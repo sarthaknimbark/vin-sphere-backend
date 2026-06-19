@@ -20,36 +20,10 @@ st.set_page_config(
 app_dir = Path(__file__).resolve().parent
 project_root = app_dir.parent
 LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
-DEPRECIATION_DIR = project_root / "Valuation" / "data"
-
-DEPRECIATION_CSV_PATHS = {
-    "audi_dep.csv": DEPRECIATION_DIR / "audi_dep.csv",
-    "byd_dep.csv": DEPRECIATION_DIR / "byd_dep.csv",
-    "chevelorate_dep.csv": DEPRECIATION_DIR / "chevelorate_dep.csv",
-    "drivearabia_toyota_prices_newest.csv": DEPRECIATION_DIR / "drivearabia_toyota_prices_newest.csv",
-    "drivearabia_toyota_prices.csv": DEPRECIATION_DIR / "drivearabia_toyota_prices.csv",
-    "ford_dep.csv": DEPRECIATION_DIR / "ford_dep.csv",
-    "gmc_dep.csv": DEPRECIATION_DIR / "gmc_dep.csv",
-    "honda_dep.csv": DEPRECIATION_DIR / "honda_dep.csv",
-    "hyundai_dep.csv": DEPRECIATION_DIR / "hyundai_dep.csv",
-    "infiniti_dep.csv": DEPRECIATION_DIR / "infiniti_dep.csv",
-    "jeep_dep.csv": DEPRECIATION_DIR / "jeep_dep.csv",
-    "kia_dep.csv": DEPRECIATION_DIR / "kia_dep.csv",
-    "lexus_dep.csv": DEPRECIATION_DIR / "lexus_dep.csv",
-    "lincoln_dep.csv": DEPRECIATION_DIR / "lincoln_dep.csv",
-    "mazda_dep.csv": DEPRECIATION_DIR / "mazda_dep.csv",
-    "mini_dep.csv": DEPRECIATION_DIR / "mini_dep.csv",
-    "mitsubishi_dep.csv": DEPRECIATION_DIR / "mitsubishi_dep.csv",
-    "porsche_dep.csv": DEPRECIATION_DIR / "porsche_dep.csv",
-    "rox_dep.csv": DEPRECIATION_DIR / "rox_dep.csv",
-    "suzuki_dep.csv": DEPRECIATION_DIR / "suzuki_dep.csv",
-    "tesla_dep.csv": DEPRECIATION_DIR / "tesla_dep.csv",
-    "toyota_dep.csv": DEPRECIATION_DIR / "toyota_dep.csv",
-    "volkswagen_dep.csv": DEPRECIATION_DIR / "volkswagen_dep.csv",
-}
+CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep.csv"
 
 st.title("VIN Decoder")
-st.write("Unified vehicle decoding, historical lookups, and ML price prediction dashboard.")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 17 characters)")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER
@@ -295,102 +269,139 @@ def calculate_valuation(price: float) -> dict:
 
 
 @st.cache_data
-def load_all_depreciation_lookups() -> dict:
-    dfs = {}
-    for name, path in DEPRECIATION_CSV_PATHS.items():
-        if Path(path).exists():
-            try:
-                dfs[name] = pd.read_csv(path)
-            except Exception:
-                pass
-    return dfs
-
-
-def find_matches_in_df(df: pd.DataFrame, result: dict) -> pd.DataFrame:
-    make = str(result.get("make", "")).strip().lower()
-    model = str(result.get("model", "")).strip().lower().replace(" ", "-")
-    if make:
-        if not model.startswith(f"{make}-"):
-            model_slug = f"{make}-{model}"
-        else:
-            model_slug = model
-    else:
-        model_slug = model
-
-    year = result.get("year")
+def load_car_depreciation_data():
+    if not CAR_DEP_CSV_PATH.exists():
+        # Fallback to alternate spelling if needed
+        alt_path = project_root / "Valuation" / "data" / "drivearabia_car_depriciation_valuation" / "car_dep.csv"
+        if alt_path.exists():
+            return pd.read_csv(alt_path)
+        return None
     try:
-        year_val = int(pd.to_numeric(year))
+        return pd.read_csv(CAR_DEP_CSV_PATH)
+    except Exception:
+        return None
+
+
+def score_trim_match(decoded_trim: str, csv_trim: str) -> float:
+    if not decoded_trim or pd.isna(decoded_trim):
+        return 0.0
+    if not csv_trim or pd.isna(csv_trim):
+        return 0.0
+
+    def get_clean_tokens(s):
+        s_clean = re.sub(r'[^a-z0-9\s]', ' ', str(s).lower())
+        tokens = s_clean.split()
+        
+        noise = {
+            'i3', 'i4', 'i5', 'i6', 'v6', 'v8', 'v10', 'v12', 'w12',
+            't', 'tc', 'tsc', 'tfsi', 'fsi', 'gdi', 'hybrid', 'phev', 'ev',
+            'quattro', 'fwd', 'rwd', 'awd', '4wd', '4x4', 'specs', 'spec',
+            'aed', 'nan', 'null', 'liter', 'liters', 'litre', 'litres',
+            'coupe', 'sedan', 'cabriolet', 'hatchback', 'suv', 'wagon',
+            'cvt', 'auto', 'manual', 'at', 'mt', 'dseg', 'cseg', 'bseg'
+        }
+        
+        clean_toks = set()
+        for t in tokens:
+            if t in noise:
+                continue
+            if re.match(r'^\d+(\.\d+)?[tl]?$', t):
+                continue
+            clean_toks.add(t)
+        return clean_toks
+
+    dec_tokens = get_clean_tokens(decoded_trim)
+    csv_tokens = get_clean_tokens(csv_trim)
+    
+    if not dec_tokens or not csv_tokens:
+        dec_tokens = set(re.sub(r'[^a-z0-9\s]', ' ', str(decoded_trim).lower()).split())
+        csv_tokens = set(re.sub(r'[^a-z0-9\s]', ' ', str(csv_trim).lower()).split())
+        
+    if not dec_tokens or not csv_tokens:
+        return 0.0
+        
+    intersection = dec_tokens.intersection(csv_tokens)
+    if not intersection:
+        return 0.0
+        
+    score = len(intersection) / min(len(dec_tokens), len(csv_tokens))
+    
+    dec_clean_str = "".join(sorted(list(dec_tokens)))
+    csv_clean_str = "".join(sorted(list(csv_tokens)))
+    seq_ratio = SequenceMatcher(None, dec_clean_str, csv_clean_str).ratio()
+    
+    return score + 0.1 * seq_ratio
+
+
+def find_matches_in_car_dep(df: pd.DataFrame, result: dict) -> pd.DataFrame:
+    make = str(result.get("make", "")).strip().upper()
+    model = str(result.get("model", "")).strip().upper()
+    try:
+        year_val = int(pd.to_numeric(result.get("year")))
     except Exception:
         return pd.DataFrame()
 
-    matches = df[(df["model_slug"] == model_slug) & (df["year"] == year_val)]
-    if matches.empty:
-        matches = df[
-            df["model_slug"].str.contains(model, case=False, na=False)
-            & (df["year"] == year_val)
-        ]
-        if matches.empty:
+    # 1. Filter by make
+    make_matches = df[df["make"].str.upper().str.strip() == make]
+    if make_matches.empty:
+        make_matches = df[df["make"].str.upper().str.contains(make, na=False)]
+        if make_matches.empty:
             return pd.DataFrame()
 
+    # 2. Filter by year
+    year_matches = make_matches[make_matches["year"] == year_val]
+    if year_matches.empty:
+        return pd.DataFrame()
+
+    # 3. Filter by model
+    norm_decoded_model = re.sub(r"[^A-Z0-9]", "", model)
+    
+    def model_matches(csv_model):
+        if pd.isna(csv_model):
+            return False
+        norm_csv = re.sub(r"[^A-Z0-9]", "", str(csv_model).upper())
+        return (norm_decoded_model == norm_csv) or (norm_decoded_model in norm_csv) or (norm_csv in norm_decoded_model)
+
+    model_matches_df = year_matches[year_matches["model"].apply(model_matches)]
+    if model_matches_df.empty:
+        def slug_matches(csv_slug):
+            if pd.isna(csv_slug):
+                return False
+            norm_slug = re.sub(r"[^A-Z0-9]", "", str(csv_slug).upper())
+            return (norm_decoded_model in norm_slug)
+        model_matches_df = year_matches[year_matches["model_slug"].apply(slug_matches)]
+        if model_matches_df.empty:
+            return pd.DataFrame()
+
+    # 4. Filter by trim
     trim = str(result.get("trim", "")).strip().upper()
+    if not trim or trim in ["UNKNOWN", ""]:
+        return model_matches_df
 
-    def normalize_trim(val):
-        if pd.isna(val):
-            return ""
-        return re.sub(r"[^A-Z0-9]", "", str(val).upper())
+    scored_candidates = model_matches_df.copy()
+    scored_candidates["trim_score"] = scored_candidates["trim_name"].apply(lambda x: score_trim_match(trim, x))
+    
+    valid_candidates = scored_candidates[scored_candidates["trim_score"] > 0.0]
+    if not valid_candidates.empty:
+        best_score = valid_candidates["trim_score"].max()
+        if best_score >= 0.5:
+            return valid_candidates[valid_candidates["trim_score"] == best_score]
 
-    trim_key = normalize_trim(trim)
-
-    best_match = None
-    if trim_key:
-        exact_matches = matches[
-            matches["trim_name"].apply(normalize_trim) == trim_key
-        ]
-        if not exact_matches.empty:
-            best_match = exact_matches
-        else:
-            contains_matches = matches[
-                matches["trim_name"].apply(
-                    lambda x: trim_key in normalize_trim(x)
-                    or normalize_trim(x) in trim_key
-                )
-            ]
-            if not contains_matches.empty:
-                best_match = contains_matches
-            else:
-                matches_copy = matches.copy()
-                matches_copy["score"] = matches_copy["trim_name"].apply(
-                    lambda x: SequenceMatcher(
-                        None, trim_key, normalize_trim(x)
-                    ).ratio()
-                    if x
-                    else 0.0
-                )
-                fuzzy_matches = matches_copy[matches_copy["score"] >= 0.82]
-                if not fuzzy_matches.empty:
-                    best_score = fuzzy_matches["score"].max()
-                    best_match = fuzzy_matches[
-                        fuzzy_matches["score"] == best_score
-                    ]
-
-    if best_match is None or best_match.empty:
-        best_match = matches
-
-    return best_match
+    return model_matches_df
 
 
 def get_depreciated_values_by_file(result: dict) -> dict:
-    dfs_dict = load_all_depreciation_lookups()
-    matched_values = {}
+    df = load_car_depreciation_data()
+    if df is None or df.empty:
+        return {}
 
-    for filename, df in dfs_dict.items():
-        matched_df = find_matches_in_df(df, result)
-        if not matched_df.empty and "depreciated_value" in matched_df.columns:
-            valid_vals = matched_df["depreciated_value"].dropna()
-            if not valid_vals.empty:
-                matched_values[filename] = float(valid_vals.median())
+    matched_df = find_matches_in_car_dep(df, result)
+    if not matched_df.empty and "depreciated_value" in matched_df.columns:
+        valid_vals = matched_df["depreciated_value"].dropna()
+        if not valid_vals.empty:
+            return {"DriveArabia": float(valid_vals.median())}
 
-    return matched_values
+    return {}
 
 
 # =====================================================================
@@ -420,8 +431,8 @@ def get_ml_predicted_price_info(result: dict) -> dict:
 #                         INPUT CONTROL PANEL
 # =====================================================================
 vin_input = st.text_input(
-    "Enter a VIN or Short Chassis Number to decode:",
-    placeholder="e.g. JTFHX02POF0099797 (17-char) or EL500004138 (11-char)",
+    "Enter Chassis Number to decode:",
+    placeholder="Enter VIN Number here.",
     max_chars=17,
 ).strip().upper()
 
@@ -434,7 +445,7 @@ if st.button("Decode", type="primary"):
             f"Invalid chassis length ({length} characters). Input must be exactly 9, 10, 11, 12, or 17 characters."
         )
     else:
-        with st.spinner("Decoding vehicle chassis metrics..."):
+        with st.spinner("Decoding VIN..."):
             try:
                 # 1. Decode attributes
                 res, matched_len = decode_any_vin(normalized_input)
@@ -578,8 +589,8 @@ if st.button("Decode", type="primary"):
                 # =====================================================
                 #                   DASHBOARD RENDERING
                 # =====================================================
-                st.subheader(f"Chassis Length Detected: {matched_len} Characters")
-                st.subheader(f"Overall Decoding Confidence: {overall_conf:.2f}%")
+                st.write(f"Chassis Length Detected: {matched_len} Characters")
+                st.write(f"Overall Decoding Confidence: {overall_conf:.2f}%")
                 st.progress(overall_conf / 100.0)
 
                 st.write("### Decoded Vehicle Attributes")
