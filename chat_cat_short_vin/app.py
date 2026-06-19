@@ -77,6 +77,7 @@ if length > 0:
         model_to_use = 10
     elif length == 9:
         st.info("Detected: 09 Character Chassis Model")
+        model_to_use = 9
     elif length == 11:
         st.info("Detected: 11-Character Chassis Model")
         model_to_use = 11
@@ -90,7 +91,7 @@ if st.button("Decode Chassis", use_container_width=True):
     if length == 0:
         st.error("Please enter a chassis number first.")
     elif model_to_use is None:
-        st.error("Chassis must be exactly 10 or 11 characters.")
+        st.error("Chassis must be exactly 09,10,11 or 12 characters.")
     else:
         # Save choice in session state to persist it for interactive widgets
         st.session_state["last_decoded_chassis"] = normalized
