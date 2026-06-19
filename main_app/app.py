@@ -26,8 +26,6 @@ DEPRECIATION_CSV_PATHS = {
     "audi_dep.csv": DEPRECIATION_DIR / "audi_dep.csv",
     "byd_dep.csv": DEPRECIATION_DIR / "byd_dep.csv",
     "chevelorate_dep.csv": DEPRECIATION_DIR / "chevelorate_dep.csv",
-    "drivearabia_toyota_prices_newest.csv": DEPRECIATION_DIR / "drivearabia_toyota_prices_newest.csv",
-    "drivearabia_toyota_prices.csv": DEPRECIATION_DIR / "drivearabia_toyota_prices.csv",
     "ford_dep.csv": DEPRECIATION_DIR / "ford_dep.csv",
     "gmc_dep.csv": DEPRECIATION_DIR / "gmc_dep.csv",
     "honda_dep.csv": DEPRECIATION_DIR / "honda_dep.csv",
@@ -46,6 +44,7 @@ DEPRECIATION_CSV_PATHS = {
     "tesla_dep.csv": DEPRECIATION_DIR / "tesla_dep.csv",
     "toyota_dep.csv": DEPRECIATION_DIR / "toyota_dep.csv",
     "volkswagen_dep.csv": DEPRECIATION_DIR / "volkswagen_dep.csv",
+
 }
 
 st.title("VIN Decoder")
@@ -420,8 +419,8 @@ def get_ml_predicted_price_info(result: dict) -> dict:
 #                         INPUT CONTROL PANEL
 # =====================================================================
 vin_input = st.text_input(
-    "Enter a VIN or Short Chassis Number to decode:",
-    placeholder="e.g. JTFHX02POF0099797 (17-char) or EL500004138 (11-char)",
+    "Enter Chassis Number to decode:",
+    placeholder="Enter VIN Number here.",
     max_chars=17,
 ).strip().upper()
 
