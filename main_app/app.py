@@ -23,7 +23,7 @@ LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep.csv"
 
 st.title("VIN Decoder")
-st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 17 characters)")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters)")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER
@@ -38,6 +38,7 @@ _SHORT_VIN_DIRS = {
     "chat_cat_short_vin_09",
     "chat_cat_short_vin_11",
     "chat_cat_short_vin_12",
+    "chat_cat_short_vin_13",
 }
 
 
@@ -66,7 +67,7 @@ def load_predict_module(directory_name: str):
 
 
 def decode_any_vin(vin_str: str) -> tuple:
-    """Standardizes routing logic for 9, 10, 11, 12, and 17 character VIN/Chassis numbers."""
+    """Standardizes routing logic for 9, 10, 11, 12, 13, and 17 character VIN/Chassis numbers."""
     normalized = re.sub(r"[^A-Z0-9]", "", vin_str.upper())
     length = len(normalized)
 
@@ -76,6 +77,13 @@ def decode_any_vin(vin_str: str) -> tuple:
             normalized, model_dir=str(project_root / "chat_cat(3.0)" / "models")
         )
         return res, 17
+    elif length == 13:
+        mod = load_predict_module("chat_cat_short_vin_13")
+        res = mod.predict_vehicle(
+            normalized,
+            model_dir=str(project_root / "chat_cat_short_vin_13" / "models"),
+        )
+        return res, 13
     elif length == 12:
         mod = load_predict_module("chat_cat_short_vin_12")
         res = mod.predict_vehicle(
@@ -106,7 +114,7 @@ def decode_any_vin(vin_str: str) -> tuple:
         return res, 9
     else:
         raise ValueError(
-            f"Invalid length: {length} characters. Must be 9, 10, 11, 12, or 17 characters."
+            f"Invalid length: {length} characters. Must be 9, 10, 11, 12, 13, or 17 characters."
         )
 
 
@@ -440,9 +448,9 @@ if st.button("Decode", type="primary"):
     normalized_input = re.sub(r"[^A-Z0-9]", "", vin_input)
     length = len(normalized_input)
 
-    if length not in [9, 10, 11, 12, 17]:
+    if length not in [9, 10, 11, 12, 13, 17]:
         st.error(
-            f"Invalid chassis length ({length} characters). Input must be exactly 9, 10, 11, 12, or 17 characters."
+            f"Invalid chassis length ({length} characters). Input must be exactly 9, 10, 11, 12, 13, or 17 characters."
         )
     else:
         with st.spinner("Decoding VIN..."):
