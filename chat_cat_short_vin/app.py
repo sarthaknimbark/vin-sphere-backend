@@ -20,6 +20,7 @@ if str(chat_cat_short_vin_path) not in sys.path:
     sys.path.append(str(chat_cat_short_vin_path))
 
 from chat_cat_short_vin_09.predict import predict_vehicle as predict_09, explain_prediction as explain_09
+from chat_cat_short_vin_13.predict import predict_vehicle as predict_13, explain_prediction as explain_13
 from chat_cat_short_vin.predict import predict_vehicle as predict_10, explain_prediction as explain_10
 from chat_cat_short_vin_11.predict import predict_vehicle as predict_11, explain_prediction as explain_11
 from chat_cat_short_vin_12.predict import predict_vehicle as predict_12, explain_prediction as explain_12
@@ -62,7 +63,7 @@ st.set_page_config(
 st.title("Short VIN Decoder (ML Model)")
 # User input form
 chassis_input = st.text_input(
-    "Enter a 9, 10, 11, 12 Character Short Chassis Number:",
+    "Enter a 9, 10, 11, 12, or 13 Character Short Chassis Number:",
     placeholder="Enter your vin here."
 ).strip().upper()
 
@@ -84,14 +85,17 @@ if length > 0:
     elif length == 12:
         st.info("Detected: 12-Character Chassis Model")
         model_to_use = 12
+    elif length == 13:
+        st.info("Detected: 13-Character Chassis Model")
+        model_to_use = 13
     else:
-        st.error(f"Invalid length: {length} characters. Must be 09,10,11 or 12.")
+        st.error(f"Invalid length: {length} characters. Must be 09, 10, 11, 12, or 13.")
 
 if st.button("Decode Chassis", use_container_width=True):
     if length == 0:
         st.error("Please enter a chassis number first.")
     elif model_to_use is None:
-        st.error("Chassis must be exactly 09,10,11 or 12 characters.")
+        st.error("Chassis must be exactly 09, 10, 11, 12, or 13 characters.")
     else:
         # Save choice in session state to persist it for interactive widgets
         st.session_state["last_decoded_chassis"] = normalized
@@ -113,10 +117,15 @@ if st.button("Decode Chassis", use_container_width=True):
             if not os.path.exists(model_dir) or not os.listdir(model_dir):
                 st.warning("11-Character models are currently training or not found in models directory.")
                 st.stop()
-        else:
+        elif model_to_use == 12:
             model_dir = project_root / "chat_cat_short_vin_12" / "models"
             if not os.path.exists(model_dir) or not os.listdir(model_dir):
                 st.warning("12-Character models are currently training or not found in models directory.")
+                st.stop()
+        else:
+            model_dir = project_root / "chat_cat_short_vin_13" / "models"
+            if not os.path.exists(model_dir) or not os.listdir(model_dir):
+                st.warning("13-Character models are currently training or not found in models directory.")
                 st.stop()
 
 # Persistent rendering block
@@ -136,10 +145,14 @@ if "last_decoded_chassis" in st.session_state:
         model_dir = str(project_root / "chat_cat_short_vin_11" / "models")
         predict_fn = predict_11
         explain_fn = explain_11
-    else:
+    elif model_to_use == 12:
         model_dir = str(project_root / "chat_cat_short_vin_12" / "models")
         predict_fn = predict_12
         explain_fn = explain_12
+    else:
+        model_dir = str(project_root / "chat_cat_short_vin_13" / "models")
+        predict_fn = predict_13
+        explain_fn = explain_13
         
     with st.spinner("Decoding vehicle attributes and calculating confidence scores..."):
         try:
@@ -179,6 +192,20 @@ if "last_decoded_chassis" in st.session_state:
                 
             df_display = pd.DataFrame(table_rows)
             st.table(df_display)
+
+            top_alts = result.get("top_alternatives", {})
+            if top_alts:
+                st.subheader("Top Alternative Predictions")
+                for target, options in top_alts.items():
+                    if options:
+                        st.markdown(f"**{target.upper()}**: " + ", ".join(
+                            [f"{item['label']} ({item['probability']:.1%})" for item in options]
+                        ))
+
+            nearest = result.get("nearest_vin_matches", [])
+            if nearest:
+                st.subheader("Nearest VIN Matches")
+                st.table(pd.DataFrame(nearest))
             
             # 2. Explainability Insights Section
             # st.markdown("---")
