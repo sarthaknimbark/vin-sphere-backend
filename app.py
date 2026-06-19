@@ -194,51 +194,16 @@ def get_lookup_price(result: dict, vin: str):
 
 
 
-@st.cache_resource
-def load_ml_price_model(model_path: str):
-    from catboost import CatBoostRegressor
-    model = CatBoostRegressor()
-    model.load_model(model_path)
-    return model
-
-
-def get_ml_predicted_price(result: dict) -> float:
-    model_path = project_root / "Valuation_ml" / "price_model.cbm"
-    if not model_path.exists():
-        return None
+def get_ml_predicted_price_info(result: dict) -> dict:
     try:
-        model = load_ml_price_model(str(model_path))
-    except Exception:
-        return None
-
-    make = str(result.get("make", "")).strip().upper()
-    model_name = str(result.get("model", "")).strip().upper()
-    trim = str(result.get("trim", "")).strip()
-    if not trim or trim.upper() in ["NAN", "NONE", "UNKNOWN", ""]:
-        trim = "UNKNOWN"
-    else:
-        trim = trim.upper()
-
-    year_val = pd.to_numeric(result.get("year"), errors="coerce")
-    if pd.isna(year_val):
-        return None
-
-    ref_year = 2026
-    age = max(ref_year - int(year_val), 0)
-
-    input_df = pd.DataFrame([{
-        "make": make,
-        "model": model_name,
-        "trim": trim,
-        "age": age
-    }])
-
-    try:
-        import numpy as np
-        pred_log = model.predict(input_df)[0]
-        pred_price = np.expm1(pred_log)
-        return float(pred_price)
-    except Exception:
+        from Valuation_ml.train_price_model import predict_price_with_confidence
+        make = result.get("make", "")
+        model = result.get("model", "")
+        trim = result.get("trim", "")
+        year = result.get("year", 2020)
+        return predict_price_with_confidence(make, model, trim, year)
+    except Exception as e:
+        print(f"Error in ML prediction: {e}")
         return None
 
 
@@ -414,16 +379,19 @@ if st.button("Decode", use_container_width=True):
                 except Exception:
                     model_confidence = 94.50
 
-                ml_price = get_ml_predicted_price(result)
-                if ml_price is None:
+                ml_info = get_ml_predicted_price_info(result)
+                if ml_info is None:
+                    ml_price = None
                     ml_price_display = "Not found"
                     ml_conf_display = "Not found"
                     ml_predicted_conf = None
                 else:
+                    ml_price = ml_info["price"]
                     ml_price_display = f"{ml_price:,.0f}"
-                    ml_joint_conf = (overall_conf / 100.0) * model_confidence
-                    ml_conf_display = f"{ml_joint_conf:.2f}%"
-                    ml_predicted_conf = float(ml_joint_conf / 100.0)
+                    # Calculate joint confidence by blending VIN decoding confidence with ML pricing confidence
+                    joint_conf = (overall_conf / 100.0) * ml_info["confidence"]
+                    ml_conf_display = f"{joint_conf * 100:.2f}% ({ml_info['method']})"
+                    ml_predicted_conf = float(joint_conf)
                 result["ml_predicted_price"] = None if ml_price is None else float(ml_price)
                 result["ml_predicted_price_confidence"] = ml_predicted_conf
 
