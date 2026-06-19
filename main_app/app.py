@@ -20,7 +20,7 @@ st.set_page_config(
 app_dir = Path(__file__).resolve().parent
 project_root = app_dir.parent
 LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
-DEPRECIATION_DIR = project_root / "Valuation" / "data"
+DEPRECIATION_DIR = project_root / "Valuation" / "data"/ "drivearabia_car_depriciation_valuation"/"depreciation"
 
 DEPRECIATION_CSV_PATHS = {
     "audi_dep.csv": DEPRECIATION_DIR / "audi_dep.csv",
@@ -48,7 +48,7 @@ DEPRECIATION_CSV_PATHS = {
 }
 
 st.title("VIN Decoder")
-st.write("Unified vehicle decoding, historical lookups, and ML price prediction dashboard.")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 17 characters)")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER
