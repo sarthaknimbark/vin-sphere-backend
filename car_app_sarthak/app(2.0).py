@@ -76,7 +76,7 @@ def select_price(df: pd.DataFrame):
     df = valid_price_rows(df)
     if df.empty:
         return None
-    return float(df["price"].median())
+    return float(df.iloc[0]["price"])
 
 
 def get_lookup_price(result: dict, vin: str):
@@ -92,50 +92,22 @@ def get_lookup_price(result: dict, vin: str):
         if price is not None:
             return price
 
-    base_matches = lookup_df[
-        (lookup_df["make_key"] == normalize_lookup_text(result.get("make")))
-        & (lookup_df["model_key"] == normalize_lookup_text(result.get("model")))
-        & (lookup_df["year_key"] == normalize_lookup_year(result.get("year")))
-    ]
+    make_key = normalize_lookup_text(result.get("make"))
+    model_key = normalize_lookup_text(result.get("model"))
+    year_key = normalize_lookup_year(result.get("year"))
+    trim_key = normalize_lookup_text(result.get("trim"))
 
-    if base_matches.empty:
+    if not trim_key or trim_key in ["UNKNOWN", ""]:
         return None
 
-    trim_key = normalize_lookup_text(result.get("trim"))
-    if trim_key:
-        exact_trim_matches = base_matches[base_matches["trim_key"] == trim_key]
-        price = select_price(exact_trim_matches)
-        if price is not None:
-            return price
-
-        contains_trim_matches = base_matches[
-            base_matches["trim_key"].apply(
-                lambda csv_trim: bool(csv_trim)
-                and (trim_key in csv_trim or csv_trim in trim_key)
-            )
-        ]
-        price = select_price(contains_trim_matches)
-        if price is not None:
-            return price
-
-        fuzzy_matches = base_matches.copy()
-        fuzzy_matches["trim_score"] = fuzzy_matches["trim_key"].apply(
-            lambda csv_trim: SequenceMatcher(None, trim_key, csv_trim).ratio()
-            if csv_trim
-            else 0.0
-        )
-        fuzzy_matches = fuzzy_matches[fuzzy_matches["trim_score"] >= 0.82]
-        if not fuzzy_matches.empty:
-            best_score = fuzzy_matches["trim_score"].max()
-            price = select_price(fuzzy_matches[fuzzy_matches["trim_score"] == best_score])
-            if price is not None:
-                return price
-
-    valid_base_matches = valid_price_rows(base_matches)
-    if valid_base_matches["trim_key"].nunique() == 1:
-        return select_price(valid_base_matches)
-
-    return None
+    exact_matches = lookup_df[
+        (lookup_df["make_key"] == make_key)
+        & (lookup_df["model_key"] == model_key)
+        & (lookup_df["year_key"] == year_key)
+        & (lookup_df["trim_key"] == trim_key)
+    ]
+    
+    return select_price(exact_matches)
 
 st.title("VIN Decoder (2.0)")
 
@@ -193,25 +165,21 @@ if st.button("Decode", use_container_width=True):
                 result["valuation"] = valuation_data
 
                 table_data = [
-                    {"Attribute": "Make", "Predicted Value": result.get("make"), "Confidence": f"{conf_dict.get('make', 0.0)*100:.2f}%"},
-                    {"Attribute": "Model", "Predicted Value": result.get("model"), "Confidence": f"{conf_dict.get('model', 0.0)*100:.2f}%"},
-                    {"Attribute": "Trim", "Predicted Value": result.get("trim"), "Confidence": f"{conf_dict.get('trim', 0.0)*100:.2f}%"},
-                    {"Attribute": "Body Type", "Predicted Value": result.get("body_type"), "Confidence": f"{conf_dict.get('body_type', 0.0)*100:.2f}%"},
-                    {"Attribute": "Model Year", "Predicted Value": result.get("year"), "Confidence": f"{conf_dict.get('year', 0.0)*100:.2f}%"},
-                    {"Attribute": "Cylinders", "Predicted Value": result.get("cylinders"), "Confidence": f"{conf_dict.get('cylinders', 0.0)*100:.2f}%"},
-                    {"Attribute": "Origin", "Predicted Value": result.get("origin"), "Confidence": f"{conf_dict.get('origin', 0.0)*100:.2f}%"},
-                    {"Attribute": "Number of Passengers", "Predicted Value": result.get("no_of_passengers"), "Confidence": f"{conf_dict.get('no_of_passengers', 0.0)*100:.2f}%"},
-                    {"Attribute": "Weight (KG)", "Predicted Value": result.get("weight"), "Confidence": f"{conf_dict.get('weight', 0.0)*100:.2f}%"},
-                    {"Attribute": "Regional Specs", "Predicted Value": result.get("regional_spec"), "Confidence": f"{conf_dict.get('regional_spec', 0.0)*100:.2f}%"},
-                    {"Attribute": "Color", "Predicted Value": result.get("color"), "Confidence": f"{conf_dict.get('color', 0.0)*100:.2f}%"},
-                    {"Attribute": "Price", "Predicted Value": price_display, "Confidence": "Lookup"},
+                    {"Attribute": "Make", "Predicted Value": result.get("make")},
+                    {"Attribute": "Model", "Predicted Value": result.get("model")},
+                    {"Attribute": "Trim", "Predicted Value": result.get("trim")},
+                    {"Attribute": "Body Type", "Predicted Value": result.get("body_type")},
+                    {"Attribute": "Model Year", "Predicted Value": result.get("year")},
+                    {"Attribute": "Cylinders", "Predicted Value": result.get("cylinders")},
+                    {"Attribute": "Origin", "Predicted Value": result.get("origin")},
+                    {"Attribute": "Number of Passengers", "Predicted Value": result.get("no_of_passengers")},
+                    {"Attribute": "Weight (KG)", "Predicted Value": result.get("weight")},
+                    {"Attribute": "Regional Specs", "Predicted Value": result.get("regional_spec")},
+                    {"Attribute": "Color", "Predicted Value": result.get("color")},
+                    {"Attribute": "Price", "Predicted Value": price_display},
                 ]
                 
                 df_results = pd.DataFrame(table_data)
-                
-                # Display overall confidence score
-                overall_conf = result.get("confidence", 0.0) * 100
-                st.subheader(f"Overall Confidence: {overall_conf:.2f}%")
                 
                 # Display Results Table
                 st.table(df_results)

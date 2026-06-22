@@ -1,6 +1,8 @@
 import os
+import sys
 import logging
 import pickle
+import importlib.util
 import torch
 from typing import Optional
 
@@ -40,8 +42,16 @@ def load_vin_transformer(model_dir: str, device: torch.device) -> Optional[torch
     checkpoint = torch.load(filepath, map_location=device)
     num_classes_dict = checkpoint["num_classes_dict"]
     
-    # Import inside function to prevent circular dependency
-    from model import MultiTaskVINTransformer
+    # Import model.py from this file's own directory (avoids sys.path race conditions)
+    _this_dir = os.path.dirname(os.path.abspath(__file__))
+    _model_path = os.path.join(_this_dir, "model.py")
+    _spec = importlib.util.spec_from_file_location("chat_cat_model", _model_path)
+    _model_mod = importlib.util.module_from_spec(_spec)
+    # Ensure the directory is on sys.path so model.py's own imports resolve
+    if _this_dir not in sys.path:
+        sys.path.insert(0, _this_dir)
+    _spec.loader.exec_module(_model_mod)
+    MultiTaskVINTransformer = _model_mod.MultiTaskVINTransformer
     
     config = checkpoint.get("config", None)
     if config is not None:

@@ -126,9 +126,9 @@ def decode_vin(
     # Default thresholds to prevent hallucinations
     if thresholds is None:
         thresholds = {
-            "trim": 0.50,
-            "regional_spec": 0.50,
-            "body_type": 0.40
+            "trim": 0.0,
+            "regional_spec": 0.0,
+            "body_type": 0.0
         }
         
     # 1. Load cached resources
