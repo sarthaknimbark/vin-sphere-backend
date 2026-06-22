@@ -23,7 +23,7 @@ LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep.csv"
 
 st.title("VIN Decoder")
-st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters)")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v2.1")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER
@@ -34,6 +34,8 @@ st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 character
 # the folder to remain on sys.path so joblib can find 'vin_decoder' as a
 # top-level module during deserialization.
 _SHORT_VIN_DIRS = {
+    "chat_cat(2.0)",
+    "chat_cat(3.0)",
     "chat_cat_short_vin",
     "chat_cat_short_vin_09",
     "chat_cat_short_vin_11",
@@ -44,19 +46,35 @@ _SHORT_VIN_DIRS = {
 
 def load_predict_module(directory_name: str):
     """Loads predict.py from a sub-directory, keeping the path on sys.path for
-    short-VIN modules so their pickled vin_decoder_pipeline.pkl can unpickle."""
+    short-VIN modules so their pickled vin_decoder_pipeline.pkl can unpickle.
+
+    Evicts all bare-name sibling modules (model, model_utils, feature_engineering,
+    dataset, predict …) from sys.modules before importing so that any on-disk
+    changes to those files are always picked up by the running Streamlit server
+    without requiring a manual restart.
+    """
     dir_path = project_root / directory_name
     keep_on_path = directory_name in _SHORT_VIN_DIRS
 
-    # Add to sys.path if not already there
+    # Bare module names that live inside chat_cat-style directories.
+    # Clearing them forces Python to re-read them from disk on next import.
+    _CHAT_CAT_MODULES = {
+        "predict", "model", "model_utils",
+        "feature_engineering", "dataset",
+        "vin_decoder", "train_pipeline",
+    }
+
+    # Evict all stale bare-name modules from the module cache
+    for mod_key in list(sys.modules.keys()):
+        base = mod_key.split(".")[0]
+        if base in _CHAT_CAT_MODULES:
+            del sys.modules[mod_key]
+
+    # Add directory to sys.path if not already present
     if str(dir_path) not in sys.path:
         sys.path.insert(0, str(dir_path))
 
     try:
-        # Clear existing 'predict' from module cache to force reload from the right dir
-        for mod_key in list(sys.modules.keys()):
-            if mod_key == "predict" or mod_key.startswith("predict."):
-                del sys.modules[mod_key]
         predict_module = importlib.import_module("predict")
     finally:
         # Only remove path if this module doesn't need it for pickle deserialization
@@ -72,9 +90,9 @@ def decode_any_vin(vin_str: str) -> tuple:
     length = len(normalized)
 
     if length == 17:
-        mod = load_predict_module("chat_cat(3.0)")
+        mod = load_predict_module("chat_cat(2.0)")
         res = mod.decode_vin(
-            normalized, model_dir=str(project_root / "chat_cat(3.0)" / "models")
+            normalized, model_dir=str(project_root / "chat_cat(2.0)" / "models")
         )
         return res, 17
     elif length == 13:
@@ -469,72 +487,79 @@ if st.button("Decode", type="primary"):
                 )
 
                 # Format rows for table
-                conf_dict = result.get("attribute_confidences", {})
+                attr_conf = result.get("attribute_confidences", {})
+
+                def fmt_conf(key: str) -> str:
+                    val = attr_conf.get(key)
+                    if val is None:
+                        return ""
+                    return f"{float(val) * 100:.1f}%"
+
                 table_data = [
                     {
                         "Attribute": "Make",
                         "Predicted Value": result.get("make"),
-                        "Confidence": f"{conf_dict.get('make', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("make"),
                     },
                     {
                         "Attribute": "Model",
                         "Predicted Value": result.get("model"),
-                        "Confidence": f"{conf_dict.get('model', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("model"),
                     },
                     {
                         "Attribute": "Trim",
                         "Predicted Value": result.get("trim"),
-                        "Confidence": f"{conf_dict.get('trim', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("trim"),
                     },
                     {
                         "Attribute": "Body Type",
                         "Predicted Value": result.get("body_type"),
-                        "Confidence": f"{conf_dict.get('body_type', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("body_type"),
                     },
                     {
                         "Attribute": "Model Year",
                         "Predicted Value": result.get("year"),
-                        "Confidence": f"{conf_dict.get('year', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("year"),
                     },
                     {
                         "Attribute": "Cylinders",
                         "Predicted Value": result.get("cylinders"),
-                        "Confidence": f"{conf_dict.get('cylinders', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("cylinders"),
                     },
                     {
                         "Attribute": "Origin",
                         "Predicted Value": result.get("origin"),
-                        "Confidence": f"{conf_dict.get('origin', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("origin"),
                     },
                     {
                         "Attribute": "Number of Passengers",
                         "Predicted Value": result.get("no_of_passengers"),
-                        "Confidence": f"{conf_dict.get('no_of_passengers', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("no_of_passengers"),
                     },
                     {
                         "Attribute": "Weight (KG)",
                         "Predicted Value": result.get("weight"),
-                        "Confidence": f"{conf_dict.get('weight', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("weight"),
                     },
                     {
                         "Attribute": "Regional Specs",
                         "Predicted Value": result.get("regional_spec"),
-                        "Confidence": f"{conf_dict.get('regional_spec', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("regional_spec"),
                     },
                     {
                         "Attribute": "Color",
                         "Predicted Value": result.get("color"),
-                        "Confidence": f"{conf_dict.get('color', 0.0) * 100:.2f}%",
+                        "Confidence": fmt_conf("color"),
                     },
                     {
                         "Attribute": "Price (Lookup)",
                         "Predicted Value": price_display,
-                        "Confidence": "Lookup Match",
+                        "Confidence": "Lookup table",
                     },
                     {
                         "Attribute": "Price (ML Model)",
                         "Predicted Value": ml_price_display,
-                        "Confidence": ml_conf_display,
+                        "Confidence": ml_conf_display if ml_info is not None else "",
                     },
                 ]
 
@@ -548,7 +573,7 @@ if st.button("Decode", type="primary"):
                             {
                                 "Attribute": f"Depreciated Price ({display_name})",
                                 "Predicted Value": f"{val:,.0f} AED",
-                                "Confidence": "Scraped Depreciation",
+                                "Confidence": "",
                             }
                         )
                 else:
@@ -556,7 +581,7 @@ if st.button("Decode", type="primary"):
                         {
                             "Attribute": "Depreciated Price",
                             "Predicted Value": "Not Found",
-                            "Confidence": "Scraped Depreciation",
+                            "Confidence": "Scraped Data",
                         }
                     )
                 table_data.extend(dep_rows)
@@ -565,8 +590,10 @@ if st.button("Decode", type="primary"):
                 #                   DASHBOARD RENDERING
                 # =====================================================
                 st.write(f"Chassis Length Detected: {matched_len} Characters")
-                st.write(f"Overall Decoding Confidence: {overall_conf:.2f}%")
-                st.progress(overall_conf / 100.0)
+
+                # Overall model confidence
+                overall_conf = result.get("confidence", 0.0) * 100
+                st.metric(label="Overall Model Confidence", value=f"{overall_conf:.1f}%")
 
                 st.write("### Decoded Vehicle Attributes")
                 st.table(pd.DataFrame(table_data))
