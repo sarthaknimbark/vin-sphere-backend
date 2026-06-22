@@ -19,6 +19,7 @@ COLUMN_MAPPING = {
     "REGIONAL_SPEC": ["regionalSpec", "regional_spec", "regionalSpec"],
     "CYLINDERS": ["CYLINDERS", "cylinders", "Cylinders"],
     "FUEL_TYPE": ["FUEL_TYPE", "fuelType", "fuel_type"],
+    "ENGINE": ["engine", "Engine", "engineSize", "engineCapacity"],
     "TRANSMISSION": ["TRANSMISSION", "transmission"],
     "YEAR": ["YEAR", "year", "Year"],
     "ORIGIN": ["origin", "Origin", "ORIGIN"],
