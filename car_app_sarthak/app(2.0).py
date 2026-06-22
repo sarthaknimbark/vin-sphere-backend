@@ -139,7 +139,22 @@ def get_lookup_price(result: dict, vin: str):
 
 st.title("VIN Decoder (2.0)")
 
-#st.write("Decode vehicle attributes using the fallback hierarchical lookup model.")
+# Sidebar for ensemble and threshold configuration
+st.sidebar.header("Ensemble Configuration")
+w_transformer = st.sidebar.slider("Transformer Weight", 0.0, 1.0, 0.70, 0.05)
+w_lookup = round(1.0 - w_transformer, 2)
+st.sidebar.write(f"Lookup Weight: {w_lookup}")
+
+st.sidebar.header("Confidence Thresholds")
+trim_thresh = st.sidebar.slider("Trim Threshold", 0.0, 1.0, 0.50, 0.05)
+spec_thresh = st.sidebar.slider("Regional Spec Threshold", 0.0, 1.0, 0.50, 0.05)
+body_thresh = st.sidebar.slider("Body Type Threshold", 0.0, 1.0, 0.40, 0.05)
+
+thresholds = {
+    "trim": trim_thresh,
+    "regional_spec": spec_thresh,
+    "body_type": body_thresh
+}
 
 # User VIN input panel
 vin_input = st.text_input(
@@ -156,7 +171,13 @@ if st.button("Decode", use_container_width=True):
         with st.spinner("Decoding..."):
             try:
                 # Perform prediction using fallback model
-                result = decode_vin(vin_input, model_dir=MODEL_DIR)
+                result = decode_vin(
+                    vin_input,
+                    model_dir=MODEL_DIR,
+                    w_transformer=w_transformer,
+                    w_lookup=w_lookup,
+                    thresholds=thresholds
+                )
                 
                 # Format prediction results into a table
                 conf_dict = result.get("attribute_confidences", {})
