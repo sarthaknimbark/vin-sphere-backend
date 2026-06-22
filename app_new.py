@@ -366,6 +366,8 @@ def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
         "tesla_dep.csv",
         "toyota_dep.csv",
         "volkswagen_dep.csv",
+
+        "missing_models_dep.csv"
     ]
     
     for name in target_files:
