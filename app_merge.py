@@ -333,67 +333,15 @@ def calculate_valuation(price: float) -> dict:
 def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
     dfs = {}
     
-    # 1. Define the 21 target CSV files we expect to load
-    target_files = [
-        # "abarth_dep.csv",
-        # "audi_dep.csv",
-        # "baic_dep.csv",
-        # "bently_dep.csv",
-        # "byd_dep.csv",
-        # "cadillac_dep.csv",
-        # "changan_dep.csv",
-        # "chevrolet_dep.csv",
-        # "dodge_dep.csv",
-        # "ford_dep.csv",
-        # "geely_dep.csv",
-        # "gmc_dep.csv",
-        # "honda_dep.csv",
-        # "hyundai_dep.csv",
-        # "infiniti_dep.csv",
-        # "isuzu_dep.csv",
-        # "jaguar_dep.csv",
-        # "jeep_dep.csv",
-        # "kia_dep.csv",
-        # "lexus_dep.csv",
-        # "lincoln_dep.csv",
-        # "mazda_dep.csv",
-        # "mini_dep.csv",
-        # "mitsubishi_dep.csv",
-        # "nissan_dep.csv",
-        # "renault_dep.csv"   
-        # "rox_dep.csv",
-        # "suzuki_dep.csv",
-        # "tesla_dep.csv",
-        # "toyota_dep.csv",
-        # "volkswagen_dep.csv",
+    target_file = "car_dep.csv"
 
-        # "missing_models_dep.csv"
-
-        "car_dep.csv"
-    ]
+    local_file_path = directory_path / target_file
     
-    for name in target_files:
-        local_file_path = directory_path / name
-        
-        # Try finding it locally in the updated subdirectory structure first
-        if local_file_path.exists():
-            try:
-                dfs[name] = pd.read_csv(local_file_path)
-                continue
-            except Exception:
-                pass
-        
-        # Fallback to GitHub raw URL for Cloud/Vercel deployments if local directory structure is missing
-        # github_url = f"https://raw.githubusercontent.com/sarthak-opash/vin-sphere-python/dev-sarthak/Valuation/data/drivearabia_car_depreciation_valuation/depreciated/{name}"
-        # try:
-        #     dfs[name] = pd.read_csv(github_url)
-        # except Exception:
-        #     # Secondary fallback: Main branch path
-        #     main_url = f"https://raw.githubusercontent.com/sarthak-opash/vin-sphere-python/main/Valuation/data/drivearabia_car_depreciation_valuation/depreciated/{name}"
-        #     try:
-        #         dfs[name] = pd.read_csv(main_url)
-        #     except Exception:
-        #         pass
+    if local_file_path.exists():
+        try:
+            dfs[target_file] = pd.read_csv(local_file_path)
+        except Exception:
+            pass
                 
     return dfs
 
