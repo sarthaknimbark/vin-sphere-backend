@@ -16,6 +16,24 @@ st.set_page_config(
     layout="centered",
 )
 
+# Hide Streamlit's default toolbar (Fork, GitHub, menu) and footer
+st.markdown(
+    """
+    <style>
+        /* Hide the top-right toolbar: Fork button, GitHub icon, three-dot menu */
+        [data-testid="stToolbar"] { visibility: hidden !important; }
+        .stDeployButton { display: none !important; }
+        #MainMenu { visibility: hidden !important; }
+        /* Hide Made with Streamlit footer */
+        footer { visibility: hidden !important; }
+        /* Hide the header bar entirely */
+        header[data-testid="stHeader"] { display: none !important; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
 # Resolve project paths
 app_dir = Path(__file__).resolve().parent
 project_root = app_dir.parent
