@@ -140,7 +140,7 @@ MODEL_DIR = str(project_root / "chat_cat" / "models")
 LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
 
 # Updated directory path for your cleaned 21 depreciation CSV files
-DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated"
+DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation"
 
 st.title("VIN Decoder (ML Model)")
 
@@ -333,199 +333,15 @@ def calculate_valuation(price: float) -> dict:
 def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
     dfs = {}
     
-    # 1. Define the 21 target CSV files we expect to load
-    target_files = [
-        "abarth_dep.csv",
-        "acura_dep.csv",
-        "aeolus_dep.csv",
-        "aito_dep.csv",
-        "al_damani_dep.csv",
-        "alfa_romeo_dep.csv",
-        "arcfox_dep.csv",
-        "ashok_leyland_dep.csv",
-        "aston_martin_dep.csv",
-        "audi_dep.csv",
-        "avatr_dep.csv",
-        "baic_dep.csv",
-        "baojun_dep.csv",
-        "baojun_yep_dep.csv",
-        "baw_dep.csv",
-        "bently_dep.csv",
-        "bestune_dep.csv",
-        "bmw_dep.csv",
-        "borgward_dep.csv",
-        "brilliance_dep.csv",
-        "bugatti_dep.csv",
-        "buick_dep.csv",
-        "byd___denza_dep.csv",
-        "byd___yangwang_dep.csv",
-        "byd_dep.csv",
-        "cadillac_dep.csv",
-        "changan_dep.csv",
-        "chervolet_dep.csv",
-        "chery_dep.csv",
-        "chevrolet_dep.csv",
-        "chrysler_dep.csv",
-        "citroen_dep.csv",
-        "cmc_dep.csv",
-        "daihatsu_dep.csv",
-        "datsun_dep.csv",
-        "deepal_dep.csv",
-        "dfsk_dep.csv",
-        "dodge_dep.csv",
-        "dongfeng_aeolus_dep.csv",
-        "dongfeng_dep.csv",
-        "dongfeng_eπ_dep.csv",
-        "dongfeng_xiaoka_dep.csv",
-        "dorcen_dep.csv",
-        "exeed_dep.csv",
-        "faw_dep.csv",
-        "ferrari_dep.csv",
-        "fiat_dep.csv",
-        "force_dep.csv",
-        "ford_dep.csv",
-        "forthing_dep.csv",
-        "foton_dep.csv",
-        "gac_dep.csv",
-        "geely_dep.csv",
-        "genesis_dep.csv",
-        "gmc_dep.csv",
-        "great_wall_dep.csv",
-        "gwm___wey_dep.csv",
-        "haval_dep.csv",
-        "hig_dep.csv",
-        "hino_dep.csv",
-        "hiphi_dep.csv",
-        "honda_dep.csv",
-        "hongqi_dep.csv",
-        "hummer_dep.csv",
-        "hycan_dep.csv",
-        "hyundai_dep.csv",
-        "ineos_dep.csv",
-        "infiniti_dep.csv",
-        "isuzu_dep.csv",
-        "iveco_dep.csv",
-        "jac_dep.csv",
-        "jaecoo_dep.csv",
-        "jaguar_dep.csv",
-        "jcb_dep.csv",
-        "jeep_dep.csv",
-        "jetour_dep.csv",
-        "jidu_dep.csv",
-        "jiyue_dep.csv",
-        "jmc_dep.csv",
-        "kaiyi_dep.csv",
-        "kia_dep.csv",
-        "king_long_dep.csv",
-        "lada_dep.csv",
-        "lamborghini_dep.csv",
-        "lancia_dep.csv",
-        "land_rover_dep.csv",
-        "leading_ideal_dep.csv",
-        "leapmotor_dep.csv",
-        "leapmotors_dep.csv",
-        "leopard_dep.csv",
-        "lexus_dep.csv",
-        "li_auto_dep.csv",
-        "li_dep.csv",
-        "lincoln_dep.csv",
-        "lotus_dep.csv",
-        "lucid_dep.csv",
-        "luxgen_dep.csv",
-        "lykan_dep.csv",
-        "lynk_and_co_dep.csv",
-        "maextro_dep.csv",
-        "mahindra_dep.csv",
-        "maserati_dep.csv",
-        "maxus_dep.csv",
-        "maybach_dep.csv",
-        "mazda_dep.csv",
-        "mclaren_dep.csv",
-        "mercedes_benz_dep.csv",
-        "mercury_dep.csv",
-        "mg_dep.csv",
-        "mini_dep.csv",
-        "mitsubishi_dep.csv",
-        "morgan_dep.csv",
-        "nio_dep.csv",
-        "nissan_dep.csv",
-        "omoda_dep.csv",
-        "opel_dep.csv",
-        "padar_dep.csv",
-        "pagani_dep.csv",
-        "peugeot_dep.csv",
-        "polestar_dep.csv",
-        "pontiac_dep.csv",
-        "pontica_dep.csv",
-        "porsche_dep.csv",
-        "prevost_dep.csv",
-        "proton_dep.csv",
-        "qingling_dep.csv",
-        "rabdan_dep.csv",
-        "ram_dep.csv",
-        "range_rover_dep.csv",
-        "renault_dep.csv",
-        "riddara_dep.csv",
-        "rivian_dep.csv",
-        "rolls_royce_dep.csv",
-        "rox_dep.csv",
-        "saab_dep.csv",
-        "saic_dep.csv",
-        "sandstorm_dep.csv",
-        "saturn_dep.csv",
-        "seat_dep.csv",
-        "sinotruk_dep.csv",
-        "skoda_dep.csv",
-        "skywell_dep.csv",
-        "smart_dep.csv",
-        "soueast_dep.csv",
-        "ssangyong_dep.csv",
-        "subaru_dep.csv",
-        "suzuki_dep.csv",
-        "tam_dep.csv",
-        "tank_dep.csv",
-        "tata_dep.csv",
-        "tesla_dep.csv",
-        "toyota_dep.csv",
-        "uaz_dep.csv",
-        "vgv_dep.csv",
-        "victory_dep.csv",
-        "vinfast_dep.csv",
-        "volkswagen_dep.csv",
-        "volvo_dep.csv",
-        "voyah_dep.csv",
-        "wuling_dep.csv",
-        "xaomi_dep.csv",
-        "xiaomi_dep.csv",
-        "xpeng_dep.csv",
-        "zeekr_dep.csv",
-        "zna_dep.csv",
-        "zotye_dep.csv",
-        "zxauto_dep.csv",
-    ]
+    target_file = "car_dep.csv"
+
+    local_file_path = directory_path / target_file
     
-    for name in target_files:
-        local_file_path = directory_path / name
-        
-        # Try finding it locally in the updated subdirectory structure first
-        if local_file_path.exists():
-            try:
-                dfs[name] = pd.read_csv(local_file_path)
-                continue
-            except Exception:
-                pass
-        
-        # Fallback to GitHub raw URL for Cloud/Vercel deployments if local directory structure is missing
-        github_url = f"https://raw.githubusercontent.com/sarthak-opash/vin-sphere-python/dev-sarthak/Valuation/data/drivearabia_car_depreciation_valuation/depreciated/{name}"
+    if local_file_path.exists():
         try:
-            dfs[name] = pd.read_csv(github_url)
+            dfs[target_file] = pd.read_csv(local_file_path)
         except Exception:
-            # Secondary fallback: Main branch path
-            main_url = f"https://raw.githubusercontent.com/sarthak-opash/vin-sphere-python/main/Valuation/data/drivearabia_car_depreciation_valuation/depreciated/{name}"
-            try:
-                dfs[name] = pd.read_csv(main_url)
-            except Exception:
-                pass
+            pass
                 
     return dfs
 
