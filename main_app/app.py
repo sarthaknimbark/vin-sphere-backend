@@ -184,7 +184,7 @@ def select_price(df: pd.DataFrame):
     df = valid_price_rows(df)
     if df.empty:
         return None
-    return float(df["price"].median())
+    return float(df.iloc[0]["price"])
 
 
 def get_lookup_price(result: dict, vin: str):
@@ -200,52 +200,23 @@ def get_lookup_price(result: dict, vin: str):
         if price is not None:
             return price
 
-    base_matches = lookup_df[
-        (lookup_df["make_key"] == normalize_lookup_text(result.get("make")))
-        & (lookup_df["model_key"] == normalize_lookup_text(result.get("model")))
-        & (lookup_df["year_key"] == normalize_lookup_year(result.get("year")))
-    ]
+    # Require exact match on make, model, year, and trim
+    make_key = normalize_lookup_text(result.get("make"))
+    model_key = normalize_lookup_text(result.get("model"))
+    year_key = normalize_lookup_year(result.get("year"))
+    trim_key = normalize_lookup_text(result.get("trim"))
 
-    if base_matches.empty:
+    if not trim_key or trim_key in ["UNKNOWN", ""]:
         return None
 
-    trim_key = normalize_lookup_text(result.get("trim"))
-    if trim_key:
-        exact_trim_matches = base_matches[base_matches["trim_key"] == trim_key]
-        price = select_price(exact_trim_matches)
-        if price is not None:
-            return price
-
-        contains_trim_matches = base_matches[
-            base_matches["trim_key"].apply(
-                lambda csv_trim: bool(csv_trim)
-                and (trim_key in csv_trim or csv_trim in trim_key)
-            )
-        ]
-        price = select_price(contains_trim_matches)
-        if price is not None:
-            return price
-
-        fuzzy_matches = base_matches.copy()
-        fuzzy_matches["trim_score"] = fuzzy_matches["trim_key"].apply(
-            lambda csv_trim: SequenceMatcher(None, trim_key, csv_trim).ratio()
-            if csv_trim
-            else 0.0
-        )
-        fuzzy_matches = fuzzy_matches[fuzzy_matches["trim_score"] >= 0.82]
-        if not fuzzy_matches.empty:
-            best_score = fuzzy_matches["trim_score"].max()
-            price = select_price(
-                fuzzy_matches[fuzzy_matches["trim_score"] == best_score]
-            )
-            if price is not None:
-                return price
-
-    valid_base_matches = valid_price_rows(base_matches)
-    if valid_base_matches["trim_key"].nunique() == 1:
-        return select_price(valid_base_matches)
-
-    return None
+    exact_matches = lookup_df[
+        (lookup_df["make_key"] == make_key)
+        & (lookup_df["model_key"] == model_key)
+        & (lookup_df["year_key"] == year_key)
+        & (lookup_df["trim_key"] == trim_key)
+    ]
+    
+    return select_price(exact_matches)
 
 
 def calculate_valuation(price: float) -> dict:
@@ -384,7 +355,7 @@ def find_matches_in_car_dep(df: pd.DataFrame, result: dict) -> pd.DataFrame:
     # 4. Filter by trim
     trim = str(result.get("trim", "")).strip().upper()
     if not trim or trim in ["UNKNOWN", ""]:
-        return model_matches_df
+        return pd.DataFrame()
 
     scored_candidates = model_matches_df.copy()
     scored_candidates["trim_score"] = scored_candidates["trim_name"].apply(lambda x: score_trim_match(trim, x))
@@ -392,10 +363,11 @@ def find_matches_in_car_dep(df: pd.DataFrame, result: dict) -> pd.DataFrame:
     valid_candidates = scored_candidates[scored_candidates["trim_score"] > 0.0]
     if not valid_candidates.empty:
         best_score = valid_candidates["trim_score"].max()
-        if best_score >= 0.5:
+        # Require a high score (e.g. >= 0.8) to consider it a match
+        if best_score >= 0.8:
             return valid_candidates[valid_candidates["trim_score"] == best_score]
 
-    return model_matches_df
+    return pd.DataFrame()
 
 
 def get_depreciated_values_by_file(result: dict) -> dict:
@@ -407,15 +379,12 @@ def get_depreciated_values_by_file(result: dict) -> dict:
     if not matched_df.empty and "depreciated_value" in matched_df.columns:
         valid_vals = matched_df["depreciated_value"].dropna()
         if not valid_vals.empty:
-            return {"DriveArabia": float(valid_vals.median())}
+            return {"DriveArabia": float(valid_vals.iloc[0])}
 
     return {}
 
 
-# =====================================================================
-#                         VALUATION ENSEMBLE ROUTER
-# =====================================================================
-
+#VALUATION ENSEMBLE ROUTER
 
 def get_ml_predicted_price_info(result: dict) -> dict:
     try:
@@ -434,10 +403,8 @@ def get_ml_predicted_price_info(result: dict) -> dict:
         if str(project_root) in sys.path:
             sys.path.remove(str(project_root))
 
-
-# =====================================================================
 #                         INPUT CONTROL PANEL
-# =====================================================================
+
 vin_input = st.text_input(
     "Enter Chassis Number to decode:",
     placeholder="Enter VIN Number here.",
