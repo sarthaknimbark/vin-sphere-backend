@@ -1,0 +1,64 @@
+=== GCC vs NON-GCC REGIONAL SPECIFICATION RULES ===
+
+1. DECISION TREE CLASSIFICATION RULES:
+|--- POS_1 IN [012345]
+|   |--- POS_10 IN [01234...BCDEF]
+|   |   |--- POS_8 IN [01234...GHIJK]
+|   |   |   |--- POS_3 IN [01234...KLMNO]
+|   |   |   |   |--- class: 1
+|   |   |   |--- POS_3 >  24.00
+|   |   |   |   |--- class: 1
+|   |   |--- POS_8 >  20.50
+|   |   |   |--- POS_8 IN [01234...NOPQR]
+|   |   |   |   |--- class: 1
+|   |   |   |--- POS_8 >  27.50
+|   |   |   |   |--- class: 1
+|   |--- POS_10 >  15.50
+|   |   |--- POS_11 IN [012345]
+|   |   |   |--- POS_5 IN [01234...6789A]
+|   |   |   |   |--- class: 1
+|   |   |   |--- POS_5 >  10.50
+|   |   |   |   |--- class: 1
+|   |   |--- POS_11 >  5.50
+|   |   |   |--- POS_8 IN [01234...PQRST]
+|   |   |   |   |--- class: 1
+|   |   |   |--- POS_8 >  29.50
+|   |   |   |   |--- class: 1
+|--- POS_1 >  5.50
+|   |--- POS_2 IN [01234...BCDEF]
+|   |   |--- POS_11 IN [012345]
+|   |   |   |--- POS_2 IN [01234...ABCDE]
+|   |   |   |   |--- class: 1
+|   |   |   |--- POS_2 >  14.50
+|   |   |   |   |--- class: 0
+|   |   |--- POS_11 >  5.50
+|   |   |   |--- POS_10 IN [012]
+|   |   |   |   |--- class: 1
+|   |   |   |--- POS_10 >  2.50
+|   |   |   |   |--- class: 1
+|   |--- POS_2 >  15.50
+|   |   |--- POS_1 IN [01234...TUVWX]
+|   |   |   |--- POS_7 IN [012345]
+|   |   |   |   |--- class: 1
+|   |   |   |--- POS_7 >  5.50
+|   |   |   |   |--- class: 1
+|   |   |--- POS_1 >  33.50
+|   |   |   |--- POS_8 IN [01234...89ABC]
+|   |   |   |   |--- class: 1
+|   |   |   |--- POS_8 >  12.50
+|   |   |   |   |--- class: 1
+
+2. FEATURE IMPORTANCE RANKING:
+   POS_2: 67.92%
+   POS_11: 15.59%
+   POS_1: 7.33%
+   POS_10: 4.04%
+   POS_8: 3.73%
+   POS_7: 0.58%
+   POS_5: 0.44%
+   POS_3: 0.37%
+
+
+3. EXCLUSIVE WMI+VDS PREFIX PATTERNS:
+   GCC-Exclusive prefixes (first 9 characters, count=10660): ['19XFB2620', '19XFB2621', '19XFB2622', '19XFB2623', '19XFB2624', '19XFB2625', '19XFB2626', '19XFB2627', '19XFB2628', '19XFB2629', '19XFB262X', '19XFB2640', '19XFB2642', '19XFB2644', '19XFB2645', '19XFB2646', '19XFB2647', '19XFB2648', '19XFB2649', '19XFC1F39', '19XFC2650', '19XFC2651', '19XFC2652', '19XFC2655', '19XFC2657', '19XFC2658', '19XFC2659', '19XFC265X', '19XFC2670', '19XFC2671']...
+   Non-GCC-Exclusive prefixes (first 9 characters, count=5): ['LFBGE3062', 'LFBGE3065', 'LFBGE3066', 'LFBGE607X', 'LFVVB9E74']...

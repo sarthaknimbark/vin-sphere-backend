@@ -19,9 +19,47 @@ logger = logging.getLogger(__name__)
 # Global resources cache to speed up predictions
 _resources = None
 
+def check_gcc_rules(vin: str, make: str, rules: dict) -> Optional[str]:
+    """
+    Applies exact pattern-matching rules on the VIN to identify GCC vs. Non-GCC specification.
+    Returns 'GCC', 'NON-GCC', or None if no rule matches.
+    """
+    if not rules:
+        return None
+    vin = vin.upper().strip()
+    make = make.upper().strip()
+    
+    # 0. Check manual overrides
+    manual_overrides = rules.get("manual_overrides", {})
+    if vin in manual_overrides:
+        return manual_overrides[vin]
+    
+    # 1. Check exclusive WMI patterns
+    wmi = vin[0:3]
+    if wmi in rules.get("non_gcc_exclusive_wmis", []):
+        return "NON-GCC"
+    if wmi in rules.get("gcc_exclusive_wmis", []):
+        return "GCC"
+        
+    # 2. Check make-specific position-based rules
+    make_rules = rules.get("make_specific_position_rules", {}).get(make, {})
+    for pos_str, char_rules in make_rules.items():
+        try:
+            pos_idx = int(pos_str.split("_")[1]) - 1
+            if pos_idx < len(vin):
+                char_val = vin[pos_idx]
+                if char_val in char_rules.get("non_gcc_only", []):
+                    return "NON-GCC"
+                if char_val in char_rules.get("gcc_only", []):
+                    return "GCC"
+        except Exception:
+            pass
+            
+    return None
+
 def get_resources(model_dir: str = "models") -> dict:
     """
-    Loads all modeling resources (fallback model, Transformer, label encoders)
+    Loads all modeling resources (fallback model, Transformer, label encoders, rule patterns)
     into memory, caching them for subsequent requests.
     """
     global _resources
@@ -46,10 +84,21 @@ def get_resources(model_dir: str = "models") -> dict:
                     except Exception as e:
                         logger.error(f"Failed to load encoder {fn}: {e}")
                         
+        # Load rules patterns
+        rules = {}
+        rules_path = os.path.join(model_dir, "gcc_non_gcc_rules.json")
+        if os.path.exists(rules_path):
+            try:
+                with open(rules_path, "r") as f:
+                    rules = json.load(f)
+            except Exception as e:
+                logger.error(f"Failed to load rules JSON: {e}")
+                
         _resources = {
             "fallback_model": fallback_model,
             "transformer_model": transformer_model,
             "encoders": encoders,
+            "rules": rules,
             "device": device
         }
         
@@ -87,6 +136,7 @@ def decode_vin(
     fallback_model = res["fallback_model"]
     transformer_model = res["transformer_model"]
     encoders = res["encoders"]
+    rules = res.get("rules", {})
     device = res["device"]
     
     # 2. Extract features for the lookup model
@@ -187,6 +237,13 @@ def decode_vin(
             label_final = label_lookup
             prob_final = prob_lookup
             
+        # Override regional spec if rules match
+        if target_lower == "regional_spec" and rules:
+            rule_val = check_gcc_rules(vin_clean, predictions.get("make", ""), rules)
+            if rule_val is not None:
+                label_final = rule_val
+                prob_final = 1.0
+                
         # Boost confidence for display compatibility (scale to [0.98, 1.0])
         boosted_confidence = 0.98 + 0.02 * prob_final
         
