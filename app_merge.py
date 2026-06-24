@@ -137,7 +137,7 @@ def decode_any_vin(vin_str):
 
 # Define fallback model and lookup paths
 MODEL_DIR = str(project_root / "chat_cat" / "models")
-LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
+LOOKUP_DATA_PATH = project_root / "Data/lookup_data_clean.csv"
 
 # Updated directory path for your cleaned 21 depreciation CSV files
 DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation"
@@ -333,7 +333,7 @@ def calculate_valuation(price: float) -> dict:
 def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
     dfs = {}
     
-    target_file = "car_dep.csv"
+    target_file = "car_dep_new.csv"
 
     local_file_path = directory_path / target_file
     
