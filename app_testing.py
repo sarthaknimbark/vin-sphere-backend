@@ -3,13 +3,14 @@ from pathlib import Path
 import glob
 
 project_root = Path(__file__).resolve().parent
-INPUT_CSV = project_root / 'lookup_data.csv'
+INPUT_CSV = project_root / 'Data' / 'lookup_data_clean.csv'
 # DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated'
+DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated_2'
 DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
 
 # load all depreciation files once
-# all_dep = pd.concat([pd.read_csv(f) for f in glob.glob(str(DEP_DIR/'*_dep.csv'))], ignore_index=True)
-all_dep = pd.read_csv(str(DEP_DIR / 'car_dep.csv'))
+all_dep = pd.concat([pd.read_csv(f) for f in glob.glob(str(DEP_DIR/'*_dep.csv'))], ignore_index=True)
+# all_dep = pd.read_csv(str(DEP_DIR / 'car_dep.csv'))
 all_dep['model_slug'] = all_dep['model_slug'].astype(str).str.upper()
 
 lookup = pd.read_csv(INPUT_CSV)
