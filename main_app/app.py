@@ -38,10 +38,10 @@ st.markdown(
 app_dir = Path(__file__).resolve().parent
 project_root = app_dir.parent
 LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
-CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep.csv"
+CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep_new.csv"
 
 st.title("VIN Decoder")
-st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v2.5")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v2.6")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER

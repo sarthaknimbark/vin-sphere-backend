@@ -153,7 +153,7 @@ def decode_vin(
     
     # Target hierarchies for backoff lookups
     BACKOFF_HIERARCHY = {
-        "MAKE": [["WMI"]],
+        "MAKE": [["WMI", "VDS"], ["WMI"]],
         "MODEL": [["WMI", "VDS", "YEAR_CODE"], ["WMI", "VDS"], ["WMI"]],
         "TRIM": [["WMI", "VDS", "YEAR_CODE", "PLANT_CODE"], ["WMI", "VDS", "YEAR_CODE"], ["WMI", "VDS"], ["WMI"]],
         "BODY_TYPE": [["WMI", "VDS"], ["WMI"]],
