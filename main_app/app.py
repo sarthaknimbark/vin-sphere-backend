@@ -85,7 +85,7 @@ def load_predict_module(directory_name: str):
     # Evict all stale bare-name modules from the module cache
     for mod_key in list(sys.modules.keys()):
         base = mod_key.split(".")[0]
-        if base in _CHAT_CAT_MODULES:
+        if base in _CHAT_CAT_MODULES or base.startswith("chat_cat"):
             del sys.modules[mod_key]
 
     # Ensure the directory is at the front of sys.path so it takes priority
