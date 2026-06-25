@@ -88,9 +88,10 @@ def load_predict_module(directory_name: str):
         if base in _CHAT_CAT_MODULES:
             del sys.modules[mod_key]
 
-    # Add directory to sys.path if not already present
-    if str(dir_path) not in sys.path:
-        sys.path.insert(0, str(dir_path))
+    # Ensure the directory is at the front of sys.path so it takes priority
+    if str(dir_path) in sys.path:
+        sys.path.remove(str(dir_path))
+    sys.path.insert(0, str(dir_path))
 
     try:
         predict_module = importlib.import_module("predict")
