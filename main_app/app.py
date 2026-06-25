@@ -41,7 +41,7 @@ LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep.csv"
 
 st.title("VIN Decoder")
-st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v2.1")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v2.5")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER
