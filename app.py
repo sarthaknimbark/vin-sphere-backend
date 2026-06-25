@@ -135,13 +135,6 @@ def decode_any_vin(vin_str):
     else:
         raise ValueError(f"Invalid VIN/Chassis length: {length}. Must be 9, 11, 12, or 17 characters.")
 
-# Define fallback model and lookup paths
-MODEL_DIR = str(project_root / "chat_cat" / "models")
-LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
-
-# Updated directory path for your cleaned 21 depreciation CSV files
-DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated"
-
 st.title("VIN Decoder (ML Model)")
 
 # User VIN input panel
@@ -328,73 +321,31 @@ def calculate_valuation(price: float) -> dict:
     except Exception:
         return None
 
+# Define fallback model and lookup paths
+MODEL_DIR = str(project_root / "chat_cat" / "models")
+LOOKUP_DATA_PATH = project_root / "Data/lookup_data_clean.csv"
+
+# Updated directory path for your cleaned 21 depreciation CSV files
+# DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation"
+# DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated"
+DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated_2"
 
 @st.cache_data
 def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
     dfs = {}
     
-    # 1. Define the 21 target CSV files we expect to load
-    target_files = [
-        "abarth_dep.csv",
-        "audi_dep.csv",
-        "baic_dep.csv",
-        "bently_dep.csv",
-        "byd_dep.csv",
-        "cadillac_dep.csv",
-        "changan_dep.csv",
-        "chevrolet_dep.csv",
-        "dodge_dep.csv",
-        "ford_dep.csv",
-        "geely_dep.csv",
-        "gmc_dep.csv",
-        "honda_dep.csv",
-        "hyundai_dep.csv",
-        "infiniti_dep.csv",
-        "isuzu_dep.csv",
-        "jaguar_dep.csv",
-        "jeep_dep.csv",
-        "kia_dep.csv",
-        "lexus_dep.csv",
-        "lincoln_dep.csv",
-        "mazda_dep.csv",
-        "mini_dep.csv",
-        "mitsubishi_dep.csv",
-        "nissan_dep.csv",
-        "renault_dep.csv"   
-        "rox_dep.csv",
-        "suzuki_dep.csv",
-        "tesla_dep.csv",
-        "toyota_dep.csv",
-        "volkswagen_dep.csv",
-
-        "missing_models_dep.csv"
-    ]
-    
-    for name in target_files:
-        local_file_path = directory_path / name
+    # 1. Dynamically scan the directory for any file ending in '_dep.csv'
+    # This automatically catches new files added in the future!
+    for local_file_path in directory_path.glob("*_dep.csv"):
+        file_name = local_file_path.name  # Extracts just the 'brand_dep.csv' string
         
-        # Try finding it locally in the updated subdirectory structure first
-        if local_file_path.exists():
-            try:
-                dfs[name] = pd.read_csv(local_file_path)
-                continue
-            except Exception:
-                pass
-        
-        # Fallback to GitHub raw URL for Cloud/Vercel deployments if local directory structure is missing
-        github_url = f"https://raw.githubusercontent.com/sarthak-opash/vin-sphere-python/dev-sarthak/Valuation/data/drivearabia_car_depreciation_valuation/depreciated/{name}"
         try:
-            dfs[name] = pd.read_csv(github_url)
+            dfs[file_name] = pd.read_csv(local_file_path)
         except Exception:
-            # Secondary fallback: Main branch path
-            main_url = f"https://raw.githubusercontent.com/sarthak-opash/vin-sphere-python/main/Valuation/data/drivearabia_car_depreciation_valuation/depreciated/{name}"
-            try:
-                dfs[name] = pd.read_csv(main_url)
-            except Exception:
-                pass
+            # Silently pass if a file is corrupted or unreadable
+            pass
                 
     return dfs
-
 
 def find_matches_in_df(df: pd.DataFrame, result: dict) -> pd.DataFrame:
     make = str(result.get("make", "")).strip().lower()
