@@ -1,0 +1,260 @@
+{
+  "manual_overrides": {},
+  "gcc_exclusive_prefixes_3": [
+    "4D3",
+    "ADT",
+    "FD3",
+    "HH3",
+    "HH4",
+    "HLS",
+    "MA3",
+    "RN3",
+    "SJ5",
+    "SJ7"
+  ],
+  "non_gcc_exclusive_prefixes_3": [],
+  "gcc_exclusive_prefixes_4": [
+    "ADTR",
+    "FD3S",
+    "FJ40",
+    "FJ45",
+    "HH32",
+    "HLS3",
+    "MA31",
+    "RN30",
+    "SJ50",
+    "SJ70"
+  ],
+  "non_gcc_exclusive_prefixes_4": [],
+  "gcc_exclusive_prefixes_5": [
+    "ADTR1",
+    "FJ403",
+    "FJ452",
+    "FJ453",
+    "FJ454",
+    "FJ620",
+    "HLS30",
+    "KY608",
+    "MA310",
+    "SJ501",
+    "SJ704"
+  ],
+  "non_gcc_exclusive_prefixes_5": [],
+  "make_specific_position_rules": {
+    "TOYOTA": {
+      "POS_1": {
+        "gcc_only": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "A",
+          "E",
+          "H",
+          "I",
+          "J",
+          "P",
+          "R",
+          "T",
+          "V",
+          "Y"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_2": {
+        "gcc_only": [
+          "0",
+          "1",
+          "2",
+          "5",
+          "A",
+          "B",
+          "D",
+          "F",
+          "G",
+          "H",
+          "I",
+          "N",
+          "O",
+          "S",
+          "T",
+          "X",
+          "Z"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_3": {
+        "gcc_only": [
+          "0",
+          "2",
+          "3",
+          "5",
+          "7",
+          "8",
+          "9",
+          "D",
+          "E",
+          "N",
+          "R",
+          "T",
+          "Z"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_4": {
+        "gcc_only": [
+          "1",
+          "4",
+          "6",
+          "A",
+          "B",
+          "E",
+          "F",
+          "Q",
+          "R",
+          "U",
+          "X",
+          "Z"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_5": {
+        "gcc_only": [
+          "-",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "8",
+          "9",
+          "B",
+          "E",
+          "K"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_6": {
+        "gcc_only": [
+          "E"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_7": {
+        "gcc_only": [
+          "E",
+          "S"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_8": {
+        "gcc_only": [
+          "C",
+          "E"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_9": {
+        "gcc_only": [
+          "E"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_10": {
+        "gcc_only": [
+          "E"
+        ],
+        "non_gcc_only": []
+      }
+    },
+    "NISSAN": {
+      "POS_1": {
+        "gcc_only": [
+          "1",
+          "A",
+          "B",
+          "C",
+          "M",
+          "N",
+          "P",
+          "R",
+          "T",
+          "W",
+          "Z"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_2": {
+        "gcc_only": [
+          "1",
+          "4",
+          "A",
+          "E",
+          "G",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "V",
+          "Z"
+        ],
+        "non_gcc_only": [
+          "F"
+        ]
+      },
+      "POS_3": {
+        "gcc_only": [
+          "4",
+          "A",
+          "C",
+          "S",
+          "T",
+          "Y"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_4": {
+        "gcc_only": [
+          "2",
+          "3",
+          "5",
+          "6",
+          "8",
+          "A",
+          "R"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_5": {
+        "gcc_only": [
+          "2",
+          "6",
+          "8",
+          "L"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_7": {
+        "gcc_only": [
+          "A"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_8": {
+        "gcc_only": [
+          "P"
+        ],
+        "non_gcc_only": []
+      },
+      "POS_10": {
+        "gcc_only": [
+          "3"
+        ],
+        "non_gcc_only": []
+      }
+    }
+  }
+}

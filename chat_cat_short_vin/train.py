@@ -5,6 +5,7 @@ if str(_parent) not in sys.path:
     sys.path.append(str(_parent))
 
 import os
+import json
 import argparse
 import logging
 import joblib
@@ -26,8 +27,9 @@ from sklearn.ensemble import (
 )
 
 from chat_cat_short_vin.feature_engineering import load_and_preprocess_data, extract_features
-from chat_cat_short_vin.model_utils import RobustLabelEncoder, save_model, load_model
+from chat_cat_short_vin.model_utils import RobustLabelEncoder, save_model, load_model, check_gcc_rules
 from chat_cat_short_vin.prefix_similarity import PrefixSimilarityEngine
+
 
 # Configure logging
 logging.basicConfig(
@@ -187,6 +189,108 @@ def compute_top_k_accuracy(probs: np.ndarray, y_true: np.ndarray, k: int) -> flo
     correct = [y_true[i] in top_k_preds[i] for i in range(len(y_true))]
     return float(np.mean(correct))
 
+def extract_gcc_rules(data_path: str, save_dir: str):
+    logger.info("Extracting GCC vs. Non-GCC pattern-matching rules for short chassis...")
+    df = pd.read_csv(data_path)
+    df['VIN'] = df['chassisNumber'].astype(str).str.upper().str.strip()
+    df = df[df['VIN'].str.len() == 10].copy()
+    
+    reg_spec_col = 'regionalSpec'
+    if 'regionalSpec' not in df.columns:
+        for c in df.columns:
+            if c.lower() == 'regionalspec':
+                reg_spec_col = c
+                break
+                
+    make_col = 'make'
+    if 'make' not in df.columns:
+        for c in df.columns:
+            if c.lower() == 'make':
+                make_col = c
+                break
+                
+    df[reg_spec_col] = df[reg_spec_col].astype(str).str.upper().str.strip()
+    df = df[df[reg_spec_col].isin(['GCC', 'NON-GCC'])].copy()
+    df[make_col] = df[make_col].astype(str).str.upper().str.strip()
+    
+    # 1. Prefix 3 rules
+    df['prefix3'] = df['VIN'].str[0:3]
+    p3_groups = df.groupby(['prefix3', reg_spec_col]).size().unstack(fill_value=0)
+    if 'GCC' not in p3_groups.columns:
+        p3_groups['GCC'] = 0
+    if 'NON-GCC' not in p3_groups.columns:
+        p3_groups['NON-GCC'] = 0
+    p3_groups['Total'] = p3_groups['GCC'] + p3_groups['NON-GCC']
+    gcc_p3 = p3_groups[(p3_groups['NON-GCC'] == 0) & (p3_groups['GCC'] > 5)].index.tolist()
+    ngcc_p3 = p3_groups[(p3_groups['GCC'] == 0) & (p3_groups['NON-GCC'] > 5)].index.tolist()
+    
+    # 2. Prefix 4 rules
+    df['prefix4'] = df['VIN'].str[0:4]
+    p4_groups = df.groupby(['prefix4', reg_spec_col]).size().unstack(fill_value=0)
+    if 'GCC' not in p4_groups.columns:
+        p4_groups['GCC'] = 0
+    if 'NON-GCC' not in p4_groups.columns:
+        p4_groups['NON-GCC'] = 0
+    p4_groups['Total'] = p4_groups['GCC'] + p4_groups['NON-GCC']
+    gcc_p4 = p4_groups[(p4_groups['NON-GCC'] == 0) & (p4_groups['GCC'] > 5)].index.tolist()
+    ngcc_p4 = p4_groups[(p4_groups['GCC'] == 0) & (p4_groups['NON-GCC'] > 5)].index.tolist()
+
+    # 3. Prefix 5 rules
+    df['prefix5'] = df['VIN'].str[0:5]
+    p5_groups = df.groupby(['prefix5', reg_spec_col]).size().unstack(fill_value=0)
+    if 'GCC' not in p5_groups.columns:
+        p5_groups['GCC'] = 0
+    if 'NON-GCC' not in p5_groups.columns:
+        p5_groups['NON-GCC'] = 0
+    p5_groups['Total'] = p5_groups['GCC'] + p5_groups['NON-GCC']
+    gcc_p5 = p5_groups[(p5_groups['NON-GCC'] == 0) & (p5_groups['GCC'] > 5)].index.tolist()
+    ngcc_p5 = p5_groups[(p5_groups['GCC'] == 0) & (p5_groups['NON-GCC'] > 5)].index.tolist()
+    
+    # 4. Make-specific character positions
+    make_rules = {}
+    makes = df[make_col].unique()
+    for m in makes:
+        df_m = df[df[make_col] == m]
+        gcc_m = df_m[df_m[reg_spec_col] == 'GCC']
+        ngcc_m = df_m[df_m[reg_spec_col] == 'NON-GCC']
+        
+        if len(gcc_m) < 5 or len(ngcc_m) < 5:
+            continue
+            
+        make_rules[m] = {}
+        for pos in range(10):
+            chars_gcc = set(gcc_m['VIN'].str[pos].unique())
+            chars_ngcc = set(ngcc_m['VIN'].str[pos].unique())
+            
+            overlap = chars_gcc.intersection(chars_ngcc)
+            only_gcc = chars_gcc - overlap
+            only_ngcc = chars_ngcc - overlap
+            
+            if only_gcc or only_ngcc:
+                make_rules[m][f"POS_{pos+1}"] = {
+                    "gcc_only": sorted(list(only_gcc)),
+                    "non_gcc_only": sorted(list(only_ngcc))
+                }
+                
+    rules = {
+        "manual_overrides": {},
+        "gcc_exclusive_prefixes_3": gcc_p3,
+        "non_gcc_exclusive_prefixes_3": ngcc_p3,
+        "gcc_exclusive_prefixes_4": gcc_p4,
+        "non_gcc_exclusive_prefixes_4": ngcc_p4,
+        "gcc_exclusive_prefixes_5": gcc_p5,
+        "non_gcc_exclusive_prefixes_5": ngcc_p5,
+        "make_specific_position_rules": make_rules
+    }
+    
+    os.makedirs(save_dir, exist_ok=True)
+    filepath = os.path.join(save_dir, "gcc_non_gcc_rules.json")
+    with open(filepath, 'w') as f:
+        json.dump(rules, f, indent=2)
+    
+    logger.info(f"Successfully saved GCC vs Non-GCC rules to {filepath}")
+    return rules
+
 def main():
     parser = argparse.ArgumentParser(description="Japanese Import 10-Character Short Chassis Model Training Pipeline")
     parser.add_argument(
@@ -233,6 +337,10 @@ def main():
     
     # Save training prefixes and split metadata
     os.makedirs(args.model_dir, exist_ok=True)
+    
+    # Extract GCC vs. Non-GCC pattern-matching rules
+    rules = extract_gcc_rules(args.data_path, args.model_dir)
+    
     metadata = {
         "train_prefixes": list(train_prefixes),
         "test_prefixes": list(test_prefixes),
@@ -617,6 +725,12 @@ def main():
         if isinstance(rs_pred_idx, (np.ndarray, list)):
             rs_pred_idx = rs_pred_idx[0]
         rs_val = target_encoders["regional_specs"].inverse_transform(rs_pred_idx)
+        
+        # Override regional spec if rules match
+        rule_val = check_gcc_rules(chassis, make_val, rules)
+        if rule_val is not None:
+            rs_val = rule_val
+            
         pred_regional_specs.append(rs_val)
         
         # 8. Cylinders

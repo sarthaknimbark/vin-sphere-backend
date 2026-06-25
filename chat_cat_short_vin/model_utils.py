@@ -82,3 +82,46 @@ def load_model(filepath: str) -> Any:
     except Exception as e:
         logger.error(f"Failed to load from {filepath}: {e}")
         raise
+
+def check_gcc_rules(chassis: str, make: str, rules: dict) -> Any:
+    """
+    Applies exact pattern-matching rules on the short chassis to identify GCC vs. Non-GCC specification.
+    Returns 'GCC', 'NON-GCC', or None if no rule matches.
+    """
+    if not rules:
+        return None
+    chassis = str(chassis).upper().strip()
+    make = str(make).upper().strip()
+    
+    # 0. Check manual overrides
+    manual_overrides = rules.get("manual_overrides", {})
+    if chassis in manual_overrides:
+        return manual_overrides[chassis]
+    
+    # 1. Check exclusive prefixes (longest first)
+    for length in [5, 4, 3]:
+        pref = chassis[:length]
+        if len(pref) == length:
+            gcc_list = rules.get(f"gcc_exclusive_prefixes_{length}", [])
+            ngcc_list = rules.get(f"non_gcc_exclusive_prefixes_{length}", [])
+            if pref in ngcc_list:
+                return "NON-GCC"
+            if pref in gcc_list:
+                return "GCC"
+                
+    # 2. Check make-specific position-based rules
+    make_rules = rules.get("make_specific_position_rules", {}).get(make, {})
+    for pos_str, char_rules in make_rules.items():
+        try:
+            pos_idx = int(pos_str.split("_")[1]) - 1
+            if pos_idx < len(chassis):
+                char_val = chassis[pos_idx]
+                if char_val in char_rules.get("non_gcc_only", []):
+                    return "NON-GCC"
+                if char_val in char_rules.get("gcc_only", []):
+                    return "GCC"
+        except Exception:
+            pass
+            
+    return None
+
