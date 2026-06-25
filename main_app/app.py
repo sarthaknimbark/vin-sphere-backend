@@ -41,7 +41,7 @@ LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep.csv"
 
 st.title("VIN Decoder")
-st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v2.1")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v2.5")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER
@@ -85,7 +85,7 @@ def load_predict_module(directory_name: str):
     # Evict all stale bare-name modules from the module cache
     for mod_key in list(sys.modules.keys()):
         base = mod_key.split(".")[0]
-        if base in _CHAT_CAT_MODULES:
+        if base in _CHAT_CAT_MODULES or base.startswith("chat_cat"):
             del sys.modules[mod_key]
 
     # Ensure the directory is at the front of sys.path so it takes priority

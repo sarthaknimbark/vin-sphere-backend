@@ -20,6 +20,7 @@ class VINDecoder:
         self.target_encoders = {}
         self.similarity_engines = {}
         self.prefix_stats = {}
+        self.lookup_df = None
         
         # Try to load attributes if the files exist
         prefix_stats_path = os.path.join(model_dir, "prefix_statistics.pkl")
@@ -40,8 +41,102 @@ class VINDecoder:
                 model_path = os.path.join(model_dir, f"{safe_name}_model.pkl")
                 if os.path.exists(model_path):
                     self.models[t] = joblib.load(model_path)
+        
+        # Load lookup dataframe
+        self.lookup_df = self._load_lookup_df()
+
+    def _load_lookup_df(self) -> pd.DataFrame:
+        possible_paths = [
+            os.path.join(os.path.dirname(os.path.dirname(__file__)), "Data", "final_clean_12.csv"),
+            os.path.join("Data", "final_clean_12.csv"),
+            "final_clean_12.csv"
+        ]
+        for path in possible_paths:
+            if os.path.exists(path):
+                try:
+                    df = pd.read_csv(path)
+                    df['chassisNumber_clean'] = df['chassisNumber'].astype(str).str.upper().str.strip()
+                    return df
+                except Exception:
+                    pass
+        return None
 
     def predict(self, chassis_number: str) -> dict:
+        normalized = normalize_chassis(chassis_number)
+        if not normalized or len(normalized) != 12:
+            raise ValueError("Chassis number must be exactly 12 characters.")
+            
+        # Initialize lookup_df dynamically if not present (handles unpickled instances)
+        if not hasattr(self, 'lookup_df') or self.lookup_df is None:
+            self.lookup_df = self._load_lookup_df()
+            
+        if self.lookup_df is not None:
+            match_rows = self.lookup_df[self.lookup_df['chassisNumber_clean'] == normalized]
+            if not match_rows.empty:
+                row = match_rows.iloc[0]
+                
+                def get_val(col_name, default="UNKNOWN"):
+                    val = row.get(col_name)
+                    if pd.isna(val) or val is None:
+                        return default
+                    return val
+                
+                # Format year
+                year_val = get_val("year")
+                try:
+                    year_val = int(float(year_val))
+                except (ValueError, TypeError):
+                    pass
+                
+                # Format weight
+                weight_val = get_val("weightInKg", 0.0)
+                try:
+                    weight_val = float(weight_val)
+                except (ValueError, TypeError):
+                    weight_val = 0.0
+                    
+                # Format cylinders
+                cyl_val = get_val("cylinders", "UNKNOWN")
+                try:
+                    cyl_val = str(int(float(cyl_val)))
+                except (ValueError, TypeError):
+                    cyl_val = str(cyl_val)
+                    
+                # Format noOfPassengers
+                pax_val = get_val("noOfPassengers", "UNKNOWN")
+                try:
+                    pax_val = str(int(float(pax_val)))
+                except (ValueError, TypeError):
+                    pax_val = str(pax_val)
+                
+                output = {
+                    "make": str(get_val("make")).upper().strip(),
+                    "model": str(get_val("model")).upper().strip(),
+                    "trim": str(get_val("trim")).upper().strip(),
+                    "year": year_val,
+                    "body_type": str(get_val("bodyType")).upper().strip(),
+                    "origin": str(get_val("origin")).upper().strip(),
+                    "regional_specs": str(get_val("regionalSpec")).upper().strip(),
+                    "cylinders": cyl_val,
+                    "no_of_passengers": pax_val,
+                    "color": str(get_val("color")).upper().strip(),
+                    "weight": weight_val,
+                    "confidence": {
+                        "make": 1.0,
+                        "model": 1.0,
+                        "year": 1.0,
+                        "trim": 1.0,
+                        "body_type": 1.0,
+                        "origin": 1.0,
+                        "regional_specs": 1.0,
+                        "cylinders": 1.0,
+                        "no_of_passengers": 1.0,
+                        "color": 1.0,
+                        "weight": 1.0
+                    }
+                }
+                return output
+
         normalized = normalize_chassis(chassis_number)
         if not normalized or len(normalized) != 12:
             raise ValueError("Chassis number must be exactly 12 characters.")
