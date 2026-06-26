@@ -1,0 +1,4 @@
+model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
+borgward-bx5,2019,ELITE,50600,50600,50600,"AED 50,600 - 50,600",AED,,2026-06-25T17:18:26Z,BORGWARD,BX5,BX5,0.133753,7,43832
+borgward-bx7,2018,ELITE,61400,61400,61400,"AED 61,400 - 61,400",AED,,2026-06-25T17:18:26Z,BORGWARD,BX7,BX7,0.133753,8,53188
+borgward-bx7,2019,LUXURY,63900,63900,63900,"AED 63,900 - 63,900",AED,,2026-06-25T17:18:26Z,BORGWARD,BX7,BX7,0.133753,7,55353

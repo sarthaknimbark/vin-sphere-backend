@@ -1,0 +1,2 @@
+model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
+lancia-delta,2005,STD,8900,8900,8900,"AED 8,900 - 8,900",AED,,2026-06-25T17:18:26Z,LANCIA,DELTA,DELTA,0.133753,21,7710

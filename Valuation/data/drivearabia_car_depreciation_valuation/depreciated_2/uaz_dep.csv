@@ -1,0 +1,2 @@
+model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
+uaz-hunter,2017,STD,16340,19100,17720,"AED 16,340 - 19,100",AED,,2026-06-25T17:18:26Z,UAZ,HUNTER,HUNTER,0.133753,9,15350
