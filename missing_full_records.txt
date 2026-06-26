@@ -5444,12 +5444,6 @@ NISSAN               | 300ZX                     | C                    | 1988  
 NISSAN               | 300ZX                     | LS                   | 1986   | JN1HZ16S5GX083159
 NISSAN               | 300ZX                     | STD                  | 1985   | JN1CZ14S6FX065314
 NISSAN               | 300ZX                     | STD                  | 1987   | JN1HZ14SXHX213053
-NISSAN               | ALTIMA                    | S                    | 2002   | 1N4AL11E02C285365
-NISSAN               | ALTIMA                    | S                    | 2002   | 1N4AL11E52C228918
-NISSAN               | ALTIMA                    | S                    | 2003   | 1N4AL11E63C259483
-NISSAN               | ALTIMA                    | S                    | 2004   | 1N4AL21D94C147528
-NISSAN               | ALTIMA                    | S                    | 2004   | 3N1CB51D94L893500
-NISSAN               | ALTIMA                    | SE                   | 2003   | WDB9501633K775847
 NISSAN               | ALTIMA                    | STD                  | 1993   | NAN
 NISSAN               | ARMADA                    | SE                   | 2004   | 5N1AA08BX4N737430
 NISSAN               | DATSUN                    | STD                  | 1984   | PG720262690

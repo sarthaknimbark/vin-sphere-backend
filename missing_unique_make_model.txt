@@ -3866,10 +3866,6 @@ NISSAN               | 300ZX                     | C                    | 1988
 NISSAN               | 300ZX                     | LS                   | 1986  
 NISSAN               | 300ZX                     | STD                  | 1985  
 NISSAN               | 300ZX                     | STD                  | 1987  
-NISSAN               | ALTIMA                    | S                    | 2002  
-NISSAN               | ALTIMA                    | S                    | 2003  
-NISSAN               | ALTIMA                    | S                    | 2004  
-NISSAN               | ALTIMA                    | SE                   | 2003  
 NISSAN               | ALTIMA                    | STD                  | 1993  
 NISSAN               | ARMADA                    | SE                   | 2004  
 NISSAN               | DATSUN                    | STD                  | 1984  
