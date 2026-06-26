@@ -1,0 +1,5 @@
+model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
+iveco-daily,2014,STD,19800,22000,20900,"AED 19,800 - 22,000",AED,,2026-06-25T17:18:26Z,IVECO,DAILY,DAILY,0.140609,12,17961
+iveco-daily,2015,STD,36700,36700,36700,"AED 36,700 - 36,700",AED,,2026-06-25T17:18:26Z,IVECO,DAILY,DAILY,0.140609,11,31540
+iveco-daily,2017,STD,34600,34600,34600,"AED 34,600 - 34,600",AED,,2026-06-25T17:18:26Z,IVECO,DAILY,DAILY,0.140609,9,29735
+iveco-daily,2020,STD,59745,59745,59745,"AED 59,745 - 59,745",AED,,2026-06-25T17:18:26Z,IVECO,DAILY,DAILY,0.140609,6,51344

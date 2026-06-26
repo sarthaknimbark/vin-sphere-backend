@@ -1,0 +1,2 @@
+model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
+riddara-rd6,2025,ULTRA X,120700,141200,130950,"AED 120,700 - 141,200",AED,,2026-06-25T17:18:26Z,RIDDARA,RD6,RD6,0.133753,1,113435

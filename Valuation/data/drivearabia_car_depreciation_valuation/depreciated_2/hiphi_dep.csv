@@ -1,0 +1,4 @@
+model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
+hiphi-hiphi-x,2022,STD,162000,162000,162000,"AED 162,000 - 162,000",AED,,2026-06-25T17:18:26Z,HIPHI,HIPHI X,HIPHI X,0.133753,4,140332
+hiphi-hiphix,2022,STD,162000,162000,162000,"AED 162,000 - 162,000",AED,,2026-06-25T17:18:26Z,HIPHI,HIPHIX,HIPHIX,0.133753,4,140332
+hiphi-z,2023,STD,251750,251750,251750,"AED 251,750 - 251,750",AED,,2026-06-25T17:18:26Z,HIPHI,Z,Z,0.133753,3,218078

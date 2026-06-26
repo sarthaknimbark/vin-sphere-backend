@@ -1,0 +1,3 @@
+model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
+bugatti-veyron,2007,STD,2660900,2660900,2660900,"AED 2,660,900 - 2,660,900",AED,,2026-06-25T17:18:26Z,BUGATTI,VEYRON,VEYRON,0.241358,19,2018670
+bugatti-veyron,2008,STD,3006400,4008500,3507450,"AED 3,006,400 - 4,008,500",AED,,2026-06-25T17:18:26Z,BUGATTI,VEYRON,VEYRON,0.241358,18,2660899

@@ -1,0 +1,3 @@
+model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
+leading-ideal-l9,2023,MAX EDITION,128300,150100,139200,"AED 128,300 - 150,100",AED,,2026-06-25T17:18:26Z,LEADING IDEAL,L9,L9,0.133753,3,120582
+leading-ideal-l9,2024,ULTRA (NON GCC),201800,201800,201800,"AED 201,800 - 201,800",AED,,2026-06-25T17:18:26Z,LEADING IDEAL,L9,L9,0.133753,2,174809
