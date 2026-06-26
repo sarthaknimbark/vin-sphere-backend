@@ -2,14 +2,6 @@
 MAKE                 | MODEL                     | TRIM                 | YEAR   | CHASSIS
 ------------------------------------------------------------------------------------------
 ACURA                | INTEGRA                   | STD                  | 1995   | JH4DC4459SS014605
-AITO                 | M7                        | STD                  | 2023   | LM8F7E193PA093610
-AITO                 | M7                        | STD                  | 2025   | LM8F7J1A9SE028359
-AITO                 | M9                        | MAX                  | 2025   | LM8F7J3BXSC235862
-AITO                 | M9                        | STD (NON GCC)        | 2024   | LM8F7G1B2RA401674
-AITO                 | M9                        | STD (NON GCC)        | 2024   | LM8F7G1B8RA347314
-AITO                 | M9                        | STD (NON GCC)        | 2025   | LM8F7G6B4SC159974
-AITO                 | M9                        | STD (NON GCC)        | 2025   | NAN
-AITO                 | M9                        | ULTRA                | 2025   | LM8F7J3BXSC235862
 AL DAMANI            | DMV 300                   | BASIC                | 2023   | RA4D12EC4PAA00065
 AL DAMANI            | DMV 300                   | BASIC                | 2023   | RA4D12ECXPAA00068
 AL DAMANI            | DMV 300                   | HIGHLINE             | 2022   | RA4D12EC4NAA00001
@@ -84,7 +76,6 @@ ALFA ROMEO           | STELVIO                   | VELOCE               | 2024  
 ALFA ROMEO           | STELVIO                   | VELOCE               | 2025   | NAN
 ALFA ROMEO           | TONALE                    | TI                   | 2024   | ZARANATDN3R306378
 ALFA ROMEO           | TONALE                    | VELOCE               | 2024   | ZARNATDN6R3064555
-ARCFOX               | A S                       | FOREST               | 2023   | L6T79P2N6PP009732
 ASHOK LEYLAND        | 2021                      | BUS                  | 2021   | MB1PG34L1MR1K2585
 ASHOK LEYLAND        | ASHOK LEYLAND             | FALCON               | 2023   | MB1PBEHD2PU1B9348
 ASHOK LEYLAND        | FALCON                    | STD                  | 2010   | MB1PBEJA9AH1B1845
@@ -160,10 +151,6 @@ AUDI                 | A6                        | STD                  | 2000  
 AUDI                 | A6                        | STD                  | 2002   | WAUZZZ4B62N085751
 AUDI                 | A8                        | LWB TOP              | 2003   | WAUZZZ4D03N000339
 AUDI                 | A8                        | STD                  | 2001   | WAUML54D61N011234
-AUDI                 | Q2                        | 35 TFSI SPORT        | 2018   | WAUZZZGA5JA097818
-AUDI                 | S6                        | TFSI                 | 2024   | WAUZZZF21RN032950
-AUDI                 | S6                        | TFSI                 | 2025   | WAUZZZF21SN007326
-AVANTY               | ELANTRA                   | GLS                  | 2019   | KMHD641EEKU873860
 BAIC                 | BJ40 PRO                  | PREMIUM              | 2027   | LNBRCFBK7VB462411
 BAIC                 | BJ40PRO                   | STANDARD             | 2027   | LNBRCFBK2VB462431
 BAIC                 | BJ40PRO                   | STANDARD             | 2027   | LNBRCFBKXVB462449
@@ -172,28 +159,61 @@ BAIC                 | U5 PLUS                   | HONOR                | 2027  
 BAIC                 | U5 PLUS                   | LUXURY               | 2027   | LNBSCCAKBVD120049
 BAOJUN               | 2024                      | STD                  | 2024   | LK6ADAE20SG000043
 BAOJUN YEP           | YEP/STATION               | STD                  | 2025   | LK6ADAE26SG000080
-BAW                  | 212                       | ADV                  | 2026   | JABACH3TN075470
-BAW                  | 212                       | ADVENTURER           | 2026   | HJABACDH2TN075489
-BAW                  | 212                       | STD (NON GCC)        | 2025   | HJ4BACDH5SN053615
-BAW                  | 212                       | STD (NON GCC)        | 2025   | HJ4BACDH9SN060681
-BAW                  | 212                       | STD (NON GCC)        | 2026   | HJ4BACDHOTN075166
-BAW                  | 212                       | STD (NON GCC)        | 2026   | NAN
 BAW                  | 212(4WD)                  | STATION1             | 2026   | HJ4BACDH4TN090737
-BENTLEY              | BENTAYGA                  | ATELIER EDITION      | 2026   | NAN
 BENTLEY              | UNKNOWN                   | MULLINER             | 1967   | 484677H193303
-BESTUNE              | T33                       | PREMIUM              | 2021   | LFP83APE5M1D05644
-BESTUNE              | T77                       | PREMIUM              | 2025   | LFBGE3069SJK01906
-BESTUNE              | T77                       | PREMIUM              | 2026   | LFBGE3067TJK00707
-BORGWARD             | BX5                       | ELITE                | 2019   | LXVJ2GEC7KA008292
-BORGWARD             | BX7                       | ELITE                | 2018   | LXVD3GFC6JA004113
-BORGWARD             | BX7                       | ELITE                | 2018   | LXVD3GFCXJA004017
-BORGWARD             | BX7                       | LUXURY               | 2019   | LXVD3GFC0KA001483
-BRILLIANCE           | FRV CROSS                 | STD                  | 2013   | LSYYDBCA2DC085841
-BRILLIANCE           | FRV CROSS                 | STD                  | 2014   | LSYYDBDB4EC076373
-BRILLIANCE           | H530                      | COMFORT              | 2014   | LSYYBBDB3EC003047
-BRILLIANCE           | H530                      | COMFORT              | 2014   | LSYYBBDB4EC003056
-BRILLIANCE           | JINBEI                    | STD                  | 2015   | LSYHDAAAXFK008768
-BRILLIANCE           | V5                        | STD                  | 2014   | LSYYDBDB2EC019699
+BMW                  | 116I                      | STD                  | 2005   | WBAUF11085JR91290
+BMW                  | 118I                      | STD                  | 2005   | WBAUF31095PR40339
+BMW                  | 318CI                     | STD                  | 2000   | WBABL31050JP55149
+BMW                  | 318CI                     | STD                  | 2002   | WBABN51090JT84194
+BMW                  | 318I                      | STD                  | 1998   | WBACA0101WAC37964
+BMW                  | 318I                      | STD                  | 2000   | SCBLC31E4YCX05137
+BMW                  | 318I                      | STD                  | 2000   | WBAAL3102YJS02482
+BMW                  | 318I                      | STD                  | 2002   | WBAAU51060KN00718
+BMW                  | 318I                      | STD                  | 2004   | WBABW71024PK51207
+BMW                  | 320 SEDAN                 | PLATINUM             | 1988   | WBAAA510803062576
+BMW                  | 320I                      | STD                  | 1999   | WBAAM11070JM83636
+BMW                  | 320I                      | STD                  | 1999   | WBAAM51080EH68011
+BMW                  | 320I                      | STD                  | 2000   | WBAAM110X0JM86224
+BMW                  | 320I                      | STD                  | 2000   | WBADD31090BU10335
+BMW                  | 320I                      | STD                  | 2001   | NAN
+BMW                  | 320I                      | STD                  | 2001   | WBAAN15000NC93065
+BMW                  | 320I                      | STD                  | 2002   | NAN
+BMW                  | 320I                      | STD                  | 2002   | WBAET150X0NF87256
+BMW                  | 323I                      | STD                  | 2000   | WBAAM31060FM83822
+BMW                  | 325CI                     | STD                  | 2001   | WBAAV31090FV86147
+BMW                  | 325I                      | STD                  | 1992   | NAN
+BMW                  | 325I                      | STD                  | 2001   | WBAAA21020AE68267
+BMW                  | 325I                      | STD                  | 2001   | WBAAW33481ET40923
+BMW                  | 325I                      | STD                  | 2002   | WBAEV31090KL45648
+BMW                  | 325I                      | STD                  | 2003   | WBAET35000NF95040
+BMW                  | 325I                      | STD                  | 2003   | WBAET35090NF95103
+BMW                  | 328I                      | STD                  | 2000   | WBAAM51020EH68117
+BMW                  | 328I                      | STD                  | 2000   | WBAAM510X0EH68866
+BMW                  | 328I                      | STD                  | 2000   | WBABM51060JK65666
+BMW                  | 328I                      | STD                  | 2001   | WBAAM11030JM90227
+BMW                  | 330I                      | STD                  | 2001   | WBABN51011JT80514
+BMW                  | 330I                      | STD                  | 2001   | WBABN51040JT81185
+BMW                  | 330I                      | STD                  | 2002   | NAN
+BMW                  | 335                       | STD                  | 2008   | WBAWB71050P026853
+BMW                  | 520D                      | TRIM                 | 2020   | WBAJF5107LWW66043
+BMW                  | 520I                      | EXECUTIVE            | 2004   | WBANA31054B160353
+BMW                  | 520I                      | STD                  | 2001   | HCR32021525
+BMW                  | 520I                      | STD                  | 2001   | WBADT21041GZ01817
+BMW                  | 520I                      | STD                  | 2001   | WBADT21041GZ02076
+BMW                  | 520I                      | STD                  | 2003   | WBADT21033GZ09510
+BMW                  | 520I                      | STD                  | 2005   | WBANA31045B913081
+BMW                  | 528I                      | STD                  | 1997   | NAN
+BMW                  | 528I                      | STD                  | 1998   | WBADD6104WBR40688
+BMW                  | 728                       | STD                  | 2001   | NAN
+BMW                  | 735I                      | STD                  | 2001   | WBAGG41040DN64935
+BMW                  | 735LI                     | STD                  | 2001   | WBAGH61071DC45302
+BMW                  | 745LI                     | STD                  | 2002   | WBAGL610X2DM55874
+BMW                  | BMW 3201                  | STD                  | 1989   | WBAAD61020AG18330
+BMW                  | BMW 3301                  | STD                  | 2013   | WBA3F91030F144943
+BMW                  | BMW 525                   | XLI                  | 2005   | WBANA51040CM62653
+BMW                  | M5                        | STD                  | 2002   | WBSDE93492BZ99790
+BMW                  | X3                        | SI                   | 2004   | NAN
+BMW                  | Z3                        | ROADSTER             | 2000   | WBAAA21060EG26277
 BUGATTI              | CHIRON                    | SPORT                | 2024   | NAN
 BUGATTI              | CHIRON                    | STD                  | 2018   | NAN
 BUGATTI              | CHIRON                    | STD                  | 2022   | VF9SC3V3XNM795039
@@ -203,10 +223,8 @@ BUGATTI              | CHIRON                    | STD                  | 2023  
 BUGATTI              | CHIRON                    | STD                  | 2024   | VF9SW3V39RM795112
 BUGATTI              | CHIRON                    | STD                  | 2024   | VF9SW3V3XRM795099
 BUGATTI              | CHIRON                    | SUPER SPORT          | 2022   | VF9SW3V37NM795023
-BUGATTI              | VEYRON                    | STD                  | 2007   | VF9SA15B16M795045
-BUGATTI              | VEYRON                    | STD                  | 2008   | VF9SA15C58M795173
-BUGATTI              | VEYRON                    | STD                  | 2008   | VF9SA15C68M795179
-BUICK                | RIVIERA                   | COUPE                | 2026   | 1G4AZ57Y7DE442958
+BYD                  | F3                        | STD                  | 2010   | LGXC36DF0A0000025
+BYD                  | F6                        | STD                  | 2010   | NAN
 BYD                  | LEOPARD 7 (2WD)           | STD                  | 2025   | LC0F74C41S7158648
 BYD                  | LEOPARD 7 (4WD)           | STD                  | 2025   | LC0FD4C47S7092406
 BYD                  | LEOPARD 7(2WD)            | 7                    | 2025   | LC0F74C49S7158705
@@ -216,6 +234,7 @@ BYD                  | LEOPARD 7(2WD)            | SUV                  | 2025  
 BYD                  | LEOPARD S/STATION         | LE PLATINUM CITY     | 2025   | LC0FD1C4485419547
 BYD                  | LEOPARD/STATION           | 7                    | 2025   | LC0FD4C41S7082289
 BYD                  | QIN PLUS(2WD)             | STD                  | 2025   | LC0C76C4754521177
+BYD                  | SHARK                     | 6                    | 2027   | LPE19W2A5VF004290
 BYD                  | SHARK (PICK UP)           | PREMIUM              | 2026   | LPE19W2A0TF055161
 BYD                  | SHARK (PICK UP)           | S                    | 2026   | LPE19W2A1TF055198
 BYD                  | SONG (2WD)                | EV                   | 2025   | LC0C74C41S5056572
@@ -233,7 +252,6 @@ BYD - YANGWANG       | U8                        | STD (NON GCC)        | 2024  
 BYD - YANGWANG       | U8                        | STD (NON GCC)        | 2025   | LGXEK1C42S0087694
 BYD - YANGWANG       | U8                        | STD (NON GCC)        | 2025   | LGXEK1C42S0360204
 CADILLAC             | 1984                      | 1                    | 1984   | 1G6AW6983E9073898
-CADILLAC             | ATS                       | PREMIUM LUXURY       | 2019   | NAN
 CADILLAC             | BLS                       | COMFORT              | 2007   | YSCFD49Y272350350
 CADILLAC             | BROGHAM                   | SE PLATINUM CITY     | 1987   | 1G6DW51Y2H9725899
 CADILLAC             | BROGHAM                   | STD                  | 1989   | 1G6DW51Y6KR722589
@@ -243,25 +261,11 @@ CADILLAC             | CADILLAC CEVEL            | PREMIER SWB          | 1984  
 CADILLAC             | CATERA                    | STD                  | 2001   | 1G6DW51Y1J9729724
 CADILLAC             | CATERA                    | STD                  | 2002   | 1G6DW52P0SR700531
 CADILLAC             | CATERA                    | STD                  | 2003   | 1G6EL5788FE658041
-CADILLAC             | CT6                       | LUXURY               | 2017   | 1G6K95RS3HU137408
-CADILLAC             | CT6                       | LUXURY               | 2017   | 1G6KD5RS6HU207904
-CADILLAC             | CT6                       | PLATINUM             | 2017   | 1G6K95R65HU990413
-CADILLAC             | CT6                       | PLATINUM             | 2017   | 1G6K95R68HU990261
-CADILLAC             | CT6                       | PLATINUM             | 2017   | 1G6K95R69HU181416
-CADILLAC             | DEVILLE                   | STD                  | 2001   | 546239519
-CADILLAC             | DEVILLE                   | STD                  | 2002   | 1G6KD54Y0XU777486
-CADILLAC             | DEVILLE                   | STD                  | 2004   | 1G6KE57Y24U113937
-CADILLAC             | DEVILLE                   | STD                  | 2005   | 1G6CD53B8M4346889
 CADILLAC             | ELDORADO                  | STD                  | 1981   | 1G6AL5792BE626462
 CADILLAC             | SLS                       | STD                  | 2002   | 1G6KY54921U232586
-CATERHAM             | SEVEN                     | 360 S                | 2025   | SDKLDF5DA24577416
 CHANGAN              | CHANGAN                   | C                    | 2025   | LSCBBN2A2SG800613
-CHANGAN              | EADO                      | STD                  | 2025   | LS5A2DKE7TA967845
-CHANGAN              | EADO                      | STD                  | 2026   | LS5A2DKE7TA967845
 CHANGAN              | HAOLV R                   | S                    | 2025   | LS62793S1SG180128
 CHANGAN              | QNE 07/SEDAN              | C                    | 2025   | LS6C3E2X6RA400107
-CHANGAN              | X5 PLUS                   | PIONEER              | 2026   | LS4ASE2E8TB309584
-CHANGAN              | X5 PLUS                   | STD                  | 2026   | LS4ASE2E2TB307216
 CHERVOLET            | CAPRICE                   | LS                   | 2009   | 6G1ML54709L316275
 CHERVOLET            | CAPRICE                   | LTZ                  | 2013   | 6G1ML5D27DL814759
 CHERVOLET            | CAPRICE                   | ROYALE  NAV          | 2009   | 6G1ML54729L316262
@@ -273,16 +277,9 @@ CHERVOLET            | CAPRICE                   | ROYALE  NAV          | 2013  
 CHERVOLET            | CAPRICE                   | ROYALE  NAV          | 2013   | 6G1ML5D22DL813891
 CHERVOLET            | CAPRICE                   | STD                  | 2005   | 6G1LK52F05L360005
 CHERVOLET            | CAPRICE                   | STD                  | 2010   | 6G1ML5D71AL449552
-CHERY                | ARRIZO 6 PRO              | LUXURY               | 2022   | LVVDC21BXND062256
 CHERY                | E5                        | COMFORT              | 2015   | LVVDC2185FD015055
 CHERY                | EASTAR                    | STD                  | 2007   | ZAR93700005244115
-CHERY                | EASTAR                    | STD                  | 2009   | WMEEJ31X99K220451
 CHERY                | RELY RB (PICK UP)         | S                    | 2026   | HJR25GK14TF402772
-CHERY                | TIGGO                     | STD                  | 2014   | LVVDB24B0ED028776
-CHERY                | TIGGO                     | STD                  | 2015   | LVTDB24B3FC019621
-CHERY                | TIGGO                     | STD                  | 2015   | LVVDB24B7FD014987
-CHERY                | TIGGO 7                   | LUXURY               | 2019   | LVVDB21B4KD016081
-CHERY                | TIGGO 7                   | LUXURY               | 2020   | NAN
 CHERY - ICAR         | 03                        | STD                  | 2024   | LURMCVB14RA152318
 CHERY - ICAR         | 03                        | STD (NON GCC)        | 2024   | LURMCWBT0RA161119
 CHERY - ICAR         | 03                        | STD (NON GCC)        | 2024   | LURMCWBT0RA202378
@@ -291,17 +288,127 @@ CHERY - ICAR         | 03                        | STD (NON GCC)        | 2025  
 CHERY - ICAR         | 03T                       | STD                  | 2026   | LNNBDDFU6TD957525
 CHERY - ICAR         | V23                       | STD (NON GCC)        | 2025   | LURMCWEY6SA047476
 CHERY - ICAR         | V27                       | FLAGSHIP             | 2025   | LNNBBDEDXSJ000077
+CHEVROLET            | ASTRO                     | STD                  | 1998   | 1GNDM19W5WB165890
+CHEVROLET            | ASTRO                     | STD                  | 1998   | 1GNEL19W4WB146089
+CHEVROLET            | ASTRO                     | STD                  | 2001   | 1GNEL19W31B120169
+CHEVROLET            | ASTRO                     | STD                  | 2002   | 1GBEL19X72B117542
+CHEVROLET            | ASTRO                     | STD                  | 2002   | 1GNDM19X62B100372
+CHEVROLET            | ASTRO                     | STD                  | 2003   | 1GDGG29U231210413
+CHEVROLET            | ASTRO                     | STD                  | 2003   | 1GNEL19X73B128190
+CHEVROLET            | ASTRO                     | STD                  | 2004   | 1GKDM19X74B506158
+CHEVROLET            | ASTRO                     | STD                  | 2005   | 1GCGG29U951185646
+CHEVROLET            | ASTRO                     | STD                  | 2005   | 1GTGG29UX51258023
+CHEVROLET            | AVALANCHE                 | AVALANCHE            | 2004   | 3GNEK12T64G256696
+CHEVROLET            | AVEO                      | BASE                 | 2007   | KL1TJ53727B038318
+CHEVROLET            | AVEO                      | BASE                 | 2007   | KL1TJ53757B037518
+CHEVROLET            | AVEO                      | BASE                 | 2009   | KL1TJ53769B637337
+CHEVROLET            | AVEO                      | LS                   | 2006   | KL1TJ58Y66B579615
+CHEVROLET            | AVEO                      | LS                   | 2006   | KL1TJ68Y36B645026
+CHEVROLET            | AVEO                      | LS                   | 2007   | KL1TM627X7B707434
+CHEVROLET            | AVEO                      | LS                   | 2007   | NAN
+CHEVROLET            | AVEO                      | LS                   | 2009   | KL1TD53729B290418
+CHEVROLET            | AVEO                      | LS                   | 2009   | KL1TJ53719B296557
+CHEVROLET            | AVEO                      | LS                   | 2010   | NAN
+CHEVROLET            | AVEO                      | LT                   | 2006   | NAN
+CHEVROLET            | AVEO                      | LT                   | 2008   | KL1TJ53748B170370
+CHEVROLET            | AVEO                      | LT                   | 2008   | KL1TJ5B74BB220158
+CHEVROLET            | AVEO                      | LT                   | 2009   | NAN
+CHEVROLET            | AVEO                      | STD                  | 2004   | KL1TJ51Y14B187701
+CHEVROLET            | AVEO                      | STD                  | 2004   | KL1TJ51Y24B222858
+CHEVROLET            | AVEO                      | STD                  | 2005   | KL1TJ58Y75B481515
+CHEVROLET            | AVEO                      | STD                  | 2005   | KL1TJ62Y25B420118
+CHEVROLET            | AVEO                      | STD                  | 2006   | NAN
+CHEVROLET            | BLAZER                    | SE                   | 1987   | 1GNEV18H3HF147291
+CHEVROLET            | C 10                      | 1500                 | 1967   | CE147S160356
+CHEVROLET            | C 10                      | 1500                 | 1977   | CCS447Z162134
+CHEVROLET            | C 10                      | 1500                 | 1985   | 1GCCC14DXEF310068
+CHEVROLET            | C 10                      | GL                   | 1977   | CCL447Z137063
+CHEVROLET            | C 10                      | GLX                  | 1948   | 6TKA1107
+CHEVROLET            | C 10                      | STD (NON GCC)        | 1979   | 1GCCC14D1BZ121304
 CHEVROLET            | C/K 3500                  | GLX                  | 1979   | CCL349B137113
+CHEVROLET            | C10                       | 1500                 | 1979   | CCL449Z203504
+CHEVROLET            | CAMARO                    | STD                  | 1969   | 124379N613250
+CHEVROLET            | CAMARO                    | STD                  | 2001   | NAN
+CHEVROLET            | CAMARO                    | STD                  | 2003   | 1G1FB1RX9J0135448
+CHEVROLET            | CAPRI                     | ROYALE  NAV          | 1988   | 1G1BU51H5JR110787
+CHEVROLET            | CAPRICE                   | LS                   | 1988   | 1G1BU51H5JR135172
+CHEVROLET            | CAPRICE                   | PREMIER SWB          | 1988   | 1G1BU51H5JR110787
+CHEVROLET            | CAPRICE                   | ROYALE  NAV          | 1988   | 1G1BU51H5JR110787
+CHEVROLET            | CAPRICE                   | SE                   | 1989   | 1G1BU51E1KR220758
+CHEVROLET            | CAPRICE                   | STD                  | 2002   | 1G1BU51E5KA123447
+CHEVROLET            | CAPRICE                   | STD                  | 2002   | 6G1HM52F22L773412
+CHEVROLET            | CAPRICE                   | STD                  | 2004   | 6G1KM54F64L104680
+CHEVROLET            | CAVALIER                  | LS                   | 2002   | NAN
+CHEVROLET            | CAVALIER                  | LS                   | 2003   | 3G1JF52F33S109589
+CHEVROLET            | CHEVROLET C 10            | 1500                 | 1977   | CCS447Z162134
+CHEVROLET            | CHEVROLET CHEVY           | STD                  | 1998   | 1GCEG15M1W1073674
+CHEVROLET            | CHEVROLET EL CAMI         | PREMIUM 50YR PK      | 1987   | 3GCCW80H1HS906792
+CHEVROLET            | CHEVROLET IMPALA          | LS                   | 1963   | 31847S269502
+CHEVROLET            | CORVETTE                  | C6                   | 1976   | 1Z37L6S435024
+CHEVROLET            | CORVETTE                  | CENTENIAL EDITION    | 1982   | 1G1AY8782C5111141
+CHEVROLET            | DAIMLER DOUBLE            | LS                   | 1985   | W09AJ4224MKA06050
+CHEVROLET            | ENVOY                     | 1500                 | 2009   | 1GCHG39KX91137653
+CHEVROLET            | EPICA                     | LS                   | 2004   | KL1VJ52Z24B103093
+CHEVROLET            | EXPRESS                   | STD                  | 1999   | 1GBFG15R7X1058960
+CHEVROLET            | EXPRESS                   | STD                  | 2000   | 1GCFG15M4Y1120591
+CHEVROLET            | EXPRESS                   | STD                  | 2013   | 1GCZG8CG5D1128602
+CHEVROLET            | IMPALA                    | S                    | 1964   | 41847R173133
+CHEVROLET            | IMPALA                    | STD                  | 2003   | 2G1135S37J9158741
+CHEVROLET            | IMPALA                    | STD                  | 2006   | 2G1155S39G9144665
+CHEVROLET            | LUMINA                    | LTZ                  | 2002   | 6G1XL52B52L838197
+CHEVROLET            | LUMINA                    | S                    | 2003   | 6G12K14B53L107774
+CHEVROLET            | LUMINA                    | S                    | 2003   | 6G12K14F83L141419
+CHEVROLET            | LUMINA                    | SS                   | 2001   | 1D80H2L560606
+CHEVROLET            | LUMINA                    | SS                   | 2002   | 1G1BU51E5KA123447
+CHEVROLET            | LUMINA                    | SS                   | 2004   | 6G1YL52B04L250926
+CHEVROLET            | MALIBU                    | STD                  | 2002   | 1GNDT13S022370309
+CHEVROLET            | MASTER DELUXE             | GT                   | 1939   | 21JB0420798
+CHEVROLET            | NOVA                      | SV                   | 1974   | 1X27D4K177808
+CHEVROLET            | NOVA WATCH                | STD                  | 1972   | 1X27H2W348398
+CHEVROLET            | OPTRA                     | LS                   | 2005   | KL1JJ62635K124255
+CHEVROLET            | OPTRA                     | LS                   | 2006   | KL1JJ52656K297738
+CHEVROLET            | OPTRA                     | LS                   | 2006   | KL1JJ58606K445768
+CHEVROLET            | SILVERADO                 | 1500                 | 1986   | 1GCGK24M1GJ141410
+CHEVROLET            | SILVERADO                 | 1500                 | 1999   | 3GCEC28R2XG197027
+CHEVROLET            | SILVERADO                 | 1500                 | 1999   | CS149Z871224
+CHEVROLET            | SILVERADO                 | 1500                 | 2002   | 1GCEC14V82Z256393
+CHEVROLET            | SILVERADO                 | 1500                 | 2002   | 1GCEK14V92Z269673
+CHEVROLET            | SILVERADO                 | 1500 EXT/CAB         | 2000   | 1GCEK14T7YZ121609
+CHEVROLET            | SILVERADO                 | 1500 EXT/CAB         | 2000   | 1GCEK14V6XZ140247
+CHEVROLET            | SILVERADO                 | 2500 REG/CAB LT Z71 LONG | 1984   | 1GCGC24M6ES114403
+CHEVROLET            | SILVERADO                 | 2500HD EXT CAB LT1 Z71 | 1985   | 1GCGC24W2FJ158424
+CHEVROLET            | SILVERADO                 | 2500HD EXT/CAB LT1 Z71 | 1985   | 1GCGC24W2FJ158424
+CHEVROLET            | SILVERADO                 | S ASF                | 1986   | 2GCGE34W5G1210422
+CHEVROLET            | SILVERADO                 | SGL                  | 1988   | 1GCDK14K4JZ230411
+CHEVROLET            | SILVERADO                 | STD                  | 2001   | 1GCEC14V31Z232291
+CHEVROLET            | SILVERADO K3500           | S                    | 2024   | 1GC4YSE78RF184240
+CHEVROLET            | SPARK                     | BASE                 | 2006   | KL1MD614X6C117190
+CHEVROLET            | SPARK                     | BASE                 | 2006   | KL1MJ61406C135741
+CHEVROLET            | SPARK                     | BASE                 | 2008   | KL1MD61478C341360
+CHEVROLET            | SPARK                     | BASE                 | 2008   | KLYKA484D8C395580
+CHEVROLET            | SPARK                     | BASE                 | 2009   | KL1MJ614X9C546178
+CHEVROLET            | SPARK                     | BASE                 | 2010   | KLYMA481DAC131813
+CHEVROLET            | SPARK                     | BASE                 | 2010   | KLYMA481DAC146392
+CHEVROLET            | SPARK                     | LS                   | 2007   | KL1MJ61467C204014
+CHEVROLET            | SPARK                     | LS                   | 2008   | KL1MD61488C369782
+CHEVROLET            | SPARK                     | LS                   | 2009   | KLASA48DD9B672713
+CHEVROLET            | SPARK                     | LS                   | 2010   | NAN
+CHEVROLET            | TAHOE                     | STD                  | 1996   | NAN
+CHEVROLET            | TAHOE                     | STD                  | 2000   | 1GNEK13T4YJ116309
+CHEVROLET            | TAHOE                     | STD                  | 2000   | 3GNEK18RXXG231994
 CHEVROLET            | TAHOE K1500 (4WD)         | S                    | 1999   | 1GNEK13R8XJ504811
-CHRYSLER             | 300                       | TOP                  | 2014   | 2C3CCACG5EH248965
+CHEVROLET            | TRAILBLAZER               | LS                   | 2000   | 1GBEL19W5YB156792
+CHEVROLET            | TRAILBLAZER               | LS                   | 2002   | 1GNDT13S822381140
+CHEVROLET            | TRAILBLAZER               | LS                   | 2002   | 1GNDT13SX22382418
+CHEVROLET            | UPLANDER                  | LS                   | 2005   | 1GNDV33L05D267656
+CHEVROLET            | VENTURE                   | STD                  | 2001   | 1GNDX03E41D168939
+CHEVROLET            | Z 280                     | LT                   | 1979   | HS130125190
 CHRYSLER             | GRAND VOYAGER             | LX LTH               | 1999   | SS22N6R309974
 CHRYSLER             | GRAND VOYAGER             | SE                   | 2000   | 1C3BF66P5EX594697
 CHRYSLER             | NEON                      | STD                  | 2005   | 1C3ES66C75D215027
 CHRYSLER             | NEON                      | STD                  | 2005   | 2C3JA53G15H559085
 CHRYSLER             | PT CRUISER                | LIMITED              | 2006   | 1A8GY61R76Y119917
 CHRYSLER             | TOWN & COUNTRY            | STD                  | 2013   | 2C4RC1BG7DR597996
-CITROEN              | CITROEN C5                | S                    | 2025   | VR7A45GY6SL000424
-CMC                  | 7Z                        | MINIVANI             | 2013   | RKMAS47L9DY030917
 DAIHATSU             | CHARADE                   | STD                  | 2006   | JD1GL100161051781
 DAIHATSU             | CHARADE                   | STD                  | 2006   | JD1GL100861047436
 DAIHATSU             | DAIHATSU                  | 1                    | 2009   | JD4TV182891081298
@@ -324,37 +431,19 @@ DAIHATSU             | YRV                       | STD                  | 2004  
 DAIHATSU             | YRV                       | STD                  | 2005   | JD1GM201051519705
 DATSUN               | 1969                      | S                    | 1969   | SPL31122441
 DATSUN               | ZX 280/COUPE              | SPORT                | 1980   | HS130219058
-DEEPAL               | G318                      | STD                  | 2025   | LS6B3G314SA700039
 DODGE                | 1500                      | STD                  | 2012   | 1C6RD6FT0CS133518
 DODGE                | CALIBER                   | SE                   | 2007   | 1B3HB28BX7D387885
 DODGE                | CALIBER                   | SXT                  | 2007   | 1B3HB48B57D387899
 DODGE                | CHALLENGER                | SPORT                | 1974   | JH23G4B163816
 DODGE                | DAKOTA                    | SPORT                | 2002   | 1B7HL48N22S529037
-DODGE                | DURANGO                   | LIMITED              | 2004   | 1D4HB58D34F208929
-DODGE                | DURANGO                   | LIMITED              | 2004   | 1D4HB58D64F220492
 DODGE                | DURANGO                   | SLT                  | 2002   | 1B4HS48Z92F118861
 DODGE                | DURANGO                   | SLT                  | 2002   | 1B4HS58Z72F146275
-DODGE                | DURANGO                   | SLT                  | 2004   | 1D4HB48D14F197326
-DODGE                | GRAND CARAVAN             | SE (NON GCC)         | 2017   | 2C4RDGBGXHR850329
-DODGE                | GRAND CARAVAN             | SE (NON GCC)         | 2017   | 2C4RDGEGXHR798468
-DODGE                | GRAND CARAVAN             | SE (NON GCC)         | 2019   | 2C4RDGCG0KR661999
-DODGE                | GRAND CARAVAN             | SE (NON GCC)         | 2019   | 2C4RDGCG5KR758566
-DODGE                | RAM                       | LIMITED              | 2000   | 1D7RV1CT1BS523626
 DONGFENG             | 2025                      | VTI SR AIR BAG ABS   | 2025   | LGJE1EE02SM320003
 DONGFENG EΠ          | 007                       | STD                  | 2025   | LDP41E963SD119993
 DONGFENG EΠ          | 007                       | STD                  | 2025   | LDP41E964SD153165
 DONGFENG EΠ          | MAGE                      | E1                   | 2025   | LGJE5EE03SM332889
-DONGFENG-XIAOKA      | C35                       | STD                  | 2022   | LDP42A964R9000935
-DORCEN               | DOMY X7                   | STD                  | 2018   | LJ8F5D5D0JE129369
 EXEED                | ROCKY                     | FLAGSHIP             | 1989   | JDA000F8500040161
-EXEED                | RX                        | LUXURY               | 2001   | LVTDD24BX11111111
 EXEED                | RX 2.0 T                  | PREMIUM              | 2025   | LVTDD24B3SG000516
-EXEED                | VX                        | LUXURY               | 2026   | NAN
-FAW                  | BESTURN B50               | DELUXE               | 2020   | LFP83ACC6L1K00031
-FAW                  | BESTURN X40               | PREMIUM              | 2021   | LFP83APE4M1K04771
-FERRARI              | 488 GTB                   | STD                  | 2016   | ZFF79AMT8G0218181
-FERRARI              | 488 GTB                   | STD                  | 2016   | ZFF80AMTXG0216804
-FERRARI              | 488 GTB                   | STD                  | 2018   | ZFF80AMT6H0223444
 FERRARI              | 812                       | COMPETIZIONE         | 2024   | ZFF03TMB000283586
 FERRARI              | 812                       | COMPETIZIONE         | 2024   | ZFF97CMB000290527
 FERRARI              | DAYTONA S                 | STD                  | 2025   | ZFF05UMTXS0312425
@@ -362,17 +451,70 @@ FERRARI              | DAYTONA SP3               | STD                  | 2025  
 FERRARI              | F8_TRIBUTO                | STD                  | 2022   | ZFF92LLLXN0281581
 FERRARI              | LAFERRARI                 | STD                  | 2015   | ZFF76ZHT7F0208788
 FERRARI              | LAFERRARI                 | STD                  | 2017   | ZFF86ZHL7H0232855
-FERRARI              | PORTOFINO                 | STD                  | 2019   | ZFF89FPTOK0238589
-FERRARI              | PORTOFINO                 | STD                  | 2020   | ZFF89FPT5L0249458
-FERRARI              | PORTOFINO                 | STD                  | 2020   | ZFF89FPT7L0255813
 FIAT                 | FIAT SPIDER 661           | 1                    | 2018   | ZFANF6E4A00132718
-FORCE                | TRAVELLER                 | STD                  | 2021   | MC1E4FGB1MP013742
-FORCE                | URBANIA                   | GLE                  | 2026   | MC1M4AGB0TP006696
-FORCE                | URBANIA                   | STD                  | 2026   | MC1M4AGB0TP006701
+FORD                 | BRONCO                    | GTS                  | 1987   | 1FMDU15N2HLA02662
+FORD                 | COBRA                     | GT PREMIUM           | 1965   | AA931AAHV21CN1755
+FORD                 | CROWN VICTORIA            | LX                   | 1999   | 2MEBM75F7JX671699
+FORD                 | CROWN VICTORIA            | LX                   | 2003   | 2FAFP74W43X143901
+FORD                 | CROWN VICTORIA            | LX                   | 2004   | 2FAFP72W24X153928
+FORD                 | E 350                     | STD                  | 2011   | 1FDWE3FS1ADA97026
+FORD                 | E 450                     | CATAWAY              | 2014   | 1FDXE4FS9EDA22896
+FORD                 | E 450                     | G                    | 2024   | 1FDXE4FN5RDD16165
+FORD                 | E 450                     | STD                  | 2008   | 1FDXE45S48DB03066
 FORD                 | E450 SUPER DUTY (MOTORHOME) | C                    | 2017   | 1FC4E4KS0HDC26004
+FORD                 | ESCAPE                    | XLS                  | 2002   | 1FMYU01122KC26512
+FORD                 | EVEREST                   | STD                  | 2004   | NAN
+FORD                 | EXPEDITION                | XLT                  | 2001   | 1FMPU18LX1LA36524
+FORD                 | EXPEDITION                | XLT                  | 2002   | 1FMFU18L32LA40105
 FORD                 | EXPEDITION   EL           | XL  CLTH             | 2017   | 1FMJK1KTXHEA32105
+FORD                 | EXPLORER                  | LIMITED              | 2004   | 1FMDU75W04ZA36151
+FORD                 | EXPLORER                  | XLT                  | 2000   | NAN
+FORD                 | EXPLORER                  | XLT                  | 2002   | 1FMDU75K22ZC54490
+FORD                 | EXPLORER                  | XLT                  | 2002   | 1FMZU72E22ZC32526
+FORD                 | EXPLORER                  | XLT                  | 2004   | 1FMZU63K24ZB28572
+FORD                 | EXPLORER                  | XLT                  | 2005   | 1FMZU72E05ZA71260
+FORD                 | EXPLORER                  | XLT                  | 2005   | 1FMZU72E55ZA50601
+FORD                 | F 150                     | STD                  | 1996   | 1FDKE30G9THA85530
 FORD                 | F 250 (PICK UP)           | LARIAT CREW CAB      | 2021   | 1FT7W2B6XMEC68332
 FORD                 | F600 ENTEGRA ESTEEM XL 33F (MOTORHOME) | GL                   | 2025   | 1FDFF6LT2SDA08481
+FORD                 | FOCUS                     | AMBIENTE             | 2006   | NAN
+FORD                 | FOCUS                     | STD                  | 2006   | WF0TD65L86VM64797
+FORD                 | FOCUS                     | TREND                | 2001   | NAN
+FORD                 | FOCUS                     | TREND                | 2002   | WF0SD95L32VJ11195
+FORD                 | FOCUS                     | TREND                | 2003   | WF0SD94L13VP68774
+FORD                 | FOCUS                     | TREND                | 2003   | WF0SD95L73VL04032
+FORD                 | FOCUS                     | TREND                | 2004   | WF0SD95L14VK31029
+FORD                 | FOCUS                     | TREND                | 2004   | WF0SD95L74VA85450
+FORD                 | FOCUS                     | TREND                | 2006   | WF0TD35L16VP04027
+FORD                 | FOCUS                     | TREND                | 2006   | WF0TD35L26VS02174
+FORD                 | MJP 2                     | GLX                  | 1981   | MJP2BLW454125
+FORD                 | MONDEO                    | ST 220               | 2005   | WF0HB44F95GJ25402
+FORD                 | MONDEO                    | STD                  | 2004   | WF0TB14F04GJ69411
+FORD                 | MONDEO                    | STD                  | 2004   | WF0TB14F34GJ00535
+FORD                 | MONDEO                    | STD                  | 2006   | WF0TD65L36VM46871
+FORD                 | MONDEO                    | STD                  | 2006   | WF0TD65L86VD46302
+FORD                 | MUSTANG                   | GT                   | 1967   | 7R01C108381
+FORD                 | MUSTANG                   | GT                   | 1990   | 9F02R188929
+FORD                 | MUSTANG                   | GT                   | 2001   | 1FAFP42X51F189322
+FORD                 | MUSTANG                   | GT                   | 2001   | 8R01C160735
+FORD                 | MUSTANG                   | GT                   | 2002   | 1FAFP40412F124803
+FORD                 | MUSTANG                   | GT                   | 2003   | 1FAFP42RX3F397779
+FORD                 | MUSTANG                   | GT                   | 2003   | 1FAFP49Y33F301858
+FORD                 | MUSTANG                   | GT PREMIUM           | 1968   | 8R01C160735
+FORD                 | MUSTANG                   | PREMIUM              | 1987   | 1FABP42E6HF251575
+FORD                 | MUSTANG                   | PREMIUM              | 2001   | JN1HZ14S9HX212265
+FORD                 | MUSTANG                   | STD                  | 1989   | NAN
+FORD                 | MUSTANG                   | STD                  | 1990   | 00002W87Z6N514535
+FORD                 | MUSTANG                   | STD                  | 1998   | NAN
+FORD                 | MUSTANG                   | STD                  | 1999   | 1FAFP4045XF116050
+FORD                 | MUSTANG                   | STD                  | 1999   | 1FAFP42X2XF159008
+FORD                 | MUSTANG                   | STD                  | 2000   | 1FAFP4040YF270120
+FORD                 | MUSTANG                   | STD                  | 2000   | 9R02R162064
+FORD                 | RANGER                    | STD                  | 2005   | MNCBS32725W457369
+FORD                 | SKF                       | 1500                 | 1988   | SKFMJR2BMJT100651
+FORD                 | THUNDERBIRD               | GT                   | 2002   | 1FAHP60A62Y114525
+FORD                 | THUNDERBIRD               | LOUNGE LTH           | 1963   | 3Y87Z148317
+FORD                 | WINNEBAGO MOTOR HOME      | GL                   | 2004   | 4UZAAHDC54CN10221
 FORD2140777009       | MUSTANG                   | PREMIUM 50YR PK      | 2015   | 1FA6P8AMXF5428763
 GAC                  | GS3 EMZOOM                | 1.5 GL SPORT+        | 2027   | LMGHT1L89V3242187
 GAC                  | GS3 EMZOOM 1.5TG GB       | STD                  | 2026   | LMGHT1L51T3230330
@@ -386,11 +528,8 @@ GEELY                | GC6                       | S                    | 2018  
 GEELY                | ني ام جراند               | ADVANCE              | 2016   | L6T7964Z8GN003114
 GMC                  | CANYON                    | SLT                  | 2016   | 1GTH6BE32G1194518
 GMC                  | GMC                       | STD                  | 2006   | 36TEK142X66233161
-GMC                  | SAVANA                    | GL                   | 2012   | 1GTW78CG7C1191010
 GMC                  | SAVANA(VAN)               | SE T1                | 2012   | 1GTW78CG5C1110490
 GMC                  | SEIARA                    | 1500  Z71            | 1979   | TCS349Z512920
-GMC                  | SEIRRA                    | 1500 REG/CAB SLE Z71 | 2018   | 1GTN29EC8JZ320980
-GMC                  | SEIRRA                    | 1500 REG/CAB SLE Z71 | 2019   | 3GTN99EFXKG234996
 GMC                  | SIERRA                    | 1500                 | 1981   | 1GTGC34M8BB505859
 GMC                  | SIERRA                    | 1500                 | 1999   | 1GTEK19T6XE536001
 GMC                  | SIERRA                    | 1500  Z71            | 1977   | TCL347B506518
@@ -404,7 +543,6 @@ GMC                  | SIERRA                    | STD                  | 1979  
 GMC                  | SIERRA                    | STD                  | 1983   | 2GTGC34M2D1515533
 GMC                  | SIERRA                    | STD (NON GCC)        | 1981   | 1GTGC34M8BB506459
 GMC                  | YUKON                     | DENALI S/R DVD/NAV   | 2003   | 1GKEK63U53J326803
-GMC                  | YUKON                     | SLE                  | 1995   | 1GKEK18K6SJ726720
 GMC                  | YUKON                     | SLE                  | 2001   | 1GKEK13T61J283841
 GMC                  | YUKON                     | SLE                  | 2001   | 1GKEK13T81J105851
 GMC                  | YUKON                     | SLE                  | 2002   | 1GKEK13T12J264860
@@ -525,117 +663,195 @@ GREAT WALL           | WINGLE 7                  | STD                  | 2023  
 GREAT WALL           | WINGLE 7                  | STD                  | 2023   | LGWCB4199PB665609
 GWM - WEY            | GAOSHAN                   | STD                  | 2025   | LGWFGVA82SM012516
 HAVAL                | V7                        | HIGH DELUXE          | 2027   | LGWFF7A53VE601044
-HIG                  | KLQ6600                   | D                    | 2025   | LKL1AAA64SA811720
-HIPHI                | HIPHI X                   | STD                  | 2022   | LJD8AC3F9N0018231
-HIPHI                | HIPHIX                    | STD                  | 2022   | LJD8AC3F9N0018231
-HIPHI                | Z                         | STD                  | 2023   | LJD7BC2F6P0012013
+HONDA                | ACCORD                    | CLOTH                | 2002   | NAN
+HONDA                | ACCORD                    | EXI                  | 1999   | JHMKA9624XC400167
+HONDA                | ACCORD                    | EXI                  | 2000   | JHMCD45300C207363
+HONDA                | ACCORD                    | EXI                  | 2001   | 2HHES36841H001743
+HONDA                | ACCORD                    | EXI                  | 2001   | NAN
+HONDA                | ACCORD                    | LXI                  | 1997   | 1HGCD5554VA238195
+HONDA                | ACCORD                    | LXI                  | 1997   | 1HGCD7257VA006786
+HONDA                | ACCORD                    | LXI                  | 1999   | JHMCF8640XC400264
+HONDA                | ACCORD                    | LXI                  | 1999   | JHMCF8645XC401328
+HONDA                | ACCORD                    | LXI                  | 2000   | JHMCF8542YC400043
+HONDA                | ACCORD                    | LXI                  | 2000   | JHMCF8640YC402002
+HONDA                | ACCORD                    | LXI                  | 2001   | JHMCG56521C400388
+HONDA                | ACCORD                    | LXI                  | 2002   | JHMCF86392C407732
+HONDA                | ACCORD                    | STD                  | 1993   | NAN
+HONDA                | ACCORD                    | VTI                  | 1999   | JHMCF9649XC401077
+HONDA                | ACCORD                    | VTI                  | 1999   | JHMCF9649XC402665
+HONDA                | ACCORD                    | VTI                  | 2000   | JHMCF8631YC400430
+HONDA                | ACCORD                    | VTI                  | 2000   | JHMCF863XYC401320
+HONDA                | ACCORD                    | VTI                  | 2002   | JHMCF86342C407458
+HONDA                | ACCORD                    | VTI                  | 2002   | JHMCF86352C407436
+HONDA                | ACCORD                    | VTI L                | 2002   | 1HGCF86662A086306
+HONDA                | ACCORD                    | VTI L                | 2002   | JHMCF86532C407744
+HONDA                | ACCORD                    | VTI SR AIR BAG ABS   | 2001   | JHMCF86391C403825
+HONDA                | ACCORD                    | VTI SR AIR BAG ABS   | 2001   | JHMCF863X1C402764
+HONDA                | ACCORD                    | VTI SR AIR BAG ABS   | 2002   | JHMCF86312C404274
+HONDA                | ACCORD                    | VTI SR AIR BAG ABS   | 2002   | JHMCF86392C403082
+HONDA                | ACCORD COUPE              | COUPE                | 1999   | NA11001131
+HONDA                | ACTY                      | GLX                  | 1989   | HA21106440
+HONDA                | ACURA                     | VTI                  | 2002   | JH4DC53022C025600
+HONDA                | CITY                      | BASE                 | 2000   | 2L57R2P373362
+HONDA                | CITY                      | EXI                  | 2004   | JHLRD57444C400328
+HONDA                | CITY                      | LXI                  | 2002   | MRH3A25472P030008
+HONDA                | CITY                      | LXI                  | 2002   | MRH3A26432P030084
+HONDA                | CITY                      | LXI                  | 2004   | MRHGD66204P910337
+HONDA                | CITY                      | LXI                  | 2004   | MRHGD66224P910372
+HONDA                | CIVIC                     | COUPE                | 1999   | 1HGEJ7265TL051088
+HONDA                | CIVIC                     | EX                   | 1999   | 1HGEM1155XL061199
+HONDA                | CIVIC                     | EXI                  | 1999   | JHMEK14700S107042
+HONDA                | CIVIC                     | EXI                  | 1999   | JHMEK3549XS404070
+HONDA                | CIVIC                     | EXI                  | 2002   | 2HGES15182H576460
+HONDA                | CIVIC                     | EXI                  | 2003   | JHMES16673S400811
+HONDA                | CIVIC                     | EXI                  | 2003   | NAN
+HONDA                | CIVIC                     | LXI                  | 2001   | JHME5863615400455
+HONDA                | CIVIC                     | LXI                  | 2001   | JHMES86311S404591
+HONDA                | CIVIC                     | LXI                  | 2002   | JHMES86382S400684
+HONDA                | CIVIC                     | LXI                  | 2002   | JHMES86762S406180
+HONDA                | CIVIC                     | LXI                  | 2003   | JHMES86193S407661
+HONDA                | CIVIC                     | LXI                  | 2003   | JHMES86193S408423
+HONDA                | CIVIC                     | TYPE R               | 2002   | NAN
+HONDA                | CIVIC                     | VTI                  | 2001   | JHMES86371S404045
+HONDA                | CIVIC                     | VTI                  | 2001   | JHMES86731S408841
+HONDA                | CIVIC                     | VTI                  | 2002   | 1HGES16522L072104
+HONDA                | CIVIC                     | VTI                  | 2003   | JHMES16643S400832
+HONDA                | CIVIC                     | VTI                  | 2003   | JHMES166X3S400608
+HONDA                | CR V                      | LX                   | 2000   | JHLRD1849YC401195
+HONDA                | CR V                      | LX                   | 2000   | JHLRD1864YC045885
+HONDA                | CR V                      | RVI                  | 2001   | JHLRD18551C400673
+HONDA                | CR V                      | RVI                  | 2001   | JHMGH48601S200769
+HONDA                | CR V                      | RVI                  | 2002   | JHLRD58482C401218
+HONDA                | CR V                      | RVI                  | 2002   | JHLRD58872C401424
+HONDA                | CR V                      | RVSI                 | 2002   | NAN
+HONDA                | ELEMENT                   | EX (NON GCC)         | 2003   | 5J6YH28543L014049
+HONDA                | FIT                       | GL                   | 2022   | RKTGS4880NF102779
+HONDA                | HONDA ODYSSEY             | STD                  | 2021   | JHMRC1835MC400528
 HONDA                | HR (4WD)                  | SX                   | 2024   | 3CZRZ1H31RM720266
-HONGQI               | H5                        | LUXURY               | 2020   | LFPH4ACP6L1Y00001
-HONGQI               | H5                        | LUXURY               | 2023   | NAN
-HONGQI               | OUSADO                    | FLAGSHIP             | 2024   | LFPH4ACP3R2A00911
-HONGQI               | OUSADO                    | FLAGSHIP             | 2024   | LFPH4ACP4R1Y00278
-HONGQI               | OUSADO                    | LUXURY               | 2024   | LFPH4ACP1R2A39822
-HONGQI               | OUSADO                    | LUXURY               | 2024   | LFPH4ACP3R2A00911
-HYCAN                | V09                       | STD (NON GCC)        | 2023   | LMWU11S50P1001214
+HONDA                | HRV                       | BASE                 | 2001   | NAN
+HONDA                | HRV                       | BASE                 | 2002   | JHLGH48452S400507
+HONDA                | INSIGHT                   | STD (NON GCC)        | 2010   | JHMZE2H74AS015532
+HONDA                | INTEGRA                   | STD                  | 1995   | CD71401484
+HONDA                | INTEGRA                   | STD                  | 1995   | HH42304612
+HONDA                | JAZZ                      | ES                   | 2004   | JHMGD18654S400629
+HONDA                | JAZZ                      | ES                   | 2004   | JHMGD18664S400588
+HONDA                | JAZZ                      | ES                   | 2005   | JHMGD18605S400345
+HONDA                | JAZZ                      | ES                   | 2005   | JHMGD18895S400460
+HONDA                | JAZZ                      | LS                   | 2005   | NAN
+HONDA                | JAZZ                      | LX                   | 2004   | JHMGD18694S400195
+HONDA                | ODYSSEY                   | EX                   | 2000   | 2HKRL1863YH013840
+HONDA                | ODYSSEY                   | EX                   | 2000   | 2HKRL186XYH532335
+HONDA                | ODYSSEY                   | EX                   | 2001   | 2HKRL18531H609317
+HONDA                | ODYSSEY                   | EX                   | 2001   | 2HKRL18641H011861
+HONDA                | ODYSSEY                   | EX                   | 2002   | 2HKRL18692H559386
+HONDA                | ODYSSEY                   | EX                   | 2002   | 2HKRL18802H700752
+HONDA                | ODYSSEY                   | EX                   | 2003   | 5FNRL18593B136024
+HONDA                | ODYSSEY                   | EX                   | 2003   | 5FNRL18663B134112
+HONDA                | ROCKY                     | EX                   | 1988   | JDA000F8000030631
+HYUNDAI              | 2016                      | STD                  | 2016   | MALA851C96M409097
+HYUNDAI              | ACCENT                    | GL                   | 2000   | KMHEM41BPYA283689
+HYUNDAI              | ACCENT                    | GL                   | 2001   | NAN
+HYUNDAI              | ACCENT                    | GL                   | 2004   | KMHCH41G44U514002
+HYUNDAI              | ACCENT                    | GL                   | 2005   | NAN
+HYUNDAI              | ACCENT                    | GL MID               | 2002   | KMHCG51F82U128549
+HYUNDAI              | ACCENT                    | GL MID               | 2004   | KMHCG41G24U538043
+HYUNDAI              | ACCENT                    | GL MID               | 2004   | KMHCH41G14U537768
+HYUNDAI              | ACCENT                    | GL MID               | 2006   | KMHCM41A96U024052
+HYUNDAI              | ACCENT                    | GL MID               | 2006   | KMHCM41C16U067950
+HYUNDAI              | ACCENT                    | GL TOP               | 2003   | KMHCG41F73U393944
+HYUNDAI              | ACCENT                    | GL TOP               | 2003   | KMHCG41G93U474811
+HYUNDAI              | ACCENT                    | GL TOP               | 2005   | KMHCG51F45U280848
+HYUNDAI              | ACCENT                    | GL TOP               | 2005   | KMHCH41G25U614813
+HYUNDAI              | ATOS                      | GL                   | 2004   | KMHAG51GP4U345726
+HYUNDAI              | ATOS PRIME                | STD                  | 2000   | KMFPA18XPYC008619
+HYUNDAI              | ATOS PRIME                | STD                  | 2002   | KMHAG51GP2U289270
+HYUNDAI              | COUPE                     | GLS                  | 2000   | KMHJG31FPYU154361
+HYUNDAI              | COUPE                     | GLS                  | 2001   | 1GBJG31F511115505
+HYUNDAI              | COUPE                     | GLS                  | 2002   | KMHHN61F02U010738
+HYUNDAI              | COUPE                     | GLS                  | 2002   | KMHHN61F62U036065
+HYUNDAI              | COUPE                     | GLS                  | 2003   | KMJHD17FP3C018488
+HYUNDAI              | COUPE                     | GLS                  | 2004   | NAN
+HYUNDAI              | COUPE                     | GLS                  | 2005   | KMHHM61D15U163764
+HYUNDAI              | ELANTRA                   | GL                   | 2002   | KMHDN45D82U431120
+HYUNDAI              | ELANTRA                   | GL                   | 2004   | KMHDM41BX4U812302
+HYUNDAI              | ELANTRA                   | GL                   | 2004   | KMHDM41C74U812461
+HYUNDAI              | ELANTRA                   | GLS                  | 1999   | KMHEM41BPXA040800
+HYUNDAI              | ELANTRA                   | GLS                  | 1999   | KMHJW31FPXU120670
+HYUNDAI              | GALLOPER                  | STD                  | 1996   | KMFGA17FX5C005647
+HYUNDAI              | GALLOPER                  | STD                  | 1998   | KMXKNE1JPWU241378
+HYUNDAI              | GALLOPER                  | STD                  | 2001   | KMXKNE1JP1U398059
+HYUNDAI              | GALLOPER                  | STD                  | 2002   | KMXKPE1H42U438750
+HYUNDAI              | GETZ                      | STD                  | 2003   | KMHBT51B63U055297
+HYUNDAI              | GETZ                      | STD                  | 2003   | KMHBT51BX3U072698
+HYUNDAI              | GETZ                      | STD                  | 2004   | KMHBT51G44U115011
+HYUNDAI              | GETZ                      | STD                  | 2005   | KMHBT51H55U412878
+HYUNDAI              | GETZ                      | STD                  | 2005   | KMHBT51H85U412521
+HYUNDAI              | GETZ                      | STD                  | 2006   | KMHBT51D26U451054
+HYUNDAI              | GETZ                      | STD                  | 2006   | KMHBT51D86U524508
+HYUNDAI              | GETZ                      | STD                  | 2007   | KMHBT51D57U635874
+HYUNDAI              | GETZ                      | STD                  | 2007   | KMHBT51D97U630869
+HYUNDAI              | GETZ                      | STD                  | 2008   | KMHBT51B28U726231
+HYUNDAI              | GETZ                      | STD                  | 2008   | NLHPN81D38Z005899
 HYUNDAI              | GRAND YUOR / SEDAN        | GL                   | 2020   | KMHF241DBLA376379
+HYUNDAI              | GRANDYUOR                 | STD                  | 2011   | KMHFH41EBBA018139
+HYUNDAI              | H100                      | STD                  | 2003   | KMFXKS7BP3U670659
+HYUNDAI              | HD 46                     | C                    | 2015   | KMFJA17B4FC280161
+HYUNDAI              | HD 46 PICK UP CARGO       | 1                    | 2012   | KMFJA17B3CC176823
+HYUNDAI              | HD65                      | STD W/BOX            | 2001   | KMFGA17FPYC127293
+HYUNDAI              | I10                       | GL                   | 2008   | MALAM51B68M050182
+HYUNDAI              | I10                       | GL                   | 2008   | MALAM51B98M050175
+HYUNDAI              | I10                       | GL                   | 2008   | NAN
+HYUNDAI              | I10                       | GL                   | 2010   | NAN
+HYUNDAI              | I10                       | STD                  | 2009   | MALAM51B19M162003
+HYUNDAI              | I10                       | STD                  | 2009   | MALAM51C19M216814
+HYUNDAI              | I10                       | STD                  | 2010   | MALAN51C5AM587489
+HYUNDAI              | MATRIX                    | GL                   | 2002   | KMHPM81D32U059876
+HYUNDAI              | MATRIX                    | GL                   | 2003   | KMHPM81D33U088800
+HYUNDAI              | MATRIX                    | GL                   | 2005   | MITR315246
+HYUNDAI              | MATRIX                    | STD                  | 2004   | KMHPM81C04U152459
+HYUNDAI              | MATRIX                    | STD                  | 2005   | KMHPM81D55U215226
+HYUNDAI              | MATRIX                    | STD                  | 2005   | KMHPN81D75U204872
+HYUNDAI              | PORTER                    | STD (NON GCC)        | 2001   | KMFXKS7BP1U510094
+HYUNDAI              | PORTER                    | STD (NON GCC)        | 2001   | KMFXKS7BP1U533255
+HYUNDAI              | PORTER                    | STD (NON GCC)        | 2004   | KMFZCS7JP4U011688
+HYUNDAI              | PORTER                    | STD (NON GCC)        | 2005   | KMFZCS7JP5U059645
+HYUNDAI              | PORTER                    | STD (NON GCC)        | 2005   | KMFZCS7JP5U061535
+HYUNDAI              | SANTA FE                  | STD                  | 2001   | KMHSC81DP1U047406
+HYUNDAI              | SANTA FE                  | STD                  | 2001   | KMHSC81DP1U090677
+HYUNDAI              | SANTA FE                  | STD                  | 2002   | KMHSD81VP2U298894
+HYUNDAI              | SONATA                    | GL                   | 2001   | 5NPE34AF31H707816
+HYUNDAI              | SONATA                    | GL                   | 2002   | KMHEM41B62A679170
+HYUNDAI              | SONATA                    | GL                   | 2002   | KMHEM41B82A688372
+HYUNDAI              | SONATA                    | GL                   | 2003   | KMHEM41B23A731329
+HYUNDAI              | SONATA                    | GL                   | 2004   | KMHEM41B54A046632
+HYUNDAI              | SONATA                    | GL                   | 2004   | KMHEM41B64A943958
+HYUNDAI              | STAREX VAN                | STD                  | 2010   | KMJWA37JBAU196249
+HYUNDAI              | TRAJET                    | STD                  | 2001   | KMFGA17FPYC127409
+HYUNDAI              | TRAJET                    | STD                  | 2003   | KMHMG81CX3U182335
+HYUNDAI              | TRAJET                    | STD                  | 2004   | KMHMG81C74U208827
+HYUNDAI              | TRAJET                    | STD                  | 2005   | KMHMG81C05U266943
+HYUNDAI              | TRAJET                    | STD                  | 2005   | KMHMG81C15U247303
+HYUNDAI              | TRAJET                    | TOP                  | 2002   | KMFGA17FPXC002136
+HYUNDAI              | TRAJET                    | TOP                  | 2004   | NAN
 HYUNDAI2120117999    | ACCENT                    | GL                   | 2018   | MALC741C6JM063605
 INFINITI             | 2001                      | STD                  | 2001   | JNKCA31A61T032551
 INFINITI             | FX35                      | STD                  | 2004   | JNRAS08U03X101055
 INFINITI             | FX35                      | STD                  | 2004   | JNRAS08W24X203864
-INFINITI             | FX45                      | STD                  | 2003   | JNRBS08W03X404472
-INFINITI             | FX45                      | STD                  | 2004   | JNRBS08W54X402699
-INFINITI             | FX45                      | STD                  | 2004   | JNRBS08W84X402776
-INFINITI             | FX45                      | STD                  | 2005   | JNRBS08W35X400984
-INFINITI             | FX45                      | STD                  | 2005   | JNRBS08WX5X401694
-INFINITI             | FX45                      | STD                  | 2006   | JNKBY1AP26M320750
 INFINITI             | G 25 S/SEDAN              | STD (NON GCC)        | 2011   | JN1DV6AP1BM604088
-INFINITI             | G25                       | STD                  | 2012   | JNKDV61E2CM470915
-INFINITI             | G25                       | STD                  | 2012   | JNKDV61E4CM470544
 INFINITI             | I35                       | STD                  | 2003   | JNKDA31A73T113937
 INFINITI             | I35                       | STD                  | 2003   | JNKDA31A83T112909
 INFINITI             | M35                       | STD                  | 2006   | JNKAY01E86M100659
-INFINITI             | M45                       | STD                  | 2007   | JNKBY01A37M250441
-INFINITI             | M45                       | STD                  | 2008   | JNKBY01E28M370042
-INFINITI             | M45                       | STD                  | 2009   | JNKCY01E19M550019
-INFINITI             | M56                       | LUXURY               | 2011   | JN1AY1AP3BM520867
-INFINITI             | Q50                       | PREMIUM              | 2015   | JN1CV7AP4FM830455
-INFINITI             | Q50                       | PREMIUM              | 2015   | JN1CV7AP8FM830622
-INFINITI             | Q50                       | PREMIUM LUXURY       | 2015   | JN1BV7AP1FM339644
-INFINITI             | Q50                       | PREMIUM LUXURY       | 2015   | JN1BV7AR6FM395502
-INFINITI             | Q50                       | PREMIUM SPORT        | 2015   | JN1BV7AP5FM560423
-INFINITI             | Q50                       | PREMIUM SPORT        | 2015   | JNKAV71E8FM540334
-INFINITI             | Q50                       | SPORT                | 2015   | NAN
-INFINITI             | QX 60                     | LUXURY               | 2019   | 5N1DL0MM3KC565149
-INFINITI             | QX 60                     | LUXURY               | 2020   | 5N1DL0MM1LC529820
 INFINITI             | QX4                       | STD                  | 2001   | JNRDR09Y31W212566
 INFINITI             | QX4                       | STD                  | 2001   | JNRDR09Y41W217517
 INFINITI             | QX4                       | STD                  | 2004   | JN8DR0SY14W700719
-INFINITI             | QX70S                     | SPORT LUXURY         | 2014   | NAN
-INFINITI             | QX70S                     | SPORT LUXURY         | 2015   | NAN
-INFINITI             | QX70S                     | SPORT LUXURY         | 2017   | NAN
 ISUZU                | KB                        | GL                   | 2002   | JAADL33C927F06964
-ISUZU                | NPR                       | STD                  | 1991   | JAANPR58LM7100402
-ISUZU                | NPR                       | STD                  | 1996   | BT10619546489
-ISUZU                | NPR                       | STD                  | 1997   | JAATFR16HV9100438
-ISUZU                | NPR                       | STD                  | 1998   | JAANHR55EW7100137
-ISUZU                | NPR                       | STD                  | 1999   | 4GTJ7C133XJ601268
-ISUZU                | NPR                       | STD                  | 1999   | JAAKP34GXX7P02008
-ISUZU                | NPR                       | STD                  | 2000   | JAAFP14F1Y7H00195
-ISUZU                | NPR                       | STD                  | 2002   | JAAJP34G627P02950
-ISUZU                | NPR                       | STD                  | 2002   | JAMKP34G627P02292
-ISUZU                | NPR                       | STD                  | 2003   | JAAJP34G337P03233
-ISUZU                | NPR                       | STD                  | 2003   | JAAJP34GX37P03052
-ISUZU                | NPR                       | STD                  | 2004   | JAAJP34G247P07775
-ISUZU                | NPR                       | STD                  | 2004   | JAAKP34G247P02256
-ISUZU                | NPR                       | STD                  | 2005   | JAMJP34G157P08260
-ISUZU                | NPR                       | STD                  | 2005   | JAMJP34G457P02937
-ISUZU                | NPR                       | STD                  | 2006   | JAAFP14F667H00190
-ISUZU                | NPR                       | STD                  | 2006   | JAMKP34G167P10337
-ISUZU                | NPR                       | STD                  | 2007   | JAAKP34G277P02620
-ISUZU                | NPR                       | STD                  | 2007   | JAAKP34G677P02023
-ISUZU                | NPR                       | STD                  | 2008   | JAAKP34G387P13322
-ISUZU                | NPR                       | STD                  | 2008   | JAMKP34G787P22396
-ISUZU                | NPR                       | STD                  | 2009   | JAAJP23T897K00041
-ISUZU                | NPR                       | STD                  | 2009   | JAAKP34T797P02578
-ISUZU                | NPR                       | STD                  | 2010   | JAMLP3454A7P10831
-ISUZU                | NPR                       | STD                  | 2011   | JAAJP23T4B7K00835
-ISUZU                | NPR                       | STD                  | 2011   | JAMKP34H0B7P03494
-ISUZU                | NPR                       | STD                  | 2012   | JAMLP3454C7P00416
-ISUZU                | NPR                       | STD                  | 2012   | JAMLP3458C7P00175
-ISUZU                | NPR                       | STD                  | 2013   | JAMKP34H2D7P09610
-ISUZU                | NPR                       | STD                  | 2013   | JAMKP34H5D7P13490
-ISUZU                | NPR                       | STD                  | 2014   | JAAKP34T4E7P01303
-ISUZU                | NPR                       | STD                  | 2014   | JAMKP34H6E7P10518
-ISUZU                | NPR                       | STD                  | 2015   | JAMKP34H0F7P16980
-ISUZU                | NPR                       | STD                  | 2015   | JAMKP34HXF7P05761
-ISUZU                | NPR                       | STD                  | 2016   | JAALP3452G7P27018
-ISUZU                | NPR                       | STD                  | 2016   | NAN
-ISUZU                | NPR                       | STD                  | 2017   | JAMKP34H5H7P04200
-ISUZU                | NPR                       | STD                  | 2017   | JAMKP34H9H7P06726
-IVECO                | DAILY                     | STD                  | 2014   | ZCFC50AY6ED526127
-IVECO                | DAILY                     | STD                  | 2014   | ZCFC70AD5E5974859
-IVECO                | DAILY                     | STD                  | 2015   | ZCFC50AY6FD533094
-IVECO                | DAILY                     | STD                  | 2015   | ZCFC50AY6FD541910
-IVECO                | DAILY                     | STD                  | 2017   | ZCFC050A6H5142010
-IVECO                | DAILY                     | STD                  | 2020   | ZCFCA50A7L5345056
 IVECO                | DAILY                     | TR                   | 2018   | ZCFCA50A0J5229694
-JAC                  | E30X                      | COMFORT              | 2025   | LJ1EEKSP9S7400805
-JAC                  | E30X                      | COMFORT              | 2026   | NAN
-JAC                  | E30X                      | FLAGSHIP             | 2025   | LJ1EEKSP6S7400910
-JAC                  | E30X                      | FLAGSHIP             | 2025   | LJ1EEKSPXS7400862
-JAC                  | E30X                      | FLAGSHIP             | 2026   | NAN
-JAC                  | JS3                       | COMFORT              | 2025   | LJ12EKR24S4704638
-JAC                  | JS3                       | COMFORT              | 2025   | LJ12EKR27S4705055
-JAC                  | JS3                       | COMFORT              | 2026   | LJ12EKR29T4702482
-JAC                  | JS3                       | COMFORT              | 2026   | LJ12EKR2XT4702460
 JAC                  | SUNRAY MINI EURO5(BUS)    | BUS                  | 2026   | LJ166B3D8T2255101
 JAECOO               | JAECOO J5 (2WD)           | TDL                  | 2026   | LVUGTB222TDE58133
 JAGUAR               | S TYPE                    | STD                  | 2003   | SAJAA01C73HM91250
 JAGUAR               | S TYPE                    | STD                  | 2004   | SAJAA01A14JN00520
 JAGUAR               | S TYPE                    | STD                  | 2005   | SAJAA02A05JN47571
 JAGUAR               | S TYPE                    | STD                  | 2005   | SAJAA80E65RG38028
-JAGUAR               | S TYPE                    | STD                  | 2006   | SAJAA01F26HN64054
-JAGUAR               | S TYPE                    | STD                  | 2006   | SAJAA02D56FN69340
 JAGUAR               | X TYPE                    | SE                   | 2001   | SAJHX6246VC788193
 JAGUAR               | X TYPE                    | SE                   | 2001   | SAJJFALD4BC793653
 JAGUAR               | X TYPE                    | SE                   | 2004   | SAJAA51F54XE13681
@@ -646,7 +862,6 @@ JAGUAR               | X TYPE                    | SE                   | 2007  
 JAGUAR               | XJ                        | STD                  | 1998   | SAJJHKMD4BP806996
 JAGUAR               | XJS                       | GL                   | 1986   | SAJNV5847GC127396
 JAGUAR               | XJS                       | W12                  | 1986   | SAJNV5847GC127396
-JCB                  | JCB 3CX                   | 3CX                  | 2014   | JCB3CX4TC02260722
 JEEP                 | GRAND CHEROKEE            | LAREDO               | 2002   | 1J4GW48S42C269009
 JEEP                 | GRAND CHEROKEE            | LAREDO               | 2002   | 1J4GX48SX2C292033
 JEEP                 | GRAND CHEROKEE            | LAREDO               | 2003   | TMAJ281333KJ73915
@@ -657,20 +872,78 @@ JEEP                 | GRAND CHEROKEE            | LIMITED              | 2001  
 JEEP                 | GRAND CHEROKEE            | LIMITED              | 2002   | 1J8GW58N22Y125475
 JEEP                 | GRAND CHEROKEE            | OVERLAND             | 2002   | 1J8GW68J32Y100099
 JEEP                 | PATRIOT                   | LOWLINE              | 2007   | 1J8FF28W47D308734
-JEEP                 | RENEGADE                  | LIMITED              | 2021   | ZACNJCAB8MPM46222
-JEEP                 | RENEGADE                  | LIMITED              | 2021   | ZACNJDAB7MPM33645
 JEEP                 | WRANGLER                  | SPORT                | 1995   | 1J4FY49VXSP262749
 JETOUR               | T 2/STATION               | COMFRONT             | 2025   | IDD24B7SDE48326
-JIDU                 | 01                        | PREMIUM              | 2024   | L6T79P2N3RP165097
-JIDU                 | 01                        | STD (NON GCC)        | 2023   | L6T79P2N8PP098073
-JIDU                 | 01                        | STD (NON GCC)        | 2024   | L6T79T2E1RP109474
-JIDU                 | 01                        | STD (NON GCC)        | 2024   | L6T79T2E3RP109802
-JINBEI               | X30                       | STD (NON GCC)        | 2025   | LM6AFABF9SX207022
-JIYUE                | 01                        | STD (NON GCC)        | 2023   | L6T79P2N4PP092514
-JIYUE                | 01                        | STD (NON GCC)        | 2024   | L6T79P2N0RP163923
 KAIYI                | X3 PRO (2WD)              | 1.5T FLAGSHIP        | 2026   | LUYJB2G22TA002726
+KIA                  | 4000                      | STD                  | 2017   | KNCWJ2760H7144846
+KIA                  | BONGO                     | STD (NON GCC)        | 2001   | KN3HAP53E1K805757
+KIA                  | BONGO                     | STD (NON GCC)        | 2002   | KN3HAP53E2K820627
+KIA                  | BONGO                     | STD (NON GCC)        | 2002   | KN3HAP53E2K877393
+KIA                  | BONGO                     | STD (NON GCC)        | 2003   | KN3HAP53C3K915791
+KIA                  | BONGO                     | STD (NON GCC)        | 2003   | KN3HAP53E3K911181
+KIA                  | BONGO                     | STD (NON GCC)        | 2004   | KN3HAP53C4K975549
+KIA                  | BONGO                     | STD (NON GCC)        | 2004   | KN3HNP6N34K020188
+KIA                  | BONGO                     | STD (NON GCC)        | 2005   | KN3HAP8N15K120834
+KIA                  | BONGO                     | STD (NON GCC)        | 2005   | KN3HNP6N35K099425
+KIA                  | CARENS                    | STD                  | 2006   | KNAFC526665439714
+KIA                  | CARENS                    | STD                  | 2007   | KNAFG521877067999
+KIA                  | CARNIVAL                  | STD                  | 2005   | KNAUP752556708505
+KIA                  | CERATO                    | LX                   | 2004   | KNAFB227X45317994
+KIA                  | CERATO                    | LX                   | 2005   | KNAFE223X55160344
+KIA                  | CERATO                    | LX                   | 2005   | KNAFE242X55157450
+KIA                  | CERATO                    | LX                   | 2006   | NAN
+KIA                  | CERATO                    | LX                   | 2007   | KNAFE227475386630
+KIA                  | CERATO                    | LX                   | 2007   | KNAFE227975438138
+KIA                  | CERATO                    | STD                  | 2004   | KNAFE222045026481
+KIA                  | CERATO                    | STD                  | 2004   | KNAFE222245026482
+KIA                  | CERATO                    | STD                  | 2005   | KNAFE5243855103086
+KIA                  | CERATO                    | STD                  | 2006   | KNAFE223865271816
+KIA                  | CERATO                    | STD                  | 2006   | KNAFE242065272947
 KIA                  | GAC   EMZOOM 1.5TG GS     | GL                   | 2026   | LMGHT1L2XT3210583
 KIA                  | K 4/SEDAN                 | LX MID               | 2025   | 3KPFT4DE8SE080298
+KIA                  | K2700                     | STD (NON GCC)        | 2003   | KN3HAP53E1K766872
+KIA                  | K2700                     | STD (NON GCC)        | 2003   | KNCSD061537881209
+KIA                  | K2700                     | STD (NON GCC)        | 2004   | KNCSD011X47966913
+KIA                  | K2700                     | STD (NON GCC)        | 2005   | KNCSD011257996358
+KIA                  | K2700                     | STD (NON GCC)        | 2005   | KNCSE061057036798
+KIA                  | K2700                     | STD (NON GCC)        | 2006   | KN3HNP8N26K142310
+KIA                  | K2700                     | STD (NON GCC)        | 2006   | KNCSE061467202757
+KIA                  | OPRIUS                    | STD                  | 2004   | KNALD224945014210
+KIA                  | OPRIUS                    | STD                  | 2005   | KNALD124255057282
+KIA                  | OPTIMA                    | STD                  | 2004   | KNAGD222135241020
+KIA                  | OPTIMA                    | STD                  | 2004   | KNAGD224X45321435
+KIA                  | OPTIMA                    | STD                  | 2005   | KNAGD222855356264
+KIA                  | PICANTO                   | LX                   | 2005   | KNABA24335T138995
+KIA                  | PICANTO                   | LX                   | 2005   | KNABA24365T159744
+KIA                  | PICANTO                   | LX                   | 2006   | KNABA24376T289727
+KIA                  | PICANTO                   | LX                   | 2006   | KNABA24376T318921
+KIA                  | PICANTO                   | LX                   | 2007   | KNABA24327T345395
+KIA                  | PICANTO                   | LX                   | 2007   | KNABA24387T366168
+KIA                  | PICANTO                   | LX                   | 2008   | KNABA24378T474251
+KIA                  | PICANTO                   | LX                   | 2008   | KNABA24378T553810
+KIA                  | PICANTO                   | LX                   | 2009   | KNABA24329T662130
+KIA                  | PICANTO                   | LX                   | 2009   | NAN
+KIA                  | PICANTO                   | LX                   | 2010   | KNABK5135AT855430
+KIA                  | PICANTO                   | LX                   | 2010   | KNABK5137AT880684
+KIA                  | PICANTO                   | LX                   | 2011   | KNABJ5130BT140947
+KIA                  | PICANTO                   | LX                   | 2011   | KNABJ5130BT996765
+KIA                  | PRIDE                     | STD (NON GCC)        | 2010   | KNADH413BAS651079
+KIA                  | RIO                       | EX TOP               | 2007   | NAN
+KIA                  | RIO                       | LX                   | 2004   | KNADC221146324147
+KIA                  | RIO                       | LX                   | 2004   | KNADC223346324068
+KIA                  | RIO                       | LX                   | 2005   | KNADC243X56245785
+KIA                  | RIO                       | LX                   | 2005   | NAN
+KIA                  | RIO                       | LX                   | 2006   | KNADE241866118530
+KIA                  | RIO                       | LX                   | 2006   | KNADE243466023433
+KIA                  | RIO                       | LX                   | 2007   | KNADE221376250776
+KIA                  | RIO                       | LX                   | 2007   | KNADE241276234369
+KIA                  | SEDONA                    | EX (NON GCC)         | 2007   | KNDMB233076117629
+KIA                  | SEDONA                    | EX (NON GCC)         | 2007   | KNDMB233X76142831
+KIA                  | SORENTO                   | STD                  | 2003   | KNAJC523535092601
+KIA                  | SORENTO                   | STD                  | 2004   | KNAJC523145318859
+KIA                  | SORENTO                   | STD                  | 2004   | KNAJC523645267701
+KIA                  | SPORTAGE                  | LX                   | 2002   | KNDJB623125111736
+KIA                  | SPORTAGE                  | LX                   | 2003   | KNAJA553825175438
 KIA                  | يونجو                     | STD (NON GCC)        | 2010   | KNCSJY74BAK456272
 KIA41964             | SORENTO                   | EX                   | 2015   | KNAPH8129F5016096
 KING LONG            | KING LONG                 | STD                  | 2013   | LKLSBAS36DB501068
@@ -683,11 +956,7 @@ KING LONG            | KING LONG                 | STD                  | 2020  
 KTM                  | X BOW                     | S                    | 2019   | VBKABLBX0KG001197
 LAMBORGHINI          | 400 GT                    | 400 GT               | 1967   | 012760000000
 LAMBORGHINI          | 400 GT                    | LP560-4              | 1967   | 01276
-LAMBORGHINI          | AVENTADOR                 | S                    | 2018   | ZHWEG4ZD1JLA07077
-LAMBORGHINI          | AVENTADOR                 | S                    | 2018   | ZHWEV4ZDXJLA07665
-LAMBORGHINI          | HURACAN                   | PERFORMANTE          | 2019   | ZHWES4ZF2KLA11687
 LAMBORGHINI          | SIAN                      | STD                  | 2021   | ZHWEK7ZD8MLA10577
-LANCIA               | DELTA                     | STD                  | 2005   | ZLA35000001210600
 LAND ROVER           | 110                       | HSE P400             | 2023   | SALEA7BU6P2124860
 LAND ROVER           | 110                       | HSE P400E            | 2020   | SALEA7BX9L2029925
 LAND ROVER           | 110                       | SE P400              | 2020   | SALEA7BU0L2002747
@@ -1937,45 +2206,23 @@ LEADING IDEAL        | L9                        | MAX EDITION          | 2023  
 LEADING IDEAL        | L9                        | MAX EDITION          | 2023   | HLX33B12XP1788882
 LEADING IDEAL        | L9                        | ULTRA (NON GCC)      | 2024   | HLX33B120R1719010
 LEADING IDEAL        | L9                        | ULTRA (NON GCC)      | 2024   | HLX33B123R1710110
-LEAPMOTOR            | C 16                      | G                    | 2025   | LFZ93AN98SD116920
-LEAPMOTOR            | C16                       | PREMIUM              | 2025   | LFZ93AN98SH014705
-LEAPMOTORS           | C 160                     | STD  (NON GCC)       | 2025   | LFZ93AN99SD106011
-LEAPMOTORS           | C11                       | STD (NON GCC)        | 2022   | LFZ63AL55ND026325
-LEAPMOTORS           | C16                       | STD  (NON GCC)       | 2024   | LFZ63AV55RD008779
-LEAPMOTORS           | C16                       | STD  (NON GCC)       | 2024   | LFZ63AV58RD010008
-LEAPMOTORS           | C16                       | STD  (NON GCC)       | 2025   | NAN
-LEOPARD              | LEOPARD 5                 | STD (NON GCC)        | 2025   | LC0FD1C45S5316539
 LEXUS                | 200T                      | STD                  | 2016   | JTHBA1024G5007911
 LEXUS                | 200ZX (CAR)               | F SPORT PLATINUM     | 1983   | JN1HZ0482DX580694
 LEXUS                | 460 LS                    | STD                  | 2011   | JTHBL46F805107575
 LEXUS                | ES 250                    | STD                  | 2011   | JTHBW46G302032186
-LEXUS                | ES 350                    | ES                   | 2021   | 58AHZ1B13MU105588
-LEXUS                | ES300                     | BASE                 | 1999   | JT8BF28G3X0210797
-LEXUS                | ES300                     | BASE                 | 1999   | JT8BF28G5X0167757
-LEXUS                | ES300                     | TOP                  | 1999   | JT8UZ30C8P0035137
-LEXUS                | ES330                     | BASE                 | 2005   | JTHBA30G255060164
-LEXUS                | ES330                     | BASE                 | 2006   | JTHBA30G965164555
-LEXUS                | GS 430                    | TOP                  | 2008   | JTHBN96SX05004260
 LEXUS                | GS300                     | BASE                 | 2000   | JT8BD68S0Y0115083
 LEXUS                | GS300                     | BASE                 | 2000   | JT8BD68S7Y0105084
 LEXUS                | GS400                     | STD                  | 1998   | JT8BH68X0W0005583
 LEXUS                | GS400                     | STD                  | 2000   | JT8BH68X1W0007133
 LEXUS                | GS400                     | STD                  | 2000   | JT8BH68X8Y0022019
-LEXUS                | GX 460                    | PLATINUM             | 2016   | JTJJM7FX3G5139880
-LEXUS                | GX 460                    | PLATINUM             | 2017   | JTJJM7FXXH5162316
 LEXUS                | IS300                     | BASE                 | 1999   | NAN
 LEXUS                | IS300                     | BASE                 | 2001   | JTHBD182110029273
 LEXUS                | IS300                     | BASE                 | 2001   | JTHBD182510024321
-LEXUS                | LS 460                    | TOP                  | 2006   | JTH8N36F000151233
-LEXUS                | LS 460                    | TOP                  | 2015   | JTHGL46F505051844
-LEXUS                | LS 600 HL                 | TOP                  | 2010   | JTHDU46F205012516
 LEXUS                | LS400                     | BASE                 | 1999   | JT8BH68X3X0014540
 LEXUS                | LS400                     | BASE                 | 1999   | JT8BH68X6X0016749
 LEXUS                | LS400                     | STD                  | 2000   | JT8BH28F0Y0172416
 LEXUS                | LS400                     | STD                  | 2000   | JT8BH28F4Y0167557
 LEXUS                | RX 2.0                    | XLT  LTH             | 2007   | JTJHW31U302038232
-LEXUS                | RX450H L                  | PLATINUM             | 2018   | 2T2BGMCA2JC023377
-LEXUS                | RX450H L                  | PLATINUM             | 2019   | 2T2BGMCA1KC036123
 LEXUS                | UX250(4WD)                | SMART                | 2022   | JTHR9JBH6N2058078
 LEXUS                | جي اس 430                 | STD                  | 2002   | JT8BL69S820011529
 LEXUS                | لي اس 300                 | BASE                 | 2006   | JTH8F306966041253
@@ -1989,8 +2236,6 @@ LI AUTO              | MEGA                      | ULTRA                | 2025  
 LINCOLN              | CONTINENTAL               | PREMIER LWB          | 1966   | 6Y82G437965
 LINCOLN              | LINCOLN TOWN              | EXECUTIVE            | 1994   | 1LNLM81W1RY651635
 LINCOLN              | NAVIGATOR                 | ULTIMATE             | 2000   | 5LMFU28A2YLJ30808
-LINCOLN              | NAVIGATOR                 | ULTIMATE             | 2003   | 5LMFU27R63LJ23800
-LINCOLN              | NAVIGATOR                 | ULTIMATE             | 2003   | 5LMFU28R83LJ44100
 LINCOLN              | NAVIGATOR  EL             | STD                  | 2013   | 2LMDJ8JK7DBL44605
 LINCOLN              | TOWN CAR                  | EXECUTIVE            | 2000   | 1LNBM82F8JY826560
 LINCOLN              | TOWN CAR                  | EXECUTIVE            | 2000   | 1LNHM83W9YY843385
@@ -1999,13 +2244,6 @@ LINCOLN              | TOWN CAR                  | EXECUTIVE            | 2002  
 LINCOLN              | TOWN CAR                  | EXECUTIVE            | 2003   | 1LNHM83W73Y647728
 LINCOLN              | TOWN CAR                  | EXECUTIVE            | 2003   | 1LNHM83W93Y693027
 LINCOLN              | TOWN CAR                  | PREMIER SWB          | 1988   | 1LNBM81F9JY767942
-LOTUS                | ELETRE                    | R                    | 2023   | LJUBMSA13PK002225
-LOTUS                | ELETRE                    | S                    | 2023   | LJUBMSA13PK002225
-LUXGEN               | U7                        | STD                  | 2014   | RF5G91S19ES000015
-LUXGEN               | U7                        | STD                  | 2014   | RF5L91S00ES000023
-LUXGEN               | U7                        | STD                  | 2015   | RF5L91S01FS000002
-LUXGEN               | U7                        | STD                  | 2015   | RF5L91S0XFS000001
-LYKAN                | CO 900                    | SE                   | 2025   | L6T79END0ST239077
 LYNK & CO            | 01                        | HYPER                | 2025   | L6T79END0ST239077
 LYNK & CO            | 01                        | HYPER                | 2025   | L6T79END4ST239986
 LYNK & CO            | 03 PLUS                   | STD                  | 2025   | L6T79ENDXST229530
@@ -2033,17 +2271,7 @@ LYNK & CO            | 900                       | STD                  | 2025  
 LYNK & CO            | 900                       | ULTRA                | 2025   | L6T79ENDXST250393
 LYNK & CO            | LYNK CO                   | CO                   | 2026   | L6T79END8ST246892
 LYNK AND CO          | 900                       | PRO                  | 2025   | L6T79ENDXST229530
-MAEXTRO              | S800                      | GLE                  | 2025   | LJ1HFAUU1SH014347
-MAEXTRO              | S800                      | S                    | 2025   | LJ1HFAUU6SH020080
-MAEXTRO              | S800                      | STARSHINE EXECUTIVE EDITION | 2025   | LJ1HFAUU7SH021481
-MASERATI             | GRECALE                   | GT                   | 2026   | ZN6PMDAAXT7464604
 MAXUS                | V80 (BUS)                 | VAN                  | 2026   | LSKG5GC18TA047749
-MAYBACH              | 57                        | V12                  | 2005   | WDB2400781A001275
-MAYBACH              | 57                        | V12                  | 2009   | WDBVF78JX9A002614
-MAYBACH              | 57                        | V12                  | 2011   | WDBVF7HB9BA002831
-MAYBACH              | 62                        | V12                  | 2006   | WDB2401781A001666
-MAYBACH              | 62                        | V12                  | 2008   | WDBVG78J98A002180
-MAYBACH              | 62 S                      | V12                  | 2006   | WDB2401781A001532
 MAZDA                | 3                         | S                    | 2004   | JM1BK323X41169373
 MAZDA                | 3 SPORT                   | S                    | 2006   | JM3SL35E760121811
 MAZDA                | 323                       | STD                  | 1998   | JM7BA1233W0227040
@@ -2088,15 +2316,9 @@ MAZDA                | E2000                     | STD                  | 2006  
 MAZDA                | E2000                     | STD                  | 2006   | JM3SL35E660122156
 MAZDA                | MAZDA 3500 T              | S                    | 1990   | WGL4T501204
 MAZDA                | TRIBUTE                   | STD (NON GCC)        | 2006   | 4F2YZ02Z26KM28900
-MCLAREN              | 570S                      | SPIDER               | 2018   | SBM13DAB9JW005366
-MCLAREN              | 570S                      | SPIDER               | 2018   | SBM13FAB8JW004026
-MCLAREN              | 570S                      | SPIDER               | 2019   | SBM13FAB4KW006325
-MCLAREN              | 600LT                     | COUPE                | 2019   | SBM13RAB6KW006943
-MCLAREN              | 600LT                     | COUPE                | 2020   | SBM13SAB4LW007744
 MCLAREN              | P1                        | CARBON EDITION       | 2014   | SBM12ABB5EW000011
 MCLAREN              | P1                        | CARBON EDITION       | 2015   | SBM12ABB4FW100019
 MCLAREN              | SPEEDTRAIL                | STD                  | 2020   | SBM14RCE2MW765757
-MERCEDES             | GT 53                     | 63-S                 | 2020   | WDD7X8KB6LA012133
 MERCEDES BENZ        | $500                      | PREMIER LWB          | 2007   | WDD2211711A066886
 MERCEDES BENZ        | $500                      | PREMIER SWB          | 2006   | WDD2211711A018292
 MERCEDES BENZ        | $550                      | STD                  | 2007   | WDD2211711A032373
@@ -5126,9 +5348,7 @@ MERCURY              | GRAND MARQUIS             | STD                  | 1999  
 MERCURY              | GRAND MARQUIS             | STD                  | 1999   | 3Z62Z535862
 MERCURY              | GRAND MARQUIS             | STD                  | 2001   | 2MEFM75W31X696388
 MERCURY              | GRAND MARQUIS             | STD                  | 2001   | JTHBN30FX00039659
-MERCURY              | SABLE                     | PREMIER              | 2009   | 1MEHM42W99G619649
 MG                   | HS HYBRID+                | LUX                  | 2026   | LSJW94394TG029612
-MHERO                | 1                         | REV  SPECIAL EDITION | 2025   | LDP29H921SM520067
 MINI                 | COOPER                    | AMG                  | 1981   | SAXXNVAXKBD143089
 MINI                 | COOPER                    | CABRIO               | 1978   | SAXXNWAXBBD110288
 MINI                 | COOPER                    | STD                  | 1975   | SAXXNWAXBBD093093
@@ -5137,16 +5357,202 @@ MINI                 | COOPER                    | STD                  | 1978  
 MINI                 | COOPER                    | STD                  | 1978   | SAXXNWAXBBD110288
 MINI                 | COUPE                     | STD                  | 1981   | SAXXNVAXKBD131417
 MINI                 | HARDTOP COOPER S          | COOPER S             | 2021   | WMWXR5C04M2N62455
+MITSUBISHI           | ASX                       | GLX                  | 2003   | JMVLRN84W3Z702447
+MITSUBISHI           | DELTA PICKUP              | GL                   | 1987   | V6804608
+MITSUBISHI           | ECLIPSE                   | GS                   | 2002   | JJ5B3J6P32PC00349
+MITSUBISHI           | ECLIPSE                   | GS                   | 2004   | JMYLNN84W4Z700417
 MITSUBISHI           | G. V. W                   | S                    | 2024   | MK2L6Y1Y1R001659
+MITSUBISHI           | GALANT                    | ES                   | 2007   | 4A3AB36FX7E084074
+MITSUBISHI           | GALANT                    | GLS                  | 2000   | JMYSREA2AYZ702860
+MITSUBISHI           | GALANT                    | GLS                  | 2001   | JMYSREA2A1Z701306
+MITSUBISHI           | GALANT                    | GLS                  | 2001   | JMYSREA2A1Z701516
+MITSUBISHI           | GALANT                    | GLS                  | 2003   | 4P3SRDJ1A3E803066
+MITSUBISHI           | GALANT                    | GLS                  | 2004   | JMYSREA2A4Z702225
+MITSUBISHI           | GALANT                    | GLS                  | 2004   | JMYSREA2A4Z705255
+MITSUBISHI           | GALANT                    | GLS                  | 2005   | JMYSREA2A5Z704020
+MITSUBISHI           | GALANT                    | GLS                  | 2006   | JMYSREA2A6Z701054
+MITSUBISHI           | GALANT                    | GLS                  | 2007   | 4P3SRDJ1A7E803524
+MITSUBISHI           | GALANT                    | GLS                  | 2007   | 4P3SRDJ1A7E804010
+MITSUBISHI           | GALANT                    | GTS                  | 2007   | 4P3SRDJIA7E804041
+MITSUBISHI           | L 200                     | STD                  | 2002   | JJ7BCE1KX2L007694
+MITSUBISHI           | L200                      | GL                   | 2001   | MMBJNK6201D020984
+MITSUBISHI           | L200                      | GL                   | 2001   | SDY0E2602981
+MITSUBISHI           | L200                      | GL                   | 2003   | MMB0NK6203D080334
+MITSUBISHI           | L200                      | GL                   | 2003   | MMBJNK6203D032436
+MITSUBISHI           | L200                      | GL                   | 2004   | MMBJNK7404D020866
+MITSUBISHI           | L200                      | GL                   | 2004   | MMBMG21H84D072392
+MITSUBISHI           | L200                      | GL                   | 2007   | MMBJNKA407D095914
+MITSUBISHI           | L200                      | GL                   | 2007   | MMBJNKA507D090049
+MITSUBISHI           | L200                      | STD                  | 2000   | JMY0NK120YP700729
+MITSUBISHI           | L200                      | STD                  | 2000   | MMBJNK620YD059778
+MITSUBISHI           | L200                      | STD                  | 2001   | JMY0NK3201P700330
+MITSUBISHI           | L200                      | STD                  | 2002   | MMBJNK6202D012701
+MITSUBISHI           | L200                      | STD                  | 2002   | MMBJNK6202D049725
+MITSUBISHI           | L200                      | STD                  | 2004   | MMB0NK6504D057798
+MITSUBISHI           | L200                      | STD                  | 2004   | MMBJNK6504D026861
+MITSUBISHI           | L200                      | STD                  | 2005   | MMB0NK6205D064629
+MITSUBISHI           | L200                      | STD                  | 2005   | MMBJNK6205D006353
+MITSUBISHI           | L300                      | DX                   | 2006   | JMYGNP03V6A771290
+MITSUBISHI           | L300                      | STD                  | 2003   | JMYGNP03V3A770869
+MITSUBISHI           | L300                      | STD                  | 2005   | JMYGNP03V5A770566
+MITSUBISHI           | L300                      | STD                  | 2006   | JMYGNP03V6A770718
+MITSUBISHI           | LANCER                    | EVO IX               | 2007   | NAN
+MITSUBISHI           | LANCER                    | GL                   | 2000   | JMYSRCK1AYU770967
+MITSUBISHI           | LANCER                    | GL                   | 2000   | JMYSRCK4AYU775039
+MITSUBISHI           | LANCER                    | GL                   | 2001   | JMYSNCS1A1U774404
+MITSUBISHI           | LANCER                    | GL                   | 2001   | JMYSRCK1A1U770292
+MITSUBISHI           | LANCER                    | GL                   | 2002   | JMYSNCS1A2U775601
+MITSUBISHI           | LANCER                    | GL                   | 2002   | JMYSRCS1A2U775135
+MITSUBISHI           | LANCER                    | GL                   | 2003   | JMYSRCS1A3U776863
+MITSUBISHI           | LANCER                    | GL                   | 2003   | JMYSRCS1A3U777510
+MITSUBISHI           | LANCER                    | GL                   | 2007   | JMYSRCS1A7U709704
+MITSUBISHI           | LANCER                    | GL                   | 2007   | JMYSRCS1A7U737023
+MITSUBISHI           | LANCER                    | GLX LOWLINE          | 2003   | JMYSTCS3A3U775879
+MITSUBISHI           | LANCER                    | GLX LOWLINE          | 2003   | JMYSTCS3A3U776897
+MITSUBISHI           | LANCER                    | GLX LOWLINE          | 2007   | NAN
+MITSUBISHI           | MAGNA                     | GLS                  | 2003   | 6MMAP57P33T007176
+MITSUBISHI           | MAGNA                     | GLS                  | 2003   | 6MMAP87P13T000602
+MITSUBISHI           | MAGNA                     | GLS                  | 2004   | 6MMAP57P24T006909
+MITSUBISHI           | MAGNA                     | GLS                  | 2004   | 6MMAP87P64T003321
+MITSUBISHI           | NATIVA                    | GLS                  | 2004   | JMY0RK9604J701412
+MITSUBISHI           | NATIVA                    | GLS                  | 2004   | JMY0RK9604J703755
+MITSUBISHI           | OUTLANDER                 | GLX                  | 2003   | JMYXRCU4W3U778909
+MITSUBISHI           | OUTLANDER                 | GLX                  | 2003   | JMYXRCU4W3U779627
+MITSUBISHI           | OUTLANDER                 | GLX                  | 2004   | JMYXRCU4W4U773728
+MITSUBISHI           | OUTLANDER                 | GLX                  | 2004   | JMYXRCU4W4U776566
+MITSUBISHI           | PAJERO                    | GL                   | 1995   | FM557MD4000700000
+MITSUBISHI           | PAJERO                    | GL                   | 1996   | NAN
+MITSUBISHI           | PAJERO                    | GL                   | 1998   | NAN
+MITSUBISHI           | PAJERO                    | GLS MIDLINE          | 2027   | JMYLRV73VV5J70832
+MITSUBISHI           | PAJERO                    | STD                  | 1999   | DL042VKJ400404
+MITSUBISHI           | PAJERO                    | STD                  | 2000   | JMYMRH65WYY700349
+MITSUBISHI           | PAJERO                    | STD                  | 2000   | JMYMRH65WYY700802
+MITSUBISHI           | PAJERO IO                 | STD                  | 2000   | JMYMRH65WYY700561
+MITSUBISHI           | PAJERO IO                 | STD                  | 2003   | JMYLRH77W3Z701685
+MITSUBISHI           | ROSA                      | GL                   | 2005   | JL5BHJ6SXSRP25275
+MITSUBISHI           | ROZA                      | S                    | 2004   | JL5B3J6P24PD01441
+MITSUBISHI           | SPACE WAGON               | GL                   | 2002   | DLNN31WRZ02732
+MITSUBISHI           | SPACE WAGON               | GLX                  | 2003   | JMYLRN84W3Z704667
+MITSUBISHI           | SPACE WAGON               | GLX                  | 2003   | JMYLRN84W3Z705329
+MITSUBISHI           | SPACE WAGON               | GLX                  | 2004   | JMYLRN84W4Z703575
+MITSUBISHI           | SPACE WAGON               | GLX                  | 2004   | JMYLRN84W4Z704370
 MITSUBISHI           | بيك اب شحن                | STD                  | 2003   | JL7BDF1J93K001652
-MORGAN               | MIDSUMMER                 | STD                  | 2024   | SA9LP58A4RP004056
-MORGAN               | SUPERSPORT                | STD                  | 2025   | SA9LP58A5SP004072
+NISSAN               | 1200GX                    | S                    | 2006   | JN1BC11D16T110654
+NISSAN               | 2400                      | STD                  | 2001   | JN6BD23S01X083733
+NISSAN               | 2400                      | STD                  | 2001   | JN6BD23S51X082867
+NISSAN               | 300ZX                     | C                    | 1988   | JN1HZ14S9JX272259
+NISSAN               | 300ZX                     | LS                   | 1986   | JN1HZ16S5GX083159
+NISSAN               | 300ZX                     | STD                  | 1985   | JN1CZ14S6FX065314
+NISSAN               | 300ZX                     | STD                  | 1987   | JN1HZ14SXHX213053
+NISSAN               | ALTIMA                    | S                    | 2002   | 1N4AL11E02C285365
+NISSAN               | ALTIMA                    | S                    | 2002   | 1N4AL11E52C228918
+NISSAN               | ALTIMA                    | S                    | 2003   | 1N4AL11E63C259483
+NISSAN               | ALTIMA                    | S                    | 2004   | 1N4AL21D94C147528
+NISSAN               | ALTIMA                    | S                    | 2004   | 3N1CB51D94L893500
+NISSAN               | ALTIMA                    | SE                   | 2003   | WDB9501633K775847
+NISSAN               | ALTIMA                    | STD                  | 1993   | NAN
+NISSAN               | ARMADA                    | SE                   | 2004   | 5N1AA08BX4N737430
+NISSAN               | DATSUN                    | STD                  | 1984   | PG720262690
+NISSAN               | DATSUN 280 ZX             | STD                  | 1979   | JN1CZ04S8CX621144
+NISSAN               | E 260                     | S                    | 1980   | 037873000
+NISSAN               | FRONTIER                  | STD (NON GCC)        | 1999   | 1N6DD21S8XC326944
+NISSAN               | FRONTIER                  | STD (NON GCC)        | 1999   | 1N6DD21S9XC345504
+NISSAN               | FRONTIER                  | STD (NON GCC)        | 2000   | 1N6DD26SXYC429440
+NISSAN               | FRONTIER                  | STD (NON GCC)        | 2000   | JN6DD23S3YX001304
+NISSAN               | G70                       | S                    | 2019   | KMTG44LA1KU011844
+NISSAN               | L 200                     | 1500 CREWCAB SLE Z71 | 1987   | FGD21000544
+NISSAN               | MAXIMA                    | STD                  | 1996   | HCR32266818
+NISSAN               | MAXIMA                    | STD                  | 1996   | JN1CCUA32Z0004821
+NISSAN               | MAXIMA                    | STD                  | 1999   | JN1CA21DXXT153696
+NISSAN               | MAXIMA                    | STD                  | 1999   | JN1CA21SXXT176829
+NISSAN               | MAXIMA                    | STD                  | 2000   | JN1CA31D6YT172883
+NISSAN               | MAXIMA                    | STD                  | 2000   | JN1CA31S8YT280713
+NISSAN               | MAXIMA                    | STD                  | 2001   | JN1CA31S91T562378
+NISSAN               | MAXIMA                    | STD                  | 2001   | JN1CA31S91T564938
+NISSAN               | MAXIMA                    | STD                  | 2002   | JN1CA31D52T550540
+NISSAN               | MAXIMA                    | STD                  | 2002   | JN1CA31S32T570896
+NISSAN               | MAXIMA                    | STD                  | 2003   | JN1CA31D83T652898
+NISSAN               | MAXIMA                    | STD                  | 2003   | JN1CA31S23T673275
+NISSAN               | MAXIMA                    | STD                  | 2005   | JN1CA31C65M150024
+NISSAN               | MAXIMA                    | STD                  | 2005   | JN1CA31D55M201246
+NISSAN               | MURANO                    | SL                   | 2003   | JN8AZ08W43W204258
+NISSAN               | MURANO                    | SL                   | 2003   | JN8AZ08W93W233495
+NISSAN               | NISSAN                    | CE (NON GCC)         | 2013   | L10EMM016488
 NISSAN               | NISSAN / CEDRICK          | AVANTGARDE SPORTS    | 1999   | JN1DY11S6XX221994
+NISSAN               | NISSAN PATROL             | STD                  | 1989   | KY60306784
 NISSAN               | NISSAN SUNNY 1.3          | LIMITED              | 1993   | BEAB13513721
 NISSAN               | NISSAN SUNNY 1.6          | LE                   | 1997   | JN1BDAB14Z0313460
 NISSAN               | NISSAN SUNNY 1.6          | S                    | 1998   | JN1BDAB14Z0326540
 NISSAN               | NISSAN SUNNY 1.6          | SPECIAL EDITION      | 1998   | JN1BDAB14Z0334033
+NISSAN               | NISSAN ZD 300             | EX DLX               | 1987   | JN1HZ14S0HX217449
+NISSAN               | NISSAN ZD300              | STD                  | 1985   | HGZ31311797
+NISSAN               | NISSAN ZX 280             | GL                   | 1980   | HGS130160238
+NISSAN               | NISSAN ZX 300             | STD                  | 1986   | HZ31320024
+NISSAN               | PATHFINDER                | SE                   | 2001   | JN8AR05YX1W516300
+NISSAN               | PATHFINDER                | SE                   | 2001   | JN8DR07Y01W527218
+NISSAN               | PATHFINDER                | SE                   | 2002   | JN8AR05YX2W523006
+NISSAN               | PATHFINDER                | SE                   | 2002   | JN8AR05YX2W525676
+NISSAN               | PATHFINDER                | XE (NON GCC)         | 2000   | JN8AR05Y3YW505598
+NISSAN               | PATHFINDER                | XE (NON GCC)         | 2000   | JN8AR07Y2YW399822
+NISSAN               | PATROL                    | 1                    | 1988   | KY60302651
+NISSAN               | PATROL                    | 1500 REG/CAB AT4     | 1989   | UGY60001350
+NISSAN               | PATROL                    | SE TITANIUM          | 1985   | K160025546
+NISSAN               | PATROL                    | SE TITANIUM          | 1989   | WGY60306626
+NISSAN               | PATROL                    | SUPER SAFARI T1      | 1988   | KY60302420
+NISSAN               | PATROL PICK UP            | S                    | 1997   | JN10UGY60Z0097266
+NISSAN               | PATROL PICK UP            | S                    | 1997   | JN1ADGD21Z0505888
+NISSAN               | PATROL SAFARI             | GL                   | 1989   | KY60303239
 NISSAN               | PATROL/JEEP               | SE T2                | 1993   | KY60359946
+NISSAN               | PICK UP                   | STD                  | 1996   | GD21504040
+NISSAN               | PICK UP                   | STD                  | 1996   | JN1ADGD21Z0505805
+NISSAN               | PICK UP                   | STD                  | 1997   | FGD21436218
+NISSAN               | PICK UP                   | STD                  | 1997   | JN1CBGD21Z0551599
+NISSAN               | PICK UP                   | STD                  | 1998   | JN1ABGD22Z0000172
+NISSAN               | PICK UP                   | STD                  | 1999   | JN6BD22S8XX011043
+NISSAN               | PICK UP                   | STD                  | 1999   | UGY60081672
+NISSAN               | PICK UP                   | STD                  | 2000   | JN6BD23S1YX075120
+NISSAN               | PICK UP                   | STD                  | 2000   | UGY60081672
+NISSAN               | PICK UP                   | STD                  | 2001   | JN6BY15Y51A500606
+NISSAN               | PICK UP                   | STD                  | 2001   | JN6DD23YX1A700586
+NISSAN               | PICK UP                   | STD                  | 2002   | JN6AD22S32X052622
+NISSAN               | PICK UP                   | STD                  | 2003   | JN6BD22S73X075200
+NISSAN               | PICK UP                   | STD                  | 2003   | JN6BD23S03X132982
+NISSAN               | PK 210                    | STD                  | 2013   | JNCPCF0H6DAN03542
+NISSAN               | PRIMERA                   | STD                  | 1998   | SJNBCAP7120218632
+NISSAN               | PRIMERA                   | STD                  | 2001   | SJNCP11B61A575133
+NISSAN               | RANGE ROVER               | LE TITANIUM          | 1972   | 35801176A
+NISSAN               | ROCKY                     | SV                   | 1985   | JDA000F8000001483
+NISSAN               | SALON                     | STD                  | 1996   | JN1BBAB14Z0308443
+NISSAN               | SALON                     | STD                  | 1998   | JN1BDAB14Z0325311
+NISSAN               | SENTRA                    | S                    | 2006   | MNTBB7A9266032666
+NISSAN               | SENTRA                    | S                    | 2006   | MNTBB7A9566043788
+NISSAN               | SKYLINE                   | LE PLATINUM CITY     | 1989   | HCR32015045
+NISSAN               | SKYLINE                   | SR                   | 1979   | HGC211156029
+NISSAN               | SKYLINE                   | SR                   | 1982   | MR30001088
+NISSAN               | SKYLINE                   | STD                  | 1987   | HR31098660
+NISSAN               | SKYLINE                   | STD                  | 1987   | HR31126791
+NISSAN               | SKYLINE                   | STD                  | 1998   | ENR34000650
+NISSAN               | SKYLINE                   | XDRIVE MASTERCLASS   | 1988   | BNR32005863
+NISSAN               | SUNNY                     | CLASSIC              | 2005   | NAN
+NISSAN               | SUNNY                     | S                    | 1997   | JN1BDAB14Z0315662
+NISSAN               | SUNNY                     | S                    | 1997   | JN1BDAB14Z0318954
+NISSAN               | SUNNY                     | STANDARD             | 2005   | JN1FN61C65W086297
+NISSAN               | SUNNY                     | STANDARD             | 2006   | JN1FN61C16W087830
+NISSAN               | SUNNY                     | STD                  | 1995   | JN1BBAB14Z0301428
+NISSAN               | SUNNY                     | STD                  | 1997   | JN1BBAB14Z0314605
+NISSAN               | SUNNY                     | STD                  | 1997   | JN1BDAB14Z0311588
+NISSAN               | SUNNY                     | STD                  | 1999   | JN1BB41S4XW009031
+NISSAN               | SUNNY                     | STD                  | 1999   | NAN
+NISSAN               | SUNNY                     | STD                  | 2000   | JN1BB41S1YW007173
+NISSAN               | SUNNY                     | STD                  | 2000   | JN1DB41S5YW002664
+NISSAN               | SUNNY                     | STD                  | 2001   | JN1FN61551W000740
+NISSAN               | SUNNY                     | STD                  | 2001   | JN1FN61C11W000954
+NISSAN               | SUNNY                     | STD                  | 2004   | JN1FN61C44W061820
+NISSAN               | SUNNY                     | STD                  | 2004   | NAN
+NISSAN               | SUNNY                     | STD                  | 2005   | JN1EN61C05W021201
+NISSAN               | SUNNY                     | STD                  | 2005   | JN1FN61CX5W501475
+NISSAN               | SUNNY                     | STD                  | 2006   | JN1EN61CX6W022566
+NISSAN               | SUNNY                     | STD                  | 2006   | JN1FN61C96W086697
 NISSAN               | SUNNY 1.3                 | BASE                 | 1998   | JN1BDAB14Z0333086
 NISSAN               | SUNNY 1.3                 | FLEET                | 2002   | JN1CBAN16Z0006196
 NISSAN               | SUNNY 1.3                 | GLI                  | 2011   | JN1BFAN16Z0006867
@@ -5165,18 +5571,36 @@ NISSAN               | SUNNY 1.6                 | LE                   | 1997  
 NISSAN               | SUNNY 1.6                 | S                    | 2011   | JN1BFAN16Z0006939
 NISSAN               | SUNNY 1.6                 | STD                  | 2002   | JN1FN61C12W01235
 NISSAN               | SUNNY SV 1.5 AT           | SV                   | 2025   | MDHBNADXSG504697
+NISSAN               | TIDA                      | S                    | 2006   | C11ESM001042
+NISSAN               | TIIDA                     | S                    | 2006   | JN1CC11C06T110902
+NISSAN               | TIIDA                     | S                    | 2006   | JN1CC13C16T006044
+NISSAN               | TIIDA                     | S PWR OPTS           | 2006   | NAN
+NISSAN               | TIIDA                     | SE                   | 2006   | NAN
+NISSAN               | TIIDA                     | SL ABS A/W           | 2006   | NAN
+NISSAN               | TIIDA                     | SL PWR+S/R           | 2006   | NAN
+NISSAN               | URVAN                     | STD                  | 1996   | JN1VNGE24Z0026094
+NISSAN               | URVAN                     | STD                  | 1999   | JN6AE44S4XX700966
+NISSAN               | URVAN                     | STD                  | 2000   | JN6AE44S5YX705630
+NISSAN               | URVAN                     | STD                  | 2001   | JN6AE42S01X710002
+NISSAN               | URVAN                     | STD                  | 2003   | JN6FE52S13X401282
+NISSAN               | URVAN                     | STD                  | 2003   | JN6FE52S33X401025
 NISSAN               | URVAN/VAN                 | S                    | 2025   | JN6BE6CS9S9440417
+NISSAN               | X TRAIL                   | STD                  | 1996   | YV2A4B2A2TB156985
+NISSAN               | X TRAIL                   | XE 2WD               | 2002   | JN1TBNT30Z0003305
+NISSAN               | X TRAIL                   | XE 2WD               | 2002   | JN8BT05Y52W000157
+NISSAN               | X TRAIL                   | XE 2WD               | 2002   | JN8BT05Y92W000369
+NISSAN               | X TRAIL                   | XE 4WD               | 2002   | NAN
+NISSAN               | XA                        | S                    | 2006   | JTKKT604360162180
+NISSAN               | Z240                      | SR                   | 1971   | HLS3053918
+NISSAN               | ZX 300                    | AVANTGARDE SPORTS    | 1984   | JN1HZ14SXEX008554
+NISSAN               | ZX 300                    | BASE                 | 1987   | JN10HGZ31U0500199
+NISSAN               | ZX 300                    | SPORT                | 1987   | JN1CZ14S7HX152562
+NISSAN               | ZX 300                    | STD                  | 1984   | JN1HZ14S4FX065821
+NISSAN               | ZX 300                    | STD                  | 1988   | JN10HGZ31U0020180
+NISSAN               | ZX 300 COUPE              | LT                   | 1985   | JN1HZ14S6FX094253
 NISSAN               | صني 1.4                   | LE                   | 1998   | JN1BBAB14Z0323718
 NISSAN               | صني 1.5                   | LXI                  | 1997   | JN1BBAB14Z0309743
 NISSAN071244AA       | PATROL                    | SE T1                | 2012   | JN8AY25Y5C9040649
-OMODA                | 7                         | STD                  | 2025   | NAN
-OMODA                | C5                        | COMFORT              | 2025   | LVVDB21B2SD106930
-OMODA                | C5                        | COMFORT              | 2026   | NAN
-OMODA                | C5                        | LUXURY               | 2025   | NAN
-OMODA                | C5                        | LUXURY               | 2026   | NAN
-OPEL                 | ASTRA                     | ELEGANCE             | 2020   | W0VBE6EC6LG048854
-OPEL                 | CROSSLAND X               | ULTIMATE             | 2022   | NAN
-OPEL                 | INSIGNIA                  | COSMO OPC LINE       | 2016   | W0LGT5E56G1010493
 OPEL                 | MOKKA  X                  | TURBO ENJOY PLUS     | 2017   | W0LJD7D84HB066051
 OPEL                 | MOKKA  X                  | TURBO ENJOY PLUS     | 2017   | W0LJD7D84HB070018
 OPEL                 | MOKKA  X                  | TURBO INOVATION      | 2017   | W0LJD7D84HB070018
@@ -5188,19 +5612,9 @@ PEUGEOT              | 206                       | BASE                 | 2004  
 PEUGEOT              | 206                       | BASE                 | 2005   | VF32AKFWA5W013567
 PEUGEOT              | 206                       | BASE                 | 2005   | VF32AKFWR5W017333
 PEUGEOT              | 206                       | BASE                 | 2006   | VF32DNFUB6Y024799
-PEUGEOT              | 206                       | BASE                 | 2007   | VF32AKFWR7W002951
-PEUGEOT              | 206                       | BASE                 | 2007   | VF32JNFUB7H000808
 PEUGEOT              | 206                       | BASE                 | 2008   | NAN
-PEUGEOT              | 206                       | CC                   | 2007   | VF32DNFUB7Y002813
 PEUGEOT              | 206                       | ONELINE              | 2008   | VF32AKFWR8Y000557
 PEUGEOT              | 206                       | ONELINE              | 2009   | VF32ANFUB9Y000527
-PEUGEOT              | 206                       | STD                  | 2007   | VF32DNFUB7Y002813
-PEUGEOT              | 206                       | XS                   | 2007   | VF32DNFUB7Y002813
-PEUGEOT              | 207                       | CC SPORT2 LTH        | 2009   | VF3WB5FWF9E001108
-PEUGEOT              | 207                       | GT                   | 2009   | VF3WB5FWF9E000602
-PEUGEOT              | 207                       | GT                   | 2009   | VF3WB5FWF9E001108
-PEUGEOT              | 207                       | PREMIUM              | 2009   | VF3WC5FWF9W000097
-PEUGEOT              | 207                       | PREMIUM              | 2009   | VF3WC5FWF9W001475
 PEUGEOT              | 307                       | CC                   | 2005   | NAN
 PEUGEOT              | 307                       | XSI                  | 2004   | VF33CNFUE4S025667
 PEUGEOT              | 307                       | XSI                  | 2005   | VF33CNFUE5S025963
@@ -5214,51 +5628,21 @@ PEUGEOT              | PARTNER                   | COMBI                | 2008  
 PEUGEOT              | PARTNER                   | STANDARD             | 2008   | VF3GBKFWC8J070444
 PEUGEOT              | PARTNER                   | STD                  | 2005   | VF3GBKFWB5J019830
 PEUGEOT              | PARTNER                   | STD                  | 2008   | VF3GJKFWC8J063852
-POLESTAR             | POLESTAR 4                | LONG RANGE DUAL MOTOR PERFORMANCE | 2026   | NAN
-PONTIAC              | FIREBIRD                  | STD                  | 1999   | 2G2FS22K0X2233114
 PONTICA              | TRANS AM                  | G                    | 1990   | 1G2FW21F4KL223719
 PORSCHE              | 911                       | S                    | 1988   | WP0ZZZ95ZJS900225
 PORSCHE              | BOXSTER                   | S                    | 2010   | WP0CB2A86BS745222
-PORSCHE              | CAYENNE COUPE             | S                    | 2022   | NAN
-PORSCHE              | CAYENNE COUPE             | S                    | 2023   | NAN
-PORSCHE              | CAYENNE COUPE             | TURBO GT             | 2022   | WP1ZZZ9YZNDA59173
-PREVOST              | LIBERTY                   | STD                  | 1992   | 2P9M33401M1001842
-QINGLING             | KV 100 QL                 | NWB                  | 2024   | LWLDABUG3RL053404
-RABDAN               | FREE                      | STD (NON GCC)        | 2022   | LDP95E968NE020739
-RABDAN               | RABDAN ONE                | STD                  | 2022   | LDP95E968NE021809
-RABDAN               | RABDAN ONE                | STD                  | 2022   | LDP95E969NE020779
-RABDAN               | RABDAN ONE                | STD                  | 2023   | LV3MC7150P1001177
-RABDAN               | RABDAN ONE                | STD                  | 2023   | LV3MC7151P1001155
-RABDAN               | SEVEN                     | STD (NON GCC)        | 2023   | NAN
-RAM                  | 1500                      | TUNGSTEN             | 2026   | 1C6SRFHP6TN227212
-RAM                  | 2500                      | LARAMIE              | 2015   | 3C6UR5FJ1FG614264
-RAM                  | 2500                      | LARAMIE              | 2015   | 3C6UR5FJ1FG617746
-RAM                  | 2500                      | LARAMIE              | 2016   | 3C6TR5EJOGG113400
 RANGE ROVER          | VOGUE                     | HSE LE               | 2015   | SALGA2EF5FA211534
 RENAULT              | CLIO                      | STD                  | 2004   | VF1CM0M0640626595
 RENAULT              | EXPRESS EX(VAN)           | GLE                  | 2026   | VF1FJRS53TG135133
 RENAULT              | GRAND SCENIC              | STD                  | 2005   | VF1VAE4Z654630342
-RENAULT              | MASTER                    | NEW MASTER L1H1      | 2022   | VF1F6RCK2NB040245
 RENAULT              | MEGANE                    | STD                  | 2005   | VF1VAE4Z654630342
 RENAULT              | MEGANE                    | STD                  | 2007   | VF1FB27107R565173
 RENAULT              | MEGANE                    | STD                  | 2007   | VF1KF25187K565744
 RENAULT              | MEGANE                    | STD                  | 2008   | VF1GB27128R573278
 RENAULT              | MEGANE                    | STD                  | 2008   | VF1KF26108K567505
-RENAULT              | MEGANE                    | STD                  | 2010   | VF1DZ1N06A0661070
-RENAULT              | MEGANE                    | STD                  | 2011   | VF1BZB2T2BR585260
-RENAULT              | MEGANE                    | STD                  | 2011   | VF1BZB2TXBR585264
 RENAULT              | SAFRANE                   | STD                  | 2008   | KNMA4C2878P609461
 RENAULT              | SAFRANE                   | STD                  | 2008   | KNMA4C2B78P990088
 RENAULT              | SYMBOL                    | STD                  | 2009   | VF14SRABL9LT53973
-RIDDARA              | RD6                       | ULTRA X              | 2025   | LA71CU833S0250029
-RIDDARA              | RD6                       | ULTRA X              | 2025   | LA71CU83XS0250044
-ROEWE                | 5                         | STD                  | 2024   | LSJA36U30RZ679357
-ROEWE                | 5                         | STD                  | 2024   | LSJA36U34RZ676137
-ROEWE                | I5                        | COMFORT              | 2024   | LSJA36U37RZ676195
-ROEWE                | I5                        | STANDARD             | 2024   | LSJA36U30RZ679357
-ROEWE                | I5                        | STANDARD             | 2024   | NAN
-ROEWE                | I5                        | STANDARD             | 2025   | NAN
-ROEWE                | I5                        | STD                  | 2024   | LSJA36U34RZ676137
 ROLLS ROYCE          | CULLINAN                  | BLACK BADGE          | 2020   | SLATV4A08LU201668
 ROLLS ROYCE          | CULLINAN                  | BLACK BADGE          | 2022   | SCATV8105NU211889
 ROLLS ROYCE          | CULLINAN                  | BLACK BADGE          | 2023   | NAN
@@ -5416,34 +5800,20 @@ ROX                  | ROX   1                   | STD                  | 2025  
 ROX                  | ROX   JISHI               | STD                  | 2026   | HJ4ABBHK5TN087936
 ROX                  | ROX   JISHI 2012WD        | VIP                  | 2025   | HJAABBHKSN078677
 ROX                  | ROX 01 (ELECTRIC ROAD VEHICLE) | S                    | 2026   | HJ4ABBHK1TN089022
-SAIC                 | IMLS6                     | STD                  | 2023   | LSJWR4095PS123778
-SAIC                 | RISING R7                 | STD                  | 2024   | LSJWK4094RS048479
-SANDSTORM            | ALREEM                    | TOP LINE             | 2020   | NAN
-SANDSTORM            | S 24                      | HIGHLINE             | 2019   | RA2S24MP4KD000037
-SATURN               | SKY                       | RED LINE             | 2007   | 1G8MB35B67Y134427
-SATURN               | SKY                       | RED LINE             | 2007   | 1G8MG35X67Y140631
 SEAT                 | ALTEA                     | REFERENCE            | 2009   | VSSJB65P19R023463
-SEAT                 | IBIZA                     | STYLE                | 2013   | VSSXY4KE2DR000377
-SEAT                 | IBIZA                     | STYLE                | 2013   | VSSXY4KE4DR000347
-SEAT                 | IBIZA                     | STYLE                | 2014   | VSSDL4KE8ER000127
 SEAT                 | LEON                      | STYLANCE             | 2004   | VSSBB41M94R070799
 SEAT                 | LEON                      | STYLANCE             | 2005   | VSSDE21MX5R063172
-SINOTRUK             | DP 25 NT                  | STD                  | 2009   | T18C53182
 SINOTRUK             | SITRAK (TRACTOR)          | STD                  | 2026   | LZZ8CVWD2TB105133
 SKODA                | OCTAVIA                   | AMBIENTE             | 2001   | TMBHE01U712502161
 SKODA                | OCTAVIA                   | AMBIENTE             | 2007   | TMBCA41Z372108884
 SKODA                | OCTAVIA                   | ELEGANCE             | 2006   | TMBCA41Z962147302
 SKODA                | OCTAVIA                   | ELEGANCE             | 2007   | TMBJA41Z772103114
 SKODA                | ROOMSTER                  | AMBIENTE             | 2008   | TMBMD45J285027990
-SKYWELL              | ET5                       | COMFORT              | 2023   | LMELBL1P2PRC00295
-SKYWELL              | ET5                       | LUXURY               | 2023   | LMELBL1P7PRC00308
-SKYWELL              | ET5                       | LUXURY               | 2025   | LMELBL1P1SRC00474
 SMART                | #1                        | PREMIUM              | 2025   | HESXR1C4XSS007320
 SMART                | #1                        | PREMIUM              | 2025   | WMEFJ5DA0GK139410
 SMART                | #3                        | PREMIUM              | 2025   | WMEFJ5DA0GK139410
 SSANGYONG            | ACTYON                    | BASE                 | 2008   | KPTC0B1668P049048
 SSANGYONG            | ACTYON                    | STD                  | 2007   | KPTC0B16S7P029965
-SSANGYONG            | REXTON                    | W S                  | 2012   | KPTG0B194CP308852
 SUBARU               | BAJA                      | STD (NON GCC)        | 2005   | 4S4BT63CX55108270
 SUBARU               | FORESTER                  | STD                  | 2003   | JF1SG93M23H017174
 SUBARU               | FORESTER                  | STD                  | 2003   | JF1SG93M83H004980
@@ -5458,11 +5828,38 @@ SUBARU               | LEGACY                    | STD                  | 2001  
 SUBARU               | LEGACY                    | STD                  | 2003   | JF1BH98M03H065262
 SUBARU               | LEGACY                    | STD                  | 2003   | JF1BH98M53H064785
 SUBARU               | LEGACY                    | STD                  | 2004   | JF1BL96M24H007074
+SUZUKI               | 2023                      | XLI                  | 2023   | MBHCZC63S00B38535
+SUZUKI               | ALTO                      | DLX                  | 2008   | MA3FB21S780177542
+SUZUKI               | ALTO                      | DLX                  | 2009   | MA3FB21S890011094
+SUZUKI               | ALTO                      | DLX                  | 2009   | MA3FB21SX90197284
+SUZUKI               | ALTO                      | STD                  | 2009   | MA3FB21S590015054
+SUZUKI               | ALTO                      | STD                  | 2009   | NAN
+SUZUKI               | GRAND VITA                | S                    | 2006   | JS3TE943264101941
+SUZUKI               | GRAND VITARA              | STD                  | 2002   | 2S3TA52C826106237
+SUZUKI               | GRAND VITARA              | STD                  | 2002   | JS3TX92V824151459
+SUZUKI               | IGNIS                     | STD                  | 2005   | EZC21S000453
+SUZUKI               | IGNIS                     | STD                  | 2005   | EZC21S00403200000
+SUZUKI               | JIMNY                     | JXL                  | 2004   | JDA000F2000615708
+SUZUKI               | JIMNY                     | STD                  | 1973   | SJ10107708
+SUZUKI               | JIMNY                     | STD                  | 2000   | JS3JB33V1Y4100721
+SUZUKI               | JIMNY                     | STD                  | 2001   | SJ50103666
+SUZUKI               | JIMNY                     | STD                  | 2001   | TA02A005223
+SUZUKI               | JIMNY                     | STD                  | 2002   | JA12W103713
+SUZUKI               | LIANA                     | STD                  | 2004   | JS2RA11S645150011
+SUZUKI               | LIANA                     | STD                  | 2004   | JS2RA31SX45200159
+SUZUKI               | LIANA                     | STD                  | 2005   | EZC21S000846
+SUZUKI               | LIANA                     | STD                  | 2005   | EZC21S001030
+SUZUKI               | LIANA                     | STD                  | 2006   | JS2RA31S265250038
 SUZUKI               | S.PRESSO                  | STD                  | 2024   | MA3RFL61S00450507
+SUZUKI               | SAMURAI                   | 1500                 | 1983   | SJ40T104292
+SUZUKI               | SAMURAI                   | STD                  | 1985   | JSA0SJ50000112257
+SUZUKI               | SAMURAI JEEP              | STD                  | 1988   | JS4JC51C4J4223151
+SUZUKI               | SX4                       | STD                  | 2007   | JS2YA41S175100022
+SUZUKI               | SX4                       | STD                  | 2007   | JS2YA41S275100272
 TAM                  | C12                       | S                    | 2027   | LHUG6JN52VH000018
-TATA                 | LP613                     | STD                  | 2008   | MAT38122287L00544
 TATA                 | LPO 1618                  | S                    | 2026   | MAT449315T5L00855
 TESLA2130144264      | MODEL Y                   | LONG RANGE           | 2022   | LRWYGCEK3NC237711
+TOYOTA               | 1998                      | SE                   | 1998   | 4T3ZF13C0WU025292
 TOYOTA               | 25 HX DC 4X4 2.7LAT       | GLX                  | 2025   | MR0BX8CD0S2868106
 TOYOTA               | 25 HX DC 4X4 PLAT GLX RA(PICK UP) | DLX                  | 2025   | MR0BXBCD752868278
 TOYOTA               | 25 LP SC 4X4 P4.0 MT      | GLX                  | 2025   | JTFLU71J7SB103593
@@ -5470,6 +5867,25 @@ TOYOTA               | 26 HX DC 4X4 2.4LAT       | DLX                  | 2026  
 TOYOTA               | 26 LP SC 4X4 P4.0L AT     | SGLX                 | 2026   | JTFLU73J5TB703883
 TOYOTA               | 26HX DC 4X4D2.4L AT       | DLX                  | 2026   | MR0KB8CD2T1164091
 TOYOTA               | 26HX DC 4X4P2.7LAT        | GLX                  | 2026   | MRDBX8CD4T2870233
+TOYOTA               | AQUA                      | GL                   | 2014   | JTDKD3B3001063731
+TOYOTA               | AURION                    | STD                  | 1992   | JT2MX83E7N0090489
+TOYOTA               | AVALON                    | STD                  | 2000   | 4T1BF28B4YU046648
+TOYOTA               | AVALON                    | STD                  | 2000   | 4T1BF28B9YU111560
+TOYOTA               | AVALON                    | XLI                  | 1999   | JZA800031981
+TOYOTA               | CAMRY                     | LE                   | 1992   | EE903051880
+TOYOTA               | CAMRY                     | LE                   | 1992   | JZS17500503120000
+TOYOTA               | CELICA                    | STD                  | 2002   | JTDDR32T0Y0011981
+TOYOTA               | CENTURY                   | 5.0L                 | 1994   | VG45003496
+TOYOTA               | COROLLA                   | HIGH DELUX           | 1980   | TA40413839
+TOYOTA               | COROLLA                   | XLI                  | 1998   | JTB53AEB1W0016394
+TOYOTA               | COROLLA                   | XLI                  | 1998   | JTB53EEB0W0004584
+TOYOTA               | COROLLA                   | XLI                  | 1999   | JT2BA13E3X3072069
+TOYOTA               | COROLLA                   | XLI                  | 1999   | JTB53AEB1W0016394
+TOYOTA               | COROLLA                   | XLI                  | 2000   | JT2BA13E0Y3101187
+TOYOTA               | COROLLA                   | XLI                  | 2000   | NAN
+TOYOTA               | COROLLA                   | XLI MID              | 1999   | JTB53AEB1X3062137
+TOYOTA               | COROLLA                   | XLI MID              | 2000   | JT2BB12E6Y0018105
+TOYOTA               | COROLLA                   | XLI MID              | 2000   | JT2BB13E5Y0016389
 TOYOTA               | COROLLA 1.3               | GA                   | 1994   | AE1013095244
 TOYOTA               | COROLLA 1.3               | GLI                  | 2025   | RKLBB0BE3S0052028
 TOYOTA               | COROLLA 1.3               | GLX                  | 2004   | ZE15090997
@@ -5525,11 +5941,79 @@ TOYOTA               | COROLLA 1.8               | XLI                  | 2016  
 TOYOTA               | COROLLA 1.8               | XLI                  | 2017   | JTNKARJE7HJ541486
 TOYOTA               | COROLLA 1.8               | XLI TOP              | 2011   | JTDBU4EE2B9156791
 TOYOTA               | COROLLA 1.8 YUS           | LE                   | 2005   | ZE15140690
+TOYOTA               | CRESSIDA                  | LUXURY SPORT         | 1987   | JT2MX73E9H0127041
+TOYOTA               | DAINA                     | S                    | 2001   | JTFAY117X12000163
 TOYOTA               | DLX FA (PICK UP)          | LIMITED              | 2026   | MROKB8CD0T1164042
+TOYOTA               | ECHO                      | XLI MID              | 2001   | JTDBW133010023279
+TOYOTA               | ECHO                      | XLI MID              | 2001   | JTDBW133210026975
+TOYOTA               | FAIRBIRD                  | STD (NON GCC)        | 1979   | 2T87Y9L108590
 TOYOTA               | GLX RA(PICK UP)           | GLX                  | 2026   | MR0JX8CD33428713
 TOYOTA               | GXR RA(STATION WAGON)     | STATION              | 2026   | MHFKUBFSXT0212532
+TOYOTA               | HAI LUX                   | GX                   | 1977   | RNZ0354212
+TOYOTA               | HIACE                     | STD                  | 1997   | JTB21UHB3V0024164
+TOYOTA               | HIACE                     | STD                  | 1998   | JTB21UHB3W0029869
+TOYOTA               | HIACE                     | STD                  | 1998   | JTB41UHB5W0004250
+TOYOTA               | HIACE                     | STD                  | 2000   | JT4ZA1192Y0039255
+TOYOTA               | HILUX                     | 1500                 | 1977   | RNZ0354212
+TOYOTA               | HILUX                     | 1500 REG/CAB         | 1982   | RN30211164
+TOYOTA               | HILUX                     | S ASF                | 1982   | RN30211164
+TOYOTA               | HILUX                     | STD                  | 1985   | YN520022265
 TOYOTA               | HX DC 4X4 D 2.4L AT       | DLX                  | 2026   | MR0KB8CD7T1164443
+TOYOTA               | LAND CRUISER              | DLX                  | 1980   | FJ45269945
+TOYOTA               | LAND CRUISER              | GLS                  | 1983   | FJ40363300
+TOYOTA               | LAND CRUISER              | GLX                  | 1985   | FJ62027417123456789
+TOYOTA               | LAND CRUISER              | GX                   | 1988   | FJ750063707
+TOYOTA               | LAND CRUISER              | PICK UP              | 1986   | FJ750032762
+TOYOTA               | LAND CRUISER              | PRESTIGE             | 1985   | FJ62027417
+TOYOTA               | LAND CRUISER              | S                    | 1982   | FJ45332539
+TOYOTA               | LAND CRUISER              | STD                  | 1967   | FJ4046340
+TOYOTA               | LAND CRUISER              | SV                   | 1980   | FJ40311205
+TOYOTA               | LAND CRUISER              | VX                   | 1985   | FJ62021671
+TOYOTA               | LAND CRUISER              | VXR BASE             | 1981   | FJ45288980
+TOYOTA               | LAND CRUISER              | XLI                  | 1988   | FJ700009564
+TOYOTA               | LAND CRUISER              | XLT                  | 1989   | FJ62102996
+TOYOTA               | LITE ACE                  | A                    | 2023   | MHKB3FE100K001743
+TOYOTA               | LITE ACE                  | C                    | 2023   | MHKB3FE100K001743
 TOYOTA               | LS4X4 P4.0L MT            | GLX                  | 2025   | JTFLU71J7SB103593
+TOYOTA               | MARK 2                    | G                    | 1991   | JZX813017951
+TOYOTA               | MARK 2                    | SR                   | 1988   | GX813325551
+TOYOTA               | MATRIX                    | STD (NON GCC)        | 2003   | 2T1KR32E13C061747
+TOYOTA               | MATRIX                    | STD (NON GCC)        | 2006   | 2T1KR32E86C577463
+TOYOTA               | MATRIX                    | STD (NON GCC)        | 2007   | 2T1KR32EX7C681891
+TOYOTA               | MATRIX                    | STD (NON GCC)        | 2009   | 2T1KU40E39C055500
+TOYOTA               | PARISIENNE BROUGHAM       | XLI                  | 1986   | 1G2BT69Y4GX228925
+TOYOTA               | PREVIA                    | STD                  | 2027   | JTB11AC10V1312997
+TOYOTA               | RAV4                      | STD                  | 1999   | JT3HP10V2X0211425
+TOYOTA               | RAV4                      | STD                  | 1999   | JT3HP10V2X7144428
+TOYOTA               | SCION                     | TC (NON GCC)         | 2008   | JTKKU104X8J011866
+TOYOTA               | SIENNA                    | LE (NON GCC)         | 1999   | 4T3ZF13CXXU129208
+TOYOTA               | SIENNA                    | LE (NON GCC)         | 2000   | 4T3ZF13C3YU177084
+TOYOTA               | SIENNA                    | LE (NON GCC)         | 2000   | 4T3ZF19C5YU204079
+TOYOTA               | SOLARA                    | STD                  | 2002   | 2T1FF22P82C571890
+TOYOTA               | SUPRA                     | S                    | 1988   | JT2MA71J2J0101971
+TOYOTA               | SUPRA                     | SPORT                | 1988   | JT2MA71J9J0100560
+TOYOTA               | SUPRA                     | STD                  | 1996   | JZA800035432
+TOYOTA               | SUPRA                     | SXT PLUS             | 1988   | JT2MA71J9J0100560
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 1997   | 4TAVN52N5VZ226661
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 1997   | 4TAVN52NXVZ326951
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 1999   | 4TAPM62N4XZ454400
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 1999   | 4TASM92N0XZ559673
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2002   | 5TENM92N62Z003169
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2002   | 5TEVL52N72Z027363
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2003   | 5TEVL52N03Z295012
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2003   | 5TEWN72N43Z226690
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2004   | 5TEVL52NX4Z384409
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2004   | 5TEWN72N54Z417925
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2005   | 5TELU42N65Z077934
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2005   | 5TENX22N25Z127569
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2006   | 5TENX22N76Z314422
+TOYOTA               | TOYOTA CENTURY            | 1                    | 1994   | GZG500006703
+TOYOTA               | TOYOTA CENTURY            | GLS                  | 1989   | GZG50000350512346987
+TOYOTA               | TOYOTA CENTURY            | TRIM                 | 2001   | JTDBU585508000071
+TOYOTA               | TOYOTA PREVIA             | LE (NON GCC)         | 2010   | JTEGD54M50A021526
+TOYOTA               | WIGO                      | GLS                  | 2022   | MHKA4GF500J000253
+TOYOTA               | YARIS                     | BASE                 | 2001   | GZG500004611
+TOYOTA               | YARIS                     | BASE                 | 2001   | MHFB29F3212096560
 TOYOTA               | برادو                     | 90                   | 2000   | JT3BM99J2Y0034048
 TOYOTA               | فورشنر                    | EXR                  | 2020   | MHFBUBFSBL0035480
 TOYOTA               | كامري                     | LE                   | 2005   | NV18037298
@@ -5542,37 +6026,69 @@ TOYOTA               | هايلوكس                   | SE T2                |
 TOYOTA12024631       | YARIS                     | BASE                 | 2006   | JTDBW933261017631
 TOYOTA2100875058     | LAND CRUISER              | VX                   | 2010   | JTMHT05J8A5080535
 TOYOTAالمـ           | YARIS                     | E                    | 2019   | MHFB29F33K2040173
-UAZ                  | HUNTER                    | STD                  | 2017   | XTT315195H1000362
-UAZ                  | HUNTER                    | STD                  | 2017   | XTT31519XH1000793
-VGV                  | U75 PLUS                  | 2.0                  | 2023   | L3AKFNM3XPY990127
-VGV                  | U75 PLUS                  | 2.0L                 | 2023   | L3AKFNM3XPY990127
-VGV                  | U75 PLUS                  | GLE                  | 2023   | L3AKFNM30PY990086
-VGV                  | U75 PLUS                  | S                    | 2023   | L3AKFNM30PY990086
-VGV                  | VX7                       | PICKUP               | 2023   | L3AZ1CK33PYA90001
-VICTORY              | SCH5022XXYD               | STD                  | 2024   | L3HEGCBBXRA005654
-VICTORY              | SCH5022XXYD               | STD                  | 2025   | L3HEDCBB2SA001189
-VICTORY              | SCH5022XXYD               | STD                  | 2025   | L3HEDCBB4SA013778
-VINFAST              | VF8                       | ECO                  | 2025   | RLLV1AFA3SH010282
+VOLKSWAGEN           | BEETLE                    | PREMIUM              | 1979   | 3VWZZZ113VM528401
+VOLKSWAGEN           | BEETLE                    | STD                  | 1997   | 3VWZZZ113VM524819
+VOLKSWAGEN           | BEETLE                    | STD                  | 2000   | WVWZZZ9CZYM610451
+VOLKSWAGEN           | BEETLE                    | STD                  | 2000   | WVWZZZ9CZYM613118
+VOLKSWAGEN           | BEETLE                    | STD                  | 2001   | WVWZZZ9CZ1M626944
+VOLKSWAGEN           | BEETLE                    | STD                  | 2001   | WVWZZZ9CZ1M635403
+VOLKSWAGEN           | BEETLE                    | STD                  | 2002   | WVWZZZ9CZ2M610729
+VOLKSWAGEN           | BEETLE                    | STD                  | 2002   | WVWZZZ9CZ2M617570
+VOLKSWAGEN           | BEETLE                    | STD                  | 2003   | WVWZZZ9CZ3M610572
+VOLKSWAGEN           | BEETLE                    | STD                  | 2003   | WVWZZZ9CZ3M611986
+VOLKSWAGEN           | BEETLE                    | STD                  | 2004   | WVWZZZ9CZ4M500840
+VOLKSWAGEN           | BEETLE                    | STD                  | 2004   | WVWZZZ9CZ4M516381
+VOLKSWAGEN           | BEETLE                    | STD                  | 2005   | WVWZZZ9CZ5M508201
+VOLKSWAGEN           | BEETLE                    | STD                  | 2005   | WVWZZZ9CZ5M512410
+VOLKSWAGEN           | BEETLE                    | STD                  | 2006   | 3VWRF31Y46M320436
+VOLKSWAGEN           | BEETLE                    | STD                  | 2006   | WVWZZZ9CZ6M513191
+VOLKSWAGEN           | BEETLE                    | STD                  | 2007   | 3VWFF31Y47M411534
+VOLKSWAGEN           | BEETLE                    | STD                  | 2007   | WVWZZZ9CZ7M552619
+VOLKSWAGEN           | BORA                      | TRENDLINE            | 2003   | WWWZZZ1JZ3W040111
+VOLKSWAGEN           | GOLF                      | COMFORTLINE          | 2002   | WVWZZZ1JZ2P044879
+VOLKSWAGEN           | GOLF                      | COMFORTLINE          | 2002   | WVWZZZ1JZ2W204197
+VOLKSWAGEN           | GOLF                      | COMFORTLINE          | 2003   | WVWZZZ1JZ3P061453
+VOLKSWAGEN           | GOLF                      | COMFORTLINE          | 2003   | WVWZZZ1JZ3W101814
+VOLKSWAGEN           | GOLF                      | COMFORTLINE          | 2004   | WVWZZZ1KZ4W102574
+VOLKSWAGEN           | GOLF                      | COMFORTLINE          | 2004   | WVWZZZ1KZ4W137725
+VOLKSWAGEN           | GOLF                      | TRENDLINE            | 2001   | WVWZZZ1JZ1P027810
+VOLKSWAGEN           | GOLF                      | TRENDLINE            | 2001   | WVWZZZ1JZ1P028276
+VOLKSWAGEN           | GOLF                      | TRENDLINE            | 2002   | NAN
+VOLKSWAGEN           | GOLF                      | TRENDLINE            | 2003   | NAN
+VOLKSWAGEN           | GOLF                      | TRENDLINE            | 2004   | NAN
 VOLKSWAGEN           | ID.3/LIFE                 | STD (NON GCC)        | 2021   | LSVFA6E92M2017214
 VOLKSWAGEN           | ID.3/LIFE                 | STD (NON GCC)        | 2021   | LSVFA6E99M2016786
 VOLKSWAGEN           | ID.3/LIFE                 | TECH (NON GCC)       | 2022   | LFVVB9E61N5018110
 VOLKSWAGEN           | ID.3/LIFE                 | TECH (NON GCC)       | 2022   | LSVFA6E99N2011489
 VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022   | LFVVB9E71N5162197
 VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022   | LFVVB9E71N5173796
+VOLKSWAGEN           | JETTA                     | COMFORTLINE          | 2007   | NAN
+VOLKSWAGEN           | JETTA                     | SPORTSLINE           | 2008   | WWWSU11K28M059204
+VOLKSWAGEN           | JETTA                     | SPORTSLINE           | 2009   | WVWSU11K09M093756
+VOLKSWAGEN           | JETTA                     | STD                  | 2007   | WVWSV51K47M071261
+VOLKSWAGEN           | JETTA                     | STD                  | 2008   | 3VWTK69M78M646366
+VOLKSWAGEN           | JETTA                     | TRENDLINE            | 2007   | NAN
+VOLKSWAGEN           | JETTA                     | TRENDLINE            | 2009   | NAN
 VOLKSWAGEN           | JETTA 2.5L                | SEL                  | 2016   | WVWSK1AJ9GM200457
+VOLKSWAGEN           | PASSAT                    | STD                  | 2003   | WVWZZZ9CZ3M629709
+VOLKSWAGEN           | PASSAT                    | STD                  | 2003   | WWWZZZ9CZ3M601978
+VOLKSWAGEN           | PASSAT                    | TRENDLINE            | 2006   | WVWDM13C66P172907
+VOLKSWAGEN           | PASSAT                    | TRENDLINE            | 2006   | WVWZZZ3CZ6P102232
+VOLKSWAGEN           | POLO                      | TRENDLINE            | 2001   | WVWZZZ6NZ1Y180676
+VOLKSWAGEN           | POLO                      | TRENDLINE            | 2003   | WVWZZZ9NZ3Y170560
+VOLKSWAGEN           | POLO                      | TRENDLINE            | 2003   | WWWZZZONZ3Y052860
+VOLKSWAGEN           | POLO                      | TRENDLINE            | 2004   | WVWBF19N44Y166184
+VOLKSWAGEN           | POLO                      | TRENDLINE            | 2004   | WVWZZZ9NZ4U028457
+VOLKSWAGEN           | R32                       | COMFORTLINE          | 2003   | WVWZZZ1JZ3D014606
+VOLKSWAGEN           | TOUAREG                   | STD                  | 2004   | WVGZE57L54D072960
+VOLKSWAGEN           | TOUAREG                   | STD                  | 2005   | WVGAZ57LX5D009632
 VOLVO                | C70                       | STD                  | 2002   | YV2A4DBA02B301953
 VOLVO                | C70                       | STD                  | 2004   | KMFGA17F84C208292
 VOLVO                | FH 12                     | G                    | 1998   | YV2A4B3G7WA274804
-VOLVO                | FM460                     | FM460                | 2019   | YV2XZY0A7KB921673
 VOLVO                | HEAD FH(TRUCK             | FH                   | 2020   | YV2RT4DADLB302191
 VOLVO                | S40                       | COMFORT              | 2005   | YV2J4CKA55B394354
-VOLVO                | S40                       | COMFORT              | 2007   | YV2AS02A27B471849
 VOLVO                | S40                       | PREMIUM              | 2005   | YV1MS384952063184
-VOLVO                | S40                       | PREMIUM              | 2007   | YV1MS665572293016
-VOLVO                | S40                       | PREMIUM              | 2007   | YV1MS685X72294773
 VOLVO                | S40                       | STD                  | 2000   | YV2A4DBA6YB251858
-VOLVO                | S60                       | B4 PLUS DARK         | 2023   | YV2A4B3C4WB187966
-VOLVO                | S60                       | B4 PLUS DARK         | 2024   | 7JRK9AZS8RG308225
 VOLVO                | S60                       | BUSINESS LINE        | 2001   | YV2J4DFA21B282783
 VOLVO                | S60                       | BUSINESS LINE        | 2002   | YV2A4DBA42B311501
 VOLVO                | S60                       | BUSINESS LINE        | 2003   | YV2A4CFAX3A568528
@@ -5587,10 +6103,6 @@ VOLVO                | S80                       | STD                  | 2000  
 VOLVO                | V70                       | COMFORT              | 2002   | YV2A4B2C1XB215385
 VOLVO                | V70                       | COMFORT              | 2006   | KMFGA17F26C034612
 VOLVO                | XC90                      | PRESTIGE 7ST         | 2003   | ZCFA1ED0002400484
-WULING               | KAIJIE                    | STD (NON GCC)        | 2023   | LZWADAH90NB080393
-WULING               | RONGGUANG                 | STD (NON GCC)        | 2024   | LZWACAGA8SC022830
-WULING               | RONGGUANG                 | STD (NON GCC)        | 2025   | LK6ADAE28RB123810
-WULING               | RONGGUANG                 | STD (NON GCC)        | 2025   | LZWCAAGA9RC112982
 XAOMI                | SU7                       | STD (NON GCC)        | 2024   | LNBSC1WK7RB035637
 XAOMI                | SU7                       | STD (NON GCC)        | 2024   | LNBSC1WK8RB010858
 XAOMI                | SU7                       | STD (NON GCC)        | 2025   | NAN
@@ -5598,10 +6110,5 @@ XAOMI                | YU7                       | MAX                  | 2025  
 XAOMI                | YU7                       | MAX                  | 2025   | HXML2A043SA193695
 XAOMI                | YU7                       | PRO                  | 2025   | HXML2A046SA237575
 XAOMI                | YU7                       | PRO                  | 2025   | HXML2A049SA219832
-XIAOMI               | YU7                       | MAX                  | 2026   | NAN
 XIAOMI               | اس يو 7 الترا             | S                    | 2025   | HXMM3A087SA137103
-ZEEKR                | X                         | PREMIUM              | 2025   | L6TDC2S22SP901370
-ZEEKR                | X                         | STD                  | 2025   | L6T796ND4SN153541
 ZEEKR                | X/STATION                 | STD                  | 2024   | L6TBX2S1XRF500328
-ZXAUTO               | GRANDTIGER                | STD                  | 2016   | LTA1222BXG2005196
-ZXAUTO               | GRANDTIGER                | STD                  | 2017   | LTA1222BXH2013400

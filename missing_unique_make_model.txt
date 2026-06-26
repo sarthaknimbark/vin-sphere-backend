@@ -2,12 +2,6 @@
 MAKE                 | MODEL                     | TRIM                 | YEAR  
 ---------------------------------------------------------------------------
 ACURA                | INTEGRA                   | STD                  | 1995  
-AITO                 | M7                        | STD                  | 2023  
-AITO                 | M7                        | STD                  | 2025  
-AITO                 | M9                        | MAX                  | 2025  
-AITO                 | M9                        | STD (NON GCC)        | 2024  
-AITO                 | M9                        | STD (NON GCC)        | 2025  
-AITO                 | M9                        | ULTRA                | 2025  
 AL DAMANI            | DMV 300                   | BASIC                | 2023  
 AL DAMANI            | DMV 300                   | HIGHLINE             | 2022  
 ALFA ROMEO           | 156                       | TWIN SPARK           | 2001  
@@ -67,7 +61,6 @@ ALFA ROMEO           | STELVIO                   | VELOCE               | 2024
 ALFA ROMEO           | STELVIO                   | VELOCE               | 2025  
 ALFA ROMEO           | TONALE                    | TI                   | 2024  
 ALFA ROMEO           | TONALE                    | VELOCE               | 2024  
-ARCFOX               | A S                       | FOREST               | 2023  
 ASHOK LEYLAND        | 2021                      | BUS                  | 2021  
 ASHOK LEYLAND        | ASHOK LEYLAND             | FALCON               | 2023  
 ASHOK LEYLAND        | FALCON                    | STD                  | 2010  
@@ -136,43 +129,63 @@ AUDI                 | A6                        | STD                  | 2000
 AUDI                 | A6                        | STD                  | 2002  
 AUDI                 | A8                        | LWB TOP              | 2003  
 AUDI                 | A8                        | STD                  | 2001  
-AUDI                 | Q2                        | 35 TFSI SPORT        | 2018  
-AUDI                 | S6                        | TFSI                 | 2024  
-AUDI                 | S6                        | TFSI                 | 2025  
-AVANTY               | ELANTRA                   | GLS                  | 2019  
 BAIC                 | BJ40 PRO                  | PREMIUM              | 2027  
 BAIC                 | BJ40PRO                   | STANDARD             | 2027  
 BAIC                 | U5 PLUS                   | HONOR                | 2027  
 BAIC                 | U5 PLUS                   | LUXURY               | 2027  
 BAOJUN               | 2024                      | STD                  | 2024  
 BAOJUN YEP           | YEP/STATION               | STD                  | 2025  
-BAW                  | 212                       | ADV                  | 2026  
-BAW                  | 212                       | ADVENTURER           | 2026  
-BAW                  | 212                       | STD (NON GCC)        | 2025  
-BAW                  | 212                       | STD (NON GCC)        | 2026  
 BAW                  | 212(4WD)                  | STATION1             | 2026  
-BENTLEY              | BENTAYGA                  | ATELIER EDITION      | 2026  
 BENTLEY              | UNKNOWN                   | MULLINER             | 1967  
-BESTUNE              | T33                       | PREMIUM              | 2021  
-BESTUNE              | T77                       | PREMIUM              | 2025  
-BESTUNE              | T77                       | PREMIUM              | 2026  
-BORGWARD             | BX5                       | ELITE                | 2019  
-BORGWARD             | BX7                       | ELITE                | 2018  
-BORGWARD             | BX7                       | LUXURY               | 2019  
-BRILLIANCE           | FRV CROSS                 | STD                  | 2013  
-BRILLIANCE           | FRV CROSS                 | STD                  | 2014  
-BRILLIANCE           | H530                      | COMFORT              | 2014  
-BRILLIANCE           | JINBEI                    | STD                  | 2015  
-BRILLIANCE           | V5                        | STD                  | 2014  
+BMW                  | 116I                      | STD                  | 2005  
+BMW                  | 118I                      | STD                  | 2005  
+BMW                  | 318CI                     | STD                  | 2000  
+BMW                  | 318CI                     | STD                  | 2002  
+BMW                  | 318I                      | STD                  | 1998  
+BMW                  | 318I                      | STD                  | 2000  
+BMW                  | 318I                      | STD                  | 2002  
+BMW                  | 318I                      | STD                  | 2004  
+BMW                  | 320 SEDAN                 | PLATINUM             | 1988  
+BMW                  | 320I                      | STD                  | 1999  
+BMW                  | 320I                      | STD                  | 2000  
+BMW                  | 320I                      | STD                  | 2001  
+BMW                  | 320I                      | STD                  | 2002  
+BMW                  | 323I                      | STD                  | 2000  
+BMW                  | 325CI                     | STD                  | 2001  
+BMW                  | 325I                      | STD                  | 1992  
+BMW                  | 325I                      | STD                  | 2001  
+BMW                  | 325I                      | STD                  | 2002  
+BMW                  | 325I                      | STD                  | 2003  
+BMW                  | 328I                      | STD                  | 2000  
+BMW                  | 328I                      | STD                  | 2001  
+BMW                  | 330I                      | STD                  | 2001  
+BMW                  | 330I                      | STD                  | 2002  
+BMW                  | 335                       | STD                  | 2008  
+BMW                  | 520D                      | TRIM                 | 2020  
+BMW                  | 520I                      | EXECUTIVE            | 2004  
+BMW                  | 520I                      | STD                  | 2001  
+BMW                  | 520I                      | STD                  | 2003  
+BMW                  | 520I                      | STD                  | 2005  
+BMW                  | 528I                      | STD                  | 1997  
+BMW                  | 528I                      | STD                  | 1998  
+BMW                  | 728                       | STD                  | 2001  
+BMW                  | 735I                      | STD                  | 2001  
+BMW                  | 735LI                     | STD                  | 2001  
+BMW                  | 745LI                     | STD                  | 2002  
+BMW                  | BMW 3201                  | STD                  | 1989  
+BMW                  | BMW 3301                  | STD                  | 2013  
+BMW                  | BMW 525                   | XLI                  | 2005  
+BMW                  | M5                        | STD                  | 2002  
+BMW                  | X3                        | SI                   | 2004  
+BMW                  | Z3                        | ROADSTER             | 2000  
 BUGATTI              | CHIRON                    | SPORT                | 2024  
 BUGATTI              | CHIRON                    | STD                  | 2018  
 BUGATTI              | CHIRON                    | STD                  | 2022  
 BUGATTI              | CHIRON                    | STD                  | 2023  
 BUGATTI              | CHIRON                    | STD                  | 2024  
 BUGATTI              | CHIRON                    | SUPER SPORT          | 2022  
-BUGATTI              | VEYRON                    | STD                  | 2007  
-BUGATTI              | VEYRON                    | STD                  | 2008  
-BUICK                | RIVIERA                   | COUPE                | 2026  
+BYD                  | F3                        | STD                  | 2010  
+BYD                  | F6                        | STD                  | 2010  
 BYD                  | LEOPARD 7 (2WD)           | STD                  | 2025  
 BYD                  | LEOPARD 7 (4WD)           | STD                  | 2025  
 BYD                  | LEOPARD 7(2WD)            | 7                    | 2025  
@@ -181,6 +194,7 @@ BYD                  | LEOPARD 7(2WD)            | SUV                  | 2025
 BYD                  | LEOPARD S/STATION         | LE PLATINUM CITY     | 2025  
 BYD                  | LEOPARD/STATION           | 7                    | 2025  
 BYD                  | QIN PLUS(2WD)             | STD                  | 2025  
+BYD                  | SHARK                     | 6                    | 2027  
 BYD                  | SHARK (PICK UP)           | PREMIUM              | 2026  
 BYD                  | SHARK (PICK UP)           | S                    | 2026  
 BYD                  | SONG (2WD)                | EV                   | 2025  
@@ -194,7 +208,6 @@ BYD - YANGWANG       | U8                        | ARABIAN EDITION      | 2026
 BYD - YANGWANG       | U8                        | STD (NON GCC)        | 2024  
 BYD - YANGWANG       | U8                        | STD (NON GCC)        | 2025  
 CADILLAC             | 1984                      | 1                    | 1984  
-CADILLAC             | ATS                       | PREMIUM LUXURY       | 2019  
 CADILLAC             | BLS                       | COMFORT              | 2007  
 CADILLAC             | BROGHAM                   | SE PLATINUM CITY     | 1987  
 CADILLAC             | BROGHAM                   | STD                  | 1989  
@@ -204,22 +217,11 @@ CADILLAC             | CADILLAC CEVEL            | PREMIER SWB          | 1984
 CADILLAC             | CATERA                    | STD                  | 2001  
 CADILLAC             | CATERA                    | STD                  | 2002  
 CADILLAC             | CATERA                    | STD                  | 2003  
-CADILLAC             | CT6                       | LUXURY               | 2017  
-CADILLAC             | CT6                       | PLATINUM             | 2017  
-CADILLAC             | DEVILLE                   | STD                  | 2001  
-CADILLAC             | DEVILLE                   | STD                  | 2002  
-CADILLAC             | DEVILLE                   | STD                  | 2004  
-CADILLAC             | DEVILLE                   | STD                  | 2005  
 CADILLAC             | ELDORADO                  | STD                  | 1981  
 CADILLAC             | SLS                       | STD                  | 2002  
-CATERHAM             | SEVEN                     | 360 S                | 2025  
 CHANGAN              | CHANGAN                   | C                    | 2025  
-CHANGAN              | EADO                      | STD                  | 2025  
-CHANGAN              | EADO                      | STD                  | 2026  
 CHANGAN              | HAOLV R                   | S                    | 2025  
 CHANGAN              | QNE 07/SEDAN              | C                    | 2025  
-CHANGAN              | X5 PLUS                   | PIONEER              | 2026  
-CHANGAN              | X5 PLUS                   | STD                  | 2026  
 CHERVOLET            | CAPRICE                   | LS                   | 2009  
 CHERVOLET            | CAPRICE                   | LTZ                  | 2013  
 CHERVOLET            | CAPRICE                   | ROYALE  NAV          | 2009  
@@ -229,31 +231,113 @@ CHERVOLET            | CAPRICE                   | ROYALE  NAV          | 2012
 CHERVOLET            | CAPRICE                   | ROYALE  NAV          | 2013  
 CHERVOLET            | CAPRICE                   | STD                  | 2005  
 CHERVOLET            | CAPRICE                   | STD                  | 2010  
-CHERY                | ARRIZO 6 PRO              | LUXURY               | 2022  
 CHERY                | E5                        | COMFORT              | 2015  
 CHERY                | EASTAR                    | STD                  | 2007  
-CHERY                | EASTAR                    | STD                  | 2009  
 CHERY                | RELY RB (PICK UP)         | S                    | 2026  
-CHERY                | TIGGO                     | STD                  | 2014  
-CHERY                | TIGGO                     | STD                  | 2015  
-CHERY                | TIGGO 7                   | LUXURY               | 2019  
-CHERY                | TIGGO 7                   | LUXURY               | 2020  
 CHERY - ICAR         | 03                        | STD                  | 2024  
 CHERY - ICAR         | 03                        | STD (NON GCC)        | 2024  
 CHERY - ICAR         | 03                        | STD (NON GCC)        | 2025  
 CHERY - ICAR         | 03T                       | STD                  | 2026  
 CHERY - ICAR         | V23                       | STD (NON GCC)        | 2025  
 CHERY - ICAR         | V27                       | FLAGSHIP             | 2025  
+CHEVROLET            | ASTRO                     | STD                  | 1998  
+CHEVROLET            | ASTRO                     | STD                  | 2001  
+CHEVROLET            | ASTRO                     | STD                  | 2002  
+CHEVROLET            | ASTRO                     | STD                  | 2003  
+CHEVROLET            | ASTRO                     | STD                  | 2004  
+CHEVROLET            | ASTRO                     | STD                  | 2005  
+CHEVROLET            | AVALANCHE                 | AVALANCHE            | 2004  
+CHEVROLET            | AVEO                      | BASE                 | 2007  
+CHEVROLET            | AVEO                      | BASE                 | 2009  
+CHEVROLET            | AVEO                      | LS                   | 2006  
+CHEVROLET            | AVEO                      | LS                   | 2007  
+CHEVROLET            | AVEO                      | LS                   | 2009  
+CHEVROLET            | AVEO                      | LS                   | 2010  
+CHEVROLET            | AVEO                      | LT                   | 2006  
+CHEVROLET            | AVEO                      | LT                   | 2008  
+CHEVROLET            | AVEO                      | LT                   | 2009  
+CHEVROLET            | AVEO                      | STD                  | 2004  
+CHEVROLET            | AVEO                      | STD                  | 2005  
+CHEVROLET            | AVEO                      | STD                  | 2006  
+CHEVROLET            | BLAZER                    | SE                   | 1987  
+CHEVROLET            | C 10                      | 1500                 | 1967  
+CHEVROLET            | C 10                      | 1500                 | 1977  
+CHEVROLET            | C 10                      | 1500                 | 1985  
+CHEVROLET            | C 10                      | GL                   | 1977  
+CHEVROLET            | C 10                      | GLX                  | 1948  
+CHEVROLET            | C 10                      | STD (NON GCC)        | 1979  
 CHEVROLET            | C/K 3500                  | GLX                  | 1979  
+CHEVROLET            | C10                       | 1500                 | 1979  
+CHEVROLET            | CAMARO                    | STD                  | 1969  
+CHEVROLET            | CAMARO                    | STD                  | 2001  
+CHEVROLET            | CAMARO                    | STD                  | 2003  
+CHEVROLET            | CAPRI                     | ROYALE  NAV          | 1988  
+CHEVROLET            | CAPRICE                   | LS                   | 1988  
+CHEVROLET            | CAPRICE                   | PREMIER SWB          | 1988  
+CHEVROLET            | CAPRICE                   | ROYALE  NAV          | 1988  
+CHEVROLET            | CAPRICE                   | SE                   | 1989  
+CHEVROLET            | CAPRICE                   | STD                  | 2002  
+CHEVROLET            | CAPRICE                   | STD                  | 2004  
+CHEVROLET            | CAVALIER                  | LS                   | 2002  
+CHEVROLET            | CAVALIER                  | LS                   | 2003  
+CHEVROLET            | CHEVROLET C 10            | 1500                 | 1977  
+CHEVROLET            | CHEVROLET CHEVY           | STD                  | 1998  
+CHEVROLET            | CHEVROLET EL CAMI         | PREMIUM 50YR PK      | 1987  
+CHEVROLET            | CHEVROLET IMPALA          | LS                   | 1963  
+CHEVROLET            | CORVETTE                  | C6                   | 1976  
+CHEVROLET            | CORVETTE                  | CENTENIAL EDITION    | 1982  
+CHEVROLET            | DAIMLER DOUBLE            | LS                   | 1985  
+CHEVROLET            | ENVOY                     | 1500                 | 2009  
+CHEVROLET            | EPICA                     | LS                   | 2004  
+CHEVROLET            | EXPRESS                   | STD                  | 1999  
+CHEVROLET            | EXPRESS                   | STD                  | 2000  
+CHEVROLET            | EXPRESS                   | STD                  | 2013  
+CHEVROLET            | IMPALA                    | S                    | 1964  
+CHEVROLET            | IMPALA                    | STD                  | 2003  
+CHEVROLET            | IMPALA                    | STD                  | 2006  
+CHEVROLET            | LUMINA                    | LTZ                  | 2002  
+CHEVROLET            | LUMINA                    | S                    | 2003  
+CHEVROLET            | LUMINA                    | SS                   | 2001  
+CHEVROLET            | LUMINA                    | SS                   | 2002  
+CHEVROLET            | LUMINA                    | SS                   | 2004  
+CHEVROLET            | MALIBU                    | STD                  | 2002  
+CHEVROLET            | MASTER DELUXE             | GT                   | 1939  
+CHEVROLET            | NOVA                      | SV                   | 1974  
+CHEVROLET            | NOVA WATCH                | STD                  | 1972  
+CHEVROLET            | OPTRA                     | LS                   | 2005  
+CHEVROLET            | OPTRA                     | LS                   | 2006  
+CHEVROLET            | SILVERADO                 | 1500                 | 1986  
+CHEVROLET            | SILVERADO                 | 1500                 | 1999  
+CHEVROLET            | SILVERADO                 | 1500                 | 2002  
+CHEVROLET            | SILVERADO                 | 1500 EXT/CAB         | 2000  
+CHEVROLET            | SILVERADO                 | 2500 REG/CAB LT Z71 LONG | 1984  
+CHEVROLET            | SILVERADO                 | 2500HD EXT CAB LT1 Z71 | 1985  
+CHEVROLET            | SILVERADO                 | 2500HD EXT/CAB LT1 Z71 | 1985  
+CHEVROLET            | SILVERADO                 | S ASF                | 1986  
+CHEVROLET            | SILVERADO                 | SGL                  | 1988  
+CHEVROLET            | SILVERADO                 | STD                  | 2001  
+CHEVROLET            | SILVERADO K3500           | S                    | 2024  
+CHEVROLET            | SPARK                     | BASE                 | 2006  
+CHEVROLET            | SPARK                     | BASE                 | 2008  
+CHEVROLET            | SPARK                     | BASE                 | 2009  
+CHEVROLET            | SPARK                     | BASE                 | 2010  
+CHEVROLET            | SPARK                     | LS                   | 2007  
+CHEVROLET            | SPARK                     | LS                   | 2008  
+CHEVROLET            | SPARK                     | LS                   | 2009  
+CHEVROLET            | SPARK                     | LS                   | 2010  
+CHEVROLET            | TAHOE                     | STD                  | 1996  
+CHEVROLET            | TAHOE                     | STD                  | 2000  
 CHEVROLET            | TAHOE K1500 (4WD)         | S                    | 1999  
-CHRYSLER             | 300                       | TOP                  | 2014  
+CHEVROLET            | TRAILBLAZER               | LS                   | 2000  
+CHEVROLET            | TRAILBLAZER               | LS                   | 2002  
+CHEVROLET            | UPLANDER                  | LS                   | 2005  
+CHEVROLET            | VENTURE                   | STD                  | 2001  
+CHEVROLET            | Z 280                     | LT                   | 1979  
 CHRYSLER             | GRAND VOYAGER             | LX LTH               | 1999  
 CHRYSLER             | GRAND VOYAGER             | SE                   | 2000  
 CHRYSLER             | NEON                      | STD                  | 2005  
 CHRYSLER             | PT CRUISER                | LIMITED              | 2006  
 CHRYSLER             | TOWN & COUNTRY            | STD                  | 2013  
-CITROEN              | CITROEN C5                | S                    | 2025  
-CMC                  | 7Z                        | MINIVANI             | 2013  
 DAIHATSU             | CHARADE                   | STD                  | 2006  
 DAIHATSU             | DAIHATSU                  | 1                    | 2009  
 DAIHATSU             | GRAN MAX                  | STD                  | 1995  
@@ -271,47 +355,76 @@ DAIHATSU             | YRV                       | STD                  | 2004
 DAIHATSU             | YRV                       | STD                  | 2005  
 DATSUN               | 1969                      | S                    | 1969  
 DATSUN               | ZX 280/COUPE              | SPORT                | 1980  
-DEEPAL               | G318                      | STD                  | 2025  
 DODGE                | 1500                      | STD                  | 2012  
 DODGE                | CALIBER                   | SE                   | 2007  
 DODGE                | CALIBER                   | SXT                  | 2007  
 DODGE                | CHALLENGER                | SPORT                | 1974  
 DODGE                | DAKOTA                    | SPORT                | 2002  
-DODGE                | DURANGO                   | LIMITED              | 2004  
 DODGE                | DURANGO                   | SLT                  | 2002  
-DODGE                | DURANGO                   | SLT                  | 2004  
-DODGE                | GRAND CARAVAN             | SE (NON GCC)         | 2017  
-DODGE                | GRAND CARAVAN             | SE (NON GCC)         | 2019  
-DODGE                | RAM                       | LIMITED              | 2000  
 DONGFENG             | 2025                      | VTI SR AIR BAG ABS   | 2025  
 DONGFENG EΠ          | 007                       | STD                  | 2025  
 DONGFENG EΠ          | MAGE                      | E1                   | 2025  
-DONGFENG-XIAOKA      | C35                       | STD                  | 2022  
-DORCEN               | DOMY X7                   | STD                  | 2018  
 EXEED                | ROCKY                     | FLAGSHIP             | 1989  
-EXEED                | RX                        | LUXURY               | 2001  
 EXEED                | RX 2.0 T                  | PREMIUM              | 2025  
-EXEED                | VX                        | LUXURY               | 2026  
-FAW                  | BESTURN B50               | DELUXE               | 2020  
-FAW                  | BESTURN X40               | PREMIUM              | 2021  
-FERRARI              | 488 GTB                   | STD                  | 2016  
-FERRARI              | 488 GTB                   | STD                  | 2018  
 FERRARI              | 812                       | COMPETIZIONE         | 2024  
 FERRARI              | DAYTONA S                 | STD                  | 2025  
 FERRARI              | DAYTONA SP3               | STD                  | 2025  
 FERRARI              | F8_TRIBUTO                | STD                  | 2022  
 FERRARI              | LAFERRARI                 | STD                  | 2015  
 FERRARI              | LAFERRARI                 | STD                  | 2017  
-FERRARI              | PORTOFINO                 | STD                  | 2019  
-FERRARI              | PORTOFINO                 | STD                  | 2020  
 FIAT                 | FIAT SPIDER 661           | 1                    | 2018  
-FORCE                | TRAVELLER                 | STD                  | 2021  
-FORCE                | URBANIA                   | GLE                  | 2026  
-FORCE                | URBANIA                   | STD                  | 2026  
+FORD                 | BRONCO                    | GTS                  | 1987  
+FORD                 | COBRA                     | GT PREMIUM           | 1965  
+FORD                 | CROWN VICTORIA            | LX                   | 1999  
+FORD                 | CROWN VICTORIA            | LX                   | 2003  
+FORD                 | CROWN VICTORIA            | LX                   | 2004  
+FORD                 | E 350                     | STD                  | 2011  
+FORD                 | E 450                     | CATAWAY              | 2014  
+FORD                 | E 450                     | G                    | 2024  
+FORD                 | E 450                     | STD                  | 2008  
 FORD                 | E450 SUPER DUTY (MOTORHOME) | C                    | 2017  
+FORD                 | ESCAPE                    | XLS                  | 2002  
+FORD                 | EVEREST                   | STD                  | 2004  
+FORD                 | EXPEDITION                | XLT                  | 2001  
+FORD                 | EXPEDITION                | XLT                  | 2002  
 FORD                 | EXPEDITION   EL           | XL  CLTH             | 2017  
+FORD                 | EXPLORER                  | LIMITED              | 2004  
+FORD                 | EXPLORER                  | XLT                  | 2000  
+FORD                 | EXPLORER                  | XLT                  | 2002  
+FORD                 | EXPLORER                  | XLT                  | 2004  
+FORD                 | EXPLORER                  | XLT                  | 2005  
+FORD                 | F 150                     | STD                  | 1996  
 FORD                 | F 250 (PICK UP)           | LARIAT CREW CAB      | 2021  
 FORD                 | F600 ENTEGRA ESTEEM XL 33F (MOTORHOME) | GL                   | 2025  
+FORD                 | FOCUS                     | AMBIENTE             | 2006  
+FORD                 | FOCUS                     | STD                  | 2006  
+FORD                 | FOCUS                     | TREND                | 2001  
+FORD                 | FOCUS                     | TREND                | 2002  
+FORD                 | FOCUS                     | TREND                | 2003  
+FORD                 | FOCUS                     | TREND                | 2004  
+FORD                 | FOCUS                     | TREND                | 2006  
+FORD                 | MJP 2                     | GLX                  | 1981  
+FORD                 | MONDEO                    | ST 220               | 2005  
+FORD                 | MONDEO                    | STD                  | 2004  
+FORD                 | MONDEO                    | STD                  | 2006  
+FORD                 | MUSTANG                   | GT                   | 1967  
+FORD                 | MUSTANG                   | GT                   | 1990  
+FORD                 | MUSTANG                   | GT                   | 2001  
+FORD                 | MUSTANG                   | GT                   | 2002  
+FORD                 | MUSTANG                   | GT                   | 2003  
+FORD                 | MUSTANG                   | GT PREMIUM           | 1968  
+FORD                 | MUSTANG                   | PREMIUM              | 1987  
+FORD                 | MUSTANG                   | PREMIUM              | 2001  
+FORD                 | MUSTANG                   | STD                  | 1989  
+FORD                 | MUSTANG                   | STD                  | 1990  
+FORD                 | MUSTANG                   | STD                  | 1998  
+FORD                 | MUSTANG                   | STD                  | 1999  
+FORD                 | MUSTANG                   | STD                  | 2000  
+FORD                 | RANGER                    | STD                  | 2005  
+FORD                 | SKF                       | 1500                 | 1988  
+FORD                 | THUNDERBIRD               | GT                   | 2002  
+FORD                 | THUNDERBIRD               | LOUNGE LTH           | 1963  
+FORD                 | WINNEBAGO MOTOR HOME      | GL                   | 2004  
 FORD2140777009       | MUSTANG                   | PREMIUM 50YR PK      | 2015  
 GAC                  | GS3 EMZOOM                | 1.5 GL SPORT+        | 2027  
 GAC                  | GS3 EMZOOM 1.5TG GB       | STD                  | 2026  
@@ -325,11 +438,8 @@ GEELY                | GC6                       | S                    | 2018
 GEELY                | ني ام جراند               | ADVANCE              | 2016  
 GMC                  | CANYON                    | SLT                  | 2016  
 GMC                  | GMC                       | STD                  | 2006  
-GMC                  | SAVANA                    | GL                   | 2012  
 GMC                  | SAVANA(VAN)               | SE T1                | 2012  
 GMC                  | SEIARA                    | 1500  Z71            | 1979  
-GMC                  | SEIRRA                    | 1500 REG/CAB SLE Z71 | 2018  
-GMC                  | SEIRRA                    | 1500 REG/CAB SLE Z71 | 2019  
 GMC                  | SIERRA                    | 1500                 | 1981  
 GMC                  | SIERRA                    | 1500                 | 1999  
 GMC                  | SIERRA                    | 1500  Z71            | 1977  
@@ -343,7 +453,6 @@ GMC                  | SIERRA                    | STD                  | 1979
 GMC                  | SIERRA                    | STD                  | 1983  
 GMC                  | SIERRA                    | STD (NON GCC)        | 1981  
 GMC                  | YUKON                     | DENALI S/R DVD/NAV   | 2003  
-GMC                  | YUKON                     | SLE                  | 1995  
 GMC                  | YUKON                     | SLE                  | 2001  
 GMC                  | YUKON                     | SLE                  | 2002  
 GMC                  | YUKON                     | SLE                  | 2003  
@@ -425,83 +534,140 @@ GREAT WALL           | WINGLE 7                  | STD                  | 2022
 GREAT WALL           | WINGLE 7                  | STD                  | 2023  
 GWM - WEY            | GAOSHAN                   | STD                  | 2025  
 HAVAL                | V7                        | HIGH DELUXE          | 2027  
-HIG                  | KLQ6600                   | D                    | 2025  
-HIPHI                | HIPHI X                   | STD                  | 2022  
-HIPHI                | HIPHIX                    | STD                  | 2022  
-HIPHI                | Z                         | STD                  | 2023  
+HONDA                | ACCORD                    | CLOTH                | 2002  
+HONDA                | ACCORD                    | EXI                  | 1999  
+HONDA                | ACCORD                    | EXI                  | 2000  
+HONDA                | ACCORD                    | EXI                  | 2001  
+HONDA                | ACCORD                    | LXI                  | 1997  
+HONDA                | ACCORD                    | LXI                  | 1999  
+HONDA                | ACCORD                    | LXI                  | 2000  
+HONDA                | ACCORD                    | LXI                  | 2001  
+HONDA                | ACCORD                    | LXI                  | 2002  
+HONDA                | ACCORD                    | STD                  | 1993  
+HONDA                | ACCORD                    | VTI                  | 1999  
+HONDA                | ACCORD                    | VTI                  | 2000  
+HONDA                | ACCORD                    | VTI                  | 2002  
+HONDA                | ACCORD                    | VTI L                | 2002  
+HONDA                | ACCORD                    | VTI SR AIR BAG ABS   | 2001  
+HONDA                | ACCORD                    | VTI SR AIR BAG ABS   | 2002  
+HONDA                | ACCORD COUPE              | COUPE                | 1999  
+HONDA                | ACTY                      | GLX                  | 1989  
+HONDA                | ACURA                     | VTI                  | 2002  
+HONDA                | CITY                      | BASE                 | 2000  
+HONDA                | CITY                      | EXI                  | 2004  
+HONDA                | CITY                      | LXI                  | 2002  
+HONDA                | CITY                      | LXI                  | 2004  
+HONDA                | CIVIC                     | COUPE                | 1999  
+HONDA                | CIVIC                     | EX                   | 1999  
+HONDA                | CIVIC                     | EXI                  | 1999  
+HONDA                | CIVIC                     | EXI                  | 2002  
+HONDA                | CIVIC                     | EXI                  | 2003  
+HONDA                | CIVIC                     | LXI                  | 2001  
+HONDA                | CIVIC                     | LXI                  | 2002  
+HONDA                | CIVIC                     | LXI                  | 2003  
+HONDA                | CIVIC                     | TYPE R               | 2002  
+HONDA                | CIVIC                     | VTI                  | 2001  
+HONDA                | CIVIC                     | VTI                  | 2002  
+HONDA                | CIVIC                     | VTI                  | 2003  
+HONDA                | CR V                      | LX                   | 2000  
+HONDA                | CR V                      | RVI                  | 2001  
+HONDA                | CR V                      | RVI                  | 2002  
+HONDA                | CR V                      | RVSI                 | 2002  
+HONDA                | ELEMENT                   | EX (NON GCC)         | 2003  
+HONDA                | FIT                       | GL                   | 2022  
+HONDA                | HONDA ODYSSEY             | STD                  | 2021  
 HONDA                | HR (4WD)                  | SX                   | 2024  
-HONGQI               | H5                        | LUXURY               | 2020  
-HONGQI               | H5                        | LUXURY               | 2023  
-HONGQI               | OUSADO                    | FLAGSHIP             | 2024  
-HONGQI               | OUSADO                    | LUXURY               | 2024  
-HYCAN                | V09                       | STD (NON GCC)        | 2023  
+HONDA                | HRV                       | BASE                 | 2001  
+HONDA                | HRV                       | BASE                 | 2002  
+HONDA                | INSIGHT                   | STD (NON GCC)        | 2010  
+HONDA                | INTEGRA                   | STD                  | 1995  
+HONDA                | JAZZ                      | ES                   | 2004  
+HONDA                | JAZZ                      | ES                   | 2005  
+HONDA                | JAZZ                      | LS                   | 2005  
+HONDA                | JAZZ                      | LX                   | 2004  
+HONDA                | ODYSSEY                   | EX                   | 2000  
+HONDA                | ODYSSEY                   | EX                   | 2001  
+HONDA                | ODYSSEY                   | EX                   | 2002  
+HONDA                | ODYSSEY                   | EX                   | 2003  
+HONDA                | ROCKY                     | EX                   | 1988  
+HYUNDAI              | 2016                      | STD                  | 2016  
+HYUNDAI              | ACCENT                    | GL                   | 2000  
+HYUNDAI              | ACCENT                    | GL                   | 2001  
+HYUNDAI              | ACCENT                    | GL                   | 2004  
+HYUNDAI              | ACCENT                    | GL                   | 2005  
+HYUNDAI              | ACCENT                    | GL MID               | 2002  
+HYUNDAI              | ACCENT                    | GL MID               | 2004  
+HYUNDAI              | ACCENT                    | GL MID               | 2006  
+HYUNDAI              | ACCENT                    | GL TOP               | 2003  
+HYUNDAI              | ACCENT                    | GL TOP               | 2005  
+HYUNDAI              | ATOS                      | GL                   | 2004  
+HYUNDAI              | ATOS PRIME                | STD                  | 2000  
+HYUNDAI              | ATOS PRIME                | STD                  | 2002  
+HYUNDAI              | COUPE                     | GLS                  | 2000  
+HYUNDAI              | COUPE                     | GLS                  | 2001  
+HYUNDAI              | COUPE                     | GLS                  | 2002  
+HYUNDAI              | COUPE                     | GLS                  | 2003  
+HYUNDAI              | COUPE                     | GLS                  | 2004  
+HYUNDAI              | COUPE                     | GLS                  | 2005  
+HYUNDAI              | ELANTRA                   | GL                   | 2002  
+HYUNDAI              | ELANTRA                   | GL                   | 2004  
+HYUNDAI              | ELANTRA                   | GLS                  | 1999  
+HYUNDAI              | GALLOPER                  | STD                  | 1996  
+HYUNDAI              | GALLOPER                  | STD                  | 1998  
+HYUNDAI              | GALLOPER                  | STD                  | 2001  
+HYUNDAI              | GALLOPER                  | STD                  | 2002  
+HYUNDAI              | GETZ                      | STD                  | 2003  
+HYUNDAI              | GETZ                      | STD                  | 2004  
+HYUNDAI              | GETZ                      | STD                  | 2005  
+HYUNDAI              | GETZ                      | STD                  | 2006  
+HYUNDAI              | GETZ                      | STD                  | 2007  
+HYUNDAI              | GETZ                      | STD                  | 2008  
 HYUNDAI              | GRAND YUOR / SEDAN        | GL                   | 2020  
+HYUNDAI              | GRANDYUOR                 | STD                  | 2011  
+HYUNDAI              | H100                      | STD                  | 2003  
+HYUNDAI              | HD 46                     | C                    | 2015  
+HYUNDAI              | HD 46 PICK UP CARGO       | 1                    | 2012  
+HYUNDAI              | HD65                      | STD W/BOX            | 2001  
+HYUNDAI              | I10                       | GL                   | 2008  
+HYUNDAI              | I10                       | GL                   | 2010  
+HYUNDAI              | I10                       | STD                  | 2009  
+HYUNDAI              | I10                       | STD                  | 2010  
+HYUNDAI              | MATRIX                    | GL                   | 2002  
+HYUNDAI              | MATRIX                    | GL                   | 2003  
+HYUNDAI              | MATRIX                    | GL                   | 2005  
+HYUNDAI              | MATRIX                    | STD                  | 2004  
+HYUNDAI              | MATRIX                    | STD                  | 2005  
+HYUNDAI              | PORTER                    | STD (NON GCC)        | 2001  
+HYUNDAI              | PORTER                    | STD (NON GCC)        | 2004  
+HYUNDAI              | PORTER                    | STD (NON GCC)        | 2005  
+HYUNDAI              | SANTA FE                  | STD                  | 2001  
+HYUNDAI              | SANTA FE                  | STD                  | 2002  
+HYUNDAI              | SONATA                    | GL                   | 2001  
+HYUNDAI              | SONATA                    | GL                   | 2002  
+HYUNDAI              | SONATA                    | GL                   | 2003  
+HYUNDAI              | SONATA                    | GL                   | 2004  
+HYUNDAI              | STAREX VAN                | STD                  | 2010  
+HYUNDAI              | TRAJET                    | STD                  | 2001  
+HYUNDAI              | TRAJET                    | STD                  | 2003  
+HYUNDAI              | TRAJET                    | STD                  | 2004  
+HYUNDAI              | TRAJET                    | STD                  | 2005  
+HYUNDAI              | TRAJET                    | TOP                  | 2002  
+HYUNDAI              | TRAJET                    | TOP                  | 2004  
 HYUNDAI2120117999    | ACCENT                    | GL                   | 2018  
 INFINITI             | 2001                      | STD                  | 2001  
 INFINITI             | FX35                      | STD                  | 2004  
-INFINITI             | FX45                      | STD                  | 2003  
-INFINITI             | FX45                      | STD                  | 2004  
-INFINITI             | FX45                      | STD                  | 2005  
-INFINITI             | FX45                      | STD                  | 2006  
 INFINITI             | G 25 S/SEDAN              | STD (NON GCC)        | 2011  
-INFINITI             | G25                       | STD                  | 2012  
 INFINITI             | I35                       | STD                  | 2003  
 INFINITI             | M35                       | STD                  | 2006  
-INFINITI             | M45                       | STD                  | 2007  
-INFINITI             | M45                       | STD                  | 2008  
-INFINITI             | M45                       | STD                  | 2009  
-INFINITI             | M56                       | LUXURY               | 2011  
-INFINITI             | Q50                       | PREMIUM              | 2015  
-INFINITI             | Q50                       | PREMIUM LUXURY       | 2015  
-INFINITI             | Q50                       | PREMIUM SPORT        | 2015  
-INFINITI             | Q50                       | SPORT                | 2015  
-INFINITI             | QX 60                     | LUXURY               | 2019  
-INFINITI             | QX 60                     | LUXURY               | 2020  
 INFINITI             | QX4                       | STD                  | 2001  
 INFINITI             | QX4                       | STD                  | 2004  
-INFINITI             | QX70S                     | SPORT LUXURY         | 2014  
-INFINITI             | QX70S                     | SPORT LUXURY         | 2015  
-INFINITI             | QX70S                     | SPORT LUXURY         | 2017  
 ISUZU                | KB                        | GL                   | 2002  
-ISUZU                | NPR                       | STD                  | 1991  
-ISUZU                | NPR                       | STD                  | 1996  
-ISUZU                | NPR                       | STD                  | 1997  
-ISUZU                | NPR                       | STD                  | 1998  
-ISUZU                | NPR                       | STD                  | 1999  
-ISUZU                | NPR                       | STD                  | 2000  
-ISUZU                | NPR                       | STD                  | 2002  
-ISUZU                | NPR                       | STD                  | 2003  
-ISUZU                | NPR                       | STD                  | 2004  
-ISUZU                | NPR                       | STD                  | 2005  
-ISUZU                | NPR                       | STD                  | 2006  
-ISUZU                | NPR                       | STD                  | 2007  
-ISUZU                | NPR                       | STD                  | 2008  
-ISUZU                | NPR                       | STD                  | 2009  
-ISUZU                | NPR                       | STD                  | 2010  
-ISUZU                | NPR                       | STD                  | 2011  
-ISUZU                | NPR                       | STD                  | 2012  
-ISUZU                | NPR                       | STD                  | 2013  
-ISUZU                | NPR                       | STD                  | 2014  
-ISUZU                | NPR                       | STD                  | 2015  
-ISUZU                | NPR                       | STD                  | 2016  
-ISUZU                | NPR                       | STD                  | 2017  
-IVECO                | DAILY                     | STD                  | 2014  
-IVECO                | DAILY                     | STD                  | 2015  
-IVECO                | DAILY                     | STD                  | 2017  
-IVECO                | DAILY                     | STD                  | 2020  
 IVECO                | DAILY                     | TR                   | 2018  
-JAC                  | E30X                      | COMFORT              | 2025  
-JAC                  | E30X                      | COMFORT              | 2026  
-JAC                  | E30X                      | FLAGSHIP             | 2025  
-JAC                  | E30X                      | FLAGSHIP             | 2026  
-JAC                  | JS3                       | COMFORT              | 2025  
-JAC                  | JS3                       | COMFORT              | 2026  
 JAC                  | SUNRAY MINI EURO5(BUS)    | BUS                  | 2026  
 JAECOO               | JAECOO J5 (2WD)           | TDL                  | 2026  
 JAGUAR               | S TYPE                    | STD                  | 2003  
 JAGUAR               | S TYPE                    | STD                  | 2004  
 JAGUAR               | S TYPE                    | STD                  | 2005  
-JAGUAR               | S TYPE                    | STD                  | 2006  
 JAGUAR               | X TYPE                    | SE                   | 2001  
 JAGUAR               | X TYPE                    | SE                   | 2004  
 JAGUAR               | X TYPE                    | SE                   | 2005  
@@ -510,7 +676,6 @@ JAGUAR               | X TYPE                    | SE                   | 2007
 JAGUAR               | XJ                        | STD                  | 1998  
 JAGUAR               | XJS                       | GL                   | 1986  
 JAGUAR               | XJS                       | W12                  | 1986  
-JCB                  | JCB 3CX                   | 3CX                  | 2014  
 JEEP                 | GRAND CHEROKEE            | LAREDO               | 2002  
 JEEP                 | GRAND CHEROKEE            | LAREDO               | 2003  
 JEEP                 | GRAND CHEROKEE            | LIMITED              | 2000  
@@ -518,18 +683,53 @@ JEEP                 | GRAND CHEROKEE            | LIMITED              | 2001
 JEEP                 | GRAND CHEROKEE            | LIMITED              | 2002  
 JEEP                 | GRAND CHEROKEE            | OVERLAND             | 2002  
 JEEP                 | PATRIOT                   | LOWLINE              | 2007  
-JEEP                 | RENEGADE                  | LIMITED              | 2021  
 JEEP                 | WRANGLER                  | SPORT                | 1995  
 JETOUR               | T 2/STATION               | COMFRONT             | 2025  
-JIDU                 | 01                        | PREMIUM              | 2024  
-JIDU                 | 01                        | STD (NON GCC)        | 2023  
-JIDU                 | 01                        | STD (NON GCC)        | 2024  
-JINBEI               | X30                       | STD (NON GCC)        | 2025  
-JIYUE                | 01                        | STD (NON GCC)        | 2023  
-JIYUE                | 01                        | STD (NON GCC)        | 2024  
 KAIYI                | X3 PRO (2WD)              | 1.5T FLAGSHIP        | 2026  
+KIA                  | 4000                      | STD                  | 2017  
+KIA                  | BONGO                     | STD (NON GCC)        | 2001  
+KIA                  | BONGO                     | STD (NON GCC)        | 2002  
+KIA                  | BONGO                     | STD (NON GCC)        | 2003  
+KIA                  | BONGO                     | STD (NON GCC)        | 2004  
+KIA                  | BONGO                     | STD (NON GCC)        | 2005  
+KIA                  | CARENS                    | STD                  | 2006  
+KIA                  | CARENS                    | STD                  | 2007  
+KIA                  | CARNIVAL                  | STD                  | 2005  
+KIA                  | CERATO                    | LX                   | 2004  
+KIA                  | CERATO                    | LX                   | 2005  
+KIA                  | CERATO                    | LX                   | 2006  
+KIA                  | CERATO                    | LX                   | 2007  
+KIA                  | CERATO                    | STD                  | 2004  
+KIA                  | CERATO                    | STD                  | 2005  
+KIA                  | CERATO                    | STD                  | 2006  
 KIA                  | GAC   EMZOOM 1.5TG GS     | GL                   | 2026  
 KIA                  | K 4/SEDAN                 | LX MID               | 2025  
+KIA                  | K2700                     | STD (NON GCC)        | 2003  
+KIA                  | K2700                     | STD (NON GCC)        | 2004  
+KIA                  | K2700                     | STD (NON GCC)        | 2005  
+KIA                  | K2700                     | STD (NON GCC)        | 2006  
+KIA                  | OPRIUS                    | STD                  | 2004  
+KIA                  | OPRIUS                    | STD                  | 2005  
+KIA                  | OPTIMA                    | STD                  | 2004  
+KIA                  | OPTIMA                    | STD                  | 2005  
+KIA                  | PICANTO                   | LX                   | 2005  
+KIA                  | PICANTO                   | LX                   | 2006  
+KIA                  | PICANTO                   | LX                   | 2007  
+KIA                  | PICANTO                   | LX                   | 2008  
+KIA                  | PICANTO                   | LX                   | 2009  
+KIA                  | PICANTO                   | LX                   | 2010  
+KIA                  | PICANTO                   | LX                   | 2011  
+KIA                  | PRIDE                     | STD (NON GCC)        | 2010  
+KIA                  | RIO                       | EX TOP               | 2007  
+KIA                  | RIO                       | LX                   | 2004  
+KIA                  | RIO                       | LX                   | 2005  
+KIA                  | RIO                       | LX                   | 2006  
+KIA                  | RIO                       | LX                   | 2007  
+KIA                  | SEDONA                    | EX (NON GCC)         | 2007  
+KIA                  | SORENTO                   | STD                  | 2003  
+KIA                  | SORENTO                   | STD                  | 2004  
+KIA                  | SPORTAGE                  | LX                   | 2002  
+KIA                  | SPORTAGE                  | LX                   | 2003  
 KIA                  | يونجو                     | STD (NON GCC)        | 2010  
 KIA41964             | SORENTO                   | EX                   | 2015  
 KING LONG            | KING LONG                 | STD                  | 2013  
@@ -541,10 +741,7 @@ KING LONG            | KING LONG                 | STD                  | 2020
 KTM                  | X BOW                     | S                    | 2019  
 LAMBORGHINI          | 400 GT                    | 400 GT               | 1967  
 LAMBORGHINI          | 400 GT                    | LP560-4              | 1967  
-LAMBORGHINI          | AVENTADOR                 | S                    | 2018  
-LAMBORGHINI          | HURACAN                   | PERFORMANTE          | 2019  
 LAMBORGHINI          | SIAN                      | STD                  | 2021  
-LANCIA               | DELTA                     | STD                  | 2005  
 LAND ROVER           | 110                       | HSE P400             | 2023  
 LAND ROVER           | 110                       | HSE P400E            | 2020  
 LAND ROVER           | 110                       | SE P400              | 2020  
@@ -1401,38 +1598,18 @@ LAND ROVER           | UNKNOWN                   | DYNAMIC              | 2015
 LAND ROVER           | VOGUE                     | VOGUE                | 2019  
 LEADING IDEAL        | L9                        | MAX EDITION          | 2023  
 LEADING IDEAL        | L9                        | ULTRA (NON GCC)      | 2024  
-LEAPMOTOR            | C 16                      | G                    | 2025  
-LEAPMOTOR            | C16                       | PREMIUM              | 2025  
-LEAPMOTORS           | C 160                     | STD  (NON GCC)       | 2025  
-LEAPMOTORS           | C11                       | STD (NON GCC)        | 2022  
-LEAPMOTORS           | C16                       | STD  (NON GCC)       | 2024  
-LEAPMOTORS           | C16                       | STD  (NON GCC)       | 2025  
-LEOPARD              | LEOPARD 5                 | STD (NON GCC)        | 2025  
 LEXUS                | 200T                      | STD                  | 2016  
 LEXUS                | 200ZX (CAR)               | F SPORT PLATINUM     | 1983  
 LEXUS                | 460 LS                    | STD                  | 2011  
 LEXUS                | ES 250                    | STD                  | 2011  
-LEXUS                | ES 350                    | ES                   | 2021  
-LEXUS                | ES300                     | BASE                 | 1999  
-LEXUS                | ES300                     | TOP                  | 1999  
-LEXUS                | ES330                     | BASE                 | 2005  
-LEXUS                | ES330                     | BASE                 | 2006  
-LEXUS                | GS 430                    | TOP                  | 2008  
 LEXUS                | GS300                     | BASE                 | 2000  
 LEXUS                | GS400                     | STD                  | 1998  
 LEXUS                | GS400                     | STD                  | 2000  
-LEXUS                | GX 460                    | PLATINUM             | 2016  
-LEXUS                | GX 460                    | PLATINUM             | 2017  
 LEXUS                | IS300                     | BASE                 | 1999  
 LEXUS                | IS300                     | BASE                 | 2001  
-LEXUS                | LS 460                    | TOP                  | 2006  
-LEXUS                | LS 460                    | TOP                  | 2015  
-LEXUS                | LS 600 HL                 | TOP                  | 2010  
 LEXUS                | LS400                     | BASE                 | 1999  
 LEXUS                | LS400                     | STD                  | 2000  
 LEXUS                | RX 2.0                    | XLT  LTH             | 2007  
-LEXUS                | RX450H L                  | PLATINUM             | 2018  
-LEXUS                | RX450H L                  | PLATINUM             | 2019  
 LEXUS                | UX250(4WD)                | SMART                | 2022  
 LEXUS                | جي اس 430                 | STD                  | 2002  
 LEXUS                | لي اس 300                 | BASE                 | 2006  
@@ -1445,18 +1622,12 @@ LI AUTO              | MEGA                      | ULTRA                | 2025
 LINCOLN              | CONTINENTAL               | PREMIER LWB          | 1966  
 LINCOLN              | LINCOLN TOWN              | EXECUTIVE            | 1994  
 LINCOLN              | NAVIGATOR                 | ULTIMATE             | 2000  
-LINCOLN              | NAVIGATOR                 | ULTIMATE             | 2003  
 LINCOLN              | NAVIGATOR  EL             | STD                  | 2013  
 LINCOLN              | TOWN CAR                  | EXECUTIVE            | 2000  
 LINCOLN              | TOWN CAR                  | EXECUTIVE            | 2001  
 LINCOLN              | TOWN CAR                  | EXECUTIVE            | 2002  
 LINCOLN              | TOWN CAR                  | EXECUTIVE            | 2003  
 LINCOLN              | TOWN CAR                  | PREMIER SWB          | 1988  
-LOTUS                | ELETRE                    | R                    | 2023  
-LOTUS                | ELETRE                    | S                    | 2023  
-LUXGEN               | U7                        | STD                  | 2014  
-LUXGEN               | U7                        | STD                  | 2015  
-LYKAN                | CO 900                    | SE                   | 2025  
 LYNK & CO            | 01                        | HYPER                | 2025  
 LYNK & CO            | 03 PLUS                   | STD                  | 2025  
 LYNK & CO            | 05                        | HYPER PLUS           | 2025  
@@ -1480,17 +1651,7 @@ LYNK & CO            | 900                       | STD                  | 2025
 LYNK & CO            | 900                       | ULTRA                | 2025  
 LYNK & CO            | LYNK CO                   | CO                   | 2026  
 LYNK AND CO          | 900                       | PRO                  | 2025  
-MAEXTRO              | S800                      | GLE                  | 2025  
-MAEXTRO              | S800                      | S                    | 2025  
-MAEXTRO              | S800                      | STARSHINE EXECUTIVE EDITION | 2025  
-MASERATI             | GRECALE                   | GT                   | 2026  
 MAXUS                | V80 (BUS)                 | VAN                  | 2026  
-MAYBACH              | 57                        | V12                  | 2005  
-MAYBACH              | 57                        | V12                  | 2009  
-MAYBACH              | 57                        | V12                  | 2011  
-MAYBACH              | 62                        | V12                  | 2006  
-MAYBACH              | 62                        | V12                  | 2008  
-MAYBACH              | 62 S                      | V12                  | 2006  
 MAZDA                | 3                         | S                    | 2004  
 MAZDA                | 3 SPORT                   | S                    | 2006  
 MAZDA                | 323                       | STD                  | 1998  
@@ -1519,14 +1680,9 @@ MAZDA                | E2000                     | STD                  | 2005
 MAZDA                | E2000                     | STD                  | 2006  
 MAZDA                | MAZDA 3500 T              | S                    | 1990  
 MAZDA                | TRIBUTE                   | STD (NON GCC)        | 2006  
-MCLAREN              | 570S                      | SPIDER               | 2018  
-MCLAREN              | 570S                      | SPIDER               | 2019  
-MCLAREN              | 600LT                     | COUPE                | 2019  
-MCLAREN              | 600LT                     | COUPE                | 2020  
 MCLAREN              | P1                        | CARBON EDITION       | 2014  
 MCLAREN              | P1                        | CARBON EDITION       | 2015  
 MCLAREN              | SPEEDTRAIL                | STD                  | 2020  
-MERCEDES             | GT 53                     | 63-S                 | 2020  
 MERCEDES BENZ        | $500                      | PREMIER LWB          | 2007  
 MERCEDES BENZ        | $500                      | PREMIER SWB          | 2006  
 MERCEDES BENZ        | $550                      | STD                  | 2007  
@@ -3641,9 +3797,7 @@ MERCEDES-BENZ        | EQE 350+                  | STD                  | 2023
 MERCEDES-BENZ        | EQE 350+                  | STD                  | 2024  
 MERCURY              | GRAND MARQUIS             | STD                  | 1999  
 MERCURY              | GRAND MARQUIS             | STD                  | 2001  
-MERCURY              | SABLE                     | PREMIER              | 2009  
 MG                   | HS HYBRID+                | LUX                  | 2026  
-MHERO                | 1                         | REV  SPECIAL EDITION | 2025  
 MINI                 | COOPER                    | AMG                  | 1981  
 MINI                 | COOPER                    | CABRIO               | 1978  
 MINI                 | COOPER                    | STD                  | 1975  
@@ -3651,16 +3805,144 @@ MINI                 | COOPER                    | STD                  | 1976
 MINI                 | COOPER                    | STD                  | 1978  
 MINI                 | COUPE                     | STD                  | 1981  
 MINI                 | HARDTOP COOPER S          | COOPER S             | 2021  
+MITSUBISHI           | ASX                       | GLX                  | 2003  
+MITSUBISHI           | DELTA PICKUP              | GL                   | 1987  
+MITSUBISHI           | ECLIPSE                   | GS                   | 2002  
+MITSUBISHI           | ECLIPSE                   | GS                   | 2004  
 MITSUBISHI           | G. V. W                   | S                    | 2024  
+MITSUBISHI           | GALANT                    | ES                   | 2007  
+MITSUBISHI           | GALANT                    | GLS                  | 2000  
+MITSUBISHI           | GALANT                    | GLS                  | 2001  
+MITSUBISHI           | GALANT                    | GLS                  | 2003  
+MITSUBISHI           | GALANT                    | GLS                  | 2004  
+MITSUBISHI           | GALANT                    | GLS                  | 2005  
+MITSUBISHI           | GALANT                    | GLS                  | 2006  
+MITSUBISHI           | GALANT                    | GLS                  | 2007  
+MITSUBISHI           | GALANT                    | GTS                  | 2007  
+MITSUBISHI           | L 200                     | STD                  | 2002  
+MITSUBISHI           | L200                      | GL                   | 2001  
+MITSUBISHI           | L200                      | GL                   | 2003  
+MITSUBISHI           | L200                      | GL                   | 2004  
+MITSUBISHI           | L200                      | GL                   | 2007  
+MITSUBISHI           | L200                      | STD                  | 2000  
+MITSUBISHI           | L200                      | STD                  | 2001  
+MITSUBISHI           | L200                      | STD                  | 2002  
+MITSUBISHI           | L200                      | STD                  | 2004  
+MITSUBISHI           | L200                      | STD                  | 2005  
+MITSUBISHI           | L300                      | DX                   | 2006  
+MITSUBISHI           | L300                      | STD                  | 2003  
+MITSUBISHI           | L300                      | STD                  | 2005  
+MITSUBISHI           | L300                      | STD                  | 2006  
+MITSUBISHI           | LANCER                    | EVO IX               | 2007  
+MITSUBISHI           | LANCER                    | GL                   | 2000  
+MITSUBISHI           | LANCER                    | GL                   | 2001  
+MITSUBISHI           | LANCER                    | GL                   | 2002  
+MITSUBISHI           | LANCER                    | GL                   | 2003  
+MITSUBISHI           | LANCER                    | GL                   | 2007  
+MITSUBISHI           | LANCER                    | GLX LOWLINE          | 2003  
+MITSUBISHI           | LANCER                    | GLX LOWLINE          | 2007  
+MITSUBISHI           | MAGNA                     | GLS                  | 2003  
+MITSUBISHI           | MAGNA                     | GLS                  | 2004  
+MITSUBISHI           | NATIVA                    | GLS                  | 2004  
+MITSUBISHI           | OUTLANDER                 | GLX                  | 2003  
+MITSUBISHI           | OUTLANDER                 | GLX                  | 2004  
+MITSUBISHI           | PAJERO                    | GL                   | 1995  
+MITSUBISHI           | PAJERO                    | GL                   | 1996  
+MITSUBISHI           | PAJERO                    | GL                   | 1998  
+MITSUBISHI           | PAJERO                    | GLS MIDLINE          | 2027  
+MITSUBISHI           | PAJERO                    | STD                  | 1999  
+MITSUBISHI           | PAJERO                    | STD                  | 2000  
+MITSUBISHI           | PAJERO IO                 | STD                  | 2000  
+MITSUBISHI           | PAJERO IO                 | STD                  | 2003  
+MITSUBISHI           | ROSA                      | GL                   | 2005  
+MITSUBISHI           | ROZA                      | S                    | 2004  
+MITSUBISHI           | SPACE WAGON               | GL                   | 2002  
+MITSUBISHI           | SPACE WAGON               | GLX                  | 2003  
+MITSUBISHI           | SPACE WAGON               | GLX                  | 2004  
 MITSUBISHI           | بيك اب شحن                | STD                  | 2003  
-MORGAN               | MIDSUMMER                 | STD                  | 2024  
-MORGAN               | SUPERSPORT                | STD                  | 2025  
+NISSAN               | 1200GX                    | S                    | 2006  
+NISSAN               | 2400                      | STD                  | 2001  
+NISSAN               | 300ZX                     | C                    | 1988  
+NISSAN               | 300ZX                     | LS                   | 1986  
+NISSAN               | 300ZX                     | STD                  | 1985  
+NISSAN               | 300ZX                     | STD                  | 1987  
+NISSAN               | ALTIMA                    | S                    | 2002  
+NISSAN               | ALTIMA                    | S                    | 2003  
+NISSAN               | ALTIMA                    | S                    | 2004  
+NISSAN               | ALTIMA                    | SE                   | 2003  
+NISSAN               | ALTIMA                    | STD                  | 1993  
+NISSAN               | ARMADA                    | SE                   | 2004  
+NISSAN               | DATSUN                    | STD                  | 1984  
+NISSAN               | DATSUN 280 ZX             | STD                  | 1979  
+NISSAN               | E 260                     | S                    | 1980  
+NISSAN               | FRONTIER                  | STD (NON GCC)        | 1999  
+NISSAN               | FRONTIER                  | STD (NON GCC)        | 2000  
+NISSAN               | G70                       | S                    | 2019  
+NISSAN               | L 200                     | 1500 CREWCAB SLE Z71 | 1987  
+NISSAN               | MAXIMA                    | STD                  | 1996  
+NISSAN               | MAXIMA                    | STD                  | 1999  
+NISSAN               | MAXIMA                    | STD                  | 2000  
+NISSAN               | MAXIMA                    | STD                  | 2001  
+NISSAN               | MAXIMA                    | STD                  | 2002  
+NISSAN               | MAXIMA                    | STD                  | 2003  
+NISSAN               | MAXIMA                    | STD                  | 2005  
+NISSAN               | MURANO                    | SL                   | 2003  
+NISSAN               | NISSAN                    | CE (NON GCC)         | 2013  
 NISSAN               | NISSAN / CEDRICK          | AVANTGARDE SPORTS    | 1999  
+NISSAN               | NISSAN PATROL             | STD                  | 1989  
 NISSAN               | NISSAN SUNNY 1.3          | LIMITED              | 1993  
 NISSAN               | NISSAN SUNNY 1.6          | LE                   | 1997  
 NISSAN               | NISSAN SUNNY 1.6          | S                    | 1998  
 NISSAN               | NISSAN SUNNY 1.6          | SPECIAL EDITION      | 1998  
+NISSAN               | NISSAN ZD 300             | EX DLX               | 1987  
+NISSAN               | NISSAN ZD300              | STD                  | 1985  
+NISSAN               | NISSAN ZX 280             | GL                   | 1980  
+NISSAN               | NISSAN ZX 300             | STD                  | 1986  
+NISSAN               | PATHFINDER                | SE                   | 2001  
+NISSAN               | PATHFINDER                | SE                   | 2002  
+NISSAN               | PATHFINDER                | XE (NON GCC)         | 2000  
+NISSAN               | PATROL                    | 1                    | 1988  
+NISSAN               | PATROL                    | 1500 REG/CAB AT4     | 1989  
+NISSAN               | PATROL                    | SE TITANIUM          | 1985  
+NISSAN               | PATROL                    | SE TITANIUM          | 1989  
+NISSAN               | PATROL                    | SUPER SAFARI T1      | 1988  
+NISSAN               | PATROL PICK UP            | S                    | 1997  
+NISSAN               | PATROL SAFARI             | GL                   | 1989  
 NISSAN               | PATROL/JEEP               | SE T2                | 1993  
+NISSAN               | PICK UP                   | STD                  | 1996  
+NISSAN               | PICK UP                   | STD                  | 1997  
+NISSAN               | PICK UP                   | STD                  | 1998  
+NISSAN               | PICK UP                   | STD                  | 1999  
+NISSAN               | PICK UP                   | STD                  | 2000  
+NISSAN               | PICK UP                   | STD                  | 2001  
+NISSAN               | PICK UP                   | STD                  | 2002  
+NISSAN               | PICK UP                   | STD                  | 2003  
+NISSAN               | PK 210                    | STD                  | 2013  
+NISSAN               | PRIMERA                   | STD                  | 1998  
+NISSAN               | PRIMERA                   | STD                  | 2001  
+NISSAN               | RANGE ROVER               | LE TITANIUM          | 1972  
+NISSAN               | ROCKY                     | SV                   | 1985  
+NISSAN               | SALON                     | STD                  | 1996  
+NISSAN               | SALON                     | STD                  | 1998  
+NISSAN               | SENTRA                    | S                    | 2006  
+NISSAN               | SKYLINE                   | LE PLATINUM CITY     | 1989  
+NISSAN               | SKYLINE                   | SR                   | 1979  
+NISSAN               | SKYLINE                   | SR                   | 1982  
+NISSAN               | SKYLINE                   | STD                  | 1987  
+NISSAN               | SKYLINE                   | STD                  | 1998  
+NISSAN               | SKYLINE                   | XDRIVE MASTERCLASS   | 1988  
+NISSAN               | SUNNY                     | CLASSIC              | 2005  
+NISSAN               | SUNNY                     | S                    | 1997  
+NISSAN               | SUNNY                     | STANDARD             | 2005  
+NISSAN               | SUNNY                     | STANDARD             | 2006  
+NISSAN               | SUNNY                     | STD                  | 1995  
+NISSAN               | SUNNY                     | STD                  | 1997  
+NISSAN               | SUNNY                     | STD                  | 1999  
+NISSAN               | SUNNY                     | STD                  | 2000  
+NISSAN               | SUNNY                     | STD                  | 2001  
+NISSAN               | SUNNY                     | STD                  | 2004  
+NISSAN               | SUNNY                     | STD                  | 2005  
+NISSAN               | SUNNY                     | STD                  | 2006  
 NISSAN               | SUNNY 1.3                 | BASE                 | 1998  
 NISSAN               | SUNNY 1.3                 | FLEET                | 2002  
 NISSAN               | SUNNY 1.3                 | GLI                  | 2011  
@@ -3679,18 +3961,32 @@ NISSAN               | SUNNY 1.6                 | LE                   | 1997
 NISSAN               | SUNNY 1.6                 | S                    | 2011  
 NISSAN               | SUNNY 1.6                 | STD                  | 2002  
 NISSAN               | SUNNY SV 1.5 AT           | SV                   | 2025  
+NISSAN               | TIDA                      | S                    | 2006  
+NISSAN               | TIIDA                     | S                    | 2006  
+NISSAN               | TIIDA                     | S PWR OPTS           | 2006  
+NISSAN               | TIIDA                     | SE                   | 2006  
+NISSAN               | TIIDA                     | SL ABS A/W           | 2006  
+NISSAN               | TIIDA                     | SL PWR+S/R           | 2006  
+NISSAN               | URVAN                     | STD                  | 1996  
+NISSAN               | URVAN                     | STD                  | 1999  
+NISSAN               | URVAN                     | STD                  | 2000  
+NISSAN               | URVAN                     | STD                  | 2001  
+NISSAN               | URVAN                     | STD                  | 2003  
 NISSAN               | URVAN/VAN                 | S                    | 2025  
+NISSAN               | X TRAIL                   | STD                  | 1996  
+NISSAN               | X TRAIL                   | XE 2WD               | 2002  
+NISSAN               | X TRAIL                   | XE 4WD               | 2002  
+NISSAN               | XA                        | S                    | 2006  
+NISSAN               | Z240                      | SR                   | 1971  
+NISSAN               | ZX 300                    | AVANTGARDE SPORTS    | 1984  
+NISSAN               | ZX 300                    | BASE                 | 1987  
+NISSAN               | ZX 300                    | SPORT                | 1987  
+NISSAN               | ZX 300                    | STD                  | 1984  
+NISSAN               | ZX 300                    | STD                  | 1988  
+NISSAN               | ZX 300 COUPE              | LT                   | 1985  
 NISSAN               | صني 1.4                   | LE                   | 1998  
 NISSAN               | صني 1.5                   | LXI                  | 1997  
 NISSAN071244AA       | PATROL                    | SE T1                | 2012  
-OMODA                | 7                         | STD                  | 2025  
-OMODA                | C5                        | COMFORT              | 2025  
-OMODA                | C5                        | COMFORT              | 2026  
-OMODA                | C5                        | LUXURY               | 2025  
-OMODA                | C5                        | LUXURY               | 2026  
-OPEL                 | ASTRA                     | ELEGANCE             | 2020  
-OPEL                 | CROSSLAND X               | ULTIMATE             | 2022  
-OPEL                 | INSIGNIA                  | COSMO OPC LINE       | 2016  
 OPEL                 | MOKKA  X                  | TURBO ENJOY PLUS     | 2017  
 OPEL                 | MOKKA  X                  | TURBO INOVATION      | 2017  
 PADAR                | KINGKONG (PICKUP)         | S                    | 2025  
@@ -3700,16 +3996,9 @@ PEUGEOT              | 206                       | BASE                 | 2002
 PEUGEOT              | 206                       | BASE                 | 2004  
 PEUGEOT              | 206                       | BASE                 | 2005  
 PEUGEOT              | 206                       | BASE                 | 2006  
-PEUGEOT              | 206                       | BASE                 | 2007  
 PEUGEOT              | 206                       | BASE                 | 2008  
-PEUGEOT              | 206                       | CC                   | 2007  
 PEUGEOT              | 206                       | ONELINE              | 2008  
 PEUGEOT              | 206                       | ONELINE              | 2009  
-PEUGEOT              | 206                       | STD                  | 2007  
-PEUGEOT              | 206                       | XS                   | 2007  
-PEUGEOT              | 207                       | CC SPORT2 LTH        | 2009  
-PEUGEOT              | 207                       | GT                   | 2009  
-PEUGEOT              | 207                       | PREMIUM              | 2009  
 PEUGEOT              | 307                       | CC                   | 2005  
 PEUGEOT              | 307                       | XSI                  | 2004  
 PEUGEOT              | 307                       | XSI                  | 2005  
@@ -3721,41 +4010,18 @@ PEUGEOT              | PARTNER                   | COMBI                | 2008
 PEUGEOT              | PARTNER                   | STANDARD             | 2008  
 PEUGEOT              | PARTNER                   | STD                  | 2005  
 PEUGEOT              | PARTNER                   | STD                  | 2008  
-POLESTAR             | POLESTAR 4                | LONG RANGE DUAL MOTOR PERFORMANCE | 2026  
-PONTIAC              | FIREBIRD                  | STD                  | 1999  
 PONTICA              | TRANS AM                  | G                    | 1990  
 PORSCHE              | 911                       | S                    | 1988  
 PORSCHE              | BOXSTER                   | S                    | 2010  
-PORSCHE              | CAYENNE COUPE             | S                    | 2022  
-PORSCHE              | CAYENNE COUPE             | S                    | 2023  
-PORSCHE              | CAYENNE COUPE             | TURBO GT             | 2022  
-PREVOST              | LIBERTY                   | STD                  | 1992  
-QINGLING             | KV 100 QL                 | NWB                  | 2024  
-RABDAN               | FREE                      | STD (NON GCC)        | 2022  
-RABDAN               | RABDAN ONE                | STD                  | 2022  
-RABDAN               | RABDAN ONE                | STD                  | 2023  
-RABDAN               | SEVEN                     | STD (NON GCC)        | 2023  
-RAM                  | 1500                      | TUNGSTEN             | 2026  
-RAM                  | 2500                      | LARAMIE              | 2015  
-RAM                  | 2500                      | LARAMIE              | 2016  
 RANGE ROVER          | VOGUE                     | HSE LE               | 2015  
 RENAULT              | CLIO                      | STD                  | 2004  
 RENAULT              | EXPRESS EX(VAN)           | GLE                  | 2026  
 RENAULT              | GRAND SCENIC              | STD                  | 2005  
-RENAULT              | MASTER                    | NEW MASTER L1H1      | 2022  
 RENAULT              | MEGANE                    | STD                  | 2005  
 RENAULT              | MEGANE                    | STD                  | 2007  
 RENAULT              | MEGANE                    | STD                  | 2008  
-RENAULT              | MEGANE                    | STD                  | 2010  
-RENAULT              | MEGANE                    | STD                  | 2011  
 RENAULT              | SAFRANE                   | STD                  | 2008  
 RENAULT              | SYMBOL                    | STD                  | 2009  
-RIDDARA              | RD6                       | ULTRA X              | 2025  
-ROEWE                | 5                         | STD                  | 2024  
-ROEWE                | I5                        | COMFORT              | 2024  
-ROEWE                | I5                        | STANDARD             | 2024  
-ROEWE                | I5                        | STANDARD             | 2025  
-ROEWE                | I5                        | STD                  | 2024  
 ROLLS ROYCE          | CULLINAN                  | BLACK BADGE          | 2020  
 ROLLS ROYCE          | CULLINAN                  | BLACK BADGE          | 2022  
 ROLLS ROYCE          | CULLINAN                  | BLACK BADGE          | 2023  
@@ -3857,31 +4123,19 @@ ROX                  | ROX   1                   | STD                  | 2025
 ROX                  | ROX   JISHI               | STD                  | 2026  
 ROX                  | ROX   JISHI 2012WD        | VIP                  | 2025  
 ROX                  | ROX 01 (ELECTRIC ROAD VEHICLE) | S                    | 2026  
-SAIC                 | IMLS6                     | STD                  | 2023  
-SAIC                 | RISING R7                 | STD                  | 2024  
-SANDSTORM            | ALREEM                    | TOP LINE             | 2020  
-SANDSTORM            | S 24                      | HIGHLINE             | 2019  
-SATURN               | SKY                       | RED LINE             | 2007  
 SEAT                 | ALTEA                     | REFERENCE            | 2009  
-SEAT                 | IBIZA                     | STYLE                | 2013  
-SEAT                 | IBIZA                     | STYLE                | 2014  
 SEAT                 | LEON                      | STYLANCE             | 2004  
 SEAT                 | LEON                      | STYLANCE             | 2005  
-SINOTRUK             | DP 25 NT                  | STD                  | 2009  
 SINOTRUK             | SITRAK (TRACTOR)          | STD                  | 2026  
 SKODA                | OCTAVIA                   | AMBIENTE             | 2001  
 SKODA                | OCTAVIA                   | AMBIENTE             | 2007  
 SKODA                | OCTAVIA                   | ELEGANCE             | 2006  
 SKODA                | OCTAVIA                   | ELEGANCE             | 2007  
 SKODA                | ROOMSTER                  | AMBIENTE             | 2008  
-SKYWELL              | ET5                       | COMFORT              | 2023  
-SKYWELL              | ET5                       | LUXURY               | 2023  
-SKYWELL              | ET5                       | LUXURY               | 2025  
 SMART                | #1                        | PREMIUM              | 2025  
 SMART                | #3                        | PREMIUM              | 2025  
 SSANGYONG            | ACTYON                    | BASE                 | 2008  
 SSANGYONG            | ACTYON                    | STD                  | 2007  
-SSANGYONG            | REXTON                    | W S                  | 2012  
 SUBARU               | BAJA                      | STD (NON GCC)        | 2005  
 SUBARU               | FORESTER                  | STD                  | 2003  
 SUBARU               | IMPREZA                   | STD                  | 1999  
@@ -3893,11 +4147,30 @@ SUBARU               | LEGACY                    | STD                  | 1999
 SUBARU               | LEGACY                    | STD                  | 2001  
 SUBARU               | LEGACY                    | STD                  | 2003  
 SUBARU               | LEGACY                    | STD                  | 2004  
+SUZUKI               | 2023                      | XLI                  | 2023  
+SUZUKI               | ALTO                      | DLX                  | 2008  
+SUZUKI               | ALTO                      | DLX                  | 2009  
+SUZUKI               | ALTO                      | STD                  | 2009  
+SUZUKI               | GRAND VITA                | S                    | 2006  
+SUZUKI               | GRAND VITARA              | STD                  | 2002  
+SUZUKI               | IGNIS                     | STD                  | 2005  
+SUZUKI               | JIMNY                     | JXL                  | 2004  
+SUZUKI               | JIMNY                     | STD                  | 1973  
+SUZUKI               | JIMNY                     | STD                  | 2000  
+SUZUKI               | JIMNY                     | STD                  | 2001  
+SUZUKI               | JIMNY                     | STD                  | 2002  
+SUZUKI               | LIANA                     | STD                  | 2004  
+SUZUKI               | LIANA                     | STD                  | 2005  
+SUZUKI               | LIANA                     | STD                  | 2006  
 SUZUKI               | S.PRESSO                  | STD                  | 2024  
+SUZUKI               | SAMURAI                   | 1500                 | 1983  
+SUZUKI               | SAMURAI                   | STD                  | 1985  
+SUZUKI               | SAMURAI JEEP              | STD                  | 1988  
+SUZUKI               | SX4                       | STD                  | 2007  
 TAM                  | C12                       | S                    | 2027  
-TATA                 | LP613                     | STD                  | 2008  
 TATA                 | LPO 1618                  | S                    | 2026  
 TESLA2130144264      | MODEL Y                   | LONG RANGE           | 2022  
+TOYOTA               | 1998                      | SE                   | 1998  
 TOYOTA               | 25 HX DC 4X4 2.7LAT       | GLX                  | 2025  
 TOYOTA               | 25 HX DC 4X4 PLAT GLX RA(PICK UP) | DLX                  | 2025  
 TOYOTA               | 25 LP SC 4X4 P4.0 MT      | GLX                  | 2025  
@@ -3905,6 +4178,19 @@ TOYOTA               | 26 HX DC 4X4 2.4LAT       | DLX                  | 2026
 TOYOTA               | 26 LP SC 4X4 P4.0L AT     | SGLX                 | 2026  
 TOYOTA               | 26HX DC 4X4D2.4L AT       | DLX                  | 2026  
 TOYOTA               | 26HX DC 4X4P2.7LAT        | GLX                  | 2026  
+TOYOTA               | AQUA                      | GL                   | 2014  
+TOYOTA               | AURION                    | STD                  | 1992  
+TOYOTA               | AVALON                    | STD                  | 2000  
+TOYOTA               | AVALON                    | XLI                  | 1999  
+TOYOTA               | CAMRY                     | LE                   | 1992  
+TOYOTA               | CELICA                    | STD                  | 2002  
+TOYOTA               | CENTURY                   | 5.0L                 | 1994  
+TOYOTA               | COROLLA                   | HIGH DELUX           | 1980  
+TOYOTA               | COROLLA                   | XLI                  | 1998  
+TOYOTA               | COROLLA                   | XLI                  | 1999  
+TOYOTA               | COROLLA                   | XLI                  | 2000  
+TOYOTA               | COROLLA                   | XLI MID              | 1999  
+TOYOTA               | COROLLA                   | XLI MID              | 2000  
 TOYOTA               | COROLLA 1.3               | GA                   | 1994  
 TOYOTA               | COROLLA 1.3               | GLI                  | 2025  
 TOYOTA               | COROLLA 1.3               | GLX                  | 2004  
@@ -3958,11 +4244,68 @@ TOYOTA               | COROLLA 1.8               | XLI                  | 2016
 TOYOTA               | COROLLA 1.8               | XLI                  | 2017  
 TOYOTA               | COROLLA 1.8               | XLI TOP              | 2011  
 TOYOTA               | COROLLA 1.8 YUS           | LE                   | 2005  
+TOYOTA               | CRESSIDA                  | LUXURY SPORT         | 1987  
+TOYOTA               | DAINA                     | S                    | 2001  
 TOYOTA               | DLX FA (PICK UP)          | LIMITED              | 2026  
+TOYOTA               | ECHO                      | XLI MID              | 2001  
+TOYOTA               | FAIRBIRD                  | STD (NON GCC)        | 1979  
 TOYOTA               | GLX RA(PICK UP)           | GLX                  | 2026  
 TOYOTA               | GXR RA(STATION WAGON)     | STATION              | 2026  
+TOYOTA               | HAI LUX                   | GX                   | 1977  
+TOYOTA               | HIACE                     | STD                  | 1997  
+TOYOTA               | HIACE                     | STD                  | 1998  
+TOYOTA               | HIACE                     | STD                  | 2000  
+TOYOTA               | HILUX                     | 1500                 | 1977  
+TOYOTA               | HILUX                     | 1500 REG/CAB         | 1982  
+TOYOTA               | HILUX                     | S ASF                | 1982  
+TOYOTA               | HILUX                     | STD                  | 1985  
 TOYOTA               | HX DC 4X4 D 2.4L AT       | DLX                  | 2026  
+TOYOTA               | LAND CRUISER              | DLX                  | 1980  
+TOYOTA               | LAND CRUISER              | GLS                  | 1983  
+TOYOTA               | LAND CRUISER              | GLX                  | 1985  
+TOYOTA               | LAND CRUISER              | GX                   | 1988  
+TOYOTA               | LAND CRUISER              | PICK UP              | 1986  
+TOYOTA               | LAND CRUISER              | PRESTIGE             | 1985  
+TOYOTA               | LAND CRUISER              | S                    | 1982  
+TOYOTA               | LAND CRUISER              | STD                  | 1967  
+TOYOTA               | LAND CRUISER              | SV                   | 1980  
+TOYOTA               | LAND CRUISER              | VX                   | 1985  
+TOYOTA               | LAND CRUISER              | VXR BASE             | 1981  
+TOYOTA               | LAND CRUISER              | XLI                  | 1988  
+TOYOTA               | LAND CRUISER              | XLT                  | 1989  
+TOYOTA               | LITE ACE                  | A                    | 2023  
+TOYOTA               | LITE ACE                  | C                    | 2023  
 TOYOTA               | LS4X4 P4.0L MT            | GLX                  | 2025  
+TOYOTA               | MARK 2                    | G                    | 1991  
+TOYOTA               | MARK 2                    | SR                   | 1988  
+TOYOTA               | MATRIX                    | STD (NON GCC)        | 2003  
+TOYOTA               | MATRIX                    | STD (NON GCC)        | 2006  
+TOYOTA               | MATRIX                    | STD (NON GCC)        | 2007  
+TOYOTA               | MATRIX                    | STD (NON GCC)        | 2009  
+TOYOTA               | PARISIENNE BROUGHAM       | XLI                  | 1986  
+TOYOTA               | PREVIA                    | STD                  | 2027  
+TOYOTA               | RAV4                      | STD                  | 1999  
+TOYOTA               | SCION                     | TC (NON GCC)         | 2008  
+TOYOTA               | SIENNA                    | LE (NON GCC)         | 1999  
+TOYOTA               | SIENNA                    | LE (NON GCC)         | 2000  
+TOYOTA               | SOLARA                    | STD                  | 2002  
+TOYOTA               | SUPRA                     | S                    | 1988  
+TOYOTA               | SUPRA                     | SPORT                | 1988  
+TOYOTA               | SUPRA                     | STD                  | 1996  
+TOYOTA               | SUPRA                     | SXT PLUS             | 1988  
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 1997  
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 1999  
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2002  
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2003  
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2004  
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2005  
+TOYOTA               | TACOMA                    | STD (NON GCC)        | 2006  
+TOYOTA               | TOYOTA CENTURY            | 1                    | 1994  
+TOYOTA               | TOYOTA CENTURY            | GLS                  | 1989  
+TOYOTA               | TOYOTA CENTURY            | TRIM                 | 2001  
+TOYOTA               | TOYOTA PREVIA             | LE (NON GCC)         | 2010  
+TOYOTA               | WIGO                      | GLS                  | 2022  
+TOYOTA               | YARIS                     | BASE                 | 2001  
 TOYOTA               | برادو                     | 90                   | 2000  
 TOYOTA               | فورشنر                    | EXR                  | 2020  
 TOYOTA               | كامري                     | LE                   | 2005  
@@ -3975,31 +4318,50 @@ TOYOTA               | هايلوكس                   | SE T2                |
 TOYOTA12024631       | YARIS                     | BASE                 | 2006  
 TOYOTA2100875058     | LAND CRUISER              | VX                   | 2010  
 TOYOTAالمـ           | YARIS                     | E                    | 2019  
-UAZ                  | HUNTER                    | STD                  | 2017  
-VGV                  | U75 PLUS                  | 2.0                  | 2023  
-VGV                  | U75 PLUS                  | 2.0L                 | 2023  
-VGV                  | U75 PLUS                  | GLE                  | 2023  
-VGV                  | U75 PLUS                  | S                    | 2023  
-VGV                  | VX7                       | PICKUP               | 2023  
-VICTORY              | SCH5022XXYD               | STD                  | 2024  
-VICTORY              | SCH5022XXYD               | STD                  | 2025  
-VINFAST              | VF8                       | ECO                  | 2025  
+VOLKSWAGEN           | BEETLE                    | PREMIUM              | 1979  
+VOLKSWAGEN           | BEETLE                    | STD                  | 1997  
+VOLKSWAGEN           | BEETLE                    | STD                  | 2000  
+VOLKSWAGEN           | BEETLE                    | STD                  | 2001  
+VOLKSWAGEN           | BEETLE                    | STD                  | 2002  
+VOLKSWAGEN           | BEETLE                    | STD                  | 2003  
+VOLKSWAGEN           | BEETLE                    | STD                  | 2004  
+VOLKSWAGEN           | BEETLE                    | STD                  | 2005  
+VOLKSWAGEN           | BEETLE                    | STD                  | 2006  
+VOLKSWAGEN           | BEETLE                    | STD                  | 2007  
+VOLKSWAGEN           | BORA                      | TRENDLINE            | 2003  
+VOLKSWAGEN           | GOLF                      | COMFORTLINE          | 2002  
+VOLKSWAGEN           | GOLF                      | COMFORTLINE          | 2003  
+VOLKSWAGEN           | GOLF                      | COMFORTLINE          | 2004  
+VOLKSWAGEN           | GOLF                      | TRENDLINE            | 2001  
+VOLKSWAGEN           | GOLF                      | TRENDLINE            | 2002  
+VOLKSWAGEN           | GOLF                      | TRENDLINE            | 2003  
+VOLKSWAGEN           | GOLF                      | TRENDLINE            | 2004  
 VOLKSWAGEN           | ID.3/LIFE                 | STD (NON GCC)        | 2021  
 VOLKSWAGEN           | ID.3/LIFE                 | TECH (NON GCC)       | 2022  
 VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022  
+VOLKSWAGEN           | JETTA                     | COMFORTLINE          | 2007  
+VOLKSWAGEN           | JETTA                     | SPORTSLINE           | 2008  
+VOLKSWAGEN           | JETTA                     | SPORTSLINE           | 2009  
+VOLKSWAGEN           | JETTA                     | STD                  | 2007  
+VOLKSWAGEN           | JETTA                     | STD                  | 2008  
+VOLKSWAGEN           | JETTA                     | TRENDLINE            | 2007  
+VOLKSWAGEN           | JETTA                     | TRENDLINE            | 2009  
 VOLKSWAGEN           | JETTA 2.5L                | SEL                  | 2016  
+VOLKSWAGEN           | PASSAT                    | STD                  | 2003  
+VOLKSWAGEN           | PASSAT                    | TRENDLINE            | 2006  
+VOLKSWAGEN           | POLO                      | TRENDLINE            | 2001  
+VOLKSWAGEN           | POLO                      | TRENDLINE            | 2003  
+VOLKSWAGEN           | POLO                      | TRENDLINE            | 2004  
+VOLKSWAGEN           | R32                       | COMFORTLINE          | 2003  
+VOLKSWAGEN           | TOUAREG                   | STD                  | 2004  
+VOLKSWAGEN           | TOUAREG                   | STD                  | 2005  
 VOLVO                | C70                       | STD                  | 2002  
 VOLVO                | C70                       | STD                  | 2004  
 VOLVO                | FH 12                     | G                    | 1998  
-VOLVO                | FM460                     | FM460                | 2019  
 VOLVO                | HEAD FH(TRUCK             | FH                   | 2020  
 VOLVO                | S40                       | COMFORT              | 2005  
-VOLVO                | S40                       | COMFORT              | 2007  
 VOLVO                | S40                       | PREMIUM              | 2005  
-VOLVO                | S40                       | PREMIUM              | 2007  
 VOLVO                | S40                       | STD                  | 2000  
-VOLVO                | S60                       | B4 PLUS DARK         | 2023  
-VOLVO                | S60                       | B4 PLUS DARK         | 2024  
 VOLVO                | S60                       | BUSINESS LINE        | 2001  
 VOLVO                | S60                       | BUSINESS LINE        | 2002  
 VOLVO                | S60                       | BUSINESS LINE        | 2003  
@@ -4014,17 +4376,9 @@ VOLVO                | S80                       | STD                  | 2000
 VOLVO                | V70                       | COMFORT              | 2002  
 VOLVO                | V70                       | COMFORT              | 2006  
 VOLVO                | XC90                      | PRESTIGE 7ST         | 2003  
-WULING               | KAIJIE                    | STD (NON GCC)        | 2023  
-WULING               | RONGGUANG                 | STD (NON GCC)        | 2024  
-WULING               | RONGGUANG                 | STD (NON GCC)        | 2025  
 XAOMI                | SU7                       | STD (NON GCC)        | 2024  
 XAOMI                | SU7                       | STD (NON GCC)        | 2025  
 XAOMI                | YU7                       | MAX                  | 2025  
 XAOMI                | YU7                       | PRO                  | 2025  
-XIAOMI               | YU7                       | MAX                  | 2026  
 XIAOMI               | اس يو 7 الترا             | S                    | 2025  
-ZEEKR                | X                         | PREMIUM              | 2025  
-ZEEKR                | X                         | STD                  | 2025  
 ZEEKR                | X/STATION                 | STD                  | 2024  
-ZXAUTO               | GRANDTIGER                | STD                  | 2016  
-ZXAUTO               | GRANDTIGER                | STD                  | 2017  
