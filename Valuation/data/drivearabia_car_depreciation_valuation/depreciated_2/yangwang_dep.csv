@@ -1,0 +1,4 @@
+model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
+yangwang-u8,2026,ARABIAN EDITION,570000,570000,570000,"AED 570,000 - 570,000",AED,,2026-06-25T17:18:26Z,YANGWANG,U8,U8,0.085797,0,521096
+yangwang-u8,2024,STD (NON GCC),476300,476300,476300,"AED 476,300 - 476,300",AED,,2026-06-25T17:18:26Z,YANGWANG,U8,U8,0.085797,2,435435
+yangwang-u8,2025,STD (NON GCC),493600,548400,521000,"AED 493,600 - 548,400",AED,,2026-06-25T17:18:26Z,YANGWANG,U8,U8,0.085797,1,476300
