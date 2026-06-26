@@ -74,11 +74,16 @@ def normalize_name(label_type: str, value: Union[str, float, int, None]) -> str:
         return val.title()
         
     elif label_type == "MODEL":
+        # Keep spaces, but normalize multiple spaces to a single space
+        val = " ".join(str(val).split())
+        # Strip regional specs so that model is normalized consistently
+        val = val.replace("(NON GCC)", "").replace("(GCC)", "").strip()
         # Toyota Land Cruiser variations
-        if val in ["LANDCRUISER", "LAND CRUISER", "LAND CRISER", "LAND_CRUISER"]:
+        val_no_space = val.replace(" ", "").replace("_", "")
+        if val_no_space in ["LANDCRUISER", "LANDCRISER"]:
             return "Land Cruiser"
         # Range Rover variations
-        if val in ["RANGEROVER", "RANGE ROVER", "RANGE_ROVER"]:
+        if val_no_space in ["RANGEROVER"]:
             return "Range Rover"
         # Patrol variations
         if val == "NISSAN PATROL":
