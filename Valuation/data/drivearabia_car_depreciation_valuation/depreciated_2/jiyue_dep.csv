@@ -1,3 +1,3 @@
 model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
-jiyue-01,2023,STD (NON GCC),73000,73000,73000,"AED 73,000 - 73,000",AED,,2026-06-25T17:18:26Z,JIYUE,01,01,0.139557,3,62812
-jiyue-01,2024,STD (NON GCC),84840,84840,84840,"AED 84,840 - 84,840",AED,,2026-06-25T17:18:26Z,JIYUE,01,01,0.139557,2,73000
+jiyue-01,2023,STD (NON GCC),73000,73000,73000,"AED 73,000 - 73,000",AED,,2026-06-25T17:18:26Z,JIYUE,1,1,0.139557,3,62812
+jiyue-01,2024,STD (NON GCC),84840,84840,84840,"AED 84,840 - 84,840",AED,,2026-06-25T17:18:26Z,JIYUE,1,1,0.139557,2,73000
