@@ -597,6 +597,5 @@ VOLKSWAGEN           | ID.3/LIFE                 | TECH (NON GCC)       | 2022  
 VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022   | LFVVB9E71N5162197
 VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022   | LFVVB9E71N5173796
 VOLKSWAGEN           | JETTA 2.5L                | SEL                  | 2016   | WVWSK1AJ9GM200457
-VOLVO                | HEAD FH(TRUCK             | FH                   | 2020   | YV2RT4DADLB302191
 XIAOMI               | اس يو 7 الترا             | S                    | 2025   | HXMM3A087SA137103
 ZEEKR                | X/STATION                 | STD                  | 2024   | L6TBX2S1XRF500328

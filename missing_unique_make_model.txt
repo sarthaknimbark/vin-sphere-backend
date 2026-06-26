@@ -544,6 +544,5 @@ VOLKSWAGEN           | ID.3/LIFE                 | STD (NON GCC)        | 2021
 VOLKSWAGEN           | ID.3/LIFE                 | TECH (NON GCC)       | 2022  
 VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022  
 VOLKSWAGEN           | JETTA 2.5L                | SEL                  | 2016  
-VOLVO                | HEAD FH(TRUCK             | FH                   | 2020  
 XIAOMI               | اس يو 7 الترا             | S                    | 2025  
 ZEEKR                | X/STATION                 | STD                  | 2024  
