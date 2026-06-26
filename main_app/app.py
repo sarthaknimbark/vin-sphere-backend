@@ -2,6 +2,20 @@ import sys
 import os
 import re
 import importlib
+import warnings
+
+# Suppress scikit-learn inconsistent version warnings during unpickling
+try:
+    from sklearn.exceptions import InconsistentVersionWarning
+    warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
+except ImportError:
+    pass
+
+# Suppress scikit-learn unpickling warnings generally
+warnings.filterwarnings("ignore", message="Trying to unpickle estimator")
+# Suppress user warnings (e.g. from XGBoost model loading)
+warnings.filterwarnings("ignore", category=UserWarning)
+
 from difflib import SequenceMatcher
 from pathlib import Path
 
