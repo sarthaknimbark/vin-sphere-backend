@@ -6,7 +6,20 @@ import pickle
 import numpy as np
 import pandas as pd
 import torch
+import warnings
 from typing import Dict, Any, Tuple, Optional
+
+# Suppress scikit-learn inconsistent version warnings during unpickling
+try:
+    from sklearn.exceptions import InconsistentVersionWarning
+    warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
+except ImportError:
+    pass
+
+# Suppress scikit-learn unpickling warnings generally
+warnings.filterwarnings("ignore", message="Trying to unpickle estimator")
+# Suppress user warnings (e.g. from XGBoost model loading)
+warnings.filterwarnings("ignore", category=UserWarning)
 
 from feature_engineering import extract_vin_features
 from dataset import encode_vin
@@ -154,8 +167,19 @@ def decode_vin(
     # Target hierarchies for backoff lookups
     BACKOFF_HIERARCHY = {
         "MAKE": [["WMI", "VDS"], ["WMI"]],
-        "MODEL": [["WMI", "VDS", "YEAR_CODE"], ["WMI", "VDS"], ["WMI"]],
-        "TRIM": [["WMI", "VDS", "YEAR_CODE", "PLANT_CODE"], ["WMI", "VDS", "YEAR_CODE"], ["WMI", "VDS"], ["WMI"]],
+        "MODEL": [
+            ["WMI", "VDS", "YEAR_CODE", "PLANT_CODE"],
+            ["WMI", "VDS", "YEAR_CODE"],
+            ["WMI", "VDS"],
+            ["WMI"]
+        ],
+        "TRIM": [
+            ["WMI", "VDS", "YEAR_CODE", "PLANT_CODE"],
+            ["WMI", "VDS", "YEAR_CODE"],
+            ["WMI", "VDS", "PLANT_CODE"],
+            ["WMI", "VDS"],
+            ["WMI"]
+        ],
         "BODY_TYPE": [["WMI", "VDS"], ["WMI"]],
         "YEAR": [["WMI", "VDS", "YEAR_CODE"], ["WMI", "YEAR_CODE"], ["YEAR_CODE"]],
         "CYLINDERS": [["WMI", "VDS", "YEAR_CODE"], ["WMI", "VDS"], ["WMI"]],
