@@ -147,14 +147,14 @@ for i, row in enumerate(lookup.itertuples(index=False)):
 # ── Write output ──────────────────────────────────────────────────────────────
 print("Writing reports to disk...")
 
-with open('missing_full_records.txt', 'w', encoding='utf8') as f:
+with open('Data/missing_full_records.txt', 'w', encoding='utf8') as f:
     f.write('=== ALL CARS MISSING DEPRECIATION VALUES (WITH CHASSIS) ===\n')
     f.write(f'{"MAKE":<20} | {"MODEL":<25} | {"TRIM":<20} | {"YEAR":<6} | CHASSIS\n')
     f.write('-' * 90 + '\n')
     for mk, md, tr, yr, ch in sorted(missing_with_chassis):
         f.write(f'{mk:<20} | {md:<25} | {tr:<20} | {yr:<6} | {ch}\n')
 
-with open('missing_unique_make_model.txt', 'w', encoding='utf8') as f:
+with open('Data/missing_unique_make_model.txt', 'w', encoding='utf8') as f:
     f.write('=== UNIQUE MISSING DEPRECIATION VALUES (WITHOUT CHASSIS) ===\n')
     f.write(f'{"MAKE":<20} | {"MODEL":<25} | {"TRIM":<20} | {"YEAR":<6}\n')
     f.write('-' * 75 + '\n')
