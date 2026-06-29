@@ -1,6 +1,7 @@
 import sys
 import os
 import re
+import time
 import importlib
 import warnings
 
@@ -27,25 +28,11 @@ import streamlit as st
 st.set_page_config(
     page_title="VIN Decoder",
     page_icon="",
-    layout="centered",
+    layout="wide",
+    initial_sidebar_state="expanded",
 )
 
-# Hide Streamlit's default toolbar (Fork, GitHub, menu) and footer
-st.markdown(
-    """
-    <style>
-        /* Hide the top-right toolbar: Fork button, GitHub icon, three-dot menu */
-        [data-testid="stToolbar"] { visibility: hidden !important; }
-        .stDeployButton { display: none !important; }
-        #MainMenu { visibility: hidden !important; }
-        /* Hide Made with Streamlit footer */
-        footer { visibility: hidden !important; }
-        /* Hide the header bar entirely */
-        header[data-testid="stHeader"] { display: none !important; }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+
 
 
 # Resolve project paths
@@ -53,6 +40,549 @@ app_dir = Path(__file__).resolve().parent
 project_root = app_dir.parent
 LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep_2.csv"
+
+# =====================================================================
+#                 DATA COLLECTION & ROUTING FOUNDATION
+# =====================================================================
+MASTER_DB_DIR = project_root / "master_database"
+MASTER_DATASET_PATH = MASTER_DB_DIR / "master_dataset.csv"
+PENDING_PREDICTIONS_PATH = MASTER_DB_DIR / "pending_predictions.csv"
+PREDICTION_LOGS_PATH = MASTER_DB_DIR / "prediction_logs.csv"
+
+def migrate_csv_headers():
+    import os
+    for path in [PENDING_PREDICTIONS_PATH, PREDICTION_LOGS_PATH]:
+        if os.path.exists(str(path)):
+            try:
+                df = pd.read_csv(str(path))
+                if "color" not in df.columns:
+                    df["color"] = "UNKNOWN"
+                    df.to_csv(str(path), index=False)
+            except Exception:
+                try:
+                    os.remove(str(path))
+                except Exception:
+                    pass
+
+migrate_csv_headers()
+
+@st.cache_data
+def load_master_dataset_dict(file_path: str) -> dict:
+    import os
+    if not os.path.exists(file_path):
+        return {}
+    try:
+        df = pd.read_csv(file_path)
+        df = df.drop_duplicates(subset=["chassisNumber"])
+        df["chassisNumber_upper"] = df["chassisNumber"].astype(str).str.upper().str.strip()
+        return df.set_index("chassisNumber_upper").to_dict(orient="index")
+    except Exception as e:
+        print(f"Error loading master dataset cache: {e}")
+        return {}
+
+def format_csv_value(val):
+    if pd.isna(val):
+        return "UNKNOWN"
+    if isinstance(val, float):
+        if val.is_integer():
+            return str(int(val))
+        return str(val)
+    return str(val)
+
+def get_verified_vin_dict(row: dict) -> dict:
+    return {
+        "vin": format_csv_value(row.get("chassisNumber")),
+        "year": format_csv_value(row.get("year")),
+        "make": format_csv_value(row.get("make")),
+        "model": format_csv_value(row.get("model")),
+        "trim": format_csv_value(row.get("trim")),
+        "body_type": format_csv_value(row.get("bodyType")),
+        "regional_spec": format_csv_value(row.get("regionalSpec")),
+        "cylinders": format_csv_value(row.get("cylinders")),
+        "color": format_csv_value(row.get("color")),
+        "origin": format_csv_value(row.get("origin")),
+        "weight": format_csv_value(row.get("weightInKg")),
+        "no_of_passengers": format_csv_value(row.get("noOfPassengers")),
+        "confidence": 1.0,
+        "attribute_confidences": {
+            "make": 1.0, "model": 1.0, "year": 1.0, "trim": 1.0, "body_type": 1.0,
+            "cylinders": 1.0, "origin": 1.0, "no_of_passengers": 1.0, "weight": 1.0,
+            "regional_spec": 1.0, "color": 1.0
+        }
+    }
+
+def log_prediction(vin: str, length: int, source: str, result: dict):
+    import datetime
+    try:
+        os.makedirs(str(MASTER_DB_DIR), exist_ok=True)
+        log_entry = {
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "vin": vin,
+            "length": length,
+            "source": source,
+            "year": result.get("year", ""),
+            "make": result.get("make", ""),
+            "model": result.get("model", ""),
+            "trim": result.get("trim", ""),
+            "body_type": result.get("body_type", ""),
+            "cylinders": result.get("cylinders", ""),
+            "color": result.get("color", ""),
+            "origin": result.get("origin", ""),
+            "no_of_passengers": result.get("no_of_passengers", ""),
+            "weight": result.get("weight", ""),
+            "regional_spec": result.get("regional_spec", ""),
+            "confidence": result.get("confidence", 0.0)
+        }
+        df_log = pd.DataFrame([log_entry])
+        file_exists = os.path.exists(str(PREDICTION_LOGS_PATH))
+        df_log.to_csv(str(PREDICTION_LOGS_PATH), mode="a", index=False, header=not file_exists)
+    except Exception as e:
+        print(f"Error logging prediction: {e}")
+
+def safe_read_pending_predictions() -> pd.DataFrame:
+    if not os.path.exists(str(PENDING_PREDICTIONS_PATH)):
+        return pd.DataFrame()
+    try:
+        df = pd.read_csv(str(PENDING_PREDICTIONS_PATH))
+        if df.empty or "vin" not in df.columns:
+            return pd.DataFrame()
+        return df
+    except Exception as e:
+        print(f"Parser error or mismatch in pending CSV: {e}. Re-initializing file.")
+        try:
+            os.remove(str(PENDING_PREDICTIONS_PATH))
+        except Exception:
+            pass
+        return pd.DataFrame()
+
+def save_pending_prediction(vin: str, length: int, result: dict):
+    import datetime
+    try:
+        os.makedirs(str(MASTER_DB_DIR), exist_ok=True)
+        pending_entry = {
+            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "vin": vin,
+            "length": length,
+            "year": result.get("year", ""),
+            "make": result.get("make", ""),
+            "model": result.get("model", ""),
+            "trim": result.get("trim", ""),
+            "body_type": result.get("body_type", ""),
+            "cylinders": result.get("cylinders", ""),
+            "color": result.get("color", ""),
+            "origin": result.get("origin", ""),
+            "no_of_passengers": result.get("no_of_passengers", ""),
+            "weight": result.get("weight", ""),
+            "regional_spec": result.get("regional_spec", ""),
+            "confidence": result.get("confidence", 0.0)
+        }
+        df_pending = pd.DataFrame([pending_entry])
+        
+        df_existing = safe_read_pending_predictions()
+        if not df_existing.empty and "vin" in df_existing.columns:
+            if vin.upper().strip() in df_existing["vin"].astype(str).str.upper().str.strip().tolist():
+                return
+            
+        file_exists = os.path.exists(str(PENDING_PREDICTIONS_PATH))
+        df_pending.to_csv(str(PENDING_PREDICTIONS_PATH), mode="a", index=False, header=not file_exists)
+    except Exception as e:
+        print(f"Error saving pending prediction: {e}")
+
+def approve_pending_prediction(vin: str, updated_attrs: dict) -> bool:
+    try:
+        # 1. Remove from pending_predictions.csv
+        df_pending = safe_read_pending_predictions()
+        if not df_pending.empty and "vin" in df_pending.columns:
+            df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin.upper().strip()]
+            df_pending_clean.to_csv(str(PENDING_PREDICTIONS_PATH), index=False)
+            
+        # 2. Append to master_dataset.csv with correct columns
+        master_row = {
+            "chassisNumber": vin.upper().strip(),
+            "year": updated_attrs.get("year", ""),
+            "make": updated_attrs.get("make", ""),
+            "model": updated_attrs.get("model", ""),
+            "trim": updated_attrs.get("trim", ""),
+            "bodyType": updated_attrs.get("body_type", ""),
+            "regionalSpec": updated_attrs.get("regional_spec", ""),
+            "cylinders": updated_attrs.get("cylinders", ""),
+            "color": updated_attrs.get("color", ""),
+            "origin": updated_attrs.get("origin", ""),
+            "weightInKg": updated_attrs.get("weight", ""),
+            "noOfPassengers": updated_attrs.get("no_of_passengers", "")
+        }
+        df_master_row = pd.DataFrame([master_row])
+        file_exists = os.path.exists(str(MASTER_DATASET_PATH))
+        df_master_row.to_csv(str(MASTER_DATASET_PATH), mode="a", index=False, header=not file_exists)
+        
+        # 3. Invalidate cache
+        if hasattr(load_master_dataset_dict, "clear"):
+            load_master_dataset_dict.clear()
+        return True
+    except Exception as e:
+        print(f"Error approving pending prediction: {e}")
+        return False
+
+def reject_pending_prediction(vin: str) -> bool:
+    try:
+        df_pending = safe_read_pending_predictions()
+        if not df_pending.empty and "vin" in df_pending.columns:
+            df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin.upper().strip()]
+            df_pending_clean.to_csv(str(PENDING_PREDICTIONS_PATH), index=False)
+            return True
+    except Exception as e:
+        print(f"Error rejecting pending prediction: {e}")
+    return False
+
+def render_admin_panel():
+    # Admin PIN Authentication Gate
+    if "admin_authenticated" not in st.session_state:
+        st.session_state.admin_authenticated = False
+        
+    if not st.session_state.admin_authenticated:
+        st.subheader("Admin Authentication Required")
+        pin_input = st.text_input("Enter Admin PIN to Access", type="password", key="admin_pin_input")
+        if st.button("Unlock Dashboard"):
+            if pin_input == "1234":
+                st.session_state.admin_authenticated = True
+                st.success("Access Granted!")
+                st.rerun()
+            else:
+                st.error("Incorrect PIN. Access Denied.")
+        st.stop()
+
+    st.title("Admin Verification Dashboard")
+    st.write("Review, edit, approve, or reject pending decoded VIN predictions in a single row.")
+    
+    # Read pending list
+    df_pending = safe_read_pending_predictions()
+    if df_pending.empty or "vin" not in df_pending.columns:
+        st.success("No pending VINs awaiting verification. Good job!")
+        return
+        
+    st.subheader(f"Pending Predictions ({len(df_pending)})")
+    
+    # Display the inline styling for colored buttons and Excel sheet formatting
+    st.markdown(
+        """
+        <style>
+        /* Admin table container layout */
+        .admin-table-container {
+            overflow-x: auto !important; /* Enable horizontal scrolling for the entire table container */
+            padding-bottom: 10px !important;
+            width: 100% !important;
+        }
+
+        /* Force single-line horizontal layout for all horizontal blocks inside the container */
+        .admin-table-container [data-testid="stHorizontalBlock"] {
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            display: flex !important;
+            flex-direction: row !important;
+            min-width: 1350px !important; /* Prevent squeezing columns below readable widths */
+        }
+
+        /* Reset stForm margins and containers inside the admin table */
+        .admin-table-container div[data-testid="stForm"] {
+            border: none !important;
+            padding: 0px !important;
+            margin-bottom: 2px !important;
+            margin-top: 2px !important;
+            background-color: transparent !important;
+        }
+        
+        /* Excel style table cells and centering alignment */
+        .admin-table-container [data-testid="stHorizontalBlock"] > div {
+            padding: 0px 4px !important; /* Consistent horizontal padding spacing */
+            margin: 0px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+        }
+        
+        /* Remove default margins on element containers to keep everything level */
+        .admin-table-container [data-testid="stHorizontalBlock"] div[data-testid="stElementContainer"],
+        .admin-table-container [data-testid="stHorizontalBlock"] div[data-testid="element-container"] {
+            margin: 0px !important;
+            padding: 0px !important;
+            height: 38px !important;
+            min-height: 38px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        /* Target the outer stTextInput container */
+        div[data-testid="stForm"] div[data-testid="stTextInput"] {
+            border: none !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            padding: 0px !important;
+            margin: 0px !important;
+            height: 38px !important;
+            min-height: 38px !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        /* Hide labels in text inputs to prevent vertical offsets */
+        div[data-testid="stForm"] div[data-testid="stTextInput"] label {
+            display: none !important;
+        }
+        
+        /* Reset the Emotion cache wrapper to be transparent and borderless */
+        div[data-testid="stForm"] div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div {
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Make the inner Styletron parent container transparent */
+        div[data-testid="stForm"] div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div > div > div {
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Style the actual input box (grandparent of the input element) for enabled inputs */
+        div[data-testid="stForm"] div[data-testid="stTextInput"]:not(:has(input:disabled)) div[data-testid="stTextInputRootElement"] > div > div {
+            border: 1px solid #cccccc !important;
+            border-radius: 6px !important;
+            height: 38px !important;
+            background-color: #ffffff !important;
+            box-shadow: none !important;
+        }
+        
+        /* Style the input box container (grandparent of the input element) for disabled inputs */
+        div[data-testid="stForm"] div[data-testid="stTextInput"]:has(input:disabled) div[data-testid="stTextInputRootElement"] > div > div {
+            background-color: #f0f0f0 !important;
+            border: 1px solid #cccccc !important;
+            border-radius: 6px !important;
+            height: 38px !important;
+            box-shadow: none !important;
+        }
+        
+        /* Style the actual input tag */
+        div[data-testid="stForm"] div[data-testid="stTextInput"] input {
+            border: none !important;
+            background-color: transparent !important;
+            color: #0f172a !important;
+            padding: 0px 8px !important;
+            height: 36px !important;
+            font-size: 0.85em !important;
+            font-weight: 600 !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
+        }
+        
+        /* Disabled input text styling */
+        div[data-testid="stForm"] div[data-testid="stTextInput"] input:disabled {
+            background-color: transparent !important;
+            color: #888888 !important;
+            font-weight: bold !important;
+            -webkit-text-fill-color: #888888 !important;
+        }
+
+        /* Target Streamlit form submit button elements */
+        div[data-testid="stFormSubmitButton"] {
+            margin: 0px !important;
+            padding: 0px !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            height: 38px !important;
+            min-height: 38px !important;
+            width: 100% !important;
+        }
+        
+        /* Target Streamlit form submit buttons directly */
+        div[data-testid="stFormSubmitButton"] button {
+            height: 38px !important;
+            min-height: 38px !important;
+            width: 100% !important;
+            margin: 0px !important;
+            padding: 0px 16px !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Approve button: Smooth green button with white text (matching the photo's shape with green color) */
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button {
+            background-color: #22c55e !important;
+            color: #ffffff !important;
+            border: 1px solid #22c55e !important;
+            border-radius: 6px !important;
+            height: 38px !important;
+            min-height: 38px !important;
+            padding: 0px 16px !important;
+            font-size: 0.85em !important;
+            font-weight: 600 !important;
+            width: 100% !important;
+            transition: all 0.2s ease-in-out !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover {
+            background-color: #16a34a !important;
+            color: #ffffff !important;
+            border-color: #16a34a !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        }
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button p,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button p {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover p,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover p {
+            color: #ffffff !important;
+        }
+
+        /* Reject button: Smooth red button with white text (matching the photo's shape with red color) */
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
+            border: 1px solid #ef4444 !important;
+            border-radius: 6px !important;
+            height: 38px !important;
+            min-height: 38px !important;
+            padding: 0px 16px !important;
+            font-size: 0.85em !important;
+            font-weight: 600 !important;
+            width: 100% !important;
+            transition: all 0.2s ease-in-out !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover {
+            background-color: #dc2626 !important;
+            color: #ffffff !important;
+            border-color: #dc2626 !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        }
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button p,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button p {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover p,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover p {
+            color: #ffffff !important;
+        }
+        </style>
+
+        """,
+        unsafe_allow_html=True
+    )
+    
+    # Wrap headers and row forms in the horizontally scrollable container
+    st.markdown("<div class='admin-table-container'>", unsafe_allow_html=True)
+
+    # Display inline table header for inputs
+    header_cols = st.columns([1.5, 1.0, 1.0, 1.0, 0.8, 1.0, 1.0, 0.8, 1.0, 0.8, 0.8, 1.0, 1.1, 1.1])
+    headers = ["VIN", "Make", "Model", "Trim", "Year", "Color", "Body Type", "Cyl", "Origin", "Pass", "Wt", "Specs", "Approve", "Reject"]
+    for col, h in zip(header_cols, headers):
+        col.markdown(f"**{h}**")
+        
+    # Render each pending VIN in its own row (form)
+    for idx, item in df_pending.iterrows():
+        vin = str(item["vin"]).strip().upper()
+        
+        # We wrap each row in a separate form with the VIN as part of the key
+        with st.form(key=f"verify_form_{vin}_{idx}"):
+            cols = st.columns([1.5, 1.0, 1.0, 1.0, 0.8, 1.0, 1.0, 0.8, 1.0, 0.8, 0.8, 1.0, 1.1, 1.1])
+            
+            with cols[0]:
+                st.text_input("VIN", value=vin, disabled=True, label_visibility="collapsed", key=f"vin_val_{vin}_{idx}")
+            with cols[1]:
+                make = st.text_input("Make", value=format_csv_value(item.get("make")), label_visibility="collapsed", key=f"make_val_{vin}_{idx}")
+            with cols[2]:
+                model = st.text_input("Model", value=format_csv_value(item.get("model")), label_visibility="collapsed", key=f"model_val_{vin}_{idx}")
+            with cols[3]:
+                trim = st.text_input("Trim", value=format_csv_value(item.get("trim")), label_visibility="collapsed", key=f"trim_val_{vin}_{idx}")
+            with cols[4]:
+                year = st.text_input("Year", value=format_csv_value(item.get("year")), label_visibility="collapsed", key=f"year_val_{vin}_{idx}")
+            with cols[5]:
+                color = st.text_input("Color", value=format_csv_value(item.get("color")), label_visibility="collapsed", key=f"color_val_{vin}_{idx}")
+            with cols[6]:
+                body_type = st.text_input("Body", value=format_csv_value(item.get("body_type")), label_visibility="collapsed", key=f"body_val_{vin}_{idx}")
+            with cols[7]:
+                cylinders = st.text_input("Cyl", value=format_csv_value(item.get("cylinders")), label_visibility="collapsed", key=f"cyl_val_{vin}_{idx}")
+            with cols[8]:
+                origin = st.text_input("Origin", value=format_csv_value(item.get("origin")), label_visibility="collapsed", key=f"origin_val_{vin}_{idx}")
+            with cols[9]:
+                no_of_passengers = st.text_input("Pass", value=format_csv_value(item.get("no_of_passengers")), label_visibility="collapsed", key=f"pass_val_{vin}_{idx}")
+            with cols[10]:
+                weight = st.text_input("Weight", value=format_csv_value(item.get("weight")), label_visibility="collapsed", key=f"weight_val_{vin}_{idx}")
+            with cols[11]:
+                regional_spec = st.text_input("Specs", value=format_csv_value(item.get("regional_spec")), label_visibility="collapsed", key=f"specs_val_{vin}_{idx}")
+                
+            with cols[12]:
+                btn_approve = st.form_submit_button("Approve", use_container_width=True)
+            with cols[13]:
+                btn_reject = st.form_submit_button("Reject", use_container_width=True)
+                
+            if btn_approve:
+                updated_attrs = {
+                    "make": make.strip().upper(),
+                    "model": model.strip().upper(),
+                    "trim": trim.strip().upper(),
+                    "body_type": body_type.strip().upper(),
+                    "year": year.strip(),
+                    "cylinders": cylinders.strip(),
+                    "color": color.strip().upper(),
+                    "origin": origin.strip(),
+                    "weight": weight.strip(),
+                    "no_of_passengers": no_of_passengers.strip(),
+                    "regional_spec": regional_spec.strip().upper()
+                }
+                if approve_pending_prediction(vin, updated_attrs):
+                    st.success(f" **Approved:** VIN `{vin}` has been verified and added to the master database.")
+                    time.sleep(2)
+                    st.rerun()
+                else:
+                    st.error(f"Failed to approve {vin}.")
+                    
+            elif btn_reject:
+                if reject_pending_prediction(vin):
+                    st.warning(f" **Rejected:** VIN `{vin}` has been discarded and removed from the pending queue.")
+                    time.sleep(2)
+                    st.rerun()
+                else:
+                    st.error(f"Failed to reject {vin}.")
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# Streamlit Navigation Sidebar
+app_mode = st.sidebar.selectbox("Navigation", ["VIN Decoder", "Admin Dashboard"])
+
+if app_mode == "Admin Dashboard":
+    render_admin_panel()
+    st.stop()
 
 st.title("VIN Decoder")
 st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v2.6")
@@ -122,51 +652,65 @@ def decode_any_vin(vin_str: str) -> tuple:
     normalized = re.sub(r"[^A-Z0-9]", "", vin_str.upper())
     length = len(normalized)
 
+    # 1. Existing VIN lookup in master_dataset.csv
+    try:
+        master_dict = load_master_dataset_dict(str(MASTER_DATASET_PATH))
+        if normalized in master_dict:
+            res = get_verified_vin_dict(master_dict[normalized])
+            log_prediction(normalized, length, "master_dataset", res)
+            return res, length
+    except Exception as e:
+        print(f"Error checking master dataset: {e}")
+
+    # 2. Run decoders if not found in master dataset
+    res = None
     if length == 17:
         mod = load_predict_module("chat_cat(2.0)")
         res = mod.decode_vin(
             normalized, model_dir=str(project_root / "chat_cat(2.0)" / "models")
         )
-        return res, 17
     elif length == 13:
         mod = load_predict_module("chat_cat_short_vin_13")
         res = mod.predict_vehicle(
             normalized,
             model_dir=str(project_root / "chat_cat_short_vin_13" / "models"),
         )
-        return res, 13
     elif length == 12:
         mod = load_predict_module("chat_cat_short_vin_12")
         res = mod.predict_vehicle(
             normalized,
             model_dir=str(project_root / "chat_cat_short_vin_12" / "models"),
         )
-        return res, 12
     elif length == 11:
         mod = load_predict_module("chat_cat_short_vin_11")
         res = mod.predict_vehicle(
             normalized,
             model_dir=str(project_root / "chat_cat_short_vin_11" / "models"),
         )
-        return res, 11
     elif length == 10:
         mod = load_predict_module("chat_cat_short_vin")
         res = mod.predict_vehicle(
             normalized,
             model_dir=str(project_root / "chat_cat_short_vin" / "models"),
         )
-        return res, 10
     elif length == 9:
         mod = load_predict_module("chat_cat_short_vin_09")
         res = mod.predict_vehicle(
             normalized,
             model_dir=str(project_root / "chat_cat_short_vin_09" / "models"),
         )
-        return res, 9
     else:
         raise ValueError(
             f"Invalid length: {length} characters. Must be 9, 10, 11, 12, 13, or 17 characters."
         )
+
+    # 3. Log all predictions & save unseen predictions to pending queue
+    if res is not None:
+        normalized_res = normalize_result_keys(res)
+        log_prediction(normalized, length, "decoder", normalized_res)
+        save_pending_prediction(normalized, length, normalized_res)
+
+    return res, length
 
 
 def normalize_result_keys(result: dict) -> dict:
