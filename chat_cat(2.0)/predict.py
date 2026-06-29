@@ -243,19 +243,28 @@ def decode_vin(
             logits = transformer_logits[target_lower]
             prob_trans_array = torch.softmax(logits, dim=-1).cpu().numpy()[0]
             
-            # Blend probabilities
-            prob_blended = w_transformer * prob_trans_array + w_lookup * prob_lookup_array
-            
-            # Select best prediction
-            best_idx = np.argmax(prob_blended)
-            label_final = encoder.classes_[best_idx]
-            prob_final = float(prob_blended[best_idx])
-            
-            # Apply confidence thresholding
-            thresh = thresholds.get(target_lower, 0.0)
-            if prob_final < thresh:
-                logger.info(f"Prediction for '{target_lower}' ({label_final}) fell below threshold {thresh} with confidence {prob_final:.4f}.")
-                label_final = "UNKNOWN"
+            # Blend probabilities (ensure shapes match)
+            if len(prob_trans_array) == num_classes:
+                prob_blended = w_transformer * prob_trans_array + w_lookup * prob_lookup_array
+                
+                # Select best prediction
+                best_idx = np.argmax(prob_blended)
+                label_final = encoder.classes_[best_idx]
+                prob_final = float(prob_blended[best_idx])
+                
+                # Apply confidence thresholding
+                thresh = thresholds.get(target_lower, 0.0)
+                if prob_final < thresh:
+                    logger.info(f"Prediction for '{target_lower}' ({label_final}) fell below threshold {thresh} with confidence {prob_final:.4f}.")
+                    label_final = "UNKNOWN"
+            else:
+                logger.warning(
+                    f"Shape mismatch for target '{target_lower}' in Transformer ensemble: "
+                    f"Transformer classes={len(prob_trans_array)}, Encoder classes={num_classes}. "
+                    "Ensembling skipped, falling back to Lookup prediction."
+                )
+                label_final = label_lookup
+                prob_final = prob_lookup
         else:
             # Fallback/standard targets that don't use Transformer predictions
             label_final = label_lookup
