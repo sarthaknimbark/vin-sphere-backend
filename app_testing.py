@@ -4,7 +4,7 @@ import glob
 import re
 
 project_root = Path(__file__).resolve().parent
-INPUT_CSV = project_root / 'Data' / 'lookup_data_clean.csv'
+INPUT_CSV = project_root / 'Data' / 'lookup_data_clean_translated.csv'
 DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated_2'
 
 # Clean up: Filter out empty or unreadable CSVs before concatenating to avoid the FutureWarning

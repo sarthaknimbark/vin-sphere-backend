@@ -1,2 +1,2 @@
 model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
-pontiac-firebird,1999,STD,5565,5565,5565,"AED 5,565 - 5,565",AED,,2026-06-25T17:18:26Z,PONTIAC,FIREBIRD,FIREBIRD,0.133753,27,4821
+pontiac-firebird,1999,STD,105735,116865,111300,"AED 105,735 - 116,865",AED,,2026-06-25T09:51:33Z,PONTIAC,FIREBIRD,FIREBIRD,0.133753,27,8904

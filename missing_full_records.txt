@@ -1,601 +1,176 @@
 === ALL CARS MISSING DEPRECIATION VALUES (WITH CHASSIS) ===
 MAKE                 | MODEL                     | TRIM                 | YEAR   | CHASSIS
 ------------------------------------------------------------------------------------------
-BAOJUN YEP           | YEP/STATION               | STD                  | 2025   | LK6ADAE26SG000080
-BAW                  | 212(4WD)                  | STATION1             | 2026   | HJ4BACDH4TN090737
-BYD                  | LEOPARD 7 (2WD)           | STD                  | 2025   | LC0F74C41S7158648
-BYD                  | LEOPARD 7 (4WD)           | STD                  | 2025   | LC0FD4C47S7092406
-BYD                  | LEOPARD 7(2WD)            | 7                    | 2025   | LC0F74C49S7158705
-BYD                  | LEOPARD 7(2WD)            | S                    | 2025   | LC0F74C49S7158705
-BYD                  | LEOPARD 7(2WD)            | SUV                  | 2025   | LC0F74C43S7116935
-BYD                  | LEOPARD 7(2WD)            | SUV                  | 2025   | LC0F74C49S7158705
-BYD                  | LEOPARD S/STATION         | LE PLATINUM CITY     | 2025   | LC0FD1C4485419547
-BYD                  | LEOPARD/STATION           | 7                    | 2025   | LC0FD4C41S7082289
-BYD                  | QIN PLUS(2WD)             | STD                  | 2025   | LC0C76C4754521177
-BYD                  | SHARK (PICK UP)           | PREMIUM              | 2026   | LPE19W2A0TF055161
-BYD                  | SHARK (PICK UP)           | S                    | 2026   | LPE19W2A1TF055198
-BYD                  | SONG (2WD)                | EV                   | 2025   | LC0C74C41S5056572
-BYD - DENZA          | B8 JEEP                   | 1                    | 2026   | LC0DD1C44T5033574
-CHANGAN              | QNE 07/SEDAN              | C                    | 2025   | LS6C3E2X6RA400107
-CHERY                | RELY RB (PICK UP)         | S                    | 2026   | HJR25GK14TF402772
-CHEVROLET            | C/K 3500                  | GLX                  | 1979   | CCL349B137113
-CHEVROLET            | TAHOE K1500 (4WD)         | S                    | 1999   | 1GNEK13R8XJ504811
-CHRYSLER             | TOWN & COUNTRY            | STD                  | 2013   | 2C4RC1BG7DR597996
-DATSUN               | ZX 280/COUPE              | SPORT                | 1980   | HS130219058
-EXEED                | RX 2.0 T                  | PREMIUM              | 2025   | LVTDD24B3SG000516
-FERRARI              | F8_TRIBUTO                | STD                  | 2022   | ZFF92LLLXN0281581
-FORD                 | E450 SUPER DUTY (MOTORHOME) | C                    | 2017   | 1FC4E4KS0HDC26004
-FORD                 | EXPEDITION   EL           | XL  CLTH             | 2017   | 1FMJK1KTXHEA32105
-FORD                 | F 250 (PICK UP)           | LARIAT CREW CAB      | 2021   | 1FT7W2B6XMEC68332
-FORD                 | F600 ENTEGRA ESTEEM XL 33F (MOTORHOME) | GL                   | 2025   | 1FDFF6LT2SDA08481
-GAC                  | GS3 EMZOOM 1.5TG GB       | STD                  | 2026   | LMGHT1L51T3230330
-GEELY                | COOLRAY 1.5 GL            | 1                    | 2026   | 15EFZS9GA0617311
-GEELY                | ني ام جراند               | ADVANCE              | 2016   | L6T7964Z8GN003114
-GMC                  | SAVANA(VAN)               | SE T1                | 2012   | 1GTW78CG5C1110490
-HONDA                | HR (4WD)                  | SX                   | 2024   | 3CZRZ1H31RM720266
-HYUNDAI              | GRAND YUOR / SEDAN        | GL                   | 2020   | KMHF241DBLA376379
-INFINITI             | G 25 S/SEDAN              | STD (NON GCC)        | 2011   | JN1DV6AP1BM604088
-IVECO                | DAILY                     | TR                   | 2018   | ZCFCA50A0J5229694
-JAC                  | SUNRAY MINI EURO5(BUS)    | BUS                  | 2026   | LJ166B3D8T2255101
-JAECOO               | JAECOO J5 (2WD)           | TDL                  | 2026   | LVUGTB222TDE58133
-JETOUR               | T 2/STATION               | COMFRONT             | 2025   | IDD24B7SDE48326
-KAIYI                | X3 PRO (2WD)              | 1.5T FLAGSHIP        | 2026   | LUYJB2G22TA002726
-KIA                  | GAC   EMZOOM 1.5TG GS     | GL                   | 2026   | LMGHT1L2XT3210583
-KIA                  | K 4/SEDAN                 | LX MID               | 2025   | 3KPFT4DE8SE080298
-KIA                  | يونجو                     | STD (NON GCC)        | 2010   | KNCSJY74BAK456272
-KTM                  | X BOW                     | S                    | 2019   | VBKABLBX0KG001197
-LAND ROVER           | DEFENDER/STATION          | STD                  | 2026   | SALEX7EU9T2498027
-LEXUS                | 200ZX (CAR)               | F SPORT PLATINUM     | 1983   | JN1HZ0482DX580694
-LEXUS                | RX 2.0                    | XLT  LTH             | 2007   | JTJHW31U302038232
-LEXUS                | UX250(4WD)                | SMART                | 2022   | JTHR9JBH6N2058078
-LEXUS                | جي اس 430                 | STD                  | 2002   | JT8BL69S820011529
-LEXUS                | لي اس 300                 | BASE                 | 2006   | JTH8F306966041253
-LINCOLN              | NAVIGATOR  EL             | STD                  | 2013   | 2LMDJ8JK7DBL44605
-MAXUS                | V80 (BUS)                 | VAN                  | 2026   | LSKG5GC18TA047749
-MERCEDES BENZ        | $500                      | PREMIER LWB          | 2007   | WDD2211711A066886
-MERCEDES BENZ        | $500                      | PREMIER SWB          | 2006   | WDD2211711A018292
-MERCEDES BENZ        | $550                      | STD                  | 2007   | WDD2211711A032373
-MERCEDES BENZ        | $550                      | STD                  | 2016   | WDDUG8FBXGA266463
-MERCEDES BENZ        | 1922                      | STD                  | 1992   | WDB65630715932085
-MERCEDES BENZ        | 1968                      | LS                   | 1968   | 10801212061315
-MERCEDES BENZ        | 200                       | SL                   | 1975   | 11501512262969
-MERCEDES BENZ        | A 200                     | 1                    | 2019   | WDD3G8HBXKW030318
-MERCEDES BENZ        | A 200                     | 1                    | 2021   | W1K3F8HB2MN233411
-MERCEDES BENZ        | A 200                     | ADVANTAGE            | 2019   | WDD3F8HB4KJ103523
-MERCEDES BENZ        | A 200                     | ADVANTAGE            | 2021   | W1K3F8HBXMN185480
-MERCEDES BENZ        | A 200                     | BASE                 | 2024   | W1K4G8HB5RJ838520
-MERCEDES BENZ        | A 200                     | LXI                  | 2024   | W1K4G8HB5RJ838520
-MERCEDES BENZ        | A 200                     | PREMIUM              | 2020   | W1K3G8HB7LJ228286
-MERCEDES BENZ        | A 200                     | PREMIUM              | 2021   | W1K3G8HB3MJ289846
-MERCEDES BENZ        | A 200                     | PREMIUM              | 2023   | W1K3F8HB9PN314488
-MERCEDES BENZ        | A 200                     | PREMIUM PLUS         | 2021   | W1K3G8HB2MJ310511
-MERCEDES BENZ        | A 200                     | PREMIUM PLUS         | 2023   | W1K3G8HB7PJ405215
-MERCEDES BENZ        | A 200                     | PREMIUM PLUS         | 2025   | W1K3G8HB4SJ476350
-MERCEDES BENZ        | A 200                     | S (NON GCC)          | 2016   | WDD1173431N392278
-MERCEDES BENZ        | A 220                     | SE                   | 2021   | W1K3G4EB2MJ289866
-MERCEDES BENZ        | A 220                     | SE PLATINUM CITY     | 2020   | W1K3G4EB8LJ229802
-MERCEDES BENZ        | A 220                     | STD                  | 2024   | W1K3G4EB3RJ435702
-MERCEDES BENZ        | A 250                     | ADVANTAGE            | 2019   | WDD3F4GB4KJ049246
-MERCEDES BENZ        | A 250                     | AMG                  | 2019   | WDD3G4GB7KW029489
-MERCEDES BENZ        | A 250                     | SPORT                | 2017   | WDDBF4EB9HJ537499
-MERCEDES BENZ        | A 250                     | SPORT                | 2018   | WDDBF4EB1JJ728839
-MERCEDES BENZ        | A 250                     | SPORT                | 2019   | WDD3F4GB1KJ051892
-MERCEDES BENZ        | A 30 AMG                  | SL                   | 2020   | W1K3G5BB8LJ218020
-MERCEDES BENZ        | A 45 AMG                  | AMG                  | 2016   | WDDBF5CB7GJ456122
-MERCEDES BENZ        | A CLASS                   | A 220                | 2019   | WDD3G4FB1KW025536
-MERCEDES BENZ        | A CLASS                   | A 220                | 2021   | W1K3G4FB5MJ300168
-MERCEDES BENZ        | B 180                     | GLS                  | 2010   | WDDFH3C89AJ560277
-MERCEDES BENZ        | B200 (HATCHBACK)          | GLS                  | 2013   | WDDMH0BB6DJ101025
-MERCEDES BENZ        | C 180                     | S                    | 2005   | WDB2030461F688037
-MERCEDES BENZ        | C 180                     | XLI                  | 2008   | WDDGF46X18F169693
-MERCEDES BENZ        | C 180                     | XLI MID              | 2009   | WDDGF46X69A192935
-MERCEDES BENZ        | C 200                     | AMG                  | 2015   | WDDWF4C80FR054972
-MERCEDES BENZ        | C 200                     | AMG                  | 2019   | WDDWF8AB4KR481821
-MERCEDES BENZ        | C 200                     | ELEGANCE             | 2003   | WDB2030421F471817
-MERCEDES BENZ        | C 200                     | EXI                  | 1999   | WDB2020201F832125
-MERCEDES BENZ        | C 200                     | GL                   | 2005   | WDB2030421F672504
-MERCEDES BENZ        | C 200                     | GL                   | 2006   | WDB2030421F776057
-MERCEDES BENZ        | C 200                     | LE                   | 2006   | WDB2030421F775436
-MERCEDES BENZ        | C 200                     | LX                   | 2005   | WDB2030421F587552
-MERCEDES BENZ        | C 200                     | SE                   | 2005   | WDB2030421F695528
-MERCEDES BENZ        | C 200                     | SL                   | 2006   | WDB2030421F802283
-MERCEDES BENZ        | C 200                     | SPECIAL EDITION      | 2005   | WDB2030421F669317
-MERCEDES BENZ        | C 220                     | GLX                  | 2018   | WDDWF0EB2JR325514
-MERCEDES BENZ        | C 250                     | AMG                  | 2016   | WDDWF4FB6GR160047
-MERCEDES BENZ        | C 250                     | TOP                  | 2009   | WDD2040521A249713
-MERCEDES BENZ        | C 300                     | COM                  | 2010   | WDDGF8BB7AR107799
-MERCEDES BENZ        | C 320                     | BASE                 | 1995   | WDB1400331A249621
-MERCEDES BENZ        | C 320                     | LE                   | 2004   | WDBRF84J24F548929
-MERCEDES BENZ        | C 350                     | GXR                  | 2014   | WDDGJ8JB6EG189350
-MERCEDES BENZ        | C 350                     | NAVIGATION SPORT     | 2006   | WDD2211561A020211
-MERCEDES BENZ        | C 350                     | STD                  | 2006   | WDD2211561A025798
-MERCEDES BENZ        | C 43 AMG                  | LXI                  | 2017   | 55SWF6EB8HU189420
-MERCEDES BENZ        | C 63                      | S                    | 2009   | WDD6F77X69F300148
-MERCEDES BENZ        | C 63 AM                   | C63 S AMG            | 2017   | WDD2053871F466304
-MERCEDES BENZ        | C CLASS                   | C200                 | 2015   | WDDWF4CB7FR043290
-MERCEDES BENZ        | C CLASS                   | C200                 | 2016   | WDD2050421R101837
-MERCEDES BENZ        | C180 K                    | AVANTGARDE           | 2007   | WDBRN46H57A934395
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2004   | WDB2030421F498241
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2005   | WDB2030421F716159
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2005   | WDB9302051K866938
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2006   | WDB2030421F772876
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2007   | WDBRF46H47F900268
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2007   | WDBRF46H67F878757
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2008   | WDDGF46X28A126073
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2008   | WDDGF46X28F101645
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2009   | WDDGF46X19F285607
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2009   | WDDGF46X99F264665
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2010   | WDDGF4KB8AA391077
-MERCEDES BENZ        | C180 K                    | CLASSIC              | 2010   | WDDGF4KBXAA371137
-MERCEDES BENZ        | C180 K                    | ELEGANCE             | 2005   | WDB2030461F613838
-MERCEDES BENZ        | C180 K                    | ELEGANCE             | 2006   | WDD2210561A034487
-MERCEDES BENZ        | C200 K                    | AVANTGARDE           | 2008   | WDDGF41XX8F008556
-MERCEDES BENZ        | C200 K                    | CLASSIC              | 2004   | WDB2030421F498452
-MERCEDES BENZ        | C200 K                    | CLASSIC              | 2004   | WDB2030461F500165
-MERCEDES BENZ        | C200 K                    | CLASSIC              | 2005   | WDB2030421F716159
-MERCEDES BENZ        | C200 K                    | CLASSIC              | 2006   | NAN
-MERCEDES BENZ        | C200 K                    | CLASSIC              | 2006   | WDB2030421F783732
-MERCEDES BENZ        | C200 K                    | CLASSIC              | 2007   | WDBRF42H67F844825
-MERCEDES BENZ        | C200 K                    | CLASSIC              | 2007   | WDBRF42H97F901146
-MERCEDES BENZ        | C200 K                    | CLASSIC              | 2008   | NAN
-MERCEDES BENZ        | C200 K                    | ELEGANCE             | 2003   | WDB9501633K797476
-MERCEDES BENZ        | C200 K                    | ELEGANCE             | 2003   | WDBRF42H13F380367
-MERCEDES BENZ        | C200 K                    | ELEGANCE             | 2004   | WDB2030421F535993
-MERCEDES BENZ        | C200 K                    | ELEGANCE             | 2004   | WDB9540332K701658
-MERCEDES BENZ        | C200 K                    | ELEGANCE             | 2006   | WDB9301631L060993
-MERCEDES BENZ        | C200 K                    | ELEGANCE             | 2006   | WDBRF42H36F787210
-MERCEDES BENZ        | C200 K                    | ELEGANCE             | 2008   | WDDGF41X28A059868
-MERCEDES BENZ        | C200 K                    | ELEGANCE             | 2008   | WDDGF41X98A119872
-MERCEDES BENZ        | C200 K                    | SPORTCOUPE           | 2008   | WDB9340135L324920
-MERCEDES BENZ        | C230 K                    | STD                  | 2005   | WDB2030401F695791
-MERCEDES BENZ        | C230 K                    | STD                  | 2006   | WDB2030521F758769
-MERCEDES BENZ        | C230 K                    | STD                  | 2006   | WDB2030521F825158
-MERCEDES BENZ        | CLA 200                   | 1                    | 2019   | WDDSJ4DB9KN729201
-MERCEDES BENZ        | CLA 200                   | AMG                  | 2024   | W1K5J8HB2RN466137
-MERCEDES BENZ        | CLA 200                   | STD                  | 2018   | WDDSJ4DB2JN662553
-MERCEDES BENZ        | CLA 200                   | STD                  | 2019   | WDDSJ4DB4KN710782
-MERCEDES BENZ        | CLA 250                   | AMG                  | 2022   | W1K5J4GB0NN266541
-MERCEDES BENZ        | CLA 250                   | AMG                  | 2022   | W1K5J4GB9NN265324
-MERCEDES BENZ        | CLA 250                   | AMG                  | 2023   | W1K5J4GB6PN324056
-MERCEDES BENZ        | CLA 250                   | STD                  | 2017   | WDDSJ4GB6HN423660
-MERCEDES BENZ        | CLA 250                   | STD                  | 2018   | WDDSJ4GB5JN520046
-MERCEDES BENZ        | CLA 250                   | STD                  | 2018   | WDDSJ4GBXJN520012
-MERCEDES BENZ        | CLA 35                    | STD                  | 2022   | WIK5J5BB8NN272472
-MERCEDES BENZ        | CLA 35 AMG                | STD                  | 2020   | W1K5J5BB6LN081730
-MERCEDES BENZ        | CLA 35 AMG                | STD                  | 2021   | W1K5J5BB6MN192828
-MERCEDES BENZ        | CLA 35 AMG                | STD                  | 2022   | W1K5J5BB0NN259358
-MERCEDES BENZ        | CLA 35 AMG                | STD                  | 2023   | W1K5J5BB8PN332978
-MERCEDES BENZ        | CLA 45                    | S                    | 2023   | W1K5J5EB0PN326734
-MERCEDES BENZ        | CLA 45                    | STD                  | 2021   | W1K5J5EB5MN170038
-MERCEDES BENZ        | CLA CLASS                 | CLA 220              | 2018   | WDDSJ5CB7JN560155
-MERCEDES BENZ        | CLA CLASS                 | CLA 250              | 2016   | WDDSJ4GB4GN325418
-MERCEDES BENZ        | CLA CLASS                 | CLA 250              | 2020   | WDD5J4GB2LN040370
-MERCEDES BENZ        | CLE CLASS                 | CLE 53               | 2025   | W1KMK6CB9SF060165
-MERCEDES BENZ        | CLK200 K                  | STD                  | 2005   | WDB1714421F034985
-MERCEDES BENZ        | CLK200 K                  | STD                  | 2005   | WDB2094421T037166
-MERCEDES BENZ        | CLK200 K                  | STD                  | 2006   | WDB2093421F172739
-MERCEDES BENZ        | CLK200 K                  | STD                  | 2007   | WDBTK41F37T082251
-MERCEDES BENZ        | CLK200 K                  | STD                  | 2007   | WDBTK41F77T086349
-MERCEDES BENZ        | CLK200 K                  | STD                  | 2008   | WDBWK42F68F179214
-MERCEDES BENZ        | CLK200 K                  | STD                  | 2009   | WDBTJ41H49F267169
-MERCEDES BENZ        | CLK200 K                  | STD                  | 2009   | WDBTK41F49T105541
-MERCEDES BENZ        | CLK230 K                  | STD                  | 2001   | WDB1704491F188918
-MERCEDES BENZ        | CLK230 K                  | STD                  | 2003   | NAN
-MERCEDES BENZ        | CLS 350                   | EX FOP               | 2013   | WDD2183591A046946
-MERCEDES BENZ        | CLS 350                   | LS                   | 2012   | WDD2183591A018065
-MERCEDES BENZ        | CLS 350                   | STD                  | 2012   | WDDLJ5K82CA051834
-MERCEDES BENZ        | CLS 400                   | STD                  | 2016   | WDDLJ6FB1GA167919
-MERCEDES BENZ        | CLS 53 AMG                | STD                  | 2022   | W1K2J6BB0NA107774
-MERCEDES BENZ        | CLS 550                   | LS                   | 2014   | WDDLJ9BB9EA096599
-MERCEDES BENZ        | CLS 63 AMG                | TOP                  | 2009   | WDDDJ77X09A149189
-MERCEDES BENZ        | DATSUN 1600               | STD                  | 1969   | SPL31122441
-MERCEDES BENZ        | E 200                     | STD                  | 2026   | W1KLF5AB2TA21210
-MERCEDES BENZ        | E 200                     | XLI                  | 2006   | WDB2110421A928431
-MERCEDES BENZ        | E 300                     | AMG                  | 2017   | WDDZF4JB4HA163551
-MERCEDES BENZ        | E 300                     | SAHARA               | 2020   | W1K2F8DB2LA814803
-MERCEDES BENZ        | E 300                     | SL                   | 2025   | W1KLF4HB9SA117779
-MERCEDES BENZ        | E 320                     | PREMIUM              | 2004   | WDB2110651A431301
-MERCEDES BENZ        | E 350                     | LS                   | 2006   | WDB2110561A826258
-MERCEDES BENZ        | E 350                     | LWB                  | 2009   | WDD2120561A006888
-MERCEDES BENZ        | E 350                     | PREMIER              | 2009   | WDD2120561A052782
-MERCEDES BENZ        | E 350                     | SPORTS               | 2010   | WDDKJ5G80AF031151
-MERCEDES BENZ        | E 350                     | STD                  | 2010   | WDD2120871A079306
-MERCEDES BENZ        | E 430                     | LX                   | 2009   | WDB2100701A676144
-MERCEDES BENZ        | E 53 AM                   | AMG                  | 2025   | W1KLFBDBXSA133507
-MERCEDES BENZ        | E 53 HYBRID 4MATIC+ SEDAN | SED                  | 2026   | W1KLF6DB1TA212484
-MERCEDES BENZ        | E 55                      | TOP                  | 1999   | WDB2100741A768215
-MERCEDES BENZ        | E 55 AMG                  | S                    | 2008   | WDB2110721B056954
-MERCEDES BENZ        | E 550                     | PREMIER SWB          | 2014   | WDDHF9BB1EA884994
-MERCEDES BENZ        | E 550                     | PRESTIGE             | 2013   | WDD2120731A706002
-MERCEDES BENZ        | E 550                     | STD                  | 2009   | WDB2110721B389738
-MERCEDES BENZ        | E 550                     | STD                  | 2009   | WDB2112721B410420
-MERCEDES BENZ        | E 550                     | STD                  | 2010   | WDD2120721A007400
-MERCEDES BENZ        | E 550                     | STD                  | 2010   | WDD2120721A007722
-MERCEDES BENZ        | E 550                     | TOP                  | 2014   | WDDHF9BB4EA869292
-MERCEDES BENZ        | E 550                     | USA                  | 2010   | WDD2120721A007871
-MERCEDES BENZ        | E 550                     | USA                  | 2012   | WDD2120731A518836
-MERCEDES BENZ        | E 550                     | USA                  | 2012   | WDD2120731A552339
-MERCEDES BENZ        | E 550                     | USA                  | 2013   | WDDHF9BB8DA759960
-MERCEDES BENZ        | E 63 AMG                  | PREMIER SWB          | 2018   | WDD2130891A335938
-MERCEDES BENZ        | E 63 AMG                  | TOP                  | 2017   | WDD2130891A287523
-MERCEDES BENZ        | E CLASS                   | E 200                | 2024   | W1KLF5AB4RA053628
-MERCEDES BENZ        | E CLASS                   | E 230                | 2007   | WDBUF52X37B147577
-MERCEDES BENZ        | E CLASS                   | E 250                | 2020   | WDDZF4KB7LA731072
-MERCEDES BENZ        | E CLASS                   | E 300                | 2020   | WDDZF4KB7LA731072
-MERCEDES BENZ        | E CLASS                   | E 400                | 2018   | WDD1J6FB4JF016798
-MERCEDES BENZ        | EQA 250                   | STD                  | 2022   | LE48P9BB3NL033690
-MERCEDES BENZ        | EQA 260                   | STD (NON GCC)        | 2023   | LB1VVG3E1XP8201228
-MERCEDES BENZ        | EQA 350 4M                | PREMIUM PLUS         | 2022   | W1N9N1CB1NJ016665
-MERCEDES BENZ        | EQA 350 4M                | PREMIUM PLUS         | 2023   | NAN
-MERCEDES BENZ        | EQA 350 4M                | PREMIUM PLUS         | 2023   | W1N9N1CB8PJ063209
-MERCEDES BENZ        | EQA 350 4M                | PREMIUM PLUS         | 2024   | W1N9N1CB6RJ086507
-MERCEDES BENZ        | EQA 350 4M                | STD                  | 2022   | W1N9N1CB7NJ016279
-MERCEDES BENZ        | EQA 350 4M                | STD                  | 2022   | W1N9N1CB9NJ018633
-MERCEDES BENZ        | EQA 350 4M                | STD                  | 2023   | NAN
-MERCEDES BENZ        | EQB 260                   | STD (NON GCC)        | 2023   | LE49M0CB5PL037394
-MERCEDES BENZ        | EQB 260                   | STD (NON GCC)        | 2023   | LE49M0CB7PL035274
-MERCEDES BENZ        | EQB 260                   | STD (NON GCC)        | 2024   | LE49M0CB3RL050079
-MERCEDES BENZ        | EQB 350                   | F SPORT              | 2023   | LE49M1DB9PL037709
-MERCEDES BENZ        | EQB 350 4M                | STD                  | 2022   | LE49M0CB8NL025897
-MERCEDES BENZ        | EQB 350 4M                | STD                  | 2022   | W1N9M1CB7NN008369
-MERCEDES BENZ        | EQB 350 4M                | STD                  | 2023   | W1N9M1CB6PN012805
-MERCEDES BENZ        | EQB 350 4M                | STD                  | 2024   | W1N9M1CB6RN056354
-MERCEDES BENZ        | EQB 350 4M                | STD                  | 2024   | W1WV0LEZ4R4311228
-MERCEDES BENZ        | EQB 350 4M                | STD                  | 2025   | NAN
-MERCEDES BENZ        | EQC 400                   | PREMIUM              | 2021   | W1K2938901F032479
-MERCEDES BENZ        | EQC 400 4M                | AMG LINE             | 2020   | W1K8P9AB6LF003415
-MERCEDES BENZ        | EQC 400 4M                | AMG LINE             | 2021   | W1K8P9AB1MF033357
-MERCEDES BENZ        | EQC 400 4M                | AMG LINE             | 2021   | W1K8P9AB6MF033712
-MERCEDES BENZ        | EQC 400 4M                | AMG LINE             | 2023   | W1K8P9AB9PF054400
-MERCEDES BENZ        | EQE 300                   | STD                  | 2023   | W1KEG1BB2PF030345
-MERCEDES BENZ        | EQE 300                   | STD                  | 2023   | W1KEG1BB8PF025621
-MERCEDES BENZ        | EQE 350 PLUS              | STD                  | 2022   | NAN
-MERCEDES BENZ        | EQE 350 PLUS              | STD                  | 2023   | W1KEG2BB7PF020898
-MERCEDES BENZ        | EQE 350 PLUS              | STD                  | 2024   | NAN
-MERCEDES BENZ        | EQE 350 PLUS              | STD                  | 2024   | W1KEG2BB3RF044795
-MERCEDES BENZ        | EQE 350+                  | STD                  | 2022   | W1K2951211F000938
-MERCEDES BENZ        | EQE 350+                  | STD                  | 2023   | NAN
-MERCEDES BENZ        | EQE 500                   | 4MATIC               | 2024   | LE4GM2CB3RN017798
-MERCEDES BENZ        | EQE 500                   | 4MATIC               | 2024   | LE4GM2CB4RN016255
-MERCEDES BENZ        | EQE 53 4M                 | AMG                  | 2022   | W1K1K6BBXNF183160
-MERCEDES BENZ        | EQE 53 4M                 | AMG                  | 2025   | NAN
-MERCEDES BENZ        | EQG G580                  | BASE                 | 2026   | NAN
-MERCEDES BENZ        | EQS 450                   | 4MATIC               | 2026   | NAN
-MERCEDES BENZ        | EQS 450 PLUS              | STD                  | 2022   | W1KCG2DB0NA001043
-MERCEDES BENZ        | EQS 450 PLUS              | STD                  | 2022   | W1KCG2DB1NA001083
-MERCEDES BENZ        | EQS 450 PLUS              | STD                  | 2023   | W1KCG2DB3PA035139
-MERCEDES BENZ        | EQS 450+                  | STD                  | 2022   | W1K2971231A002256
-MERCEDES BENZ        | EQS 450+                  | STD                  | 2023   | 4JGDM2DB9PA004982
-MERCEDES BENZ        | EQS 53 AMG                | 4M TOP               | 2023   | W1KCG5FB9PA032051
-MERCEDES BENZ        | EQS 580 4M                | 4MATIC               | 2023   | W1KCG4EB7PA031900
-MERCEDES BENZ        | EQS 580 4M                | AMG LINE             | 2022   | W1KCG4EB2NA019621
-MERCEDES BENZ        | EQS 580 4M                | AMG LINE             | 2022   | W1KCG4EB2NA019747
-MERCEDES BENZ        | EQV 300                   | STD                  | 2022   | W1V44781313865320
-MERCEDES BENZ        | FIREBIRD                  | STD (NON GCC)        | 1979   | 2T87Y9L108590
-MERCEDES BENZ        | G 300                     | SUPER SAFARI T1      | 2017   | WDCZC3DF6HX286268
-MERCEDES BENZ        | G 500                     | LE (NON GCC)         | 2000   | WDB4632401X120618
-MERCEDES BENZ        | G 55 AMG                  | LTZ                  | 2019   | WDCYC6BJ5KX302889
-MERCEDES BENZ        | G 550                     | G 550                | 2024   | W1NYC6BJ1RX492084
-MERCEDES BENZ        | G 550                     | SPORT LUXURY         | 2013   | WDCYC3HF0DX204714
-MERCEDES BENZ        | G 550                     | STD                  | 2019   | WDB4632601X315011
-MERCEDES BENZ        | G 550                     | STD                  | 2020   | WDCYC6BJ2KX319214
-MERCEDES BENZ        | G 550                     | TOP                  | 2013   | WDCYC3HF0DX204714
-MERCEDES BENZ        | G 63 AMG                  | STD                  | 2022   | W1NYC7GJXNX415562
-MERCEDES BENZ        | G 800                     | ATUMATIC             | 2023   | W1N4632761X433357
-MERCEDES BENZ        | G CLASS                   | G 300                | 2025   | W1NWC1AB5SX021193
-MERCEDES BENZ        | G CLASS                   | G 63 AMG             | 2016   | WDCYC7DF1GX251171
-MERCEDES BENZ        | G CLASS                   | G 63 AMG             | 2019   | WDCYC7GJ1KX304203
-MERCEDES BENZ        | G CLASS                   | G 63 AMG             | 2021   | W1NYC7GJ4MX367037
-MERCEDES BENZ        | G CLASS                   | G 63 AMG             | 2022   | W1NYC7GJ1NX418172
-MERCEDES BENZ        | G CLASS                   | G 63 AMG             | 2025   | W1NWH5AB0SX007257
-MERCEDES BENZ        | GLA 200                   | AMG                  | 2022   | W1N4N8HB3NJ324108
-MERCEDES BENZ        | GLA 200                   | AMG PREMIUM          | 2021   | W1N4N8H8OMJ178345
-MERCEDES BENZ        | GLA 200                   | SE T1                | 2016   | WDC1569431J237408
-MERCEDES BENZ        | GLA 200                   | STD                  | 2023   | W1N4N8HB3PJ464047
-MERCEDES BENZ        | GLA 200                   | STD                  | 2024   | W1N4N8HB4RJ597774
-MERCEDES BENZ        | GLA 200                   | STD                  | 2025   | W1N4N8HB9SJ724489
-MERCEDES BENZ        | GLA 250                   | STD                  | 2023   | W1N4N4HB9PJ450968
-MERCEDES BENZ        | GLA 35 AMG                | 4MATIC               | 2023   | W1N4N5BB0PJ432793
-MERCEDES BENZ        | GLA 35 AMG                | 4MATIC               | 2023   | W1N4N5BB5PJ467104
-MERCEDES BENZ        | GLA 35 AMG                | 4MATIC               | 2024   | W1N4N5BB6RJ591949
-MERCEDES BENZ        | GLA 43 AMG                | STD                  | 2017   | WDCED6EB9HA068322
-MERCEDES BENZ        | GLB CLASS                 | GLB 250              | 2021   | W1N4M4HB9MW087167
-MERCEDES BENZ        | GLC 200                   | STD                  | 2020   | W1N0G8BBXLF841097
-MERCEDES BENZ        | GLC 200                   | STD                  | 2020   | W1N0J8BB5LF846077
-MERCEDES BENZ        | GLC 200                   | STD                  | 2021   | W1N0G8AB6MF889411
-MERCEDES BENZ        | GLC 200                   | STD                  | 2022   | W1N0G8BBXNG055863
-MERCEDES BENZ        | GLC 200                   | STD                  | 2024   | W1NKM5BB6RF069352
-MERCEDES BENZ        | GLC 250                   | 1                    | 2018   | WDC0J4GBXJF344729
-MERCEDES BENZ        | GLC 250                   | 1                    | 2019   | WDC0J4GB1KF517989
-MERCEDES BENZ        | GLC 250                   | 1                    | 2019   | WDC0J4GBXKF501645
-MERCEDES BENZ        | GLC 250                   | AMG                  | 2017   | WDC0J4GB0HF155646
-MERCEDES BENZ        | GLC 250                   | AMG                  | 2018   | WDC0J4GB2JF320313
-MERCEDES BENZ        | GLC 250                   | AMG                  | 2019   | WDC0G4GB7KF526873
-MERCEDES BENZ        | GLC 300                   | E 4MATIC PREMIUM     | 2020   | WDC0J8EB4LF700265
-MERCEDES BENZ        | GLC 300                   | PREMIUM PLUS         | 2021   | WIN0J8EB5MF895017
-MERCEDES BENZ        | GLC 300                   | PREMIUM PLUS         | 2022   | W1N0G8DB5NG055783
-MERCEDES BENZ        | GLC 43 AMG                | 1                    | 2023   | W1N0J6EB3PG139852
-MERCEDES BENZ        | GLC 43 AMG                | OFF ROAD             | 2021   | W1N0J6EB9MF886602
-MERCEDES BENZ        | GLC 43 AMG                | OFF ROAD             | 2022   | W1N0G6EB4NV365986
-MERCEDES BENZ        | GLC 43 AMG                | OFF ROAD             | 2022   | W1N0J6EB2NG028898
-MERCEDES BENZ        | GLC 43 AMG                | STD                  | 2017   | WDC0G6EB9HF129592
-MERCEDES BENZ        | GLC 43 AMG                | STD                  | 2018   | NAN
-MERCEDES BENZ        | GLC 43 AMG                | STD                  | 2018   | WDC0J6EB6JF386345
-MERCEDES BENZ        | GLC 43 AMG                | STD                  | 2019   | WDC0G6EB5KF530337
-MERCEDES BENZ        | GLC 43 AMG                | STD                  | 2019   | WDC0J6EB2KF556041
-MERCEDES BENZ        | GLC 43 AMG                | STD                  | 2020   | W1N0J6EB7LF784245
-MERCEDES BENZ        | GLC 43 AMG                | STD                  | 2021   | NAN
-MERCEDES BENZ        | GLC 43 AMG                | STD                  | 2022   | W1K2324501F006903
-MERCEDES BENZ        | GLC 43 AMG                | STD                  | 2023   | W1N0J6EB3PG139852
-MERCEDES BENZ        | GLE 350                   | USA SPEC             | 2021   | 4JGFB43BXMA524375
-MERCEDES BENZ        | GLE 400                   | AMG                  | 2017   | WDCDA5GB4HA966208
-MERCEDES BENZ        | GLE 43 AMG                | STD                  | 2016   | WDCED6EB2GA036567
-MERCEDES BENZ        | GLE 43 AMG                | STD                  | 2017   | WDCED6EB0HA066006
-MERCEDES BENZ        | GLE 43 AMG                | STD                  | 2018   | WDCED6EB8JA113126
-MERCEDES BENZ        | GLE 43 AMG                | STD                  | 2018   | WDCED6EBXJA089654
-MERCEDES BENZ        | GLE 43 AMG                | STD                  | 2019   | WDCED6EB3KA135519
-MERCEDES BENZ        | GLE 450                   | 4MATIC               | 2019   | WDCFB5KB3KA003370
-MERCEDES BENZ        | GLE 450                   | 4MATIC               | 2022   | W1NFB5KB0NA590467
-MERCEDES BENZ        | GLE 450                   | AMG LINE             | 2016   | WDCED6EB9GA027364
-MERCEDES BENZ        | GLE 53                    | 4MATIC               | 2023   | WINFD6BBOPA971111
-MERCEDES BENZ        | GLE 53                    | AMG                  | 2021   | W1N1671611A420990
-MERCEDES BENZ        | GLE 53                    | DLX                  | 2023   | W1N1673611A621699
-MERCEDES BENZ        | GLE 53 AMG                | 4MATIC               | 2020   | W1NFB6BB8LA164920
-MERCEDES BENZ        | GLE 53 AMG                | 4MATIC               | 2022   | W1NFD6BB7NA665469
-MERCEDES BENZ        | GLE 580                   | AMG (NON GCC)        | 2020   | 4JGFB8GB7LA289270
-MERCEDES BENZ        | GLE 63                    | S                    | 2017   | WDCED7FBXHA056653
-MERCEDES BENZ        | GLK 220                   | IGNITE               | 2013   | WDCGG8EB8DG044094
-MERCEDES BENZ        | GLK 250                   | STD                  | 2014   | WDCGG3HB2EG334217
-MERCEDES BENZ        | GLK 250                   | STD                  | 2014   | WDCGG3HB5EG182157
-MERCEDES BENZ        | GLK 250                   | STD                  | 2015   | WDCGG3HB6FG365438
-MERCEDES BENZ        | GLK 250                   | STD                  | 2015   | WDCGG3HB7FG361270
-MERCEDES BENZ        | GLK 350                   | GLS                  | 2012   | WDCGG8HB4CF772544
-MERCEDES BENZ        | GLK 350                   | SUPER SAFARI T1      | 2012   | WDCGG8HB9CF853734
-MERCEDES BENZ        | GLK 350                   | TOP                  | 2012   | WDCCG8HB0CF877324
-MERCEDES BENZ        | GLK 350                   | XLT                  | 2014   | WDC2049881G252092
-MERCEDES BENZ        | GLS 400                   | GRAND EDITION        | 2019   | WDCDF5GE7KB237259
-MERCEDES BENZ        | GLS 450                   | 4M PREMIUM           | 2022   | 4JGFF5KE0NA605616
-MERCEDES BENZ        | GLS 500                   | SE T1                | 2019   | WDCDF7DE4KB194063
-MERCEDES BENZ        | GLS 500                   | STD                  | 2017   | WDCDF7DE9HA878878
-MERCEDES BENZ        | GLS 600                   | MAYBACH              | 2020   | NAN
-MERCEDES BENZ        | GLS CLASS                 | GLS 450              | 2021   | 4JGFF5KE8MA495459
-MERCEDES BENZ        | GLS CLASS                 | GLS 600 MAYBACH      | 2021   | W1N1679871A488274
-MERCEDES BENZ        | GT 63                     | S                    | 2019   | WDD7X8KB9KA002033
-MERCEDES BENZ        | M CLASS                   | ML 350               | 2008   | WDCBB86E58A351328
-MERCEDES BENZ        | M CLASS                   | ML 350               | 2014   | WDCDA5HB4EA288019
-MERCEDES BENZ        | MERCEDES 200 CLA          | GLX                  | 2022   | W1K1183871N187068
-MERCEDES BENZ        | MERCEDES 5500L            | SE PLATINUM CITY     | 2007   | WDD2211711A088782
-MERCEDES BENZ        | MERCEDES G 550            | SED                  | 2019   | WDB4632601X304376
-MERCEDES BENZ        | MERCEDES S550             | SV                   | 2015   | WDD2173851A002866
-MERCEDES BENZ        | MERCEDES S63 AMG          | LWB 5ST              | 2017   | WDD2221781A272289
-MERCEDES BENZ        | MUSTANG                   | GT                   | 1992   | WD81400501A047787
-MERCEDES BENZ        | RSX                       | STD (NON GCC)        | 2006   | JH4DC54856S019502
-MERCEDES BENZ        | S 320                     | LWB                  | 1998   | WDB1400331A421498
-MERCEDES BENZ        | S 320                     | SE                   | 2001   | WDB2201651A203412
-MERCEDES BENZ        | S 320                     | SPORT                | 2001   | WDB2201651A160256
-MERCEDES BENZ        | S 320                     | SR                   | 2001   | WDB2201651A160256
-MERCEDES BENZ        | S 320                     | SR                   | 2001   | WDB2201651A203412
-MERCEDES BENZ        | S 320 L                   | TOP                  | 1994   | WDB1400331A197039
-MERCEDES BENZ        | S 350                     | BASE                 | 2003   | WDB2201671A324951
-MERCEDES BENZ        | S 350                     | LEATHER              | 2004   | WDB2201671A407367
-MERCEDES BENZ        | S 400                     | GLX                  | 2015   | WDD2220571A143077
-MERCEDES BENZ        | S 400                     | SE                   | 2015   | WDD2220571A108477
-MERCEDES BENZ        | S 400                     | SR                   | 2015   | WDD2220571A108477
-MERCEDES BENZ        | S 400H                    | 1                    | 2016   | WDDUG6FB6GA249258
-MERCEDES BENZ        | S 450                     | AMG                  | 2020   | W1KUG6GB4LA530872
-MERCEDES BENZ        | S 450                     | LWB                  | 2018   | WDD2220661A373163
-MERCEDES BENZ        | S 500                     | AVANTGARDE SPORT     | 2007   | WDD2211711A070349
-MERCEDES BENZ        | S 500                     | GXR                  | 2015   | WDDUG8CB7FA185245
-MERCEDES BENZ        | S 500                     | LX                   | 2006   | WDD2211711A021192
-MERCEDES BENZ        | S 500                     | PREMIER SWB          | 1997   | WDB1400511A354251
-MERCEDES BENZ        | S 500                     | PREMIER SWB          | 2007   | WDD2211711A013120
-MERCEDES BENZ        | S 500                     | SR                   | 2007   | WDD2211711A013120
-MERCEDES BENZ        | S 500                     | SR                   | 2009   | WDD2211561A256875
-MERCEDES BENZ        | S 500                     | STD                  | 2002   | WDB2201751A135664
-MERCEDES BENZ        | S 500                     | TOP                  | 1996   | WDB1400511A319512
-MERCEDES BENZ        | S 500                     | TOP                  | 1997   | WDB1400511A321084
-MERCEDES BENZ        | S 500                     | TOP                  | 2005   | WDD2211711A021915
-MERCEDES BENZ        | S 500                     | TOP                  | 2007   | WDD2211711A021700
-MERCEDES BENZ        | S 500                     | TOP                  | 2010   | JTHGL46F605000207
-MERCEDES BENZ        | S 500 L                   | PREMIER SWB          | 2006   | WDD2211711A033793
-MERCEDES BENZ        | S 550                     | PREMIER LWB          | 2010   | WDD2211711A321724
-MERCEDES BENZ        | S 550                     | PREMIER LWB          | 2017   | WDD2221821A315276
-MERCEDES BENZ        | S 550                     | SR                   | 2006   | WDD2211711A022666
-MERCEDES BENZ        | S 550                     | STD                  | 2007   | WDD2211711A051352
-MERCEDES BENZ        | S 550                     | TOP                  | 2002   | WDB2201751A224193
-MERCEDES BENZ        | S 550                     | TOP                  | 2007   | WDD2211711A074766
-MERCEDES BENZ        | S 560                     | PREMIER LWB          | 1990   | WDBCA39E8LA529218
-MERCEDES BENZ        | S 600                     | AMG                  | 1996   | WDB1400571A294900
-MERCEDES BENZ        | S 600                     | EXTENDED             | 1995   | WDB1400571A169287
-MERCEDES BENZ        | S 600                     | STD                  | 1994   | WDB1400571A157458
-MERCEDES BENZ        | S 600                     | STD                  | 1996   | WDB1400571A346661
-MERCEDES BENZ        | S 63                      | STD                  | 2010   | WDD2211771A316599
-MERCEDES BENZ        | S CLASS                   | S 320                | 2020   | WDDZF8DB9LA721681
-MERCEDES BENZ        | S CLASS                   | S 400D               | 2023   | W1K6F3DB8PA242406
-MERCEDES BENZ        | S CLASS                   | S 400H               | 2015   | WDD2221821A115477
-MERCEDES BENZ        | S CLASS                   | S 500                | 2014   | WDDUG8FB5EA034091
-MERCEDES BENZ        | S CLASS                   | S 550                | 2015   | WDDUG8CB9FA091027
-MERCEDES BENZ        | S L 43 / COUPE            | STD                  | 2023   | W1K2324501F006751
-MERCEDES BENZ        | SE 280                    | STD                  | 1971   | 10806712009065
-MERCEDES BENZ        | SE 280                    | TOP                  | 1971   | 10806712004401
-MERCEDES BENZ        | SE 380                    | SV                   | 1984   | WDBCA32A1EA083522
-MERCEDES BENZ        | SE 380                    | VXR TOP              | 1984   | WDBCA32A1EA083522
-MERCEDES BENZ        | SEL 560                   | PREMIER LWB          | 1988   | WDBCA39D1JA376198
-MERCEDES BENZ        | SEL 560                   | STD                  | 1991   | WDBCA39E1MA592260
-MERCEDES BENZ        | SEL 560                   | TOP                  | 1986   | WDBCA39D1GA242509
-MERCEDES BENZ        | SL 380                    | XDRIVE MASTERCLASS   | 1985   | WDBBA45C0FA026342
-MERCEDES BENZ        | SL 450                    | STD                  | 1975   | 10704412022078
-MERCEDES BENZ        | SL 450 COUPE              | STC                  | 1979   | 10704412054897
-MERCEDES BENZ        | SL 500                    | GT PREMIUM           | 2000   | WDB1290681F179273
-MERCEDES BENZ        | SL 500                    | LWB                  | 2008   | WDD2211711A082471
-MERCEDES BENZ        | SL 500                    | STD                  | 2009   | WDBSK71F79F157063
-MERCEDES BENZ        | SL 500                    | SWB                  | 1996   | WDB1400511A307126
-MERCEDES BENZ        | SL 680                    | MAYBACH MONOGRAM SERIES | 2026   | 12104010016172
-MERCEDES BENZ        | SL 680                    | MAYBACH MONOGRAM SERIES | 2026   | WDBBA48D4HA057889
-MERCEDES BENZ        | SLK 200                   | KOMPRESSOR           | 2014   | WDDPKAJAZEFO86610
-MERCEDES BENZ        | SLK CLASS                 | SLK 350              | 2006   | WDB1714561F113608
-MERCEDES BENZ        | SLK200 K                  | STD                  | 2002   | WDB1704441F238731
-MERCEDES BENZ        | SLK200 K                  | STD                  | 2005   | NAN
-MERCEDES BENZ        | SLK200 K                  | STD                  | 2006   | WDB1714421F055722
-MERCEDES BENZ        | SLK200 K                  | STD                  | 2007   | WDB9302031L146185
-MERCEDES BENZ        | SLK200 K                  | STD                  | 2008   | WDBWK42F68F179214
-MERCEDES BENZ        | SLK200 K                  | STD                  | 2009   | WMEEJ31X29K305535
-MERCEDES BENZ        | SLK200 K                  | STD                  | 2011   | NAN
-MERCEDES BENZ        | SLK230 K                  | STD                  | 2000   | WDB6520041K476140
-MERCEDES BENZ        | SLK230 K                  | STD                  | 2001   | WDB9500361K571692
-MERCEDES BENZ        | SLK230 K                  | STD                  | 2002   | NAN
-MERCEDES BENZ        | SMART                     | 1                    | 2001   | WME01MC01YH091843
-MERCEDES BENZ        | SMART                     | AMG                  | 2009   | WME4513801K298865
-MERCEDES BENZ        | SMART                     | FORTWO               | 2014   | WMEEJ9AA4EK735799
-MERCEDES BENZ        | SMART                     | HARD TOP             | 2009   | WME4513801K298865
-MERCEDES BENZ        | SMART                     | SE                   | 2001   | WME01MC011H021551
-MERCEDES BENZ        | V 250                     | 1                    | 2020   | W1WV0LEZ5L3698093
-MERCEDES BENZ        | V 250                     | 116                  | 2021   | W1WVOGEZ8M3841904
-MERCEDES BENZ        | V 250                     | AVANTGARDE LWB       | 2018   | WD4WG3E17J3455684
-MERCEDES BENZ        | V 250                     | AVANTGARDE/E         | 2022   | W1WV0LEZ3N3950541
-MERCEDES BENZ        | V 250                     | EXCLUSIVE            | 2017   | WD4WG2E15H3235206
-MERCEDES BENZ        | V 250                     | GS                   | 2022   | W1WV0LEZ9N3978764
-MERCEDES BENZ        | V 250                     | PREMIUM              | 2022   | W1WV0LEZXN3978918
-MERCEDES BENZ        | V CLASS MPV               | VKL                  | 2019   | WD4WG2E11K3515096
-MERCEDES BENZ        | اتيجو 1725                | STD                  | 2003   | WDB9702151K836534
-MERCEDES-BENZ        | EQE 350+                  | STD                  | 2022   | LE4EG2BB8NN003163
-MERCEDES-BENZ        | EQE 350+                  | STD                  | 2023   | LE4EG2BB0PN014113
-MERCEDES-BENZ        | EQE 350+                  | STD                  | 2023   | LE4EG2BB6PN007456
-MERCEDES-BENZ        | EQE 350+                  | STD                  | 2024   | 4JGGM2BB0RA046069
-MERCEDES-BENZ        | EQE 350+                  | STD                  | 2024   | 4JGGM2BBXRA048380
-MG                   | HS HYBRID+                | LUX                  | 2026   | LSJW94394TG029612
-MG                   | HS PHEV                   | LUXURY               | 2024   | LSJA24395RN011672
-MG                   | MG RX 8                   | BE                   | 2024   | L5JW84W92RG017126
-MG                   | NONE                      | STD                  | 2023   | LSJA36U96PN019266
-MG                   | RX 5 PLUS                 | DELUXE               | 2024   | LSJA24U99RS025333
-MITSUBISHI           | G. V. W                   | S                    | 2024   | MK2L6Y1Y1R001659
-MITSUBISHI           | بيك اب شحن                | STD                  | 2003   | JL7BDF1J93K001652
-NISSAN               | NISSAN / CEDRICK          | AVANTGARDE SPORTS    | 1999   | JN1DY11S6XX221994
-NISSAN               | NISSAN SUNNY 1.3          | LIMITED              | 1993   | BEAB13513721
-NISSAN               | NISSAN SUNNY 1.6          | LE                   | 1997   | JN1BDAB14Z0313460
-NISSAN               | NISSAN SUNNY 1.6          | S                    | 1998   | JN1BDAB14Z0326540
-NISSAN               | NISSAN SUNNY 1.6          | SPECIAL EDITION      | 1998   | JN1BDAB14Z0334033
-NISSAN               | PATROL/JEEP               | SE T2                | 1993   | KY60359946
-NISSAN               | SUNNY 1.3                 | BASE                 | 1998   | JN1BDAB14Z0333086
-NISSAN               | SUNNY 1.3                 | FLEET                | 2002   | JN1CBAN16Z0006196
-NISSAN               | SUNNY 1.3                 | GLI                  | 2011   | JN1BFAN16Z0006867
-NISSAN               | SUNNY 1.3                 | LE                   | 2002   | JN1CBAN16Z0007089
-NISSAN               | SUNNY 1.3                 | LE                   | 2005   | JN1BBAB14Z0324139
-NISSAN               | SUNNY 1.3                 | STD                  | 1998   | JN1BBAB14Z0318873
-NISSAN               | SUNNY 1.3                 | STD                  | 2002   | JN1CBAN1620002579
-NISSAN               | SUNNY 1.3                 | XLI                  | 1998   | JN1BBAB14Z0319923
-NISSAN               | SUNNY 1.4                 | LE                   | 1998   | JN1BBAB14Z0318291
-NISSAN               | SUNNY 1.4                 | STD                  | 1996   | JN1BBAB14Z0306798
-NISSAN               | SUNNY 1.5                 | CLASSIC EX           | 2008   | KNMCC42H68P668290
-NISSAN               | SUNNY 1.5                 | S                    | 1998   | JN1BDAB14Z0335360
-NISSAN               | SUNNY 1.5                 | XLI                  | 1998   | JN1BDAB14Z0332046
-NISSAN               | SUNNY 1.6                 | FLEET                | 1997   | JN1BDAB14Z0318810
-NISSAN               | SUNNY 1.6                 | LE                   | 1997   | JN1BDAB14Z0318227
-NISSAN               | SUNNY 1.6                 | S                    | 2011   | JN1BFAN16Z0006939
-NISSAN               | SUNNY 1.6                 | STD                  | 2002   | JN1FN61C12W01235
-NISSAN               | SUNNY SV 1.5 AT           | SV                   | 2025   | MDHBNADXSG504697
-NISSAN               | URVAN/VAN                 | S                    | 2025   | JN6BE6CS9S9440417
-NISSAN               | صني 1.4                   | LE                   | 1998   | JN1BBAB14Z0323718
-NISSAN               | صني 1.5                   | LXI                  | 1997   | JN1BBAB14Z0309743
-OPEL                 | MOKKA  X                  | TURBO ENJOY PLUS     | 2017   | W0LJD7D84HB066051
-OPEL                 | MOKKA  X                  | TURBO ENJOY PLUS     | 2017   | W0LJD7D84HB070018
-OPEL                 | MOKKA  X                  | TURBO INOVATION      | 2017   | W0LJD7D84HB070018
-PADAR                | KINGKONG (PICKUP)         | S                    | 2025   | LA71CX831S0150027
-PEUGEOT              | LAND REK   X MT           | VAN                  | 2025   | VR3F8151253023625
-PONTICA              | TRANS AM                  | G                    | 1990   | 1G2FW21F4KL223719
-RENAULT              | EXPRESS EX(VAN)           | GLE                  | 2026   | VF1FJRS53TG135133
-ROX                  | ROX   1                   | STD                  | 2025   | HJ4ABBHK7SN082445
-ROX                  | ROX   JISHI               | STD                  | 2026   | HJ4ABBHK5TN087936
-ROX                  | ROX   JISHI 2012WD        | VIP                  | 2025   | HJAABBHKSN078677
-ROX                  | ROX 01 (ELECTRIC ROAD VEHICLE) | S                    | 2026   | HJ4ABBHK1TN089022
-SINOTRUK             | SITRAK (TRACTOR)          | STD                  | 2026   | LZZ8CVWD2TB105133
-SMART                | #1                        | PREMIUM              | 2025   | HESXR1C4XSS007320
-SMART                | #1                        | PREMIUM              | 2025   | WMEFJ5DA0GK139410
-SMART                | #3                        | PREMIUM              | 2025   | WMEFJ5DA0GK139410
-SUZUKI               | S.PRESSO                  | STD                  | 2024   | MA3RFL61S00450507
-TAM                  | C12                       | S                    | 2027   | LHUG6JN52VH000018
-TOYOTA               | 25 HX DC 4X4 2.7LAT       | GLX                  | 2025   | MR0BX8CD0S2868106
-TOYOTA               | 25 HX DC 4X4 PLAT GLX RA(PICK UP) | DLX                  | 2025   | MR0BXBCD752868278
-TOYOTA               | 25 LP SC 4X4 P4.0 MT      | GLX                  | 2025   | JTFLU71J7SB103593
-TOYOTA               | 26 HX DC 4X4 2.4LAT       | DLX                  | 2026   | MR0KB8CD3T1231488
-TOYOTA               | 26 LP SC 4X4 P4.0L AT     | SGLX                 | 2026   | JTFLU73J5TB703883
-TOYOTA               | 26HX DC 4X4D2.4L AT       | DLX                  | 2026   | MR0KB8CD2T1164091
-TOYOTA               | 26HX DC 4X4P2.7LAT        | GLX                  | 2026   | MRDBX8CD4T2870233
-TOYOTA               | COROLLA 1.3               | GA                   | 1994   | AE1013095244
-TOYOTA               | COROLLA 1.3               | GLI                  | 2025   | RKLBB0BE3S0052028
-TOYOTA               | COROLLA 1.3               | GLX                  | 2004   | ZE15090997
-TOYOTA               | COROLLA 1.3               | LE                   | 2005   | ZE15133501
-TOYOTA               | COROLLA 1.3               | LE                   | 2014   | NMTBF0JE10R005754
-TOYOTA               | COROLLA 1.3               | LIMITED              | 2020   | RKLBBOBE1L0005243
-TOYOTA               | COROLLA 1.3               | LXI                  | 2003   | ZE15009078
-TOYOTA               | COROLLA 1.3               | SE                   | 2012   | ZRE1424402339
-TOYOTA               | COROLLA 1.3               | SV                   | 2003   | NMTBZ28E70R033874
-TOYOTA               | COROLLA 1.3               | XLI                  | 2001   | JTDBW23E310002482
-TOYOTA               | COROLLA 1.3               | XLI                  | 2007   | JTDBW22E373135882
-TOYOTA               | COROLLA 1.3               | XLI                  | 2009   | JTDBZ42E79J022860
-TOYOTA               | COROLLA 1.3               | XLI                  | 2020   | RKLBBOBE8L0001934
-TOYOTA               | COROLLA 1.3               | XLI                  | 2023   | RKLBB0BE5P0050238
-TOYOTA               | COROLLA 1.3               | XLI                  | 2024   | LFMAAA0C4R0604839
-TOYOTA               | COROLLA 1.5               | S                    | 1998   | JTB53AEB1W0033808
-TOYOTA               | COROLLA 1.6               | 2.0L                 | 2020   | RKLBBOBE2L0003792
-TOYOTA               | COROLLA 1.6               | AMG                  | 2010   | LFMAP22C4A0218377
-TOYOTA               | COROLLA 1.6               | COMFORT              | 1997   | 1NXBA02E8VZ653203
-TOYOTA               | COROLLA 1.6               | GA                   | 2018   | JTNKARJE5JJ564836
-TOYOTA               | COROLLA 1.6               | GL                   | 1993   | AE1013031284
-TOYOTA               | COROLLA 1.6               | GL                   | 1996   | AE1010163094
-TOYOTA               | COROLLA 1.6               | GLI                  | 2006   | ZE15098335
-TOYOTA               | COROLLA 1.6               | GLI HEV              | 2024   | RKLBBOCE3R0004683
-TOYOTA               | COROLLA 1.6               | LE PLATINUM CITY +   | 2018   | JTNKARJE5JJ564836
-TOYOTA               | COROLLA 1.6               | S                    | 2005   | ZE15069430
-TOYOTA               | COROLLA 1.6               | S T2 TOP             | 2006   | ZE15001514
-TOYOTA               | COROLLA 1.6               | XLI                  | 1997   | JTB53AEA1V0198543
-TOYOTA               | COROLLA 1.6               | XLI                  | 2020   | RKLBBOBE9L0008598
-TOYOTA               | COROLLA 1.6               | XLI MID              | 1997   | 1NXBA02E0VZ661795
-TOYOTA               | COROLLA 1.6               | XLI MID              | 2004   | 2T1BR32E04C313330
-TOYOTA               | COROLLA 1.6               | XLI MID              | 2004   | JTDBR32E942017964
-TOYOTA               | COROLLA 1.6               | XLI POWER OPT        | 2018   | LFMA180C3J0157787
-TOYOTA               | COROLLA 1.6 SEDAN         | TOP                  | 1993   | ZE15081500
-TOYOTA               | COROLLA 1.8               | AMBIENTE             | 2018   | LFMAP86C0J0719165
-TOYOTA               | COROLLA 1.8               | BASE                 | 2005   | ZE15060485
-TOYOTA               | COROLLA 1.8               | EXI                  | 2018   | JTNKARJE3JJ566861
-TOYOTA               | COROLLA 1.8               | FLEET                | 2014   | ZRE1725521765
-TOYOTA               | COROLLA 1.8               | GA                   | 2011   | ZRE1424428217
-TOYOTA               | COROLLA 1.8               | GLI                  | 2024   | RKLBAOBE3R1005606
-TOYOTA               | COROLLA 1.8               | GLS HIGHLINE         | 2004   | ZE15086891
-TOYOTA               | COROLLA 1.8               | GLX                  | 2006   | ZE15096427
-TOYOTA               | COROLLA 1.8               | LE                   | 1997   | 1NXBB02E0VZ590627
-TOYOTA               | COROLLA 1.8               | LE                   | 2005   | ZE15028861
-TOYOTA               | COROLLA 1.8               | LE                   | 2005   | ZE15115266
-TOYOTA               | COROLLA 1.8               | LE                   | 2007   | LFMARE0C370029212
-TOYOTA               | COROLLA 1.8               | SE                   | 2017   | JTNKARJE7HJ541486
-TOYOTA               | COROLLA 1.8               | TOP                  | 2017   | JTNKARJE7HJ525241
-TOYOTA               | COROLLA 1.8               | VTI E                | 2006   | ZE15022229
-TOYOTA               | COROLLA 1.8               | XLI                  | 2001   | ZE15005750
-TOYOTA               | COROLLA 1.8               | XLI                  | 2006   | ZE15158575
-TOYOTA               | COROLLA 1.8               | XLI                  | 2016   | ZRE1725569916
-TOYOTA               | COROLLA 1.8               | XLI                  | 2017   | JTNKARJE7HJ541486
-TOYOTA               | COROLLA 1.8               | XLI TOP              | 2011   | JTDBU4EE2B9156791
-TOYOTA               | COROLLA 1.8 YUS           | LE                   | 2005   | ZE15140690
-TOYOTA               | DLX FA (PICK UP)          | LIMITED              | 2026   | MROKB8CD0T1164042
-TOYOTA               | GLX RA(PICK UP)           | GLX                  | 2026   | MR0JX8CD33428713
-TOYOTA               | GXR RA(STATION WAGON)     | STATION              | 2026   | MHFKUBFSXT0212532
-TOYOTA               | HX DC 4X4 D 2.4L AT       | DLX                  | 2026   | MR0KB8CD7T1164443
-TOYOTA               | LS4X4 P4.0L MT            | GLX                  | 2025   | JTFLU71J7SB103593
-TOYOTA               | برادو                     | 90                   | 2000   | JT3BM99J2Y0034048
-TOYOTA               | فورشنر                    | EXR                  | 2020   | MHFBUBFSBL0035480
-TOYOTA               | كامري                     | LE                   | 2005   | NV18037298
-TOYOTA               | كامري                     | SE                   | 2003   | NV18044516
-TOYOTA               | كامري                     | XLI                  | 1997   | 4T1BG22K1VU801885
-TOYOTA               | لاند كروزر                | BASE                 | 2010   | JTFLU73J2A4508079
-TOYOTA               | لاند كروزر                | GL                   | 2008   | JTFLJ73JX86046023
-TOYOTA               | لاند كروزر                | GXR                  | 2010   | JTFLU73J8A4508149
-TOYOTA               | هايلوكس                   | SE T2                | 2017   | MR0JX8CB3H3370771
-VOLKSWAGEN           | ID.3/LIFE                 | STD (NON GCC)        | 2021   | LSVFA6E92M2017214
-VOLKSWAGEN           | ID.3/LIFE                 | STD (NON GCC)        | 2021   | LSVFA6E99M2016786
-VOLKSWAGEN           | ID.3/LIFE                 | TECH (NON GCC)       | 2022   | LFVVB9E61N5018110
-VOLKSWAGEN           | ID.3/LIFE                 | TECH (NON GCC)       | 2022   | LSVFA6E99N2011489
-VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022   | LFVVB9E71N5162197
-VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022   | LFVVB9E71N5173796
-VOLKSWAGEN           | JETTA 2.5L                | SEL                  | 2016   | WVWSK1AJ9GM200457
-XIAOMI               | اس يو 7 الترا             | S                    | 2025   | HXMM3A087SA137103
-ZEEKR                | X/STATION                 | STD                  | 2024   | L6TBX2S1XRF500328
+BAOJUN YEP           | YEP/STATION               | STD                  | 2025   | 
+BAW                  | 212(4WD)                  | STATION1             | 2026   | 
+BYD                  | LEOPARD 7 (2WD)           | STD                  | 2025   | 
+BYD                  | LEOPARD 7 (4WD)           | STD                  | 2025   | 
+BYD                  | LEOPARD 7(2WD)            | 7                    | 2025   | 
+BYD                  | LEOPARD 7(2WD)            | S                    | 2025   | 
+BYD                  | LEOPARD 7(2WD)            | SUV                  | 2025   | 
+BYD                  | LEOPARD S/STATION         | LE PLATINUM CITY     | 2025   | 
+BYD                  | LEOPARD/STATION           | 7                    | 2025   | 
+BYD                  | QIN PLUS(2WD)             | STD                  | 2025   | 
+BYD                  | SHARK (PICK UP)           | PREMIUM              | 2026   | 
+BYD                  | SHARK (PICK UP)           | S                    | 2026   | 
+BYD                  | SONG (2WD)                | EV                   | 2025   | 
+CHANGAN              | QNE 07/SEDAN              | C                    | 2025   | 
+CHERY                | RELY RB (PICK UP)         | S                    | 2026   | 
+CHEVROLET            | C/K 3500                  | GLX                  | 1979   | 
+CHEVROLET            | TAHOE K1500 (4WD)         | S                    | 1999   | 
+CHRYSLER             | TOWN & COUNTRY            | STD                  | 2013   | 
+DATSUN               | ZX 280/COUPE              | SPORT                | 1980   | 
+EXEED                | RX 2.0 T                  | PREMIUM              | 2025   | 
+FERRARI              | F8_TRIBUTO                | STD                  | 2022   | 
+FORD                 | E450 SUPER DUTY (MOTORHOME) | C                    | 2017   | 
+FORD                 | EXPEDITION   EL           | XL  CLTH             | 2017   | 
+FORD                 | F 250 (PICK UP)           | LARIAT CREW CAB      | 2021   | 
+FORD                 | F600 ENTEGRA ESTEEM XL 33F (MOTORHOME) | GL                   | 2025   | 
+GAC                  | GS3 EMZOOM 1.5TG GB       | STD                  | 2026   | 
+GEELY                | COOLRAY 1.5 GL            | 1                    | 2026   | 
+GEELY                | NM GRAND                  | ADVANCE              | 2016   | 
+GMC                  | SAVANA(VAN)               | SE T1                | 2012   | 
+HONDA                | HR (4WD)                  | SX                   | 2024   | 
+HYUNDAI              | GRAND YUOR / SEDAN        | GL                   | 2020   | 
+INFINITI             | G 25 S/SEDAN              | STD (NON GCC)        | 2011   | 
+JAC                  | SUNRAY MINI EURO5(BUS)    | BUS                  | 2026   | 
+JAECOO               | JAECOO J5 (2WD)           | TDL                  | 2026   | 
+JETOUR               | T 2/STATION               | COMFRONT             | 2025   | 
+KAIYI                | X3 PRO (2WD)              | 1.5T FLAGSHIP        | 2026   | 
+KIA                  | GAC   EMZOOM 1.5TG GS     | GL                   | 2026   | 
+KIA                  | K 4/SEDAN                 | LX MID               | 2025   | 
+KIA                  | YOUNGMAN                  | STD (NON GCC)        | 2010   | 
+LAND ROVER           | DEFENDER/STATION          | STD                  | 2026   | 
+LEXUS                | 200ZX (CAR)               | F SPORT PLATINUM     | 1983   | 
+LEXUS                | LS300                     | BASE                 | 2006   | 
+LEXUS                | RX 2.0                    | XLT  LTH             | 2007   | 
+LEXUS                | UX250(4WD)                | SMART                | 2022   | 
+LI                   | L7                        | STD (NON GCC)        | 2025   | 
+LINCOLN              | NAVIGATOR  EL             | STD                  | 2013   | 
+MAXUS                | V80 (BUS)                 | VAN                  | 2026   | 
+MERCEDES BENZ        | $500                      | PREMIER LWB          | 2007   | 
+MERCEDES BENZ        | $500                      | PREMIER SWB          | 2006   | 
+MERCEDES BENZ        | $550                      | STD                  | 2007   | 
+MERCEDES BENZ        | $550                      | STD                  | 2016   | 
+MERCEDES BENZ        | ACTROS 1725               | STD                  | 2003   | 
+MERCEDES BENZ        | B200 (HATCHBACK)          | GLS                  | 2013   | 
+MERCEDES BENZ        | E 53 HYBRID 4MATIC+ SEDAN | SED                  | 2026   | 
+MERCEDES BENZ        | EQE 350+                  | STD                  | 2022   | 
+MERCEDES BENZ        | EQE 350+                  | STD                  | 2023   | 
+MERCEDES BENZ        | EQS 450+                  | STD                  | 2022   | 
+MERCEDES BENZ        | EQS 450+                  | STD                  | 2023   | 
+MERCEDES BENZ        | S L 43 / COUPE            | STD                  | 2023   | 
+MERCEDES-BENZ        | EQE 350+                  | STD                  | 2022   | 
+MERCEDES-BENZ        | EQE 350+                  | STD                  | 2023   | 
+MERCEDES-BENZ        | EQE 350+                  | STD                  | 2024   | 
+MG                   | HS HYBRID+                | LUX                  | 2026   | 
+MITSUBISHI           | G. V. W                   | S                    | 2024   | 
+NISSAN               | NISSAN / CEDRICK          | AVANTGARDE SPORTS    | 1999   | 
+NISSAN               | NISSAN SUNNY 1.3          | LIMITED              | 1993   | 
+NISSAN               | NISSAN SUNNY 1.6          | LE                   | 1997   | 
+NISSAN               | NISSAN SUNNY 1.6          | S                    | 1998   | 
+NISSAN               | NISSAN SUNNY 1.6          | SPECIAL EDITION      | 1998   | 
+NISSAN               | PATROL/JEEP               | SE T2                | 1993   | 
+NISSAN               | SUNNY 1.3                 | BASE                 | 1998   | 
+NISSAN               | SUNNY 1.3                 | FLEET                | 2002   | 
+NISSAN               | SUNNY 1.3                 | GLI                  | 2011   | 
+NISSAN               | SUNNY 1.3                 | LE                   | 2002   | 
+NISSAN               | SUNNY 1.3                 | LE                   | 2005   | 
+NISSAN               | SUNNY 1.3                 | STD                  | 1998   | 
+NISSAN               | SUNNY 1.3                 | STD                  | 2002   | 
+NISSAN               | SUNNY 1.3                 | XLI                  | 1998   | 
+NISSAN               | SUNNY 1.4                 | LE                   | 1998   | 
+NISSAN               | SUNNY 1.4                 | STD                  | 1996   | 
+NISSAN               | SUNNY 1.5                 | CLASSIC EX           | 2008   | 
+NISSAN               | SUNNY 1.5                 | LXI                  | 1997   | 
+NISSAN               | SUNNY 1.5                 | S                    | 1998   | 
+NISSAN               | SUNNY 1.5                 | XLI                  | 1998   | 
+NISSAN               | SUNNY 1.6                 | FLEET                | 1997   | 
+NISSAN               | SUNNY 1.6                 | LE                   | 1997   | 
+NISSAN               | SUNNY 1.6                 | S                    | 2011   | 
+NISSAN               | SUNNY 1.6                 | STD                  | 2002   | 
+NISSAN               | SUNNY SV 1.5 AT           | SV                   | 2025   | 
+NISSAN               | URVAN/VAN                 | S                    | 2025   | 
+OPEL                 | MOKKA  X                  | TURBO ENJOY PLUS     | 2017   | 
+OPEL                 | MOKKA  X                  | TURBO INOVATION      | 2017   | 
+PADAR                | KINGKONG (PICKUP)         | S                    | 2025   | 
+PEUGEOT              | LAND REK   X MT           | VAN                  | 2025   | 
+RENAULT              | EXPRESS EX(VAN)           | GLE                  | 2026   | 
+ROX                  | ROX   1                   | STD                  | 2025   | 
+ROX                  | ROX   JISHI               | STD                  | 2026   | 
+ROX                  | ROX   JISHI 2012WD        | VIP                  | 2025   | 
+ROX                  | ROX 01 (ELECTRIC ROAD VEHICLE) | S                    | 2026   | 
+SINOTRUK             | SITRAK (TRACTOR)          | STD                  | 2026   | 
+SMART                | #1                        | PREMIUM              | 2025   | 
+SMART                | #3                        | PREMIUM              | 2025   | 
+SUZUKI               | S.PRESSO                  | STD                  | 2024   | 
+TOYOTA               | 25 HX DC 4X4 2.7LAT       | GLX                  | 2025   | 
+TOYOTA               | 25 HX DC 4X4 PLAT GLX RA(PICK UP) | DLX                  | 2025   | 
+TOYOTA               | 25 LP SC 4X4 P4.0 MT      | GLX                  | 2025   | 
+TOYOTA               | 26 HX DC 4X4 2.4LAT       | DLX                  | 2026   | 
+TOYOTA               | 26 LP SC 4X4 P4.0L AT     | SGLX                 | 2026   | 
+TOYOTA               | 26HX DC 4X4D2.4L AT       | DLX                  | 2026   | 
+TOYOTA               | 26HX DC 4X4P2.7LAT        | GLX                  | 2026   | 
+TOYOTA               | COROLLA 1.3               | GA                   | 1994   | 
+TOYOTA               | COROLLA 1.3               | GLI                  | 2025   | 
+TOYOTA               | COROLLA 1.3               | GLX                  | 2004   | 
+TOYOTA               | COROLLA 1.3               | LE                   | 2005   | 
+TOYOTA               | COROLLA 1.3               | LE                   | 2014   | 
+TOYOTA               | COROLLA 1.3               | LIMITED              | 2020   | 
+TOYOTA               | COROLLA 1.3               | LXI                  | 2003   | 
+TOYOTA               | COROLLA 1.3               | SE                   | 2012   | 
+TOYOTA               | COROLLA 1.3               | SV                   | 2003   | 
+TOYOTA               | COROLLA 1.3               | XLI                  | 2001   | 
+TOYOTA               | COROLLA 1.3               | XLI                  | 2007   | 
+TOYOTA               | COROLLA 1.3               | XLI                  | 2009   | 
+TOYOTA               | COROLLA 1.3               | XLI                  | 2020   | 
+TOYOTA               | COROLLA 1.3               | XLI                  | 2023   | 
+TOYOTA               | COROLLA 1.3               | XLI                  | 2024   | 
+TOYOTA               | COROLLA 1.5               | S                    | 1998   | 
+TOYOTA               | COROLLA 1.6               | 2.0L                 | 2020   | 
+TOYOTA               | COROLLA 1.6               | AMG                  | 2010   | 
+TOYOTA               | COROLLA 1.6               | COMFORT              | 1997   | 
+TOYOTA               | COROLLA 1.6               | GA                   | 2018   | 
+TOYOTA               | COROLLA 1.6               | GL                   | 1993   | 
+TOYOTA               | COROLLA 1.6               | GL                   | 1996   | 
+TOYOTA               | COROLLA 1.6               | GLI                  | 2006   | 
+TOYOTA               | COROLLA 1.6               | GLI HEV              | 2024   | 
+TOYOTA               | COROLLA 1.6               | LE PLATINUM CITY +   | 2018   | 
+TOYOTA               | COROLLA 1.6               | S                    | 2005   | 
+TOYOTA               | COROLLA 1.6               | S T2 TOP             | 2006   | 
+TOYOTA               | COROLLA 1.6               | XLI                  | 1997   | 
+TOYOTA               | COROLLA 1.6               | XLI                  | 2020   | 
+TOYOTA               | COROLLA 1.6               | XLI MID              | 1997   | 
+TOYOTA               | COROLLA 1.6               | XLI MID              | 2004   | 
+TOYOTA               | COROLLA 1.6               | XLI POWER OPT        | 2018   | 
+TOYOTA               | COROLLA 1.6 SEDAN         | TOP                  | 1993   | 
+TOYOTA               | COROLLA 1.8               | AMBIENTE             | 2018   | 
+TOYOTA               | COROLLA 1.8               | BASE                 | 2005   | 
+TOYOTA               | COROLLA 1.8               | EXI                  | 2018   | 
+TOYOTA               | COROLLA 1.8               | FLEET                | 2014   | 
+TOYOTA               | COROLLA 1.8               | GA                   | 2011   | 
+TOYOTA               | COROLLA 1.8               | GLI                  | 2024   | 
+TOYOTA               | COROLLA 1.8               | GLS HIGHLINE         | 2004   | 
+TOYOTA               | COROLLA 1.8               | GLX                  | 2006   | 
+TOYOTA               | COROLLA 1.8               | LE                   | 1997   | 
+TOYOTA               | COROLLA 1.8               | LE                   | 2005   | 
+TOYOTA               | COROLLA 1.8               | LE                   | 2007   | 
+TOYOTA               | COROLLA 1.8               | SE                   | 2017   | 
+TOYOTA               | COROLLA 1.8               | TOP                  | 2017   | 
+TOYOTA               | COROLLA 1.8               | VTI E                | 2006   | 
+TOYOTA               | COROLLA 1.8               | XLI                  | 2001   | 
+TOYOTA               | COROLLA 1.8               | XLI                  | 2006   | 
+TOYOTA               | COROLLA 1.8               | XLI                  | 2016   | 
+TOYOTA               | COROLLA 1.8               | XLI                  | 2017   | 
+TOYOTA               | COROLLA 1.8               | XLI TOP              | 2011   | 
+TOYOTA               | COROLLA 1.8 YUS           | LE                   | 2005   | 
+TOYOTA               | DLX FA (PICK UP)          | LIMITED              | 2026   | 
+TOYOTA               | GLX RA(PICK UP)           | GLX                  | 2026   | 
+TOYOTA               | GXR RA(STATION WAGON)     | STATION              | 2026   | 
+TOYOTA               | HX DC 4X4 D 2.4L AT       | DLX                  | 2026   | 
+TOYOTA               | LS4X4 P4.0L MT            | GLX                  | 2025   | 
+VOLKSWAGEN           | ID.3/LIFE                 | STD (NON GCC)        | 2021   | 
+VOLKSWAGEN           | ID.3/LIFE                 | TECH (NON GCC)       | 2022   | 
+VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022   | 
+VOLKSWAGEN           | JETTA 2.5L                | SEL                  | 2016   | 
+ZEEKR                | X/STATION                 | STD                  | 2024   | 
