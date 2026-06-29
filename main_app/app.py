@@ -243,7 +243,7 @@ def render_admin_panel():
         st.subheader("Admin Authentication Required")
         pin_input = st.text_input("Enter Admin PIN to Access", type="password", key="admin_pin_input")
         if st.button("Unlock Dashboard"):
-            if pin_input == "1234":
+            if pin_input == "123456":
                 st.session_state.admin_authenticated = True
                 st.success("Access Granted!")
                 st.rerun()
@@ -252,7 +252,7 @@ def render_admin_panel():
         st.stop()
 
     st.title("Admin Verification Dashboard")
-    st.write("Review, edit, approve, or reject pending decoded VIN predictions in a single row.")
+    st.write("Review, edit, approve, or reject pending decoded VIN predictions.")
     
     # Read pending list
     df_pending = safe_read_pending_predictions()
@@ -585,7 +585,7 @@ if app_mode == "Admin Dashboard":
     st.stop()
 
 st.title("VIN Decoder")
-st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v2.6")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v3.0")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER
