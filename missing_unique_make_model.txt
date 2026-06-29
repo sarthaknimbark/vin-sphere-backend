@@ -3,174 +3,33 @@ MAKE                 | MODEL                     | TRIM                 | YEAR
 ---------------------------------------------------------------------------
 BAOJUN YEP           | YEP/STATION               | STD                  | 2025  
 BAW                  | 212(4WD)                  | STATION1             | 2026  
-BYD                  | LEOPARD 7 (2WD)           | STD                  | 2025  
-BYD                  | LEOPARD 7 (4WD)           | STD                  | 2025  
-BYD                  | LEOPARD 7(2WD)            | 7                    | 2025  
-BYD                  | LEOPARD 7(2WD)            | S                    | 2025  
-BYD                  | LEOPARD 7(2WD)            | SUV                  | 2025  
-BYD                  | LEOPARD S/STATION         | LE PLATINUM CITY     | 2025  
 BYD                  | LEOPARD/STATION           | 7                    | 2025  
-BYD                  | QIN PLUS(2WD)             | STD                  | 2025  
-BYD                  | SHARK (PICK UP)           | PREMIUM              | 2026  
-BYD                  | SHARK (PICK UP)           | S                    | 2026  
-BYD                  | SONG (2WD)                | EV                   | 2025  
-CHANGAN              | QNE 07/SEDAN              | C                    | 2025  
-CHERY                | RELY RB (PICK UP)         | S                    | 2026  
 CHEVROLET            | C/K 3500                  | GLX                  | 1979  
-CHEVROLET            | TAHOE K1500 (4WD)         | S                    | 1999  
-CHRYSLER             | TOWN & COUNTRY            | STD                  | 2013  
 DATSUN               | ZX 280/COUPE              | SPORT                | 1980  
 EXEED                | RX 2.0 T                  | PREMIUM              | 2025  
 FERRARI              | F8_TRIBUTO                | STD                  | 2022  
-FORD                 | E450 SUPER DUTY (MOTORHOME) | C                    | 2017  
-FORD                 | EXPEDITION   EL           | XL  CLTH             | 2017  
-FORD                 | F 250 (PICK UP)           | LARIAT CREW CAB      | 2021  
-FORD                 | F600 ENTEGRA ESTEEM XL 33F (MOTORHOME) | GL                   | 2025  
-GAC                  | GS3 EMZOOM 1.5TG GB       | STD                  | 2026  
-GEELY                | COOLRAY 1.5 GL            | 1                    | 2026  
 GEELY                | NM GRAND                  | ADVANCE              | 2016  
 GMC                  | SAVANA(VAN)               | SE T1                | 2012  
 HONDA                | HR (4WD)                  | SX                   | 2024  
-HYUNDAI              | GRAND YUOR / SEDAN        | GL                   | 2020  
-INFINITI             | G 25 S/SEDAN              | STD (NON GCC)        | 2011  
-JAC                  | SUNRAY MINI EURO5(BUS)    | BUS                  | 2026  
-JAECOO               | JAECOO J5 (2WD)           | TDL                  | 2026  
 JETOUR               | T 2/STATION               | COMFRONT             | 2025  
-KAIYI                | X3 PRO (2WD)              | 1.5T FLAGSHIP        | 2026  
-KIA                  | GAC   EMZOOM 1.5TG GS     | GL                   | 2026  
 KIA                  | K 4/SEDAN                 | LX MID               | 2025  
 KIA                  | YOUNGMAN                  | STD (NON GCC)        | 2010  
 LAND ROVER           | DEFENDER/STATION          | STD                  | 2026  
-LEXUS                | 200ZX (CAR)               | F SPORT PLATINUM     | 1983  
 LEXUS                | LS300                     | BASE                 | 2006  
-LEXUS                | RX 2.0                    | XLT  LTH             | 2007  
 LEXUS                | UX250(4WD)                | SMART                | 2022  
 LI                   | L7                        | STD (NON GCC)        | 2025  
-LINCOLN              | NAVIGATOR  EL             | STD                  | 2013  
-MAXUS                | V80 (BUS)                 | VAN                  | 2026  
 MERCEDES BENZ        | $500                      | PREMIER LWB          | 2007  
 MERCEDES BENZ        | $500                      | PREMIER SWB          | 2006  
 MERCEDES BENZ        | $550                      | STD                  | 2007  
 MERCEDES BENZ        | $550                      | STD                  | 2016  
-MERCEDES BENZ        | ACTROS 1725               | STD                  | 2003  
-MERCEDES BENZ        | B200 (HATCHBACK)          | GLS                  | 2013  
-MERCEDES BENZ        | E 53 HYBRID 4MATIC+ SEDAN | SED                  | 2026  
-MERCEDES BENZ        | EQE 350+                  | STD                  | 2022  
-MERCEDES BENZ        | EQE 350+                  | STD                  | 2023  
-MERCEDES BENZ        | EQS 450+                  | STD                  | 2022  
-MERCEDES BENZ        | EQS 450+                  | STD                  | 2023  
-MERCEDES BENZ        | S L 43 / COUPE            | STD                  | 2023  
-MERCEDES-BENZ        | EQE 350+                  | STD                  | 2022  
-MERCEDES-BENZ        | EQE 350+                  | STD                  | 2023  
-MERCEDES-BENZ        | EQE 350+                  | STD                  | 2024  
 MG                   | HS HYBRID+                | LUX                  | 2026  
 MITSUBISHI           | G. V. W                   | S                    | 2024  
-NISSAN               | NISSAN / CEDRICK          | AVANTGARDE SPORTS    | 1999  
-NISSAN               | NISSAN SUNNY 1.3          | LIMITED              | 1993  
-NISSAN               | NISSAN SUNNY 1.6          | LE                   | 1997  
-NISSAN               | NISSAN SUNNY 1.6          | S                    | 1998  
-NISSAN               | NISSAN SUNNY 1.6          | SPECIAL EDITION      | 1998  
 NISSAN               | PATROL/JEEP               | SE T2                | 1993  
-NISSAN               | SUNNY 1.3                 | BASE                 | 1998  
-NISSAN               | SUNNY 1.3                 | FLEET                | 2002  
-NISSAN               | SUNNY 1.3                 | GLI                  | 2011  
-NISSAN               | SUNNY 1.3                 | LE                   | 2002  
-NISSAN               | SUNNY 1.3                 | LE                   | 2005  
-NISSAN               | SUNNY 1.3                 | STD                  | 1998  
-NISSAN               | SUNNY 1.3                 | STD                  | 2002  
-NISSAN               | SUNNY 1.3                 | XLI                  | 1998  
-NISSAN               | SUNNY 1.4                 | LE                   | 1998  
-NISSAN               | SUNNY 1.4                 | STD                  | 1996  
-NISSAN               | SUNNY 1.5                 | CLASSIC EX           | 2008  
-NISSAN               | SUNNY 1.5                 | LXI                  | 1997  
-NISSAN               | SUNNY 1.5                 | S                    | 1998  
-NISSAN               | SUNNY 1.5                 | XLI                  | 1998  
-NISSAN               | SUNNY 1.6                 | FLEET                | 1997  
-NISSAN               | SUNNY 1.6                 | LE                   | 1997  
-NISSAN               | SUNNY 1.6                 | S                    | 2011  
-NISSAN               | SUNNY 1.6                 | STD                  | 2002  
-NISSAN               | SUNNY SV 1.5 AT           | SV                   | 2025  
 NISSAN               | URVAN/VAN                 | S                    | 2025  
-OPEL                 | MOKKA  X                  | TURBO ENJOY PLUS     | 2017  
-OPEL                 | MOKKA  X                  | TURBO INOVATION      | 2017  
-PADAR                | KINGKONG (PICKUP)         | S                    | 2025  
-PEUGEOT              | LAND REK   X MT           | VAN                  | 2025  
-RENAULT              | EXPRESS EX(VAN)           | GLE                  | 2026  
-ROX                  | ROX   1                   | STD                  | 2025  
-ROX                  | ROX   JISHI               | STD                  | 2026  
-ROX                  | ROX   JISHI 2012WD        | VIP                  | 2025  
-ROX                  | ROX 01 (ELECTRIC ROAD VEHICLE) | S                    | 2026  
-SINOTRUK             | SITRAK (TRACTOR)          | STD                  | 2026  
 SMART                | #1                        | PREMIUM              | 2025  
 SMART                | #3                        | PREMIUM              | 2025  
 SUZUKI               | S.PRESSO                  | STD                  | 2024  
-TOYOTA               | 25 HX DC 4X4 2.7LAT       | GLX                  | 2025  
-TOYOTA               | 25 HX DC 4X4 PLAT GLX RA(PICK UP) | DLX                  | 2025  
-TOYOTA               | 25 LP SC 4X4 P4.0 MT      | GLX                  | 2025  
-TOYOTA               | 26 HX DC 4X4 2.4LAT       | DLX                  | 2026  
-TOYOTA               | 26 LP SC 4X4 P4.0L AT     | SGLX                 | 2026  
-TOYOTA               | 26HX DC 4X4D2.4L AT       | DLX                  | 2026  
-TOYOTA               | 26HX DC 4X4P2.7LAT        | GLX                  | 2026  
-TOYOTA               | COROLLA 1.3               | GA                   | 1994  
-TOYOTA               | COROLLA 1.3               | GLI                  | 2025  
-TOYOTA               | COROLLA 1.3               | GLX                  | 2004  
-TOYOTA               | COROLLA 1.3               | LE                   | 2005  
-TOYOTA               | COROLLA 1.3               | LE                   | 2014  
-TOYOTA               | COROLLA 1.3               | LIMITED              | 2020  
-TOYOTA               | COROLLA 1.3               | LXI                  | 2003  
-TOYOTA               | COROLLA 1.3               | SE                   | 2012  
-TOYOTA               | COROLLA 1.3               | SV                   | 2003  
-TOYOTA               | COROLLA 1.3               | XLI                  | 2001  
-TOYOTA               | COROLLA 1.3               | XLI                  | 2007  
-TOYOTA               | COROLLA 1.3               | XLI                  | 2009  
-TOYOTA               | COROLLA 1.3               | XLI                  | 2020  
-TOYOTA               | COROLLA 1.3               | XLI                  | 2023  
-TOYOTA               | COROLLA 1.3               | XLI                  | 2024  
-TOYOTA               | COROLLA 1.5               | S                    | 1998  
-TOYOTA               | COROLLA 1.6               | 2.0L                 | 2020  
-TOYOTA               | COROLLA 1.6               | AMG                  | 2010  
-TOYOTA               | COROLLA 1.6               | COMFORT              | 1997  
-TOYOTA               | COROLLA 1.6               | GA                   | 2018  
-TOYOTA               | COROLLA 1.6               | GL                   | 1993  
-TOYOTA               | COROLLA 1.6               | GL                   | 1996  
-TOYOTA               | COROLLA 1.6               | GLI                  | 2006  
-TOYOTA               | COROLLA 1.6               | GLI HEV              | 2024  
-TOYOTA               | COROLLA 1.6               | LE PLATINUM CITY +   | 2018  
-TOYOTA               | COROLLA 1.6               | S                    | 2005  
-TOYOTA               | COROLLA 1.6               | S T2 TOP             | 2006  
-TOYOTA               | COROLLA 1.6               | XLI                  | 1997  
-TOYOTA               | COROLLA 1.6               | XLI                  | 2020  
-TOYOTA               | COROLLA 1.6               | XLI MID              | 1997  
-TOYOTA               | COROLLA 1.6               | XLI MID              | 2004  
-TOYOTA               | COROLLA 1.6               | XLI POWER OPT        | 2018  
-TOYOTA               | COROLLA 1.6 SEDAN         | TOP                  | 1993  
-TOYOTA               | COROLLA 1.8               | AMBIENTE             | 2018  
-TOYOTA               | COROLLA 1.8               | BASE                 | 2005  
-TOYOTA               | COROLLA 1.8               | EXI                  | 2018  
-TOYOTA               | COROLLA 1.8               | FLEET                | 2014  
-TOYOTA               | COROLLA 1.8               | GA                   | 2011  
-TOYOTA               | COROLLA 1.8               | GLI                  | 2024  
-TOYOTA               | COROLLA 1.8               | GLS HIGHLINE         | 2004  
-TOYOTA               | COROLLA 1.8               | GLX                  | 2006  
-TOYOTA               | COROLLA 1.8               | LE                   | 1997  
-TOYOTA               | COROLLA 1.8               | LE                   | 2005  
-TOYOTA               | COROLLA 1.8               | LE                   | 2007  
-TOYOTA               | COROLLA 1.8               | SE                   | 2017  
-TOYOTA               | COROLLA 1.8               | TOP                  | 2017  
-TOYOTA               | COROLLA 1.8               | VTI E                | 2006  
-TOYOTA               | COROLLA 1.8               | XLI                  | 2001  
-TOYOTA               | COROLLA 1.8               | XLI                  | 2006  
-TOYOTA               | COROLLA 1.8               | XLI                  | 2016  
-TOYOTA               | COROLLA 1.8               | XLI                  | 2017  
-TOYOTA               | COROLLA 1.8               | XLI TOP              | 2011  
-TOYOTA               | COROLLA 1.8 YUS           | LE                   | 2005  
-TOYOTA               | DLX FA (PICK UP)          | LIMITED              | 2026  
-TOYOTA               | GLX RA(PICK UP)           | GLX                  | 2026  
-TOYOTA               | GXR RA(STATION WAGON)     | STATION              | 2026  
-TOYOTA               | HX DC 4X4 D 2.4L AT       | DLX                  | 2026  
-TOYOTA               | LS4X4 P4.0L MT            | GLX                  | 2025  
 VOLKSWAGEN           | ID.3/LIFE                 | STD (NON GCC)        | 2021  
 VOLKSWAGEN           | ID.3/LIFE                 | TECH (NON GCC)       | 2022  
 VOLKSWAGEN           | ID.6/CROZZ                | PURE (NON GCC)       | 2022  
-VOLKSWAGEN           | JETTA 2.5L                | SEL                  | 2016  
 ZEEKR                | X/STATION                 | STD                  | 2024  
