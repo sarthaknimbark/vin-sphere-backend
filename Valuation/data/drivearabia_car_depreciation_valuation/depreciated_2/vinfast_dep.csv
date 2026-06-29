@@ -1,2 +1,2 @@
 model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
-vinfast-vf8,2025,ECO,153710,153710,153710,"AED 153,710 - 153,710",AED,,2026-06-25T17:18:26Z,VINFAST,VF8,VF8,0.133753,1,133151
+vinfast-vf8,2025,ECO,168571,186316,177444,"AED 168,571 - 186,316",AED,,2026-06-25T09:51:33Z,VINFAST,VF8,VF8,0.133753,1,153710

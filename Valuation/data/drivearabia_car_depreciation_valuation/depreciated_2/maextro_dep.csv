@@ -1,3 +1,4 @@
 model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
 maextro-s800,2025,GLE,153600,153600,153600,"AED 153,600 - 153,600",AED,,2026-06-25T17:18:26Z,MAEXTRO,S800,S800,0.133753,1,133056
+maextro-s800,2025,S,333666,368789,351228,"AED 333,666 - 368,789",AED,,2026-06-25T09:51:33Z,MAEXTRO,S800,S800,0.133753,1,304250
 maextro-s800,2025,STARSHINE EXECUTIVE EDITION,454900,454900,454900,"AED 454,900 - 454,900",AED,,2026-06-25T17:18:26Z,MAEXTRO,S800,S800,0.133753,1,394056

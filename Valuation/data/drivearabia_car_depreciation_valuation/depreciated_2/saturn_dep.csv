@@ -1,2 +1,2 @@
 model_slug,year,trim_name,price_min_aed,price_max_aed,price_avg_aed,price_raw,currency,url,scraped_at,make,model_name,model,annual_dep_rate,car_age,depreciated_value
-saturn-sky,2007,RED LINE,8300,8300,8300,"AED 8,300 - 8,300",AED,,2026-06-25T17:18:26Z,SATURN,SKY,SKY,0.133753,19,7190
+saturn-sky,2007,RED LINE,120672,133375,127024,"AED 120,672 - 133,375",AED,,2026-06-25T09:51:33Z,SATURN,SKY,SKY,0.133753,19,10162
