@@ -18,10 +18,6 @@ LAND ROVER           | DEFENDER/STATION          | STD                  | 2026
 LEXUS                | LS300                     | BASE                 | 2006  
 LEXUS                | UX250(4WD)                | SMART                | 2022  
 LI                   | L7                        | STD (NON GCC)        | 2025  
-MERCEDES BENZ        | $500                      | PREMIER LWB          | 2007  
-MERCEDES BENZ        | $500                      | PREMIER SWB          | 2006  
-MERCEDES BENZ        | $550                      | STD                  | 2007  
-MERCEDES BENZ        | $550                      | STD                  | 2016  
 MG                   | HS HYBRID+                | LUX                  | 2026  
 MITSUBISHI           | G. V. W                   | S                    | 2024  
 NISSAN               | PATROL/JEEP               | SE T2                | 1993  
