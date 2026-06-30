@@ -50,8 +50,66 @@ CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_deprec
 # =====================================================================
 MASTER_DB_DIR = project_root / "master_database"
 MASTER_DATASET_PATH = MASTER_DB_DIR / "master_dataset.csv"
+APPROVED_PREDICTIONS_PATH = MASTER_DB_DIR / "approved_predictions.csv"
 PENDING_PREDICTIONS_PATH = MASTER_DB_DIR / "pending_predictions.csv"
 PREDICTION_LOGS_PATH = MASTER_DB_DIR / "prediction_logs.csv"
+
+# GitHub sync environment variables from streamlit secrets
+GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN") if "GITHUB_TOKEN" in st.secrets else None
+GITHUB_OWNER = st.secrets.get("GITHUB_OWNER", "sarthak-opash")
+GITHUB_REPO = st.secrets.get("GITHUB_REPO", "vin-sphere-python")
+GITHUB_BRANCH = st.secrets.get("GITHUB_BRANCH", "main")
+
+def github_read_csv(relative_path: str) -> pd.DataFrame:
+    """Reads a CSV file from the GitHub repository using the GitHub API."""
+    import base64
+    import requests
+    from io import StringIO
+    if not GITHUB_TOKEN:
+        return pd.DataFrame()
+    git_path = relative_path.replace("\\", "/")
+    url = f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{git_path}?ref={GITHUB_BRANCH}"
+    headers = {
+        "Authorization": f"token {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+    r = requests.get(url, headers=headers)
+    if r.status_code == 200:
+        data = r.json()
+        content = base64.b64decode(data["content"]).decode("utf-8")
+        return pd.read_csv(StringIO(content))
+    return pd.DataFrame()
+
+def github_write_csv(relative_path: str, df: pd.DataFrame, commit_message: str) -> bool:
+    """Writes a DataFrame to a CSV file in the GitHub repository, committing it."""
+    import base64
+    import requests
+    if not GITHUB_TOKEN:
+        return False
+    git_path = relative_path.replace("\\", "/")
+    url = f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{git_path}"
+    headers = {
+        "Authorization": f"token {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+    sha = None
+    r_get = requests.get(f"{url}?ref={GITHUB_BRANCH}", headers=headers)
+    if r_get.status_code == 200:
+        sha = r_get.json().get("sha")
+    
+    csv_str = df.to_csv(index=False)
+    content_b64 = base64.b64encode(csv_str.encode("utf-8")).decode("utf-8")
+    
+    payload = {
+        "message": commit_message,
+        "content": content_b64,
+        "branch": GITHUB_BRANCH
+    }
+    if sha:
+        payload["sha"] = sha
+        
+    r_put = requests.put(url, headers=headers, json=payload)
+    return r_put.status_code in [200, 201]
 
 def migrate_csv_headers():
     import os
@@ -85,6 +143,31 @@ def lookup_vin_in_master_dataset(file_path: str, vin: str) -> dict:
                     return dict(zip(header, row))
     except Exception as e:
         print(f"Error reading master dataset line-by-line: {e}")
+    return None
+
+def safe_read_approved_predictions() -> pd.DataFrame:
+    if GITHUB_TOKEN:
+        df = github_read_csv("master_database/approved_predictions.csv")
+        if df.empty or "chassisNumber" not in df.columns:
+            return pd.DataFrame(columns=["chassisNumber", "year", "make", "model", "trim", "bodyType", "regionalSpec", "cylinders", "color", "origin", "weightInKg", "noOfPassengers"])
+        return df
+    else:
+        if not os.path.exists(str(APPROVED_PREDICTIONS_PATH)):
+            return pd.DataFrame(columns=["chassisNumber", "year", "make", "model", "trim", "bodyType", "regionalSpec", "cylinders", "color", "origin", "weightInKg", "noOfPassengers"])
+        try:
+            return pd.read_csv(str(APPROVED_PREDICTIONS_PATH))
+        except Exception:
+            return pd.DataFrame(columns=["chassisNumber", "year", "make", "model", "trim", "bodyType", "regionalSpec", "cylinders", "color", "origin", "weightInKg", "noOfPassengers"])
+
+def lookup_vin_in_approved_predictions(vin: str) -> dict:
+    df_approved = safe_read_approved_predictions()
+    if df_approved.empty:
+        return None
+    vin_upper = vin.upper().strip()
+    match = df_approved[df_approved["chassisNumber"].astype(str).str.upper().str.strip() == vin_upper]
+    if not match.empty:
+        row = match.iloc[0].to_dict()
+        return row
     return None
 
 def format_csv_value(val):
@@ -134,96 +217,116 @@ def align_df_columns(df: pd.DataFrame, file_path: Path) -> pd.DataFrame:
 
 def log_prediction(vin: str, length: int, source: str, result: dict):
     import datetime
-    try:
-        os.makedirs(str(MASTER_DB_DIR), exist_ok=True)
-        log_entry = {
-            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "vin": vin,
-            "length": length,
-            "source": source,
-            "year": result.get("year", ""),
-            "make": result.get("make", ""),
-            "model": result.get("model", ""),
-            "trim": result.get("trim", ""),
-            "body_type": result.get("body_type", ""),
-            "cylinders": result.get("cylinders", ""),
-            "origin": result.get("origin", ""),
-            "no_of_passengers": result.get("no_of_passengers", ""),
-            "weight": result.get("weight", ""),
-            "regional_spec": result.get("regional_spec", ""),
-            "confidence": result.get("confidence", 0.0),
-            "color": result.get("color", "")
-        }
-        df_log = pd.DataFrame([log_entry])
-        file_exists = os.path.exists(str(PREDICTION_LOGS_PATH))
-        if file_exists:
-            df_log = align_df_columns(df_log, PREDICTION_LOGS_PATH)
-        df_log.to_csv(str(PREDICTION_LOGS_PATH), mode="a", index=False, header=not file_exists)
-    except Exception as e:
-        print(f"Error logging prediction: {e}")
+    log_entry = {
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "vin": vin,
+        "length": length,
+        "source": source,
+        "year": result.get("year", ""),
+        "make": result.get("make", ""),
+        "model": result.get("model", ""),
+        "trim": result.get("trim", ""),
+        "body_type": result.get("body_type", ""),
+        "cylinders": result.get("cylinders", ""),
+        "origin": result.get("origin", ""),
+        "no_of_passengers": result.get("no_of_passengers", ""),
+        "weight": result.get("weight", ""),
+        "regional_spec": result.get("regional_spec", ""),
+        "confidence": result.get("confidence", 0.0),
+        "color": result.get("color", "")
+    }
+    df_log = pd.DataFrame([log_entry])
+    if GITHUB_TOKEN:
+        try:
+            df_existing = github_read_csv("master_database/prediction_logs.csv")
+            if not df_existing.empty:
+                df_log = pd.concat([df_existing, df_log], ignore_index=True)
+            github_write_csv("master_database/prediction_logs.csv", df_log, f"Log prediction for {vin}")
+        except Exception as e:
+            print(f"Error logging to github: {e}")
+    else:
+        try:
+            os.makedirs(str(MASTER_DB_DIR), exist_ok=True)
+            file_exists = os.path.exists(str(PREDICTION_LOGS_PATH))
+            if file_exists:
+                df_log = align_df_columns(df_log, PREDICTION_LOGS_PATH)
+            df_log.to_csv(str(PREDICTION_LOGS_PATH), mode="a", index=False, header=not file_exists)
+        except Exception as e:
+            print(f"Error logging prediction: {e}")
 
 def safe_read_pending_predictions() -> pd.DataFrame:
-    if not os.path.exists(str(PENDING_PREDICTIONS_PATH)):
-        return pd.DataFrame()
-    try:
-        df = pd.read_csv(str(PENDING_PREDICTIONS_PATH))
+    if GITHUB_TOKEN:
+        df = github_read_csv("master_database/pending_predictions.csv")
         if df.empty or "vin" not in df.columns:
             return pd.DataFrame()
         return df
-    except Exception as e:
-        print(f"Parser error or mismatch in pending CSV: {e}. Re-initializing file.")
+    else:
+        if not os.path.exists(str(PENDING_PREDICTIONS_PATH)):
+            return pd.DataFrame()
         try:
-            os.remove(str(PENDING_PREDICTIONS_PATH))
-        except Exception:
-            pass
-        return pd.DataFrame()
+            df = pd.read_csv(str(PENDING_PREDICTIONS_PATH))
+            if df.empty or "vin" not in df.columns:
+                return pd.DataFrame()
+            return df
+        except Exception as e:
+            print(f"Parser error or mismatch in pending CSV: {e}. Re-initializing file.")
+            try:
+                os.remove(str(PENDING_PREDICTIONS_PATH))
+            except Exception:
+                pass
+            return pd.DataFrame()
 
 def save_pending_prediction(vin: str, length: int, result: dict):
     import datetime
-    try:
-        os.makedirs(str(MASTER_DB_DIR), exist_ok=True)
-        pending_entry = {
-            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "vin": vin,
-            "length": length,
-            "year": result.get("year", ""),
-            "make": result.get("make", ""),
-            "model": result.get("model", ""),
-            "trim": result.get("trim", ""),
-            "body_type": result.get("body_type", ""),
-            "cylinders": result.get("cylinders", ""),
-            "color": result.get("color", ""),
-            "origin": result.get("origin", ""),
-            "no_of_passengers": result.get("no_of_passengers", ""),
-            "weight": result.get("weight", ""),
-            "regional_spec": result.get("regional_spec", ""),
-            "confidence": result.get("confidence", 0.0)
-        }
-        df_pending = pd.DataFrame([pending_entry])
-        
-        df_existing = safe_read_pending_predictions()
-        if not df_existing.empty and "vin" in df_existing.columns:
-            if vin.upper().strip() in df_existing["vin"].astype(str).str.upper().str.strip().tolist():
-                return
-            
-        file_exists = os.path.exists(str(PENDING_PREDICTIONS_PATH))
-        if file_exists:
-            df_pending = align_df_columns(df_pending, PENDING_PREDICTIONS_PATH)
-        df_pending.to_csv(str(PENDING_PREDICTIONS_PATH), mode="a", index=False, header=not file_exists)
-    except Exception as e:
-        print(f"Error saving pending prediction: {e}")
+    pending_entry = {
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "vin": vin,
+        "length": length,
+        "year": result.get("year", ""),
+        "make": result.get("make", ""),
+        "model": result.get("model", ""),
+        "trim": result.get("trim", ""),
+        "body_type": result.get("body_type", ""),
+        "cylinders": result.get("cylinders", ""),
+        "color": result.get("color", ""),
+        "origin": result.get("origin", ""),
+        "no_of_passengers": result.get("no_of_passengers", ""),
+        "weight": result.get("weight", ""),
+        "regional_spec": result.get("regional_spec", ""),
+        "confidence": result.get("confidence", 0.0)
+    }
+    df_pending = pd.DataFrame([pending_entry])
+    
+    if GITHUB_TOKEN:
+        try:
+            df_existing = github_read_csv("master_database/pending_predictions.csv")
+            if not df_existing.empty and "vin" in df_existing.columns:
+                if vin.upper().strip() in df_existing["vin"].astype(str).str.upper().str.strip().tolist():
+                    return
+                df_pending = pd.concat([df_existing, df_pending], ignore_index=True)
+            github_write_csv("master_database/pending_predictions.csv", df_pending, f"Save pending prediction for {vin}")
+        except Exception as e:
+            print(f"Error saving pending to github: {e}")
+    else:
+        try:
+            os.makedirs(str(MASTER_DB_DIR), exist_ok=True)
+            df_existing = safe_read_pending_predictions()
+            if not df_existing.empty and "vin" in df_existing.columns:
+                if vin.upper().strip() in df_existing["vin"].astype(str).str.upper().str.strip().tolist():
+                    return
+                
+            file_exists = os.path.exists(str(PENDING_PREDICTIONS_PATH))
+            if file_exists:
+                df_pending = align_df_columns(df_pending, PENDING_PREDICTIONS_PATH)
+            df_pending.to_csv(str(PENDING_PREDICTIONS_PATH), mode="a", index=False, header=not file_exists)
+        except Exception as e:
+            print(f"Error saving pending prediction: {e}")
 
 def approve_pending_prediction(vin: str, updated_attrs: dict) -> bool:
     try:
-        # 1. Remove from pending_predictions.csv
-        df_pending = safe_read_pending_predictions()
-        if not df_pending.empty and "vin" in df_pending.columns:
-            df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin.upper().strip()]
-            df_pending_clean.to_csv(str(PENDING_PREDICTIONS_PATH), index=False)
-            
-        # 2. Append to master_dataset.csv with correct columns
+        vin_upper = vin.upper().strip()
         master_row = {
-            "chassisNumber": vin.upper().strip(),
+            "chassisNumber": vin_upper,
             "year": updated_attrs.get("year", ""),
             "make": updated_attrs.get("make", ""),
             "model": updated_attrs.get("model", ""),
@@ -237,11 +340,27 @@ def approve_pending_prediction(vin: str, updated_attrs: dict) -> bool:
             "noOfPassengers": updated_attrs.get("no_of_passengers", "")
         }
         df_master_row = pd.DataFrame([master_row])
-        file_exists = os.path.exists(str(MASTER_DATASET_PATH))
-        if file_exists:
-            df_master_row = align_df_columns(df_master_row, MASTER_DATASET_PATH)
-        df_master_row.to_csv(str(MASTER_DATASET_PATH), mode="a", index=False, header=not file_exists)
-        
+
+        if GITHUB_TOKEN:
+            df_pending = github_read_csv("master_database/pending_predictions.csv")
+            if not df_pending.empty and "vin" in df_pending.columns:
+                df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin_upper]
+                github_write_csv("master_database/pending_predictions.csv", df_pending_clean, f"Remove approved VIN {vin} from pending")
+            
+            df_approved = safe_read_approved_predictions()
+            df_approved = pd.concat([df_approved, df_master_row], ignore_index=True)
+            github_write_csv("master_database/approved_predictions.csv", df_approved, f"Approve and save VIN {vin} to approved predictions")
+        else:
+            df_pending = safe_read_pending_predictions()
+            if not df_pending.empty and "vin" in df_pending.columns:
+                df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin_upper]
+                df_pending_clean.to_csv(str(PENDING_PREDICTIONS_PATH), index=False)
+            
+            df_approved = safe_read_approved_predictions()
+            df_approved = pd.concat([df_approved, df_master_row], ignore_index=True)
+            os.makedirs(str(MASTER_DB_DIR), exist_ok=True)
+            df_approved.to_csv(str(APPROVED_PREDICTIONS_PATH), index=False)
+
         return True
     except Exception as e:
         print(f"Error approving pending prediction: {e}")
@@ -249,14 +368,21 @@ def approve_pending_prediction(vin: str, updated_attrs: dict) -> bool:
 
 def reject_pending_prediction(vin: str) -> bool:
     try:
-        df_pending = safe_read_pending_predictions()
-        if not df_pending.empty and "vin" in df_pending.columns:
-            df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin.upper().strip()]
-            df_pending_clean.to_csv(str(PENDING_PREDICTIONS_PATH), index=False)
-            return True
+        vin_upper = vin.upper().strip()
+        if GITHUB_TOKEN:
+            df_pending = github_read_csv("master_database/pending_predictions.csv")
+            if not df_pending.empty and "vin" in df_pending.columns:
+                df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin_upper]
+                github_write_csv("master_database/pending_predictions.csv", df_pending_clean, f"Reject and remove VIN {vin} from pending")
+        else:
+            df_pending = safe_read_pending_predictions()
+            if not df_pending.empty and "vin" in df_pending.columns:
+                df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin_upper]
+                df_pending_clean.to_csv(str(PENDING_PREDICTIONS_PATH), index=False)
+        return True
     except Exception as e:
         print(f"Error rejecting pending prediction: {e}")
-    return False
+        return False
 
 def render_admin_panel():
     # Admin PIN Authentication Gate
@@ -736,12 +862,18 @@ def decode_any_vin(vin_str: str) -> tuple:
     normalized = re.sub(r"[^A-Z0-9]", "", vin_str.upper())
     length = len(normalized)
 
-    # 1. Existing VIN lookup in master_dataset.csv
+    # 1. Existing VIN lookup in approved_predictions or master_dataset.csv
     matched_row_dict = None
     try:
-        matched_row = lookup_vin_in_master_dataset(str(MASTER_DATASET_PATH), normalized)
+        matched_row = lookup_vin_in_approved_predictions(normalized)
         if matched_row:
             matched_row_dict = get_verified_vin_dict(matched_row)
+        else:
+            matched_row = lookup_vin_in_master_dataset(str(MASTER_DATASET_PATH), normalized)
+            if matched_row:
+                matched_row_dict = get_verified_vin_dict(matched_row)
+                
+        if matched_row_dict:
             # Check if any main attributes are UNKNOWN
             has_unknowns = False
             for key in ["make", "model", "year", "trim", "body_type", "cylinders", "color", "origin", "weight", "no_of_passengers", "regional_spec"]:
@@ -1070,7 +1202,6 @@ def find_matches_in_car_dep(df: pd.DataFrame, result: dict) -> pd.DataFrame:
         model_matches_df = year_matches[year_matches["model_slug"].apply(slug_matches)]
         if model_matches_df.empty:
             return pd.DataFrame()
-
     # 4. Filter by trim
     trim = str(result.get("trim", "")).strip().upper()
     if not trim or trim in ["UNKNOWN", ""]:
