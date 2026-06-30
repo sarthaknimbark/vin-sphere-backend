@@ -286,7 +286,8 @@ def render_admin_panel():
         
     # Pagination configuration
     total_items = len(df_pending)
-    col_size, col_nav = st.columns([1, 2])
+    st.markdown("<div class='admin-pagination-container'>", unsafe_allow_html=True)
+    col_size, col_nav = st.columns([1, 2], vertical_alignment="bottom")
     with col_size:
         items_per_page = st.selectbox("Items per page", [10, 20, 50, 100], index=0, key="admin_items_per_page")
         
@@ -299,17 +300,18 @@ def render_admin_panel():
         st.session_state.admin_page_num = max(1, total_pages)
         
     with col_nav:
-        c_prev, c_page, c_next = st.columns([1, 2, 1])
+        c_prev, c_page, c_next = st.columns([1, 2, 1], vertical_alignment="bottom")
         with c_prev:
             if st.button("⬅️ Prev", disabled=(st.session_state.admin_page_num <= 1), key="admin_btn_prev"):
                 st.session_state.admin_page_num -= 1
                 st.rerun()
         with c_page:
-            st.markdown(f"<div style='text-align: center; padding-top: 10px; font-size: 0.95em;'>Page <b>{st.session_state.admin_page_num}</b> of {total_pages}</div>", unsafe_allow_html=True)
+            st.markdown(f"<div style='text-align: center; font-size: 0.95em;'>Page <b>{st.session_state.admin_page_num}</b> of {total_pages}</div>", unsafe_allow_html=True)
         with c_next:
             if st.button("Next ➡️", disabled=(st.session_state.admin_page_num >= total_pages), key="admin_btn_next"):
                 st.session_state.admin_page_num += 1
                 st.rerun()
+    st.markdown("</div>", unsafe_allow_html=True)
                 
     start_idx = (st.session_state.admin_page_num - 1) * items_per_page
     end_idx = min(start_idx + items_per_page, total_items)
@@ -322,6 +324,32 @@ def render_admin_panel():
     st.markdown(
         """
         <style>
+        /* Center align pagination row */
+        .admin-pagination-container [data-testid="stHorizontalBlock"] {
+            align-items: flex-end !important;
+            display: flex !important;
+            flex-direction: row !important;
+        }
+
+        /* Center vertically the inner pagination columns (Prev, Page text, Next) */
+        .admin-pagination-container [data-testid="column"] [data-testid="stHorizontalBlock"] {
+            align-items: center !important;
+            display: flex !important;
+            flex-direction: row !important;
+        }
+
+        /* Center and vertically align buttons and page number inside navigation block */
+        .admin-pagination-container [data-testid="column"] [data-testid="column"] div[data-testid="stElementContainer"],
+        .admin-pagination-container [data-testid="column"] [data-testid="column"] div[data-testid="element-container"] {
+            margin: 0px !important;
+            padding: 0px !important;
+            height: 38px !important;
+            min-height: 38px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
         /* Admin table container layout */
         .admin-table-container {
             overflow-x: auto !important; /* Enable horizontal scrolling for the entire table container */
@@ -709,16 +737,24 @@ def decode_any_vin(vin_str: str) -> tuple:
     length = len(normalized)
 
     # 1. Existing VIN lookup in master_dataset.csv
+    matched_row_dict = None
     try:
         matched_row = lookup_vin_in_master_dataset(str(MASTER_DATASET_PATH), normalized)
         if matched_row:
-            res = get_verified_vin_dict(matched_row)
-            log_prediction(normalized, length, "master_dataset", res)
-            return res, length
+            matched_row_dict = get_verified_vin_dict(matched_row)
+            # Check if any main attributes are UNKNOWN
+            has_unknowns = False
+            for key in ["make", "model", "year", "trim", "body_type", "cylinders", "color", "origin", "weight", "no_of_passengers", "regional_spec"]:
+                if matched_row_dict.get(key, "UNKNOWN") == "UNKNOWN":
+                    has_unknowns = True
+                    break
+            if not has_unknowns:
+                log_prediction(normalized, length, "master_dataset", matched_row_dict)
+                return matched_row_dict, length
     except Exception as e:
         print(f"Error checking master dataset: {e}")
 
-    # 2. Run decoders if not found in master dataset
+    # 2. Run decoders if not found or contains UNKNOWN fields
     res = None
     if length == 17:
         mod = load_predict_module("chat_cat(2.0)")
@@ -763,8 +799,21 @@ def decode_any_vin(vin_str: str) -> tuple:
     # 3. Log all predictions & save unseen predictions to pending queue
     if res is not None:
         normalized_res = normalize_result_keys(res)
-        log_prediction(normalized, length, "decoder", normalized_res)
-        save_pending_prediction(normalized, length, normalized_res)
+        if matched_row_dict:
+            # Merge known values from master dataset
+            for key in ["make", "model", "year", "trim", "body_type", "cylinders", "color", "origin", "weight", "no_of_passengers", "regional_spec"]:
+                master_val = matched_row_dict.get(key, "UNKNOWN")
+                if master_val != "UNKNOWN":
+                    normalized_res[key] = master_val
+                    if "attribute_confidences" in normalized_res:
+                        if isinstance(normalized_res["attribute_confidences"], dict):
+                            normalized_res["attribute_confidences"][key] = 1.0
+            log_prediction(normalized, length, "master_dataset_merged", normalized_res)
+            return normalized_res, length
+        else:
+            log_prediction(normalized, length, "decoder", normalized_res)
+            save_pending_prediction(normalized, length, normalized_res)
+            return normalized_res, length
 
     return res, length
 
@@ -772,21 +821,28 @@ def decode_any_vin(vin_str: str) -> tuple:
 def normalize_result_keys(result: dict) -> dict:
     """Converts prediction returns into a standardized flat dictionary."""
     mapped = {}
-    mapped["make"] = str(result.get("make", "UNKNOWN")).strip().upper()
-    mapped["model"] = str(result.get("model", "UNKNOWN")).strip().upper()
-    mapped["year"] = str(result.get("year", "UNKNOWN")).strip().upper()
-    mapped["trim"] = str(result.get("trim", "UNKNOWN")).strip().upper()
-    mapped["body_type"] = str(result.get("body_type", "UNKNOWN")).strip().upper()
-    mapped["cylinders"] = str(result.get("cylinders", "UNKNOWN")).strip().upper()
-    mapped["origin"] = str(result.get("origin", "UNKNOWN")).strip().upper()
-    mapped["no_of_passengers"] = (
-        str(result.get("no_of_passengers", "UNKNOWN")).strip().upper()
-    )
-    mapped["weight"] = str(result.get("weight", "UNKNOWN")).strip().upper()
-    mapped["color"] = str(result.get("color", "UNKNOWN")).strip().upper()
+
+    def clean_val(val) -> str:
+        if val is None or pd.isna(val):
+            return "UNKNOWN"
+        s = str(val).strip().upper()
+        if s in ["", "NONE", "NAN", "NULL", "UNKNOWN", "NOT FOUND"]:
+            return "UNKNOWN"
+        return s
+
+    mapped["make"] = clean_val(result.get("make"))
+    mapped["model"] = clean_val(result.get("model"))
+    mapped["year"] = clean_val(result.get("year"))
+    mapped["trim"] = clean_val(result.get("trim"))
+    mapped["body_type"] = clean_val(result.get("body_type"))
+    mapped["cylinders"] = clean_val(result.get("cylinders"))
+    mapped["origin"] = clean_val(result.get("origin"))
+    mapped["no_of_passengers"] = clean_val(result.get("no_of_passengers"))
+    mapped["weight"] = clean_val(result.get("weight"))
+    mapped["color"] = clean_val(result.get("color"))
 
     reg_spec = result.get("regional_spec", result.get("regional_specs", "UNKNOWN"))
-    mapped["regional_spec"] = str(reg_spec).strip().upper()
+    mapped["regional_spec"] = clean_val(reg_spec)
 
     # Normalize attribute confidences supporting fallback to confidence_scores (for 9-char decoders)
     attr_conf = result.get("attribute_confidences", result.get("confidence_scores", {}))
