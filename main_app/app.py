@@ -37,7 +37,11 @@ st.set_page_config(
 
 # Resolve project paths
 app_dir = Path(__file__).resolve().parent
-project_root = app_dir.parent
+if app_dir.name == "main_app":
+    project_root = app_dir.parent
+else:
+    project_root = app_dir
+
 LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep_2.csv"
 
@@ -114,6 +118,20 @@ def get_verified_vin_dict(row: dict) -> dict:
         }
     }
 
+def align_df_columns(df: pd.DataFrame, file_path: Path) -> pd.DataFrame:
+    import os
+    if os.path.exists(str(file_path)) and os.path.getsize(str(file_path)) > 0:
+        try:
+            existing_cols = pd.read_csv(str(file_path), nrows=0).columns.tolist()
+            if existing_cols:
+                for col in existing_cols:
+                    if col not in df.columns:
+                        df[col] = "UNKNOWN"
+                return df[existing_cols]
+        except Exception as e:
+            print(f"Error aligning columns with {file_path}: {e}")
+    return df
+
 def log_prediction(vin: str, length: int, source: str, result: dict):
     import datetime
     try:
@@ -129,15 +147,17 @@ def log_prediction(vin: str, length: int, source: str, result: dict):
             "trim": result.get("trim", ""),
             "body_type": result.get("body_type", ""),
             "cylinders": result.get("cylinders", ""),
-            "color": result.get("color", ""),
             "origin": result.get("origin", ""),
             "no_of_passengers": result.get("no_of_passengers", ""),
             "weight": result.get("weight", ""),
             "regional_spec": result.get("regional_spec", ""),
-            "confidence": result.get("confidence", 0.0)
+            "confidence": result.get("confidence", 0.0),
+            "color": result.get("color", "")
         }
         df_log = pd.DataFrame([log_entry])
         file_exists = os.path.exists(str(PREDICTION_LOGS_PATH))
+        if file_exists:
+            df_log = align_df_columns(df_log, PREDICTION_LOGS_PATH)
         df_log.to_csv(str(PREDICTION_LOGS_PATH), mode="a", index=False, header=not file_exists)
     except Exception as e:
         print(f"Error logging prediction: {e}")
@@ -187,6 +207,8 @@ def save_pending_prediction(vin: str, length: int, result: dict):
                 return
             
         file_exists = os.path.exists(str(PENDING_PREDICTIONS_PATH))
+        if file_exists:
+            df_pending = align_df_columns(df_pending, PENDING_PREDICTIONS_PATH)
         df_pending.to_csv(str(PENDING_PREDICTIONS_PATH), mode="a", index=False, header=not file_exists)
     except Exception as e:
         print(f"Error saving pending prediction: {e}")
@@ -216,9 +238,10 @@ def approve_pending_prediction(vin: str, updated_attrs: dict) -> bool:
         }
         df_master_row = pd.DataFrame([master_row])
         file_exists = os.path.exists(str(MASTER_DATASET_PATH))
+        if file_exists:
+            df_master_row = align_df_columns(df_master_row, MASTER_DATASET_PATH)
         df_master_row.to_csv(str(MASTER_DATASET_PATH), mode="a", index=False, header=not file_exists)
         
-        # 3. Cache invalidation no longer needed (lookup is done directly from disk)
         return True
     except Exception as e:
         print(f"Error approving pending prediction: {e}")
@@ -261,7 +284,39 @@ def render_admin_panel():
         st.success("No pending VINs awaiting verification. Good job!")
         return
         
-    st.subheader(f"Pending Predictions ({len(df_pending)})")
+    # Pagination configuration
+    total_items = len(df_pending)
+    col_size, col_nav = st.columns([1, 2])
+    with col_size:
+        items_per_page = st.selectbox("Items per page", [10, 20, 50, 100], index=0, key="admin_items_per_page")
+        
+    total_pages = (total_items + items_per_page - 1) // items_per_page
+    
+    if "admin_page_num" not in st.session_state:
+        st.session_state.admin_page_num = 1
+        
+    if st.session_state.admin_page_num > total_pages:
+        st.session_state.admin_page_num = max(1, total_pages)
+        
+    with col_nav:
+        c_prev, c_page, c_next = st.columns([1, 2, 1])
+        with c_prev:
+            if st.button("⬅️ Prev", disabled=(st.session_state.admin_page_num <= 1), key="admin_btn_prev"):
+                st.session_state.admin_page_num -= 1
+                st.rerun()
+        with c_page:
+            st.markdown(f"<div style='text-align: center; padding-top: 10px; font-size: 0.95em;'>Page <b>{st.session_state.admin_page_num}</b> of {total_pages}</div>", unsafe_allow_html=True)
+        with c_next:
+            if st.button("Next ➡️", disabled=(st.session_state.admin_page_num >= total_pages), key="admin_btn_next"):
+                st.session_state.admin_page_num += 1
+                st.rerun()
+                
+    start_idx = (st.session_state.admin_page_num - 1) * items_per_page
+    end_idx = min(start_idx + items_per_page, total_items)
+    
+    df_page = df_pending.iloc[start_idx:end_idx]
+    
+    st.subheader(f"Pending Predictions ({start_idx + 1}-{end_idx} of {total_items})")
     
     # Display the inline styling for colored buttons and Excel sheet formatting
     st.markdown(
@@ -510,7 +565,7 @@ def render_admin_panel():
         col.markdown(f"**{h}**")
         
     # Render each pending VIN in its own row (form)
-    for idx, item in df_pending.iterrows():
+    for idx, item in df_page.iterrows():
         vin = str(item["vin"]).strip().upper()
         
         # We wrap each row in a separate form with the VIN as part of the key
@@ -733,8 +788,20 @@ def normalize_result_keys(result: dict) -> dict:
     reg_spec = result.get("regional_spec", result.get("regional_specs", "UNKNOWN"))
     mapped["regional_spec"] = str(reg_spec).strip().upper()
 
-    mapped["attribute_confidences"] = result.get("attribute_confidences", {})
-    mapped["confidence"] = result.get("confidence", 0.0)
+    # Normalize attribute confidences supporting fallback to confidence_scores (for 9-char decoders)
+    attr_conf = result.get("attribute_confidences", result.get("confidence_scores", {}))
+    standardized_conf = {}
+    for k, v in attr_conf.items():
+        standardized_conf[k.lower()] = v
+    mapped["attribute_confidences"] = standardized_conf
+
+    # Overall confidence
+    confidence = result.get("confidence")
+    if confidence is None:
+        confs = [float(v) for v in standardized_conf.values() if v is not None]
+        confidence = float(np.mean(confs)) if confs else 0.0
+    mapped["confidence"] = float(confidence)
+
     return mapped
 
 
