@@ -1,5 +1,6 @@
 import sys
 import re
+import importlib.util
 from difflib import SequenceMatcher
 from pathlib import Path
 
@@ -15,13 +16,21 @@ st.set_page_config(
 
 # Add project root and chat_cat to Python path to import chat_cat
 project_root = Path(__file__).resolve().parent
-chat_cat_path = project_root / "chat_cat"
+chat_cat_path = project_root / "chat_cat(2.0)"
 if str(project_root) not in sys.path:
     sys.path.append(str(project_root))
 if str(chat_cat_path) not in sys.path:
     sys.path.append(str(chat_cat_path))
 
-from chat_cat.predict import decode_vin
+app_path = project_root / "chat_cat(2.0)"
+predict_py_path = app_path / "predict.py"
+spec = importlib.util.spec_from_file_location("predict", str(predict_py_path))
+predict_module = importlib.util.module_from_spec(spec)
+sys.modules["predict"] = predict_module
+spec.loader.exec_module(predict_module)
+decode_vin = predict_module.decode_vin
+
+# from chat_cat.predict import decode_vin
 
 def decode_any_vin(vin_str):
     length = len(vin_str)
@@ -322,12 +331,11 @@ def calculate_valuation(price: float) -> dict:
         return None
 
 # Define fallback model and lookup paths
-MODEL_DIR = str(project_root / "chat_cat" / "models")
+MODEL_DIR = str(project_root / "chat_cat(2.0)" / "models")
 LOOKUP_DATA_PATH = project_root / "Data/lookup_clean_translated.csv"
 
 # Updated directory path for your cleaned 21 depreciation CSV files
 # DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation"
-# DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated"
 DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated_2"
 
 @st.cache_data

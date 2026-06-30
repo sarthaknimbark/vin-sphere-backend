@@ -7,8 +7,8 @@ import pandas as pd
 
 project_root = Path(__file__).resolve().parent
 INPUT_CSV = project_root / 'lookup_clean_translated.csv'
-DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
-# DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated_2'
+# DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
+DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated_2'
 
 def normalize_trim(val):
     if pd.isna(val):
@@ -17,7 +17,7 @@ def normalize_trim(val):
 
 # ── 1. PRE-INDEX DEPRECIATION DATA FOR MASSIVE SPEED ─────────────────────────
 print("Pre-indexing depreciation lookup files into memory...")
-csv_files = glob.glob(str(DEP_DIR / '*_dep_2.csv'))
+csv_files = glob.glob(str(DEP_DIR / '*_dep.csv'))
 
 # Schema: dep_index[filename][(model_slug, year_val)] = list of rows (dict format)
 dep_index = defaultdict(lambda: defaultdict(list))
@@ -169,14 +169,14 @@ for i, row in enumerate(lookup.itertuples(index=False)):
 print("Writing variance reports...")
 Path('Data').mkdir(parents=True, exist_ok=True)
 
-with open('variance_full_records.txt', 'w', encoding='utf8') as f:
+with open('variance_full_records_variance.txt', 'w', encoding='utf8') as f:
     f.write('=== CARS WITH PRICE VARIANCE GAP > 5% (WITH CHASSIS) ===\n')
     f.write(f'{"MAKE":<15} | {"MODEL":<20} | {"TRIM":<15} | {"YEAR":<5} | {"LOOKUP":<10} | {"DEP PRICE":<10} | {"GAP":<9} | {"SRC_FILE":<20} | CHASSIS\n')
     f.write('-' * 135 + '\n')
     for mk, md, tr, yr, ch, lp, dp, vp, fn in sorted(variance_records_with_chassis):
         f.write(f'{mk:<15} | {md:<20} | {tr:<15} | {yr:<5} | {lp:<10} | {dp:<10} | {vp:<9} | {fn:<20} | {ch}\n')
 
-with open('variance_unique_make_model.txt', 'w', encoding='utf8') as f:
+with open('variance_unique_make_model_variance.txt', 'w', encoding='utf8') as f:
     f.write('=== UNIQUE CAR DEFINITIONS WITH PRICE VARIANCE GAP > 5% (WITHOUT CHASSIS) ===\n')
     f.write(f'{"MAKE":<15} | {"MODEL":<20} | {"TRIM":<15} | {"YEAR":<5} | {"LOOKUP":<10} | {"DEP PRICE":<10} | {"GAP":<9} | SRC_FILE\n')
     f.write('-' * 115 + '\n')
