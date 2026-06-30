@@ -55,10 +55,16 @@ PENDING_PREDICTIONS_PATH = MASTER_DB_DIR / "pending_predictions.csv"
 PREDICTION_LOGS_PATH = MASTER_DB_DIR / "prediction_logs.csv"
 
 # GitHub sync environment variables from streamlit secrets
-GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN") if "GITHUB_TOKEN" in st.secrets else None
-GITHUB_OWNER = st.secrets.get("GITHUB_OWNER", "sarthak-opash")
-GITHUB_REPO = st.secrets.get("GITHUB_REPO", "vin-sphere-python")
-GITHUB_BRANCH = st.secrets.get("GITHUB_BRANCH", "main")
+try:
+    GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN") if "GITHUB_TOKEN" in st.secrets else None
+    GITHUB_OWNER = st.secrets.get("GITHUB_OWNER", "sarthak-opash")
+    GITHUB_REPO = st.secrets.get("GITHUB_REPO", "vin-sphere-python")
+    GITHUB_BRANCH = st.secrets.get("GITHUB_BRANCH", "main")
+except Exception:
+    GITHUB_TOKEN = None
+    GITHUB_OWNER = "sarthak-opash"
+    GITHUB_REPO = "vin-sphere-python"
+    GITHUB_BRANCH = "main"
 
 def github_read_csv(relative_path: str) -> pd.DataFrame:
     """Reads a CSV file from the GitHub repository using the GitHub API."""
