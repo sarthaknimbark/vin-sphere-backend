@@ -66,19 +66,22 @@ def migrate_csv_headers():
 
 migrate_csv_headers()
 
-@st.cache_data
-def load_master_dataset_dict(file_path: str) -> dict:
+def lookup_vin_in_master_dataset(file_path: str, vin: str) -> dict:
     import os
+    import csv
     if not os.path.exists(file_path):
-        return {}
+        return None
+    vin_upper = vin.upper().strip()
     try:
-        df = pd.read_csv(file_path)
-        df = df.drop_duplicates(subset=["chassisNumber"])
-        df["chassisNumber_upper"] = df["chassisNumber"].astype(str).str.upper().str.strip()
-        return df.set_index("chassisNumber_upper").to_dict(orient="index")
+        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+            reader = csv.reader(f)
+            header = next(reader)
+            for row in reader:
+                if row and row[0].upper().strip() == vin_upper:
+                    return dict(zip(header, row))
     except Exception as e:
-        print(f"Error loading master dataset cache: {e}")
-        return {}
+        print(f"Error reading master dataset line-by-line: {e}")
+    return None
 
 def format_csv_value(val):
     if pd.isna(val):
@@ -215,9 +218,7 @@ def approve_pending_prediction(vin: str, updated_attrs: dict) -> bool:
         file_exists = os.path.exists(str(MASTER_DATASET_PATH))
         df_master_row.to_csv(str(MASTER_DATASET_PATH), mode="a", index=False, header=not file_exists)
         
-        # 3. Invalidate cache
-        if hasattr(load_master_dataset_dict, "clear"):
-            load_master_dataset_dict.clear()
+        # 3. Cache invalidation no longer needed (lookup is done directly from disk)
         return True
     except Exception as e:
         print(f"Error approving pending prediction: {e}")
@@ -654,9 +655,9 @@ def decode_any_vin(vin_str: str) -> tuple:
 
     # 1. Existing VIN lookup in master_dataset.csv
     try:
-        master_dict = load_master_dataset_dict(str(MASTER_DATASET_PATH))
-        if normalized in master_dict:
-            res = get_verified_vin_dict(master_dict[normalized])
+        matched_row = lookup_vin_in_master_dataset(str(MASTER_DATASET_PATH), normalized)
+        if matched_row:
+            res = get_verified_vin_dict(matched_row)
             log_prediction(normalized, length, "master_dataset", res)
             return res, length
     except Exception as e:
@@ -946,7 +947,6 @@ def find_matches_in_car_dep(df: pd.DataFrame, result: dict) -> pd.DataFrame:
         model_matches_df = year_matches[year_matches["model_slug"].apply(slug_matches)]
         if model_matches_df.empty:
             return pd.DataFrame()
-
     # 4. Filter by trim
     trim = str(result.get("trim", "")).strip().upper()
     if not trim or trim in ["UNKNOWN", ""]:
