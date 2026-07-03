@@ -404,6 +404,25 @@ def render_admin_panel():
 
     st.markdown("</div>", unsafe_allow_html=True)
 
+# Check database connection status
+db_connected = False
+db_error = None
+try:
+    conn = get_db_connection()
+    db_connected = True
+    conn.close()
+except Exception as e:
+    db_error = str(e)
+
+# Render Connection Status in Sidebar Header
+st.sidebar.subheader("Database Connection")
+if db_connected:
+    st.sidebar.success("● Connected to PostgreSQL")
+else:
+    st.sidebar.error("● Disconnected")
+    st.sidebar.caption(f"Error: {db_error}")
+st.sidebar.markdown("---")
+
 # Streamlit Navigation Sidebar
 app_mode = st.sidebar.selectbox("Navigation", ["VIN Decoder", "Admin Dashboard"])
 
