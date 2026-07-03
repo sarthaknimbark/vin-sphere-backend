@@ -17,7 +17,7 @@ def normalize_trim(val):
 
 # ── 1. PRE-INDEX DEPRECIATION DATA FOR MASSIVE SPEED ─────────────────────────
 print("Pre-indexing depreciation lookup files into memory...")
-csv_files = glob.glob(str(DEP_DIR / '*_full.csv'))
+csv_files = glob.glob(str(DEP_DIR / '*_dep_2.csv'))
 
 # Schema: dep_index[filename][(model_slug, year_val)] = list of rows (dict format)
 dep_index = defaultdict(lambda: defaultdict(list))
