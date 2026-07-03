@@ -374,7 +374,13 @@ def find_matches_in_df(df: pd.DataFrame, result: dict) -> pd.DataFrame:
         
     matches = df[(df["model_slug"] == model_slug) & (df["year"] == year_val)]
     if matches.empty:
-        matches = df[df["model_slug"].str.contains(model, case=False, na=False) & (df["year"] == year_val)]
+        # FIX: fallback fuzzy match must still require the brand prefix,
+        # otherwise short model names (e.g. "x5") match unrelated brands
+        # via substring collision (lexus-lx570, infiniti-qx50, mg-rx5, etc.)
+        fallback_mask = df["model_slug"].str.contains(model, case=False, na=False) & (df["year"] == year_val)
+        if make:
+            fallback_mask = fallback_mask & df["model_slug"].str.startswith(f"{make}-", na=False)
+        matches = df[fallback_mask]
         if matches.empty:
             return pd.DataFrame()
             
@@ -415,14 +421,22 @@ def find_matches_in_df(df: pd.DataFrame, result: dict) -> pd.DataFrame:
 def get_depreciated_values_by_file(result: dict) -> dict:
     dfs_dict = load_all_depreciation_lookups_from_dir(DEPRECIATION_DIR_PATH)
     matched_values = {}
-    
+
+    make = str(result.get("make", "")).strip().lower().replace(" ", "_")
+    # FIX: only look at this car's own brand file (e.g. bmw_dep.csv), not all 169.
+    # Previously every brand file was checked, and a loose substring fallback
+    # match let unrelated brands (lexus, infiniti, mg...) show up for a BMW X5.
+    own_file = f"{make}_dep.csv"
+
     for filename, df in dfs_dict.items():
+        if filename != own_file:
+            continue
         matched_df = find_matches_in_df(df, result)
         if not matched_df.empty and "depreciated_value" in matched_df.columns:
             valid_vals = matched_df["depreciated_value"].dropna()
             if not valid_vals.empty:
                 matched_values[filename] = float(valid_vals.median())
-                
+
     return matched_values
 
 
