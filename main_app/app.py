@@ -38,202 +38,28 @@ st.set_page_config(
 # Resolve project paths
 app_dir = Path(__file__).resolve().parent
 project_root = app_dir.parent
+if str(project_root) not in sys.path:
+    sys.path.append(str(project_root))
 LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep_2.csv"
 
 # =====================================================================
 #                 DATA COLLECTION & ROUTING FOUNDATION
 # =====================================================================
-MASTER_DB_DIR = project_root / "master_database"
-MASTER_DATASET_PATH = MASTER_DB_DIR / "master_dataset.csv"
-PENDING_PREDICTIONS_PATH = MASTER_DB_DIR / "pending_predictions.csv"
-PREDICTION_LOGS_PATH = MASTER_DB_DIR / "prediction_logs.csv"
+# =====================================================================
+#                 DATA COLLECTION & ROUTING FOUNDATION (POSTGRESQL)
+# =====================================================================
+from database import (
+    get_db_connection,
+    init_db,
+    lookup_vin_in_master_dataset,
+    log_prediction,
+    safe_read_pending_predictions,
+    save_pending_prediction,
+    approve_pending_prediction,
+    reject_pending_prediction
+)
 
-def migrate_csv_headers():
-    import os
-    for path in [PENDING_PREDICTIONS_PATH, PREDICTION_LOGS_PATH]:
-        if os.path.exists(str(path)):
-            try:
-                df = pd.read_csv(str(path))
-                if "color" not in df.columns:
-                    df["color"] = "UNKNOWN"
-                    df.to_csv(str(path), index=False)
-            except Exception:
-                try:
-                    os.remove(str(path))
-                except Exception:
-                    pass
-
-migrate_csv_headers()
-
-def lookup_vin_in_master_dataset(file_path: str, vin: str) -> dict:
-    import os
-    import csv
-    if not os.path.exists(file_path):
-        return None
-    vin_upper = vin.upper().strip()
-    try:
-        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
-            reader = csv.reader(f)
-            header = next(reader)
-            for row in reader:
-                if row and row[0].upper().strip() == vin_upper:
-                    return dict(zip(header, row))
-    except Exception as e:
-        print(f"Error reading master dataset line-by-line: {e}")
-    return None
-
-def format_csv_value(val):
-    if pd.isna(val):
-        return "UNKNOWN"
-    if isinstance(val, float):
-        if val.is_integer():
-            return str(int(val))
-        return str(val)
-    return str(val)
-
-def get_verified_vin_dict(row: dict) -> dict:
-    return {
-        "vin": format_csv_value(row.get("chassisNumber")),
-        "year": format_csv_value(row.get("year")),
-        "make": format_csv_value(row.get("make")),
-        "model": format_csv_value(row.get("model")),
-        "trim": format_csv_value(row.get("trim")),
-        "body_type": format_csv_value(row.get("bodyType")),
-        "regional_spec": format_csv_value(row.get("regionalSpec")),
-        "cylinders": format_csv_value(row.get("cylinders")),
-        "color": format_csv_value(row.get("color")),
-        "origin": format_csv_value(row.get("origin")),
-        "weight": format_csv_value(row.get("weightInKg")),
-        "no_of_passengers": format_csv_value(row.get("noOfPassengers")),
-        "confidence": 1.0,
-        "attribute_confidences": {
-            "make": 1.0, "model": 1.0, "year": 1.0, "trim": 1.0, "body_type": 1.0,
-            "cylinders": 1.0, "origin": 1.0, "no_of_passengers": 1.0, "weight": 1.0,
-            "regional_spec": 1.0, "color": 1.0
-        }
-    }
-
-def log_prediction(vin: str, length: int, source: str, result: dict):
-    import datetime
-    try:
-        os.makedirs(str(MASTER_DB_DIR), exist_ok=True)
-        log_entry = {
-            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "vin": vin,
-            "length": length,
-            "source": source,
-            "year": result.get("year", ""),
-            "make": result.get("make", ""),
-            "model": result.get("model", ""),
-            "trim": result.get("trim", ""),
-            "body_type": result.get("body_type", ""),
-            "cylinders": result.get("cylinders", ""),
-            "color": result.get("color", ""),
-            "origin": result.get("origin", ""),
-            "no_of_passengers": result.get("no_of_passengers", ""),
-            "weight": result.get("weight", ""),
-            "regional_spec": result.get("regional_spec", ""),
-            "confidence": result.get("confidence", 0.0)
-        }
-        df_log = pd.DataFrame([log_entry])
-        file_exists = os.path.exists(str(PREDICTION_LOGS_PATH))
-        df_log.to_csv(str(PREDICTION_LOGS_PATH), mode="a", index=False, header=not file_exists)
-    except Exception as e:
-        print(f"Error logging prediction: {e}")
-
-def safe_read_pending_predictions() -> pd.DataFrame:
-    if not os.path.exists(str(PENDING_PREDICTIONS_PATH)):
-        return pd.DataFrame()
-    try:
-        df = pd.read_csv(str(PENDING_PREDICTIONS_PATH))
-        if df.empty or "vin" not in df.columns:
-            return pd.DataFrame()
-        return df
-    except Exception as e:
-        print(f"Parser error or mismatch in pending CSV: {e}. Re-initializing file.")
-        try:
-            os.remove(str(PENDING_PREDICTIONS_PATH))
-        except Exception:
-            pass
-        return pd.DataFrame()
-
-def save_pending_prediction(vin: str, length: int, result: dict):
-    import datetime
-    try:
-        os.makedirs(str(MASTER_DB_DIR), exist_ok=True)
-        pending_entry = {
-            "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "vin": vin,
-            "length": length,
-            "year": result.get("year", ""),
-            "make": result.get("make", ""),
-            "model": result.get("model", ""),
-            "trim": result.get("trim", ""),
-            "body_type": result.get("body_type", ""),
-            "cylinders": result.get("cylinders", ""),
-            "color": result.get("color", ""),
-            "origin": result.get("origin", ""),
-            "no_of_passengers": result.get("no_of_passengers", ""),
-            "weight": result.get("weight", ""),
-            "regional_spec": result.get("regional_spec", ""),
-            "confidence": result.get("confidence", 0.0)
-        }
-        df_pending = pd.DataFrame([pending_entry])
-        
-        df_existing = safe_read_pending_predictions()
-        if not df_existing.empty and "vin" in df_existing.columns:
-            if vin.upper().strip() in df_existing["vin"].astype(str).str.upper().str.strip().tolist():
-                return
-            
-        file_exists = os.path.exists(str(PENDING_PREDICTIONS_PATH))
-        df_pending.to_csv(str(PENDING_PREDICTIONS_PATH), mode="a", index=False, header=not file_exists)
-    except Exception as e:
-        print(f"Error saving pending prediction: {e}")
-
-def approve_pending_prediction(vin: str, updated_attrs: dict) -> bool:
-    try:
-        # 1. Remove from pending_predictions.csv
-        df_pending = safe_read_pending_predictions()
-        if not df_pending.empty and "vin" in df_pending.columns:
-            df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin.upper().strip()]
-            df_pending_clean.to_csv(str(PENDING_PREDICTIONS_PATH), index=False)
-            
-        # 2. Append to master_dataset.csv with correct columns
-        master_row = {
-            "chassisNumber": vin.upper().strip(),
-            "year": updated_attrs.get("year", ""),
-            "make": updated_attrs.get("make", ""),
-            "model": updated_attrs.get("model", ""),
-            "trim": updated_attrs.get("trim", ""),
-            "bodyType": updated_attrs.get("body_type", ""),
-            "regionalSpec": updated_attrs.get("regional_spec", ""),
-            "cylinders": updated_attrs.get("cylinders", ""),
-            "color": updated_attrs.get("color", ""),
-            "origin": updated_attrs.get("origin", ""),
-            "weightInKg": updated_attrs.get("weight", ""),
-            "noOfPassengers": updated_attrs.get("no_of_passengers", "")
-        }
-        df_master_row = pd.DataFrame([master_row])
-        file_exists = os.path.exists(str(MASTER_DATASET_PATH))
-        df_master_row.to_csv(str(MASTER_DATASET_PATH), mode="a", index=False, header=not file_exists)
-        
-        # 3. Cache invalidation no longer needed (lookup is done directly from disk)
-        return True
-    except Exception as e:
-        print(f"Error approving pending prediction: {e}")
-        return False
-
-def reject_pending_prediction(vin: str) -> bool:
-    try:
-        df_pending = safe_read_pending_predictions()
-        if not df_pending.empty and "vin" in df_pending.columns:
-            df_pending_clean = df_pending[df_pending["vin"].astype(str).str.upper().str.strip() != vin.upper().strip()]
-            df_pending_clean.to_csv(str(PENDING_PREDICTIONS_PATH), index=False)
-            return True
-    except Exception as e:
-        print(f"Error rejecting pending prediction: {e}")
-    return False
 
 def render_admin_panel():
     # Admin PIN Authentication Gate
