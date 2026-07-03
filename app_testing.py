@@ -6,10 +6,10 @@ from collections import defaultdict
 
 project_root = Path(__file__).resolve().parent
 INPUT_CSV = project_root / 'lookup_clean_translated.csv'
-DEP_DIR   = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated_2'
+DEP_DIR   = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
 
 # ── Load dep CSVs ─────────────────────────────────────────────────────────────
-csv_files = [f for f in glob.glob(str(DEP_DIR / '*_dep.csv'))]
+csv_files = [f for f in glob.glob(str(DEP_DIR / '*_dep_2.csv'))]
 valid_dfs = []
 for f in csv_files:
     try:

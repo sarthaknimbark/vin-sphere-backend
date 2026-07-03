@@ -7,8 +7,8 @@ import pandas as pd
 
 project_root = Path(__file__).resolve().parent
 INPUT_CSV = project_root / 'lookup_clean_translated.csv'
-# DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
 DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
+# DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated_2'
 
 def normalize_trim(val):
     if pd.isna(val):
