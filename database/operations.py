@@ -38,6 +38,14 @@ def lookup_vin_in_master_dataset(file_path: str, vin: str) -> dict:
     return None
 
 def log_prediction(vin: str, length: int, source: str, result: dict):
+    from zoneinfo import ZoneInfo
+    try:
+        mumbai_time = datetime.datetime.now(ZoneInfo("Asia/Kolkata"))
+    except Exception:
+        mumbai_time = datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)
+    
+    mumbai_time = mumbai_time.replace(microsecond=0)
+
     conn = None
     try:
         conn = get_db_connection()
@@ -47,7 +55,7 @@ def log_prediction(vin: str, length: int, source: str, result: dict):
                     timestamps, length, source, chassisnumber, year, make, model, trim, bodytype, regionalspec, cylinders, color, origin, weightinkg, noofpassengers
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
             """, (
-                datetime.datetime.now(),
+                mumbai_time,
                 length,
                 source,
                 vin,
@@ -104,6 +112,12 @@ def save_pending_prediction(vin: str, length: int, result: dict):
     try:
         conn = get_db_connection()
         with conn.cursor() as cur:
+            # 1. If it already exists in master_data, don't add to pending queue
+            cur.execute("SELECT 1 FROM master_data WHERE UPPER(TRIM(chassisnumber)) = %s LIMIT 1;", (vin.upper().strip(),))
+            if cur.fetchone():
+                return
+
+            # 2. If it already exists in pending_predictions, don't duplicate
             cur.execute("SELECT 1 FROM pending_predictions WHERE UPPER(TRIM(chassisnumber)) = %s LIMIT 1;", (vin.upper().strip(),))
             if cur.fetchone():
                 return
