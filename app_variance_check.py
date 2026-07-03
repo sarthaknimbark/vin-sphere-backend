@@ -44,11 +44,11 @@ for f in csv_files:
 
 def get_fast_depreciated_values(result: dict) -> dict:
     """Uses hash-map lookups instead of slow Pandas filtering."""
-    make = str(result.get("make", "")).strip().lower()
+    make = str(result.get("make", "")).strip().lower().replace(" ", "_")
     model = str(result.get("model", "")).strip().lower().replace(" ", "-")
     
-    if make and not model.startswith(f"{make}-"):
-        model_slug = f"{make}-{model}"
+    if make and not model.startswith(f"{make.replace('_','-')}-"):
+        model_slug = f"{make.replace('_','-')}-{model}"
     else:
         model_slug = model
 
@@ -61,19 +61,31 @@ def get_fast_depreciated_values(result: dict) -> dict:
     trim_key = normalize_trim(trim)
     matched_values = {}
 
-    # Query the pre-built index
-    for filename, slug_map in dep_index.items():
+    # FIX: only look at this car's own brand file (e.g. bmw_dep.csv), not all files.
+    # Previously every brand file was scanned, and the substring fallback below
+    # let unrelated brands match (e.g. "x5" matching lexus-lx570, infiniti-qx50,
+    # mg-rx5, changan-x5, etc.) causing false variance entries in the report.
+    own_filename = f"{make}_dep.csv"
+    if own_filename not in dep_index:
+        return {}
+    slug_map = dep_index[own_filename]
+
+    for filename in [own_filename]:
         # Step 1: Exact model slug match
         candidate_rows = slug_map.get((model_slug, year_val), [])
-        
+
         # Step 2: Fallback substring match (only if exact match yielded nothing)
+        # FIX: fallback must still require the brand prefix, otherwise short
+        # model names like "x5" collide with unrelated slugs sharing those
+        # characters within the SAME file too (still restrict properly).
+        make_slug_prefix = make.replace('_', '-')
         if not candidate_rows:
             candidate_rows = [
-                row for (s, y), rows in slug_map.items() 
-                if y == year_val and model in s
+                row for (s, y), rows in slug_map.items()
+                if y == year_val and model in s and s.startswith(f"{make_slug_prefix}-")
                 for row in rows
             ]
-            
+
         if not candidate_rows:
             continue
 
@@ -153,7 +165,7 @@ for i, row in enumerate(lookup.itertuples(index=False)):
             display_filename = filename.rsplit('.', 1)[0]
             variance = (dep_price - lookup_price) / lookup_price
 
-            if abs(variance) > 0.05:
+            if abs(variance) > 0.1:
                 var_pct_str = f"{variance * 100:+.2f}%"
                 variance_records_with_chassis.add(
                     (make, model, trim, display_year, chassis, f"{lookup_price:,.0f}", f"{dep_price:,.0f}", var_pct_str, display_filename)
