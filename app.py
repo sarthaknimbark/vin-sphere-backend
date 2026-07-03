@@ -335,8 +335,8 @@ MODEL_DIR = str(project_root / "chat_cat(2.0)" / "models")
 LOOKUP_DATA_PATH = project_root / "Data/lookup_clean_translated.csv"
 
 # Updated directory path for your cleaned 21 depreciation CSV files
-# DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation"
-DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated_2"
+DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation"
+# DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated_2"
 
 @st.cache_data
 def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
@@ -344,7 +344,7 @@ def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
     
     # 1. Dynamically scan the directory for any file ending in '_dep.csv'
     # This automatically catches new files added in the future!
-    for local_file_path in directory_path.glob("*_dep.csv"):
+    for local_file_path in directory_path.glob("*_dep_2_tempvariancefixed.csv"):
         file_name = local_file_path.name  # Extracts just the 'brand_dep.csv' string
         
         try:
@@ -374,13 +374,7 @@ def find_matches_in_df(df: pd.DataFrame, result: dict) -> pd.DataFrame:
         
     matches = df[(df["model_slug"] == model_slug) & (df["year"] == year_val)]
     if matches.empty:
-        # FIX: fallback fuzzy match must still require the brand prefix,
-        # otherwise short model names (e.g. "x5") match unrelated brands
-        # via substring collision (lexus-lx570, infiniti-qx50, mg-rx5, etc.)
-        fallback_mask = df["model_slug"].str.contains(model, case=False, na=False) & (df["year"] == year_val)
-        if make:
-            fallback_mask = fallback_mask & df["model_slug"].str.startswith(f"{make}-", na=False)
-        matches = df[fallback_mask]
+        matches = df[df["model_slug"].str.contains(model, case=False, na=False) & (df["year"] == year_val)]
         if matches.empty:
             return pd.DataFrame()
             
@@ -421,22 +415,14 @@ def find_matches_in_df(df: pd.DataFrame, result: dict) -> pd.DataFrame:
 def get_depreciated_values_by_file(result: dict) -> dict:
     dfs_dict = load_all_depreciation_lookups_from_dir(DEPRECIATION_DIR_PATH)
     matched_values = {}
-
-    make = str(result.get("make", "")).strip().lower().replace(" ", "_")
-    # FIX: only look at this car's own brand file (e.g. bmw_dep.csv), not all 169.
-    # Previously every brand file was checked, and a loose substring fallback
-    # match let unrelated brands (lexus, infiniti, mg...) show up for a BMW X5.
-    own_file = f"{make}_dep.csv"
-
+    
     for filename, df in dfs_dict.items():
-        if filename != own_file:
-            continue
         matched_df = find_matches_in_df(df, result)
         if not matched_df.empty and "depreciated_value" in matched_df.columns:
             valid_vals = matched_df["depreciated_value"].dropna()
             if not valid_vals.empty:
                 matched_values[filename] = float(valid_vals.median())
-
+                
     return matched_values
 
 

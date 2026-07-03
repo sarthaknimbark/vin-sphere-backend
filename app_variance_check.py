@@ -7,8 +7,8 @@ import pandas as pd
 
 project_root = Path(__file__).resolve().parent
 INPUT_CSV = project_root / 'lookup_clean_translated.csv'
-# DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
-DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated_2'
+DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
+# DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated_2'
 
 def normalize_trim(val):
     if pd.isna(val):
@@ -17,7 +17,7 @@ def normalize_trim(val):
 
 # ── 1. PRE-INDEX DEPRECIATION DATA FOR MASSIVE SPEED ─────────────────────────
 print("Pre-indexing depreciation lookup files into memory...")
-csv_files = glob.glob(str(DEP_DIR / '*_dep.csv'))
+csv_files = glob.glob(str(DEP_DIR / '*_dep_2.csv'))
 
 # Schema: dep_index[filename][(model_slug, year_val)] = list of rows (dict format)
 dep_index = defaultdict(lambda: defaultdict(list))
@@ -165,7 +165,7 @@ for i, row in enumerate(lookup.itertuples(index=False)):
             display_filename = filename.rsplit('.', 1)[0]
             variance = (dep_price - lookup_price) / lookup_price
 
-            if abs(variance) > 0.1:
+            if abs(variance) > 0.05:
                 var_pct_str = f"{variance * 100:+.2f}%"
                 variance_records_with_chassis.add(
                     (make, model, trim, display_year, chassis, f"{lookup_price:,.0f}", f"{dep_price:,.0f}", var_pct_str, display_filename)
