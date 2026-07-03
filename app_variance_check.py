@@ -165,7 +165,7 @@ for i, row in enumerate(lookup.itertuples(index=False)):
             display_filename = filename.rsplit('.', 1)[0]
             variance = (dep_price - lookup_price) / lookup_price
 
-            if abs(variance) > 0.1:
+            if abs(variance) > 0.05:
                 var_pct_str = f"{variance * 100:+.2f}%"
                 variance_records_with_chassis.add(
                     (make, model, trim, display_year, chassis, f"{lookup_price:,.0f}", f"{dep_price:,.0f}", var_pct_str, display_filename)
