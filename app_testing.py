@@ -69,19 +69,6 @@ def is_covered(make: str, model: str, year_val) -> bool:
     year_slugs = dep_by_year[year_val]
     year_stripped_slugs = dep_stripped_by_year[year_val]
 
-    # FIX: restrict candidate slugs to THIS make only. Previously step 2/3/C
-    # scanned every brand's slugs for the year, so short model names like
-    # "x5" falsely matched unrelated brands (lexus-lx570, infiniti-qx50,
-    # mg-rx5, changan-x5...) and made real coverage gaps invisible.
-    if make_s:
-        make_year_slugs = [s for s in year_slugs if s.startswith(f"{make_s}-")]
-        make_year_stripped_slugs = [
-            re.sub(r'[\s\-]+', '', s) for s in make_year_slugs
-        ]
-    else:
-        make_year_slugs = year_slugs
-        make_year_stripped_slugs = year_stripped_slugs
-
     # Helper: check ONE model variant
     def check_model_str(m: str) -> bool:
         m_slug  = to_slug(m)          # e.g. "land-cruiser-200"
@@ -92,13 +79,13 @@ def is_covered(make: str, model: str, year_val) -> bool:
         if (full, year_val) in dep_set:
             return True
 
-        # 2. Dep slug contains full model slug (same make only)
-        if any(m_slug in s for s in make_year_slugs):
+        # 2. Dep slug contains full model slug
+        if any(m_slug in s for s in year_slugs):
             return True
 
-        # 3. Normalised (strips hyphens) — catches "c-200" vs "c200" (same make only)
+        # 3. Normalised (strips hyphens) — catches "c-200" vs "c200"
         if len(m_norm) >= 3:
-            if any(m_norm in s for s in make_year_stripped_slugs):
+            if any(m_norm in s for s in year_stripped_slugs):
                 return True
 
         return False
@@ -113,14 +100,14 @@ def is_covered(make: str, model: str, year_val) -> bool:
         if check_model_str(cleaned):
             return True
 
-    # C) Progressive prefix — remove last word one at a time (same make only)
+    # C) Progressive prefix — remove last word one at a time
     words = to_slug(model).split('-')
     for n in range(len(words) - 1, 0, -1):
         prefix_model = '-'.join(words[:n])
         if len(prefix_model) < 3:
             continue
         full_prefix = f"{make_s}-{prefix_model}" if make_s else prefix_model
-        if any(full_prefix in s for s in make_year_slugs):
+        if any(full_prefix in s for s in year_slugs):
             return True
 
     return False
