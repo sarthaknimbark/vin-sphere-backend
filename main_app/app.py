@@ -61,7 +61,54 @@ from database import (
 )
 
 
+def format_csv_value(val):
+    if pd.isna(val):
+        return "UNKNOWN"
+    if isinstance(val, float):
+        if val.is_integer():
+            return str(int(val))
+        return str(val)
+    return str(val)
+
+
+def get_verified_vin_dict(row: dict) -> dict:
+    return {
+        "vin": format_csv_value(row.get("chassisNumber")),
+        "year": format_csv_value(row.get("year")),
+        "make": format_csv_value(row.get("make")),
+        "model": format_csv_value(row.get("model")),
+        "trim": format_csv_value(row.get("trim")),
+        "body_type": format_csv_value(row.get("bodyType")),
+        "regional_spec": format_csv_value(row.get("regionalSpec")),
+        "cylinders": format_csv_value(row.get("cylinders")),
+        "color": format_csv_value(row.get("color")),
+        "origin": format_csv_value(row.get("origin")),
+        "weight": format_csv_value(row.get("weightInKg")),
+        "no_of_passengers": format_csv_value(row.get("noOfPassengers")),
+        "confidence": 1.0,
+        "attribute_confidences": {
+            "make": 1.0, "model": 1.0, "year": 1.0, "trim": 1.0, "body_type": 1.0,
+            "cylinders": 1.0, "origin": 1.0, "no_of_passengers": 1.0, "weight": 1.0,
+            "regional_spec": 1.0, "color": 1.0
+        }
+    }
+
+
 def render_admin_panel():
+    # Check database connection status for Admin Panel
+    db_connected = False
+    db_error = None
+    try:
+        conn = get_db_connection()
+        db_connected = True
+        conn.close()
+    except Exception as e:
+        db_error = str(e)
+
+    if not db_connected:
+        st.error(f"Cannot access Admin Dashboard: Database is disconnected. Error: {db_error}")
+        st.stop()
+
     # Admin PIN Authentication Gate
     if "admin_authenticated" not in st.session_state:
         st.session_state.admin_authenticated = False
