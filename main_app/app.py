@@ -123,22 +123,41 @@ def render_admin_panel():
     st.write("Review, edit, approve, or reject pending decoded VIN predictions.")
     
     # Read stats
-    df_pending = safe_read_pending_predictions()
-    pending_count = len(df_pending) if (not df_pending.empty and "vin" in df_pending.columns) else 0
+    df_pending_all = safe_read_pending_predictions()
+    total_pending_count = len(df_pending_all) if (not df_pending_all.empty and "vin" in df_pending_all.columns) else 0
     approved_count = get_approved_predictions_count()
 
     # Display metric cards
     col1, col2 = st.columns(2)
     with col1:
-        st.metric(label="Pending Verifications", value=pending_count)
+        st.metric(label="Pending Verifications", value=total_pending_count)
     with col2:
         st.metric(label="Chassis Added to Master Data", value=approved_count)
         
-    if pending_count == 0:
+    if total_pending_count == 0:
         st.success("No pending VINs awaiting verification. Good job!")
         return
+
+    # Search Bar (No Emojis)
+    search_query = st.text_input("Search by VIN, Make, Model, or Trim", value="", key="admin_search_query")
+    
+    # Filter by search query if provided
+    df_pending = df_pending_all.copy()
+    if search_query:
+        q = search_query.strip().lower()
+        df_pending = df_pending[
+            df_pending["vin"].str.lower().str.contains(q, na=False) |
+            df_pending["make"].str.lower().str.contains(q, na=False) |
+            df_pending["model"].str.lower().str.contains(q, na=False) |
+            df_pending["trim"].str.lower().str.contains(q, na=False)
+        ]
         
+    pending_count = len(df_pending)
     st.subheader(f"Pending Predictions ({pending_count})")
+    
+    if pending_count == 0:
+        st.info("No matching predictions found for your search.")
+        return
 
     # Pagination Setup & Controls
     col_size, col_page, col_info = st.columns([1.5, 1.5, 5.0])
@@ -475,7 +494,7 @@ def render_admin_panel():
                     "regional_spec": regional_spec.strip().upper()
                 }
                 if update_pending_prediction(vin, updated_attrs):
-                    st.success(f"💾 **Saved:** VIN `{vin}` has been updated in the pending queue.")
+                    st.success(f"**Saved:** VIN `{vin}` has been updated in the pending queue.")
                     time.sleep(1.5)
                     st.rerun()
                 else:
@@ -496,7 +515,7 @@ def render_admin_panel():
                     "regional_spec": regional_spec.strip().upper()
                 }
                 if approve_pending_prediction(vin, updated_attrs):
-                    st.success(f" **Approved:** VIN `{vin}` has been verified and added to the master database.")
+                    st.success(f"Approved: VIN `{vin}` has been verified and added to the master database.")
                     time.sleep(2)
                     st.rerun()
                 else:
@@ -504,7 +523,7 @@ def render_admin_panel():
                     
             elif btn_reject:
                 if reject_pending_prediction(vin):
-                    st.warning(f" **Rejected:** VIN `{vin}` has been discarded and removed from the pending queue.")
+                    st.warning(f"Rejected: VIN `{vin}` has been discarded and removed from the pending queue.")
                     time.sleep(2)
                     st.rerun()
                 else:
@@ -1026,6 +1045,11 @@ if st.button("Decode", type="primary"):
                     return f"{float(val) * 100:.1f}%"
 
                 table_data = [
+                    {
+                        "Attribute": "Chassis Number",
+                        "Predicted Value": result.get("vin"),
+                        "Confidence": "",
+                    },
                     {
                         "Attribute": "Make",
                         "Predicted Value": result.get("make"),
