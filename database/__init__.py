@@ -6,5 +6,6 @@ from .operations import (
     save_pending_prediction,
     approve_pending_prediction,
     reject_pending_prediction,
-    get_approved_predictions_count
+    get_approved_predictions_count,
+    update_pending_prediction
 )
