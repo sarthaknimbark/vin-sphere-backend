@@ -56,7 +56,8 @@ from database import (
     safe_read_pending_predictions,
     save_pending_prediction,
     approve_pending_prediction,
-    reject_pending_prediction
+    reject_pending_prediction,
+    get_approved_predictions_count
 )
 
 
@@ -127,9 +128,19 @@ def render_admin_panel():
     st.title("Admin Verification Dashboard")
     st.write("Review, edit, approve, or reject pending decoded VIN predictions.")
     
-    # Read pending list
+    # Read stats
     df_pending = safe_read_pending_predictions()
-    if df_pending.empty or "vin" not in df_pending.columns:
+    pending_count = len(df_pending) if (not df_pending.empty and "vin" in df_pending.columns) else 0
+    approved_count = get_approved_predictions_count()
+
+    # Display metric cards
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric(label="Pending Verifications", value=pending_count)
+    with col2:
+        st.metric(label="Chassis Added to Master Data", value=approved_count)
+        
+    if pending_count == 0:
         st.success("No pending VINs awaiting verification. Good job!")
         return
         

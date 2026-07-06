@@ -264,3 +264,18 @@ def reject_pending_prediction(vin: str) -> bool:
     finally:
         if conn:
             conn.close()
+
+def get_approved_predictions_count() -> int:
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) FROM approved_predictions;")
+            return cur.fetchone()[0]
+    except Exception as e:
+        print(f"Error getting approved predictions count: {e}")
+        return 0
+    finally:
+        if conn:
+            conn.close()
+
