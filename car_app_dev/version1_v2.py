@@ -123,6 +123,8 @@ class VehicleSimilaritySearch:
             return df
 
         ranked = df.copy()
+        
+        ranked["_tier"] = "exact_trim"
 
         ranked["_year_diff"] = (
             ranked["year"] - query.year
@@ -133,7 +135,7 @@ class VehicleSimilaritySearch:
             ascending=True,
         )
         
-        ranked = ranked.reset_index(drop=True)
+        
 
         return ranked
     
@@ -172,6 +174,8 @@ class VehicleSimilaritySearch:
             return df
 
         ranked = df.copy()
+        ranked["_tier"] = "model"
+        
 
         ranked["_trim_match"] = (
             ranked["trim"] ==
@@ -218,11 +222,18 @@ class VehicleSimilaritySearch:
 
         if not model.empty:
             frames.append(model)
+            
+        if not frames:
+            return pd.DataFrame()
 
         combined = pd.concat(
             frames,
             ignore_index=False,
         )
+         # Remove duplicate vehicles (same row found in multiple tiers)
+        combined = combined[~combined.index.duplicated(keep="first")]
+
+        return combined
     # ==========================================================
     # PRICE
     # ==========================================================
