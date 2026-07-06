@@ -57,7 +57,8 @@ from database import (
     save_pending_prediction,
     approve_pending_prediction,
     reject_pending_prediction,
-    get_approved_predictions_count
+    get_approved_predictions_count,
+    update_pending_prediction
 )
 
 
@@ -137,8 +138,27 @@ def render_admin_panel():
         st.success("No pending VINs awaiting verification. Good job!")
         return
         
-    st.subheader(f"Pending Predictions ({len(df_pending)})")
+    st.subheader(f"Pending Predictions ({pending_count})")
+
+    # Pagination Setup & Controls
+    col_size, col_page, col_info = st.columns([1.5, 1.5, 5.0])
+    with col_size:
+        items_per_page = st.selectbox("Items per page", [10, 20, 50, 100, 200], index=0, key="admin_items_per_page")
     
+    total_pages = (pending_count + items_per_page - 1) // items_per_page
+    
+    current_page = 1
+    with col_page:
+        current_page = st.number_input("Page", min_value=1, max_value=max(1, total_pages), value=1, step=1, key="admin_page_num")
+        
+    with col_info:
+        st.markdown("<div style='height: 25px;'></div>", unsafe_allow_html=True)
+        st.caption(f"Showing page {current_page} of {total_pages} (Total: {pending_count} pending predictions)")
+            
+    start_idx = (current_page - 1) * items_per_page
+    end_idx = min(start_idx + items_per_page, pending_count)
+    df_page = df_pending.iloc[start_idx:end_idx]
+
     # Display the inline styling for colored buttons and Excel sheet formatting
     st.markdown(
         """
@@ -156,7 +176,7 @@ def render_admin_panel():
             align-items: center !important;
             display: flex !important;
             flex-direction: row !important;
-            min-width: 1350px !important; /* Prevent squeezing columns below readable widths */
+            min-width: 1500px !important; /* Prevent squeezing columns below readable widths */
         }
 
         /* Reset stForm margins and containers inside the admin table */
@@ -201,6 +221,7 @@ def render_admin_panel():
             min-height: 38px !important;
             display: flex !important;
             align-items: center !important;
+            justify-content: center !important;
         }
         
         /* Hide labels in text inputs to prevent vertical offsets */
@@ -279,20 +300,20 @@ def render_admin_panel():
             min-height: 38px !important;
             width: 100% !important;
             margin: 0px !important;
-            padding: 0px 16px !important;
+            padding: 0px 4px !important;
             box-sizing: border-box !important;
         }
 
-        /* Approve button: Smooth green button with white text (matching the photo's shape with green color) */
+        /* Save button: Blue button */
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button {
-            background-color: #22c55e !important;
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button {
+            background-color: #3b82f6 !important;
             color: #ffffff !important;
-            border: 1px solid #22c55e !important;
+            border: 1px solid #3b82f6 !important;
             border-radius: 6px !important;
             height: 38px !important;
             min-height: 38px !important;
-            padding: 0px 16px !important;
+            padding: 0px 4px !important;
             font-size: 0.85em !important;
             font-weight: 600 !important;
             width: 100% !important;
@@ -303,40 +324,30 @@ def render_admin_panel():
             align-items: center !important;
         }
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover {
-            background-color: #16a34a !important;
-            color: #ffffff !important;
-            border-color: #16a34a !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button:hover {
+            background-color: #2563eb !important;
+            border-color: #2563eb !important;
         }
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button *,
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button span,
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button p,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button *,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button span,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button p {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button p {
             color: #ffffff !important;
             font-weight: 600 !important;
         }
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover *,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover span,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover p,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover *,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover span,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover p {
-            color: #ffffff !important;
-        }
 
-        /* Reject button: Smooth red button with white text (matching the photo's shape with red color) */
+        /* Approve button: Green button */
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button {
-            background-color: #ef4444 !important;
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button {
+            background-color: #22c55e !important;
             color: #ffffff !important;
-            border: 1px solid #ef4444 !important;
+            border: 1px solid #22c55e !important;
             border-radius: 6px !important;
             height: 38px !important;
             min-height: 38px !important;
-            padding: 0px 16px !important;
+            padding: 0px 4px !important;
             font-size: 0.85em !important;
             font-weight: 600 !important;
             width: 100% !important;
@@ -347,28 +358,52 @@ def render_admin_panel():
             align-items: center !important;
         }
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover {
-            background-color: #dc2626 !important;
-            color: #ffffff !important;
-            border-color: #dc2626 !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover {
+            background-color: #16a34a !important;
+            border-color: #16a34a !important;
         }
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button *,
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button span,
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button p,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button p {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+
+        /* Reject button: Red button */
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button {
+            background-color: #ef4444 !important;
+            color: #ffffff !important;
+            border: 1px solid #ef4444 !important;
+            border-radius: 6px !important;
+            height: 38px !important;
+            min-height: 38px !important;
+            padding: 0px 4px !important;
+            font-size: 0.85em !important;
+            font-weight: 600 !important;
+            width: 100% !important;
+            transition: all 0.2s ease-in-out !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button:hover,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover {
+            background-color: #dc2626 !important;
+            border-color: #dc2626 !important;
+        }
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button p,
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button *,
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button span,
         div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button p {
             color: #ffffff !important;
             font-weight: 600 !important;
-        }
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover *,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover span,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover p,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover *,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover span,
-        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover p {
-            color: #ffffff !important;
         }
         </style>
 
@@ -380,18 +415,18 @@ def render_admin_panel():
     st.markdown("<div class='admin-table-container'>", unsafe_allow_html=True)
 
     # Display inline table header for inputs
-    header_cols = st.columns([1.5, 1.0, 1.0, 1.0, 0.8, 1.0, 1.0, 0.8, 1.0, 0.8, 0.8, 1.0, 1.1, 1.1])
-    headers = ["VIN", "Make", "Model", "Trim", "Year", "Color", "Body Type", "Cyl", "Origin", "Pass", "Wt", "Specs", "Approve", "Reject"]
+    header_cols = st.columns([1.5, 1.0, 1.0, 1.0, 0.8, 1.0, 1.0, 0.8, 1.0, 0.8, 0.8, 1.0, 1.0, 1.3, 1.0])
+    headers = ["VIN", "Make", "Model", "Trim", "Year", "Color", "Body Type", "Cyl", "Origin", "Pass", "Wt", "Specs", "Save", "Approve", "Reject"]
     for col, h in zip(header_cols, headers):
         col.markdown(f"**{h}**")
         
     # Render each pending VIN in its own row (form)
-    for idx, item in df_pending.iterrows():
+    for idx, item in df_page.iterrows():
         vin = str(item["vin"]).strip().upper()
         
         # We wrap each row in a separate form with the VIN as part of the key
         with st.form(key=f"verify_form_{vin}_{idx}"):
-            cols = st.columns([1.5, 1.0, 1.0, 1.0, 0.8, 1.0, 1.0, 0.8, 1.0, 0.8, 0.8, 1.0, 1.1, 1.1])
+            cols = st.columns([1.5, 1.0, 1.0, 1.0, 0.8, 1.0, 1.0, 0.8, 1.0, 0.8, 0.8, 1.0, 1.0, 1.3, 1.0])
             
             with cols[0]:
                 st.text_input("VIN", value=vin, disabled=True, label_visibility="collapsed", key=f"vin_val_{vin}_{idx}")
@@ -419,11 +454,34 @@ def render_admin_panel():
                 regional_spec = st.text_input("Specs", value=format_csv_value(item.get("regional_spec")), label_visibility="collapsed", key=f"specs_val_{vin}_{idx}")
                 
             with cols[12]:
-                btn_approve = st.form_submit_button("Approve", use_container_width=True)
+                btn_save = st.form_submit_button("Save", use_container_width=True)
             with cols[13]:
+                btn_approve = st.form_submit_button("Approve", use_container_width=True)
+            with cols[14]:
                 btn_reject = st.form_submit_button("Reject", use_container_width=True)
                 
-            if btn_approve:
+            if btn_save:
+                updated_attrs = {
+                    "make": make.strip().upper(),
+                    "model": model.strip().upper(),
+                    "trim": trim.strip().upper(),
+                    "body_type": body_type.strip().upper(),
+                    "year": year.strip(),
+                    "cylinders": cylinders.strip(),
+                    "color": color.strip().upper(),
+                    "origin": origin.strip(),
+                    "weight": weight.strip(),
+                    "no_of_passengers": no_of_passengers.strip(),
+                    "regional_spec": regional_spec.strip().upper()
+                }
+                if update_pending_prediction(vin, updated_attrs):
+                    st.success(f"💾 **Saved:** VIN `{vin}` has been updated in the pending queue.")
+                    time.sleep(1.5)
+                    st.rerun()
+                else:
+                    st.error(f"Failed to save changes for {vin}.")
+                    
+            elif btn_approve:
                 updated_attrs = {
                     "make": make.strip().upper(),
                     "model": model.strip().upper(),
