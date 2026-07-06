@@ -545,12 +545,12 @@ def decode_any_vin(vin_str: str) -> tuple:
     normalized = re.sub(r"[^A-Z0-9]", "", vin_str.upper())
     length = len(normalized)
 
-    # 1. Existing VIN lookup in master_dataset.csv
+    # 1. Existing VIN lookup in PostgreSQL master_data
     try:
-        matched_row = lookup_vin_in_master_dataset(str(MASTER_DATASET_PATH), normalized)
+        matched_row = lookup_vin_in_master_dataset(normalized)
         if matched_row:
             res = get_verified_vin_dict(matched_row)
-            log_prediction(normalized, length, "master_dataset", res)
+            log_prediction(normalized, length, "master_data", res)
             return res, length
     except Exception as e:
         print(f"Error checking master dataset: {e}")

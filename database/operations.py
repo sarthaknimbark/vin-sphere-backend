@@ -2,7 +2,7 @@ import datetime
 import pandas as pd
 from .connection import get_db_connection
 
-def lookup_vin_in_master_dataset(file_path: str, vin: str) -> dict:
+def lookup_vin_in_master_dataset(vin: str) -> dict:
     vin_upper = vin.upper().strip()
     conn = None
     try:
