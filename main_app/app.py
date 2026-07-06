@@ -96,14 +96,7 @@ def get_verified_vin_dict(row: dict) -> dict:
 
 def render_admin_panel():
     # Check database connection status for Admin Panel
-    db_connected = False
-    db_error = None
-    try:
-        conn = get_db_connection()
-        db_connected = True
-        conn.close()
-    except Exception as e:
-        db_error = str(e)
+    db_connected, db_error = check_db_connection_cached()
 
     if not db_connected:
         st.error(f"Cannot access Admin Dashboard: Database is disconnected. Error: {db_error}")
@@ -461,15 +454,18 @@ def render_admin_panel():
 
     st.markdown("</div>", unsafe_allow_html=True)
 
+@st.cache_resource(ttl=30)
+def check_db_connection_cached() -> tuple:
+    try:
+        from database.connection import get_db_connection
+        conn = get_db_connection()
+        conn.close()
+        return True, None
+    except Exception as e:
+        return False, str(e)
+
 # Check database connection status
-db_connected = False
-db_error = None
-try:
-    conn = get_db_connection()
-    db_connected = True
-    conn.close()
-except Exception as e:
-    db_error = str(e)
+db_connected, db_error = check_db_connection_cached()
 
 # Render Connection Status in Sidebar Header
 st.sidebar.subheader("Database Connection")
@@ -513,41 +509,38 @@ def load_predict_module(directory_name: str):
     """Loads predict.py from a sub-directory, keeping the path on sys.path for
     short-VIN modules so their pickled vin_decoder_pipeline.pkl can unpickle.
 
-    Evicts all bare-name sibling modules (model, model_utils, feature_engineering,
-    dataset, predict …) from sys.modules before importing so that any on-disk
-    changes to those files are always picked up by the running Streamlit server
-    without requiring a manual restart.
+    Natively caches short-VIN predict modules using fully qualified package names
+    so they are kept in memory (avoiding extremely slow dynamic file re-reading and
+    re-unpickling on subsequent requests).
     """
-    dir_path = project_root / directory_name
-    keep_on_path = directory_name in _SHORT_VIN_DIRS
-
-    # Bare module names that live inside chat_cat-style directories.
-    # Clearing them forces Python to re-read them from disk on next import.
-    _CHAT_CAT_MODULES = {
-        "predict", "model", "model_utils",
-        "feature_engineering", "dataset",
-        "vin_decoder", "train_pipeline",
-    }
-
-    # Evict all stale bare-name modules from the module cache
-    for mod_key in list(sys.modules.keys()):
-        base = mod_key.split(".")[0]
-        if base in _CHAT_CAT_MODULES or base.startswith("chat_cat"):
-            del sys.modules[mod_key]
-
-    # Ensure the directory is at the front of sys.path so it takes priority
-    if str(dir_path) in sys.path:
-        sys.path.remove(str(dir_path))
-    sys.path.insert(0, str(dir_path))
-
-    try:
-        predict_module = importlib.import_module("predict")
-    finally:
-        # Only remove path if this module doesn't need it for pickle deserialization
-        if not keep_on_path and str(dir_path) in sys.path:
+    if directory_name == "chat_cat(2.0)":
+        dir_path = project_root / directory_name
+        
+        if str(dir_path) in sys.path:
             sys.path.remove(str(dir_path))
+        sys.path.insert(0, str(dir_path))
+        
+        # Check if predict is already in cache for this directory
+        if "predict" in sys.modules:
+            cached_mod = sys.modules["predict"]
+            if hasattr(cached_mod, "__file__") and directory_name in str(cached_mod.__file__):
+                return cached_mod
+            else:
+                del sys.modules["predict"]
 
-    return predict_module
+        try:
+            predict_module = importlib.import_module("predict")
+        finally:
+            if str(dir_path) in sys.path:
+                sys.path.remove(str(dir_path))
+        return predict_module
+    else:
+        # For short VINs, import using their fully qualified package names (which are unique and cached by Python)
+        dir_path = project_root / directory_name
+        if str(dir_path) not in sys.path:
+            sys.path.append(str(dir_path))
+            
+        return importlib.import_module(f"{directory_name}.predict")
 
 
 def decode_any_vin(vin_str: str) -> tuple:
