@@ -40,7 +40,7 @@ app_dir = Path(__file__).resolve().parent
 project_root = app_dir.parent
 if str(project_root) not in sys.path:
     sys.path.append(str(project_root))
-LOOKUP_DATA_PATH = project_root / "lookup_data.csv"
+LOOKUP_DATA_PATH = project_root / "car_app_dev"/ "dev_lookup.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep_2.csv"
 
 # =====================================================================
