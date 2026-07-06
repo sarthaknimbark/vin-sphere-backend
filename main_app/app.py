@@ -43,12 +43,11 @@ if str(project_root) not in sys.path:
 LOOKUP_DATA_PATH = project_root / "car_app_dev"/ "dev_lookup.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep_2.csv"
 
-# =====================================================================
-#                 DATA COLLECTION & ROUTING FOUNDATION
-# =====================================================================
-# =====================================================================
-#                 DATA COLLECTION & ROUTING FOUNDATION (POSTGRESQL)
-# =====================================================================
+# Evict database modules from sys.modules cache to ensure Streamlit hot-reloads on-disk database changes
+for mod_key in list(sys.modules.keys()):
+    if mod_key == "database" or mod_key.startswith("database."):
+        del sys.modules[mod_key]
+
 from database import (
     get_db_connection,
     init_db,
