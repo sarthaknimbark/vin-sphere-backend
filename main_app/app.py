@@ -219,7 +219,8 @@ def render_admin_panel():
         
         /* Remove default margins on element containers to keep everything level */
         .admin-table-container [data-testid="stHorizontalBlock"] div[data-testid="stElementContainer"],
-        .admin-table-container [data-testid="stHorizontalBlock"] div[data-testid="element-container"] {
+        .admin-table-container [data-testid="stHorizontalBlock"] div[data-testid="element-container"],
+        .admin-table-container [data-testid="stHorizontalBlock"] .element-container {
             margin: 0px !important;
             padding: 0px !important;
             height: 38px !important;
@@ -230,7 +231,8 @@ def render_admin_panel():
         }
         
         /* Target the outer stTextInput container */
-        div[data-testid="stForm"] div[data-testid="stTextInput"] {
+        div[data-testid="stForm"] div[data-testid="stTextInput"],
+        .admin-table-container div[data-testid="stTextInput"] {
             border: none !important;
             background-color: transparent !important;
             box-shadow: none !important;
@@ -241,29 +243,34 @@ def render_admin_panel():
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
+            width: 100% !important;
         }
         
         /* Hide labels in text inputs to prevent vertical offsets */
-        div[data-testid="stForm"] div[data-testid="stTextInput"] label {
+        div[data-testid="stForm"] div[data-testid="stTextInput"] label,
+        .admin-table-container div[data-testid="stTextInput"] label {
             display: none !important;
         }
         
         /* Reset the Emotion cache wrapper to be transparent and borderless */
-        div[data-testid="stForm"] div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div {
+        div[data-testid="stForm"] div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div,
+        .admin-table-container div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div {
             background-color: transparent !important;
             border: none !important;
             box-shadow: none !important;
         }
         
         /* Make the inner Styletron parent container transparent */
-        div[data-testid="stForm"] div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div > div > div {
+        div[data-testid="stForm"] div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div > div > div,
+        .admin-table-container div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div > div > div {
             background-color: transparent !important;
             border: none !important;
             box-shadow: none !important;
         }
         
         /* Style the actual input box (grandparent of the input element) for enabled inputs */
-        div[data-testid="stForm"] div[data-testid="stTextInput"]:not(:has(input:disabled)) div[data-testid="stTextInputRootElement"] > div > div {
+        div[data-testid="stForm"] div[data-testid="stTextInput"]:not(:has(input:disabled)) div[data-testid="stTextInputRootElement"] > div > div,
+        .admin-table-container div[data-testid="stTextInput"]:not(:has(input:disabled)) div[data-testid="stTextInputRootElement"] > div > div {
             border: 1px solid #cccccc !important;
             border-radius: 6px !important;
             height: 38px !important;
@@ -272,7 +279,8 @@ def render_admin_panel():
         }
         
         /* Style the input box container (grandparent of the input element) for disabled inputs */
-        div[data-testid="stForm"] div[data-testid="stTextInput"]:has(input:disabled) div[data-testid="stTextInputRootElement"] > div > div {
+        div[data-testid="stForm"] div[data-testid="stTextInput"]:has(input:disabled) div[data-testid="stTextInputRootElement"] > div > div,
+        .admin-table-container div[data-testid="stTextInput"]:has(input:disabled) div[data-testid="stTextInputRootElement"] > div > div {
             background-color: #f0f0f0 !important;
             border: 1px solid #cccccc !important;
             border-radius: 6px !important;
@@ -281,7 +289,8 @@ def render_admin_panel():
         }
         
         /* Style the actual input tag */
-        div[data-testid="stForm"] div[data-testid="stTextInput"] input {
+        div[data-testid="stForm"] div[data-testid="stTextInput"] input,
+        .admin-table-container div[data-testid="stTextInput"] input {
             border: none !important;
             background-color: transparent !important;
             color: #0f172a !important;
@@ -291,10 +300,12 @@ def render_admin_panel():
             font-weight: 600 !important;
             text-transform: uppercase !important;
             text-align: center !important;
+            width: 100% !important;
         }
         
         /* Disabled input text styling */
-        div[data-testid="stForm"] div[data-testid="stTextInput"] input:disabled {
+        div[data-testid="stForm"] div[data-testid="stTextInput"] input:disabled,
+        .admin-table-container div[data-testid="stTextInput"] input:disabled {
             background-color: transparent !important;
             color: #888888 !important;
             font-weight: bold !important;
