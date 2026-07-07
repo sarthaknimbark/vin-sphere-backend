@@ -199,7 +199,7 @@ def render_admin_panel():
         }
 
         /* Reset stForm margins and containers inside the admin table */
-        .admin-table-container [data-testid="stForm"] {
+        .admin-table-container div[data-testid="stForm"] {
             border: none !important;
             padding: 0px !important;
             margin-bottom: 2px !important;
@@ -218,8 +218,8 @@ def render_admin_panel():
         }
         
         /* Remove default margins on element containers to keep everything level */
-        .admin-table-container [data-testid="stHorizontalBlock"] [data-testid="stElementContainer"],
-        .admin-table-container [data-testid="stHorizontalBlock"] [data-testid="element-container"] {
+        .admin-table-container [data-testid="stHorizontalBlock"] div[data-testid="stElementContainer"],
+        .admin-table-container [data-testid="stHorizontalBlock"] div[data-testid="element-container"] {
             margin: 0px !important;
             padding: 0px !important;
             height: 38px !important;
@@ -230,7 +230,7 @@ def render_admin_panel():
         }
         
         /* Target the outer stTextInput container */
-        [data-testid="stForm"] [data-testid="stTextInput"] {
+        div[data-testid="stForm"] div[data-testid="stTextInput"] {
             border: none !important;
             background-color: transparent !important;
             box-shadow: none !important;
@@ -244,27 +244,26 @@ def render_admin_panel():
         }
         
         /* Hide labels in text inputs to prevent vertical offsets */
-        [data-testid="stForm"] [data-testid="stTextInput"] label {
+        div[data-testid="stForm"] div[data-testid="stTextInput"] label {
             display: none !important;
         }
         
-        /* Reset the Emotion cache wrapper to be transparent and borderless (older Streamlit) */
-        [data-testid="stForm"] [data-testid="stTextInput"] [data-testid="stTextInputRootElement"] > div {
+        /* Reset the Emotion cache wrapper to be transparent and borderless */
+        div[data-testid="stForm"] div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div {
             background-color: transparent !important;
             border: none !important;
             box-shadow: none !important;
         }
         
-        /* Make the inner Styletron parent container transparent (older Streamlit) */
-        [data-testid="stForm"] [data-testid="stTextInput"] [data-testid="stTextInputRootElement"] > div > div > div {
+        /* Make the inner Styletron parent container transparent */
+        div[data-testid="stForm"] div[data-testid="stTextInput"] div[data-testid="stTextInputRootElement"] > div > div > div {
             background-color: transparent !important;
             border: none !important;
             box-shadow: none !important;
         }
         
-        /* Style the actual input box for enabled inputs (works for both older BaseWeb-based and 1.59.0+ Streamlit versions) */
-        [data-testid="stForm"] [data-testid="stTextInput"]:not(:has(input:disabled)) [data-testid="stTextInputRootElement"] > div > div,
-        [data-testid="stForm"] [data-testid="stTextInput"]:not(:has(input:disabled)) [data-testid="stTextInputRootElement"]:not(:has(div)) {
+        /* Style the actual input box (grandparent of the input element) for enabled inputs */
+        div[data-testid="stForm"] div[data-testid="stTextInput"]:not(:has(input:disabled)) div[data-testid="stTextInputRootElement"] > div > div {
             border: 1px solid #cccccc !important;
             border-radius: 6px !important;
             height: 38px !important;
@@ -272,9 +271,8 @@ def render_admin_panel():
             box-shadow: none !important;
         }
         
-        /* Style the input box container for disabled inputs (works for both older BaseWeb-based and 1.59.0+ Streamlit versions) */
-        [data-testid="stForm"] [data-testid="stTextInput"]:has(input:disabled) [data-testid="stTextInputRootElement"] > div > div,
-        [data-testid="stForm"] [data-testid="stTextInput"]:has(input:disabled) [data-testid="stTextInputRootElement"]:not(:has(div)) {
+        /* Style the input box container (grandparent of the input element) for disabled inputs */
+        div[data-testid="stForm"] div[data-testid="stTextInput"]:has(input:disabled) div[data-testid="stTextInputRootElement"] > div > div {
             background-color: #f0f0f0 !important;
             border: 1px solid #cccccc !important;
             border-radius: 6px !important;
@@ -283,7 +281,7 @@ def render_admin_panel():
         }
         
         /* Style the actual input tag */
-        [data-testid="stForm"] [data-testid="stTextInput"] input {
+        div[data-testid="stForm"] div[data-testid="stTextInput"] input {
             border: none !important;
             background-color: transparent !important;
             color: #0f172a !important;
@@ -296,7 +294,7 @@ def render_admin_panel():
         }
         
         /* Disabled input text styling */
-        [data-testid="stForm"] [data-testid="stTextInput"] input:disabled {
+        div[data-testid="stForm"] div[data-testid="stTextInput"] input:disabled {
             background-color: transparent !important;
             color: #888888 !important;
             font-weight: bold !important;
@@ -304,7 +302,7 @@ def render_admin_panel():
         }
 
         /* Target Streamlit form submit button elements */
-        [data-testid="stFormSubmitButton"] {
+        div[data-testid="stFormSubmitButton"] {
             margin: 0px !important;
             padding: 0px !important;
             display: flex !important;
@@ -316,7 +314,7 @@ def render_admin_panel():
         }
         
         /* Target Streamlit form submit buttons directly */
-        [data-testid="stFormSubmitButton"] button {
+        div[data-testid="stFormSubmitButton"] button {
             height: 38px !important;
             min-height: 38px !important;
             width: 100% !important;
@@ -326,8 +324,8 @@ def render_admin_panel():
         }
 
         /* Save button: Blue button */
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button {
             background-color: #3b82f6 !important;
             color: #ffffff !important;
             border: 1px solid #3b82f6 !important;
@@ -344,24 +342,24 @@ def render_admin_panel():
             justify-content: center !important;
             align-items: center !important;
         }
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button:hover {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button:hover,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button:hover {
             background-color: #2563eb !important;
             border-color: #2563eb !important;
         }
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button *,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button span,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button p,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button *,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button span,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button p {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(13) button p,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(3) button p {
             color: #ffffff !important;
             font-weight: 600 !important;
         }
 
         /* Approve button: Green button */
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button {
             background-color: #22c55e !important;
             color: #ffffff !important;
             border: 1px solid #22c55e !important;
@@ -378,24 +376,24 @@ def render_admin_panel():
             justify-content: center !important;
             align-items: center !important;
         }
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button:hover,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button:hover {
             background-color: #16a34a !important;
             border-color: #16a34a !important;
         }
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button *,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button span,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button p,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button *,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button span,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button p {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(14) button p,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(2) button p {
             color: #ffffff !important;
             font-weight: 600 !important;
         }
 
         /* Reject button: Red button */
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button {
             background-color: #ef4444 !important;
             color: #ffffff !important;
             border: 1px solid #ef4444 !important;
@@ -412,17 +410,17 @@ def render_admin_panel():
             justify-content: center !important;
             align-items: center !important;
         }
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button:hover,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button:hover,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button:hover {
             background-color: #dc2626 !important;
             border-color: #dc2626 !important;
         }
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button *,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button span,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button p,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button *,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button span,
-        [data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button p {
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-child(15) button p,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button *,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button span,
+        div[data-testid="stForm"] [data-testid="stHorizontalBlock"] > div:nth-last-child(1) button p {
             color: #ffffff !important;
             font-weight: 600 !important;
         }
