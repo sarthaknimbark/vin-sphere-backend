@@ -2,18 +2,24 @@ import datetime
 import pandas as pd
 from .connection import get_db_connection
 
-def lookup_vin_in_master_dataset(file_path: str, vin: str) -> dict:
+def lookup_vin_in_master_dataset(vin: str) -> dict:
     vin_upper = vin.upper().strip()
+    length = len(vin_upper)
+    table_name = "master_data"
+    if length in (10, 11, 12):
+        table_name = f"master_data_{length}"
+        
     conn = None
     try:
         conn = get_db_connection()
         with conn.cursor() as cur:
-            cur.execute("""
+            query = f"""
                 SELECT chassisnumber, year, make, model, trim, bodytype, regionalspec, cylinders, color, origin, weightinkg, noofpassengers
-                FROM master_data
+                FROM {table_name}
                 WHERE UPPER(TRIM(chassisnumber)) = %s
                 LIMIT 1;
-            """, (vin_upper,))
+            """
+            cur.execute(query, (vin_upper,))
             row = cur.fetchone()
             if row:
                 return {
@@ -95,10 +101,16 @@ def safe_read_pending_predictions() -> pd.DataFrame:
                 color, 
                 origin, 
                 weightinkg AS weight, 
-                noofpassengers AS no_of_passengers
-            FROM pending_predictions;
+                noofpassengers AS no_of_passengers,
+                created_at,
+                id
+            FROM pending_predictions
+            ORDER BY id DESC;
         """, conn)
-        df["timestamp"] = "UNKNOWN"
+        if not df.empty and "created_at" in df.columns:
+            df["timestamp"] = pd.to_datetime(df["created_at"]).dt.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            df["timestamp"] = "UNKNOWN"
         return df
     except Exception as e:
         print(f"Error reading pending predictions from DB: {e}")
@@ -112,8 +124,14 @@ def save_pending_prediction(vin: str, length: int, result: dict):
     try:
         conn = get_db_connection()
         with conn.cursor() as cur:
+            vin_upper = vin.upper().strip()
+            table_name = "master_data"
+            if len(vin_upper) in (10, 11, 12):
+                table_name = f"master_data_{len(vin_upper)}"
+
             # 1. If it already exists in master_data, don't add to pending queue
-            cur.execute("SELECT 1 FROM master_data WHERE UPPER(TRIM(chassisnumber)) = %s LIMIT 1;", (vin.upper().strip(),))
+            query = f"SELECT 1 FROM {table_name} WHERE UPPER(TRIM(chassisnumber)) = %s LIMIT 1;"
+            cur.execute(query, (vin_upper,))
             if cur.fetchone():
                 return
 
@@ -153,10 +171,13 @@ def approve_pending_prediction(vin: str, updated_attrs: dict) -> bool:
         conn = get_db_connection()
         with conn.cursor() as cur:
             vin_upper = vin.upper().strip()
+            table_name = "master_data"
+            if len(vin_upper) in (10, 11, 12):
+                table_name = f"master_data_{len(vin_upper)}"
             
             # 1. Insert/update in master_data
-            cur.execute("""
-                INSERT INTO master_data (
+            query_master = f"""
+                INSERT INTO {table_name} (
                     chassisnumber, year, make, model, trim, bodytype, regionalspec, cylinders, color, origin, weightinkg, noofpassengers
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 ON CONFLICT (chassisnumber) DO UPDATE SET
@@ -171,7 +192,8 @@ def approve_pending_prediction(vin: str, updated_attrs: dict) -> bool:
                     origin = EXCLUDED.origin,
                     weightinkg = EXCLUDED.weightinkg,
                     noofpassengers = EXCLUDED.noofpassengers;
-            """, (
+            """
+            cur.execute(query_master, (
                 vin_upper,
                 updated_attrs.get("year", ""),
                 updated_attrs.get("make", ""),
@@ -248,3 +270,64 @@ def reject_pending_prediction(vin: str) -> bool:
     finally:
         if conn:
             conn.close()
+
+def update_pending_prediction(vin: str, updated_attrs: dict) -> bool:
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cur:
+            vin_upper = vin.upper().strip()
+            cur.execute("""
+                UPDATE pending_predictions SET
+                    year = %s,
+                    make = %s,
+                    model = %s,
+                    trim = %s,
+                    bodytype = %s,
+                    regionalspec = %s,
+                    cylinders = %s,
+                    color = %s,
+                    origin = %s,
+                    weightinkg = %s,
+                    noofpassengers = %s
+                WHERE UPPER(TRIM(chassisnumber)) = %s;
+            """, (
+                updated_attrs.get("year", ""),
+                updated_attrs.get("make", ""),
+                updated_attrs.get("model", ""),
+                updated_attrs.get("trim", ""),
+                updated_attrs.get("body_type", ""),
+                updated_attrs.get("regional_spec", ""),
+                updated_attrs.get("cylinders", ""),
+                updated_attrs.get("color", ""),
+                updated_attrs.get("origin", ""),
+                updated_attrs.get("weight", ""),
+                updated_attrs.get("no_of_passengers", ""),
+                vin_upper
+            ))
+            conn.commit()
+            return True
+    except Exception as e:
+        print(f"Error updating pending prediction: {e}")
+        if conn:
+            conn.rollback()
+        return False
+    finally:
+        if conn:
+            conn.close()
+
+
+def get_approved_predictions_count() -> int:
+    conn = None
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cur:
+            cur.execute("SELECT COUNT(*) FROM approved_predictions;")
+            return cur.fetchone()[0]
+    except Exception as e:
+        print(f"Error getting approved predictions count: {e}")
+        return 0
+    finally:
+        if conn:
+            conn.close()
+
