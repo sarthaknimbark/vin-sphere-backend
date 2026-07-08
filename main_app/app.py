@@ -1057,11 +1057,6 @@ if st.button("Decode", type="primary"):
 
                 table_data = [
                     {
-                        "Attribute": "Chassis Number",
-                        "Predicted Value": result.get("vin"),
-                        "Confidence": "",
-                    },
-                    {
                         "Attribute": "Make",
                         "Predicted Value": result.get("make"),
                         "Confidence": fmt_conf("make"),
