@@ -344,7 +344,9 @@ def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
     
     # 1. Dynamically scan the directory for any file ending in '_dep.csv'
     # This automatically catches new files added in the future!
-    for local_file_path in directory_path.glob("*_dep_2_tempvariancefixed.csv"):
+
+    # for local_file_path in directory_path.glob("*_dep.csv"):
+    for local_file_path in [directory_path / 'car_dep_temp.csv']:
         file_name = local_file_path.name  # Extracts just the 'brand_dep.csv' string
         
         try:
