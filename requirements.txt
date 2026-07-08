@@ -8,7 +8,6 @@ requests>=2.31.0
 beautifulsoup4>=4.12.0
 ipython>=8.0.0
 openpyxl>=3.1.0
-pathlib
 scikit-learn>=1.3.0
 catboost>=1.2.0
 scipy>=1.11.0

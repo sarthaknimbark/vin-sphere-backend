@@ -4,6 +4,7 @@ import importlib.util
 from difflib import SequenceMatcher
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import streamlit as st
 
@@ -30,15 +31,12 @@ sys.modules["predict"] = predict_module
 spec.loader.exec_module(predict_module)
 decode_vin = predict_module.decode_vin
 
-# from chat_cat.predict import decode_vin
-
 def decode_any_vin(vin_str):
     length = len(vin_str)
     if length == 17:
         return decode_vin(vin_str, model_dir=MODEL_DIR)
     elif length == 9:
         from chat_cat_short_vin_09.predict import predict_vehicle as predict_09
-        import numpy as np
         model_dir_09 = str(project_root / "chat_cat_short_vin_09" / "models")
         res_09 = predict_09(vin_str, model_dir=model_dir_09)
         
@@ -73,7 +71,6 @@ def decode_any_vin(vin_str):
         return mapped_res
     elif length == 11:
         from chat_cat_short_vin_11.predict import predict_vehicle as predict_11
-        import numpy as np
         model_dir_11 = str(project_root / "chat_cat_short_vin_11" / "models")
         res_11 = predict_11(vin_str, model_dir=model_dir_11)
         
@@ -108,7 +105,6 @@ def decode_any_vin(vin_str):
         return mapped_res
     elif length == 12:
         from chat_cat_short_vin_12.predict import predict_vehicle as predict_12
-        import numpy as np
         model_dir_12 = str(project_root / "chat_cat_short_vin_12" / "models")
         res_12 = predict_12(vin_str, model_dir=model_dir_12)
         
@@ -336,7 +332,6 @@ LOOKUP_DATA_PATH = project_root / "Data/lookup_clean_translated.csv"
 
 # Updated directory path for your cleaned 21 depreciation CSV files
 DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation"
-# DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated_2"
 
 @st.cache_data
 def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
@@ -559,7 +554,7 @@ if st.button("Decode", use_container_width=True):
                     if ml_price is not None:
                         with tabs[tab_index]:
                             val = result["ml_price_valuation"]
-                            st.write("**Retail Price vs. Trade Price (ML Mou  kukkuukhhujjudel)**")
+                            st.write("**Retail Price vs. Trade Price (ML Model)**")
                             st.table(pd.DataFrame([
                                 {"Price Metric": "Minimum Price (-10%)", "Retail Price (AED)": f"{val['retail_price']['minimum']:,.0f}", "Trade Price (AED)": f"{val['trade_price']['minimum']:,.0f}"},
                                 {"Price Metric": "Average Price", "Retail Price (AED)": f"{val['retail_price']['average']:,.0f}", "Trade Price (AED)": f"{val['trade_price']['average']:,.0f}"},
