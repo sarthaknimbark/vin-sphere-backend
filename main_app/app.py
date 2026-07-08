@@ -33,6 +33,8 @@ st.set_page_config(
 )
 
 
+
+
 # Resolve project paths
 app_dir = Path(__file__).resolve().parent
 project_root = app_dir.parent
@@ -1017,6 +1019,7 @@ if st.button("Decode", type="primary"):
                     ml_price = None
                     ml_price_display = "Not found"
                     ml_conf_display = "Not found"
+                    ml_conf_level = ""
                 else:
                     ml_price = ml_info["price"]
                     ml_price_display = f"{ml_price:,.0f} AED"

@@ -8,6 +8,7 @@ database_dir = Path(__file__).resolve().parent
 project_root = database_dir.parent
 
 def get_db_connection():
+    import os
     try:
         from dotenv import load_dotenv
         load_dotenv(dotenv_path=project_root / ".env")
