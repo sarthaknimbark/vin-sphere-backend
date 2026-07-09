@@ -154,13 +154,21 @@ def prepare_data(data_path: str, save_encoders_dir: str = "models") -> Tuple[pd.
     """Loads, cleans, engineers features, normalizes target variables, and fits encoders."""
     logger.info(f"Loading raw dataset from {data_path}...")
     
-    # Check file type
-    if data_path.endswith(".csv"):
+    # Check file type or database
+    if data_path.lower() in ("postgres", "postgresql", "db", "database"):
+        import sys
+        from pathlib import Path
+        project_root = Path(__file__).resolve().parent.parent
+        if str(project_root) not in sys.path:
+            sys.path.insert(0, str(project_root))
+        from database.operations import fetch_training_data_by_length
+        df_raw = fetch_training_data_by_length(17)
+    elif data_path.endswith(".csv"):
         df_raw = pd.read_csv(data_path)
     elif data_path.endswith(".parquet"):
         df_raw = pd.read_parquet(data_path)
     else:
-        raise ValueError("Unsupported dataset file format. Use .csv or .parquet.")
+        raise ValueError("Unsupported dataset file format. Use .csv, .parquet or 'postgres'.")
         
     logger.info(f"Loaded raw data of shape: {df_raw.shape}")
     

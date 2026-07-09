@@ -31,7 +31,16 @@ logger = logging.getLogger(__name__)
 
 def extract_gcc_rules(data_path: str, save_dir: str):
     logger.info("Extracting GCC vs. Non-GCC pattern-matching rules...")
-    df = pd.read_csv(data_path)
+    if data_path.lower() in ("postgres", "postgresql", "db", "database"):
+        import sys
+        from pathlib import Path
+        project_root = Path(__file__).resolve().parent.parent
+        if str(project_root) not in sys.path:
+            sys.path.insert(0, str(project_root))
+        from database.operations import fetch_training_data_by_length
+        df = fetch_training_data_by_length(17)
+    else:
+        df = pd.read_csv(data_path)
     df['VIN'] = df['chassisNumber'].astype(str).str.upper().str.strip()
     df = df[df['VIN'].str.len() == 17].copy()
     
@@ -127,7 +136,8 @@ def main():
     
     args = parser.parse_args()
     
-    if not os.path.exists(args.data_path):
+    is_db = args.data_path.lower() in ("postgres", "postgresql", "db", "database")
+    if not is_db and not os.path.exists(args.data_path):
         logger.error(f"Dataset not found at: {args.data_path}")
         return
         
@@ -300,6 +310,16 @@ def main():
                 
         trainer.fit(args.epochs)
         logger.info("Neural Network Transformer training complete!")
+        
+        # Save validation metrics to metrics.json
+        final_metrics = trainer.evaluate()
+        metrics_file = os.path.join(args.model_dir, "metrics.json")
+        simple_metrics = {}
+        for k, v in final_metrics.items():
+            simple_metrics[k] = float(v)
+        with open(metrics_file, "w") as f:
+            json.dump(simple_metrics, f, indent=2)
+        logger.info(f"Saved NN metrics to {metrics_file}")
 
 if __name__ == "__main__":
     main()
