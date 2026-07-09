@@ -335,8 +335,8 @@ MODEL_DIR = str(project_root / "chat_cat(2.0)" / "models")
 LOOKUP_DATA_PATH = project_root / "Data/lookup_clean_translated.csv"
 
 # Updated directory path for your cleaned 21 depreciation CSV files
-DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation"
-# DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "depreciated_2"
+DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data"
+# DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data" / "depreciated"
 
 @st.cache_data
 def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
@@ -346,7 +346,7 @@ def load_all_depreciation_lookups_from_dir(directory_path: Path) -> dict:
     # This automatically catches new files added in the future!
 
     # for local_file_path in directory_path.glob("*_dep.csv"):
-    for local_file_path in [directory_path / 'car_dep_temp.csv']:
+    for local_file_path in [directory_path / 'car_dep.csv']:
         file_name = local_file_path.name  # Extracts just the 'brand_dep.csv' string
         
         try:
