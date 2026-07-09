@@ -331,3 +331,59 @@ def get_approved_predictions_count() -> int:
         if conn:
             conn.close()
 
+
+def fetch_training_data_by_length(length: int) -> pd.DataFrame:
+    """
+    Fetches all training data for a specific chassis length from the PostgreSQL database.
+    """
+    conn = None
+    try:
+        conn = get_db_connection()
+        if length in (10, 11, 12):
+            table_name = f"master_data_{length}"
+            query = f"""
+                SELECT 
+                    chassisnumber AS "chassisNumber",
+                    year AS "year",
+                    make AS "make",
+                    model AS "model",
+                    trim AS "trim",
+                    bodytype AS "bodyType",
+                    regionalspec AS "regionalSpec",
+                    cylinders AS "cylinders",
+                    color AS "color",
+                    origin AS "origin",
+                    weightinkg AS "weightInKg",
+                    noofpassengers AS "noOfPassengers"
+                FROM {table_name};
+            """
+        elif length == 17:
+            query = """
+                SELECT 
+                    chassisnumber AS "chassisNumber",
+                    year AS "year",
+                    make AS "make",
+                    model AS "model",
+                    trim AS "trim",
+                    bodytype AS "bodyType",
+                    regionalspec AS "regionalSpec",
+                    cylinders AS "cylinders",
+                    color AS "color",
+                    origin AS "origin",
+                    weightinkg AS "weightInKg",
+                    noofpassengers AS "noOfPassengers"
+                FROM master_data
+                WHERE LENGTH(chassisnumber) = 17;
+            """
+        else:
+            raise ValueError(f"Unsupported chassis length: {length}")
+            
+        df = pd.read_sql_query(query, conn)
+        return df
+    except Exception as e:
+        print(f"Error fetching training data by length: {e}")
+        raise
+    finally:
+        if conn:
+            conn.close()
+
