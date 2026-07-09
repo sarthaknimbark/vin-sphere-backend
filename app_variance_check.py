@@ -17,7 +17,8 @@ def normalize_trim(val):
 
 # ── 1. PRE-INDEX DEPRECIATION DATA FOR MASSIVE SPEED ─────────────────────────
 print("Pre-indexing depreciation lookup files into memory...")
-csv_files = glob.glob(str(DEP_DIR / '*_dep_2.csv'))
+# csv_files = glob.glob(str(DEP_DIR / '*temp.csv'))
+csv_files = [DEP_DIR / 'car_dep_temp.csv']
 
 # Schema: dep_index[filename][(model_slug, year_val)] = list of rows (dict format)
 dep_index = defaultdict(lambda: defaultdict(list))
@@ -33,12 +34,14 @@ for f in csv_files:
         df["model_slug"] = df["model_slug"].astype(str).str.strip().str.lower()
         df["year"] = pd.to_numeric(df["year"], errors="coerce")
         df["trim_key"] = df["trim_name"].apply(normalize_trim)
-        
+        df["make_key"] = df["make"].astype(str).str.strip().str.lower().str.replace(" ", "_")
+
         # Convert to dictionary records for lightning-fast hash lookups
         for row in df.to_dict(orient="records"):
             yr = row["year"]
             if pd.notna(yr):
-                dep_index[filename][(row["model_slug"], int(yr))].append(row)
+                # index by (make_key) instead of source filename
+                dep_index[row["make_key"]][(row["model_slug"], int(yr))].append(row)
     except Exception as e:
         print(f"Skipping corrupt file {f}: {e}")
 
@@ -61,23 +64,15 @@ def get_fast_depreciated_values(result: dict) -> dict:
     trim_key = normalize_trim(trim)
     matched_values = {}
 
-    # FIX: only look at this car's own brand file (e.g. bmw_dep.csv), not all files.
-    # Previously every brand file was scanned, and the substring fallback below
-    # let unrelated brands match (e.g. "x5" matching lexus-lx570, infiniti-qx50,
-    # mg-rx5, changan-x5, etc.) causing false variance entries in the report.
-    own_filename = f"{make}_dep.csv"
-    if own_filename not in dep_index:
+    if make not in dep_index:
         return {}
-    slug_map = dep_index[own_filename]
+    slug_map = dep_index[make]
 
-    for filename in [own_filename]:
+    for filename in [f"{make}_dep"]:
         # Step 1: Exact model slug match
         candidate_rows = slug_map.get((model_slug, year_val), [])
 
         # Step 2: Fallback substring match (only if exact match yielded nothing)
-        # FIX: fallback must still require the brand prefix, otherwise short
-        # model names like "x5" collide with unrelated slugs sharing those
-        # characters within the SAME file too (still restrict properly).
         make_slug_prefix = make.replace('_', '-')
         if not candidate_rows:
             candidate_rows = [
@@ -117,7 +112,7 @@ def get_fast_depreciated_values(result: dict) -> dict:
             best_rows = candidate_rows
 
         # Extract median depreciated value from best matching rows
-        valid_vals = [r["depreciated_value"] for r in best_rows if pd.notna(r.get("depreciated_value"))]
+        valid_vals = [r.get("final_depreciated_value", r.get("depreciated_value")) for r in best_rows if pd.notna(r.get("final_depreciated_value", r.get("depreciated_value")))]
         if valid_vals:
             valid_vals.sort()
             mid = len(valid_vals) // 2

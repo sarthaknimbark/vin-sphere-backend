@@ -9,7 +9,8 @@ INPUT_CSV = project_root / 'lookup_clean_translated.csv'
 DEP_DIR   = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
 
 # ── Load dep CSVs ─────────────────────────────────────────────────────────────
-csv_files = [f for f in glob.glob(str(DEP_DIR / '*_dep_2.csv'))]
+# csv_files = [f for f in glob.glob(str(DEP_DIR / '*_dep.csv'))]
+csv_files = [DEP_DIR / 'car_dep_temp.csv']
 valid_dfs = []
 for f in csv_files:
     try:
