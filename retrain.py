@@ -205,7 +205,34 @@ def main():
             except Exception as e:
                 logger.warning(f"Could not load short_{len_str} metrics: {e}")
                 
-    # 5. Save final metadata.json
+    # 5. Run evaluation and comparison pipeline
+    logger.info("\n--- Phase 5: Automated Model Evaluation and Comparison ---")
+    cmd_eval = [
+        sys.executable,
+        "evaluate_and_compare.py",
+        "--candidate_dir", str(versioned_dir),
+        "--production_dir", "models"
+    ]
+    
+    with open(log_file_path, "a", encoding="utf-8") as log_file:
+        eval_success = run_training_step(
+            cmd_eval,
+            cwd=project_root,
+            log_file=log_file
+        )
+    success_states["evaluation_and_comparison"] = eval_success
+    
+    # Load comparison report if it exists
+    eval_report = {}
+    report_path = versioned_dir / "evaluation" / "comparison_report.json"
+    if report_path.exists():
+        try:
+            with open(report_path, "r") as f:
+                eval_report = json.load(f)
+        except Exception as e:
+            logger.warning(f"Could not load evaluation report: {e}")
+            
+    # 6. Save final metadata.json
     db_row_counts = get_db_row_counts()
     
     metadata_final = {
@@ -220,7 +247,8 @@ def main():
             "total_duration": total_duration
         },
         "success_states": success_states,
-        "evaluation_metrics": metrics_summary
+        "evaluation_metrics": metrics_summary,
+        "evaluation_and_comparison_result": eval_report
     }
     
     metadata_file_path = versioned_dir / "metadata.json"

@@ -1,0 +1,27 @@
+{
+  "weights": {
+    "make": 0.25,
+    "model": 0.25,
+    "trim": 0.20,
+    "body_type": 0.10,
+    "year": 0.10,
+    "origin": 0.05,
+    "cylinders": 0.05,
+    "color": 0.0,
+    "weight": 0.0,
+    "no_of_passengers": 0.0,
+    "regional_specs": 0.0
+  },
+  "metrics": {
+    "primary": "accuracy",
+    "thresholds": {
+      "accuracy": 0.0,
+      "f1_weighted": 0.0
+    }
+  },
+  "promotion_rules": {
+    "require_overall_improvement": true,
+    "allow_regression_tolerance": 0.01,
+    "critical_attributes": ["make", "model"]
+  }
+}
