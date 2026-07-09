@@ -700,13 +700,28 @@ def render_retraining_dashboard():
             if skip_rules:
                 cmd.append("--skip_rules")
                 
+            # Inherit environment variables and pass database credentials from st.secrets if running on Streamlit Cloud
+            env = os.environ.copy()
+            env["PYTHONUNBUFFERED"] = "1"
+            try:
+                if "postgres" in st.secrets:
+                    pg_sec = st.secrets["postgres"]
+                    env["PGHOST"] = pg_sec.get("host", "")
+                    env["PGPORT"] = str(pg_sec.get("port", "5432"))
+                    env["PGDATABASE"] = pg_sec.get("database", "")
+                    env["PGUSER"] = pg_sec.get("username", pg_sec.get("user", ""))
+                    env["PGPASSWORD"] = pg_sec.get("password", "")
+            except Exception:
+                pass
+                
             # Launch background process
             proc = subprocess.Popen(
                 cmd,
                 cwd=str(project_root),
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
-                close_fds=True
+                close_fds=True,
+                env=env
             )
             
             new_status = {
