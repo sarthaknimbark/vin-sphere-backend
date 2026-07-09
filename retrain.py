@@ -66,24 +66,32 @@ def get_db_row_counts() -> dict:
 
 def run_training_step(cmd: list, cwd: Path, log_file) -> bool:
     """Runs a single training step as a subprocess, writing output to log_file."""
+    import traceback
     logger.info(f"Executing: {' '.join(cmd)} in CWD: {cwd}")
     log_file.write(f"\n--- EXECUTING COMMAND: {' '.join(cmd)} ---\n")
     log_file.flush()
     
     start_time = time.time()
-    result = subprocess.run(
-        cmd,
-        cwd=str(cwd),
-        stdout=log_file,
-        stderr=subprocess.STDOUT,
-        text=True
-    )
-    duration = time.time() - start_time
-    logger.info(f"Command finished with return code {result.returncode} in {duration:.2f} seconds.")
-    log_file.write(f"\n--- FINISHED IN {duration:.2f}s WITH RETURN CODE {result.returncode} ---\n")
-    log_file.flush()
-    
-    return result.returncode == 0
+    try:
+        result = subprocess.run(
+            cmd,
+            cwd=str(cwd),
+            stdout=log_file,
+            stderr=subprocess.STDOUT,
+            text=True
+        )
+        duration = time.time() - start_time
+        logger.info(f"Command finished with return code {result.returncode} in {duration:.2f} seconds.")
+        log_file.write(f"\n--- FINISHED IN {duration:.2f}s WITH RETURN CODE {result.returncode} ---\n")
+        log_file.flush()
+        return result.returncode == 0
+    except Exception as e:
+        duration = time.time() - start_time
+        err_msg = f"EXCEPTION OCCURRED: {e}\n{traceback.format_exc()}"
+        logger.error(err_msg)
+        log_file.write(f"\n--- FAILED IN {duration:.2f}s WITH EXCEPTION ---\n{err_msg}\n")
+        log_file.flush()
+        return False
 
 def main():
     parser = argparse.ArgumentParser(description="Unified PostgreSQL-Based Automated Retraining Pipeline")
