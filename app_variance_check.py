@@ -7,8 +7,8 @@ import pandas as pd
 
 project_root = Path(__file__).resolve().parent
 INPUT_CSV = project_root / 'lookup_clean_translated.csv'
-DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation'
-# DEP_DIR = project_root / 'Valuation' / 'data' / 'drivearabia_car_depreciation_valuation' / 'depreciated_2'
+DEP_DIR = project_root / 'Valuation' / 'data'
+# DEP_DIR = project_root / 'Valuation' / 'data' / 'depreciated'
 
 def normalize_trim(val):
     if pd.isna(val):
@@ -17,8 +17,8 @@ def normalize_trim(val):
 
 # ── 1. PRE-INDEX DEPRECIATION DATA FOR MASSIVE SPEED ─────────────────────────
 print("Pre-indexing depreciation lookup files into memory...")
-# csv_files = glob.glob(str(DEP_DIR / '*temp.csv'))
-csv_files = [DEP_DIR / 'car_dep_temp.csv']
+# csv_files = glob.glob(str(DEP_DIR / '*_dep.csv'))
+csv_files = [DEP_DIR / 'car_dep.csv']
 
 # Schema: dep_index[filename][(model_slug, year_val)] = list of rows (dict format)
 dep_index = defaultdict(lambda: defaultdict(list))

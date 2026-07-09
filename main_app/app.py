@@ -41,7 +41,7 @@ project_root = app_dir.parent
 if str(project_root) not in sys.path:
     sys.path.append(str(project_root))
 LOOKUP_DATA_PATH = project_root / "car_app_dev"/ "dev_lookup.csv"
-CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "drivearabia_car_depreciation_valuation" / "car_dep_2.csv"
+CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "car_dep.csv"
 
 # Evict database modules from sys.modules cache to ensure Streamlit hot-reloads on-disk database changes
 for mod_key in list(sys.modules.keys()):
