@@ -887,7 +887,7 @@ if app_mode == "Model Retraining":
     st.stop()
 
 st.title("VIN Decoder")
-st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v3.0")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v4.0.1")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER
