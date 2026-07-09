@@ -651,7 +651,6 @@ def render_retraining_dashboard():
             - **NN Batch Size (Processing Step)**: The size of data blocks the model reads in one go. Larger blocks make training faster.
             - **NN Learning Rate (Learning Speed)**: How fast the model adjusts its knowledge. Too fast might miss patterns; too slow takes too long.
             - **NN Downsample Limit (Data Limit)**: The amount of database rows to train on. Set to `-1` to train on all available data.
-            - **Skip Toggles (Save Time)**: Skip specific phases of training (like standard models or rules) if you only want to update others.
             """)
             
         col1, col2 = st.columns(2)
@@ -663,14 +662,9 @@ def render_retraining_dashboard():
             downsample = st.number_input("NN Downsample Limit (-1 to consider all database records, or specify the number of data rows you want to consider in the training)", min_value=-1, max_value=10000000, value=-1)
             fast = False
             
-        st.markdown("#### Optional Steps Configuration")
-        col_s1, col_s2, col_s3 = st.columns(3)
-        with col_s1:
-            skip_nn = st.checkbox("Skip Neural Network", value=False)
-        with col_s2:
-            skip_fallback = st.checkbox("Skip Fallback Model", value=False)
-        with col_s3:
-            skip_rules = st.checkbox("Skip Pattern Rules", value=False)
+        skip_nn = False
+        skip_fallback = False
+        skip_rules = False
             
         if st.button("Start Retraining Pipeline", use_container_width=True):
             # Calculate next folder
