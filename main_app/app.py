@@ -711,6 +711,10 @@ def render_retraining_dashboard():
                     env["PGDATABASE"] = pg_sec.get("database", "")
                     env["PGUSER"] = pg_sec.get("username", pg_sec.get("user", ""))
                     env["PGPASSWORD"] = pg_sec.get("password", "")
+                    
+                    # Also pass serialized connection dictionary to support SSL and custom options in connection.py fallback
+                    import json
+                    env["DB_CONN_PARAMS"] = json.dumps(dict(pg_sec))
             except Exception:
                 pass
                 
