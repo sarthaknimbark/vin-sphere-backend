@@ -610,7 +610,7 @@ def render_retraining_dashboard():
             
     # Display current status card
     if is_running:
-        st.warning(f"⚠️ Retraining in progress: Run `{status['folder']}` (PID: {status['pid']})")
+        st.warning(f"Retraining in progress: Run `{status['folder']}` (PID: {status['pid']})")
         st.markdown(f"**Started At:** {status['start_time']}")
         
         # Cancel Button
