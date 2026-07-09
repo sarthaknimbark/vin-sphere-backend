@@ -1,0 +1,12 @@
+{
+  "pid": 9768,
+  "status": "CANCELLED",
+  "folder": "training_001",
+  "start_time": "2026-07-09 17:39:35",
+  "params": {
+    "epochs": 15,
+    "downsample": 200000,
+    "fast": false
+  },
+  "end_time": "2026-07-09 17:39:42"
+}
