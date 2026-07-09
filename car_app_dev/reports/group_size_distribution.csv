@@ -1,11 +1,9 @@
-group_size,num_groups
-1,11900
-2,9736
-3,2091
-4,497
-5,105
-6,34
-7,10
-8,10
-9,3
-13,1
+metric,value
+Total Groups,24049.0
+Groups >= 2,11851.0
+Groups >= 3,2452.0
+Groups >= 5,119.0
+Groups >= 10,1.0
+Groups >= 20,0.0
+Largest Group,12.0
+Median Group Size,1.0
