@@ -21,6 +21,15 @@ def get_db_connection():
     except Exception:
         pass
 
+    try:
+        import json
+        conn_params_str = os.environ.get("DB_CONN_PARAMS")
+        if conn_params_str:
+            conn_params = json.loads(conn_params_str)
+            return psycopg2.connect(**conn_params)
+    except Exception:
+        pass
+
     return psycopg2.connect(
         host=os.environ.get("PGHOST", "localhost"),
         port=os.environ.get("PGPORT", "5432"),
