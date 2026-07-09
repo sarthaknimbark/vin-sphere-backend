@@ -585,9 +585,9 @@ def render_retraining_dashboard():
             
     def is_process_running(pid):
         try:
-            cmd = f'tasklist /FI "PID eq {pid}"'
+            cmd = f'tasklist /FI "PID eq {pid}" /FO CSV /NH'
             res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-            return str(pid) in res.stdout
+            return f'"{pid}"' in res.stdout
         except Exception:
             return False
             
@@ -860,17 +860,17 @@ def render_retraining_dashboard():
                             
                 except Exception as e:
                     st.warning(f"Could not load metadata details: {e}")
-            else:
-                # If failed/cancelled, show the last few lines of log to help debug
-                log_file = project_root / "models" / status["folder"] / "training.log"
-                if log_file.exists():
-                    st.markdown("### Final Log Output")
+            # Always show the training log output (whether success, failed, or cancelled)
+            log_file = project_root / "models" / status["folder"] / "training.log"
+            if log_file.exists():
+                st.markdown("---")
+                with st.expander("Show Training Log Output", expanded=(status["status"] != "SUCCESS")):
                     try:
                         with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
                             log_lines = lf.readlines()
-                            st.code("".join(log_lines[-50:]), language="text")
-                    except Exception:
-                        pass
+                            st.code("".join(log_lines), language="text")
+                    except Exception as e:
+                        st.warning(f"Could not read log file: {e}")
 
 @st.cache_resource(ttl=30)
 def check_db_connection_cached() -> tuple:
