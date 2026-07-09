@@ -305,11 +305,17 @@ def main():
         default="chat_cat_short_vin/models",
         help="Directory to save the trained models."
     )
+    parser.add_argument(
+        "--fast",
+        action="store_true",
+        help="Faster training: 2-fold CV and CatBoost/LightGBM only."
+    )
     
     args = parser.parse_args()
     
     # 1. Load data
-    if not os.path.exists(args.data_path):
+    is_db = args.data_path.lower() in ("postgres", "postgresql", "db", "database")
+    if not is_db and not os.path.exists(args.data_path):
         logger.error(f"Dataset file does not exist at: {args.data_path}")
         return
         
@@ -463,10 +469,10 @@ def main():
             num_classes = 1
             
         # 4. KFold Cross Validation on train prefixes
-        candidate_algos = ["CatBoost", "LightGBM", "XGBoost", "RandomForest", "ExtraTrees"]
+        candidate_algos = ["CatBoost", "LightGBM"] if args.fast else ["CatBoost", "LightGBM", "XGBoost", "RandomForest", "ExtraTrees"]
         cv_scores = {algo: [] for algo in candidate_algos}
         
-        gkf = GroupKFold(n_splits=3)
+        gkf = GroupKFold(n_splits=2 if args.fast else 3)
         groups = target_df.loc[tr_mask, "prefix5"].values
         
         for fold, (tr_idx, val_idx) in enumerate(gkf.split(X_train_encoded, y_train_raw, groups=groups)):
@@ -797,11 +803,28 @@ def main():
     if pred_passengers:
         logger.info(f" - No of Passengers Accuracy: {accuracy_score(true_passengers, pred_passengers):.4f}")
 
+    # Save validation metrics to metrics.json
+    metrics_path = os.path.join(args.model_dir, "metrics.json")
+    val_metrics = {}
+    if "best_models" in metadata:
+        for tgt, model_info in metadata["best_models"].items():
+            score_name = "mae" if TARGET_CONFIGS.get(tgt) == "regression" else "accuracy"
+            val_metrics[f"{tgt}_{score_name}"] = model_info.get("test_score")
+    if 'pred_makes' in locals() and len(pred_makes) > 0:
+        val_metrics["hierarchical_make_accuracy"] = float(accuracy_score(true_makes, pred_makes))
+        val_metrics["hierarchical_model_accuracy"] = float(accuracy_score(true_models, pred_models))
+        val_metrics["hierarchical_year_accuracy"] = float(accuracy_score(true_years, pred_years))
+        val_metrics["hierarchical_trim_accuracy"] = float(accuracy_score(true_trims, pred_trims))
+        
+    with open(metrics_path, "w") as f:
+        json.dump(val_metrics, f, indent=2)
+
     # Instantiate and save the unified pipeline
     from chat_cat_short_vin.vin_decoder import VINDecoder
     decoder_pipeline = VINDecoder(model_dir=args.model_dir)
     save_model(decoder_pipeline, os.path.join(args.model_dir, "vin_decoder_pipeline.pkl"))
-    save_model(decoder_pipeline, "vin_decoder_pipeline.pkl")
+    if "training_" not in args.model_dir:
+        save_model(decoder_pipeline, "vin_decoder_pipeline.pkl")
     logger.info("Saved unified vin_decoder_pipeline.pkl successfully!")
 
 if __name__ == "__main__":

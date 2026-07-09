@@ -147,10 +147,10 @@ def extract_features(chassis_series: pd.Series) -> pd.DataFrame:
 
 def load_and_preprocess_data(data_path: str) -> pd.DataFrame:
     """
-    Loads the short chassis dataset from a CSV file and normalizes columns.
+    Loads the short chassis dataset from a CSV file or PostgreSQL and normalizes columns.
     
     Args:
-        data_path: The filesystem path to the CSV file.
+        data_path: The filesystem path to the CSV file or 'postgres'.
         
     Returns:
         A loaded and preprocessed pandas DataFrame.
@@ -158,12 +158,23 @@ def load_and_preprocess_data(data_path: str) -> pd.DataFrame:
     if not data_path:
         raise ValueError("Data path must be provided.")
         
-    logger.info(f"Loading dataset from: {data_path}")
-    try:
-        df = pd.read_csv(data_path)
-    except Exception as e:
-        logger.error(f"Error loading CSV file from {data_path}: {e}")
-        raise
+    is_db = data_path.lower() in ("postgres", "postgresql", "db", "database")
+    if is_db:
+        logger.info("Loading dataset from PostgreSQL database...")
+        import sys
+        from pathlib import Path
+        project_root = Path(__file__).resolve().parent.parent
+        if str(project_root) not in sys.path:
+            sys.path.insert(0, str(project_root))
+        from database.operations import fetch_training_data_by_length
+        df = fetch_training_data_by_length(11)
+    else:
+        logger.info(f"Loading dataset from: {data_path}")
+        try:
+            df = pd.read_csv(data_path)
+        except Exception as e:
+            logger.error(f"Error loading CSV file from {data_path}: {e}")
+            raise
         
     # Standardize column naming if necessary (case variations)
     # The expected input column is 'chassisNumber'
