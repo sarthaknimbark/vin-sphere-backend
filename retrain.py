@@ -17,6 +17,8 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout)
     ]
 )
+logger = logging.getLogger("retrain_pipeline")
+
 class DualStream:
     def __init__(self, stream1, stream2):
         self.stream1 = stream1
