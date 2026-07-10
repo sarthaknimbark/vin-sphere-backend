@@ -67,9 +67,9 @@ def save_training_status(status_dict):
 def is_process_running(pid):
     if os.name == "nt":
         try:
-            cmd = f'tasklist /FI "PID eq {pid}"'
+            cmd = f'tasklist /FI "PID eq {pid}" /FO CSV /NH'
             res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-            return str(pid) in res.stdout
+            return f'"{pid}"' in res.stdout
         except Exception:
             return False
     else:
@@ -720,35 +720,7 @@ def render_retraining_dashboard():
     st.title("Model Retraining & Dashboard")
     st.write("Start, monitor, and cancel model retraining tasks in the background.")
     
-<<<<<<< HEAD
-=======
-    STATUS_FILE = project_root / ".training_status.json"
-    
-    def get_training_status():
-        if not STATUS_FILE.exists():
-            return None
-        try:
-            with open(STATUS_FILE, "r") as f:
-                return json.load(f)
-        except Exception:
-            return None
-            
-    def save_training_status(status_dict):
-        try:
-            with open(STATUS_FILE, "w") as f:
-                json.dump(status_dict, f, indent=2)
-        except Exception:
-            pass
-            
-    def is_process_running(pid):
-        try:
-            cmd = f'tasklist /FI "PID eq {pid}" /FO CSV /NH'
-            res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-            return f'"{pid}"' in res.stdout
-        except Exception:
-            return False
-            
->>>>>>> a4953193018bf5fe0b9ad959d529b7206b9bf4bf
+
     status = get_training_status()
     
     # Check if currently running
