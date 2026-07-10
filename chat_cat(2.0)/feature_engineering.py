@@ -150,7 +150,7 @@ def extract_vin_features(df: pd.DataFrame, vin_col: str) -> pd.DataFrame:
     
     return features
 
-def prepare_data(data_path: str, save_encoders_dir: str = "models") -> Tuple[pd.DataFrame, pd.DataFrame, Dict[str, LabelEncoder]]:
+def prepare_data(data_path: str, save_encoders_dir: str = "models", limit: int = None) -> Tuple[pd.DataFrame, pd.DataFrame, Dict[str, LabelEncoder]]:
     """Loads, cleans, engineers features, normalizes target variables, and fits encoders."""
     logger.info(f"Loading raw dataset from {data_path}...")
     
@@ -162,7 +162,7 @@ def prepare_data(data_path: str, save_encoders_dir: str = "models") -> Tuple[pd.
         if str(project_root) not in sys.path:
             sys.path.insert(0, str(project_root))
         from database.operations import fetch_training_data_by_length
-        df_raw = fetch_training_data_by_length(17)
+        df_raw = fetch_training_data_by_length(17, limit=limit)
     elif data_path.endswith(".csv"):
         df_raw = pd.read_csv(data_path)
     elif data_path.endswith(".parquet"):
