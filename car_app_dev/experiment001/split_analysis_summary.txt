@@ -2,41 +2,40 @@
 EXPERIMENT SPLIT ANALYSIS SUMMARY
 ======================================================================
 
-Train rows : 24,490
-Test rows  : 7,768
+Train rows : 24,546
+Test rows  : 7,710
 
 ======================================================================
 COVERAGE
 ======================================================================
-Known make               : 7,755 (99.83%)
-Known make+model         : 7,029 (90.49%)
-Known make+model+trim    : 154 (1.98%)
-Unknown make+model       : 739 (9.51%)
-Known model / new trim   : 6,875 (88.50%)
+Known make               : 7,692 (99.77%)
+Known make+model         : 6,962 (90.30%)
+Known make+model+trim    : 0 (0.00%)
+Unknown make+model       : 748 (9.70%)
+Known model / new trim   : 6,962 (90.30%)
 
 ======================================================================
 DIFFICULTY
 ======================================================================
-Exact Trim Seen                   154 (  1.98%)
-Known Make / New Model            726 (  9.35%)
-Known Model / New Trim          6,875 ( 88.50%)
-Unknown Make                       13 (  0.17%)
+Known Make / New Model            730 (  9.47%)
+Known Model / New Trim          6,962 ( 90.30%)
+Unknown Make                       18 (  0.23%)
 
 ======================================================================
 TRAINING COVERAGE
 ======================================================================
-Median rows/model : 27
-Mean rows/model   : 53.50
-Max rows/model    : 390
+Median rows/model : 29
+Mean rows/model   : 57.99
+Max rows/model    : 329
 
-0 rows         : 739
-1 row          : 259
-2-5 rows       : 640
-6-20 rows      : 1,768
-21-100 rows    : 3,058
-100+ rows      : 1,304
+0 rows         : 748
+1 row          : 233
+2-5 rows       : 843
+6-20 rows      : 1,349
+21-100 rows    : 3,031
+100+ rows      : 1,506
 
 ======================================================================
 EXACT TRIM MATCHES
 ======================================================================
-Exact trim matches : 154
+Exact trim matches : 0
