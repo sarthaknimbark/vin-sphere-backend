@@ -720,6 +720,35 @@ def render_retraining_dashboard():
     st.title("Model Retraining & Dashboard")
     st.write("Start, monitor, and cancel model retraining tasks in the background.")
     
+<<<<<<< HEAD
+=======
+    STATUS_FILE = project_root / ".training_status.json"
+    
+    def get_training_status():
+        if not STATUS_FILE.exists():
+            return None
+        try:
+            with open(STATUS_FILE, "r") as f:
+                return json.load(f)
+        except Exception:
+            return None
+            
+    def save_training_status(status_dict):
+        try:
+            with open(STATUS_FILE, "w") as f:
+                json.dump(status_dict, f, indent=2)
+        except Exception:
+            pass
+            
+    def is_process_running(pid):
+        try:
+            cmd = f'tasklist /FI "PID eq {pid}" /FO CSV /NH'
+            res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            return f'"{pid}"' in res.stdout
+        except Exception:
+            return False
+            
+>>>>>>> a4953193018bf5fe0b9ad959d529b7206b9bf4bf
     status = get_training_status()
     
     # Check if currently running
@@ -960,17 +989,17 @@ def render_retraining_dashboard():
                             
                 except Exception as e:
                     st.warning(f"Could not load metadata details: {e}")
-            else:
-                # If failed/cancelled, show the last few lines of log to help debug
-                log_file = project_root / "models" / status["folder"] / "training.log"
-                if log_file.exists():
-                    st.markdown("### Final Log Output")
+            # Always show the training log output (whether success, failed, or cancelled)
+            log_file = project_root / "models" / status["folder"] / "training.log"
+            if log_file.exists():
+                st.markdown("---")
+                with st.expander("Show Training Log Output", expanded=(status["status"] != "SUCCESS")):
                     try:
                         with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
                             log_lines = lf.readlines()
-                            st.code("".join(log_lines[-50:]), language="text")
-                    except Exception:
-                        pass
+                            st.code("".join(log_lines), language="text")
+                    except Exception as e:
+                        st.warning(f"Could not read log file: {e}")
 
 @st.cache_resource(ttl=30)
 def check_db_connection_cached() -> tuple:
