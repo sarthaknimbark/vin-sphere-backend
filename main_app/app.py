@@ -46,6 +46,161 @@ if str(project_root) not in sys.path:
 LOOKUP_DATA_PATH = project_root / "car_app_dev"/ "dev_lookup.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "car_dep.csv"
 
+STATUS_FILE = project_root / ".training_status.json"
+
+def get_training_status():
+    if not STATUS_FILE.exists():
+        return None
+    try:
+        with open(STATUS_FILE, "r") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+def save_training_status(status_dict):
+    try:
+        with open(STATUS_FILE, "w") as f:
+            json.dump(status_dict, f, indent=2)
+    except Exception:
+        pass
+
+def is_process_running(pid):
+    if os.name == "nt":
+        try:
+            cmd = f'tasklist /FI "PID eq {pid}"'
+            res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            return str(pid) in res.stdout
+        except Exception:
+            return False
+    else:
+        try:
+            os.kill(pid, 0)
+            return True
+        except OSError:
+            return False
+
+def get_training_progress(log_file_path):
+    if not Path(log_file_path).exists():
+        return "Initializing...", 0.0
+    try:
+        content = Path(log_file_path).read_text(encoding="utf-8", errors="ignore")
+        if "evaluate_and_compare.py" in content:
+            if "FINISHED IN" in content.split("evaluate_and_compare.py")[-1]:
+                return "Completed", 1.0
+            return "Evaluating & comparing candidate models (Phase 5/5)", 0.85
+        elif "short/12" in content or "short\\12" in content:
+            return "Training short 12-character model (Phase 4/5)", 0.65
+        elif "short/11" in content or "short\\11" in content:
+            return "Training short 11-character model (Phase 3/5)", 0.45
+        elif "short/10" in content or "short\\10" in content:
+            return "Training short 10-character model (Phase 2/5)", 0.25
+        elif "train_pipeline.py" in content:
+            return "Training standard 17-character model (Phase 1/5)", 0.05
+        return "Starting retraining pipeline...", 0.01
+    except Exception:
+        return "Running...", 0.0
+
+def cancel_training(status):
+    pid = status.get("pid")
+    if pid:
+        if os.name == "nt":
+            subprocess.run(f"taskkill /F /PID {pid} /T", shell=True)
+        else:
+            try:
+                import signal
+                os.kill(pid, signal.SIGTERM)
+            except Exception:
+                pass
+    status["status"] = "CANCELLED"
+    status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    save_training_status(status)
+
+
+
+@st.fragment(run_every=1.0)
+def render_active_training_dashboard(status):
+    is_active = is_process_running(status.get("pid"))
+    if not is_active:
+        # Process finished or died, update status
+        metadata_path = project_root / "models" / status["folder"] / "metadata.json"
+        status["status"] = "SUCCESS" if metadata_path.exists() else "FAILED"
+        status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        save_training_status(status)
+        st.rerun()
+
+    st.warning(f"Retraining in progress: Run `{status['folder']}` (PID: {status['pid']})")
+    st.markdown(f"**Started At:** {status['start_time']}")
+    
+    # Get progress
+    log_file = project_root / "models" / status["folder"] / "training.log"
+    phase_desc, progress_pct = get_training_progress(log_file)
+    st.markdown(f"**Current Phase:** {phase_desc}")
+    st.progress(progress_pct)
+    
+    # Cancel Button
+    if st.button("Cancel Retraining Run", type="primary", use_container_width=True):
+        cancel_training(status)
+        st.error("Retraining process tree was terminated.")
+        st.rerun()
+        
+    # Log streaming
+    st.markdown("### Real-time Logs")
+    if log_file.exists():
+        try:
+            with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
+                lines = lf.readlines()
+                # Show last 100 lines
+                st.code("".join(lines[-100:]), language="text")
+        except Exception as e:
+            st.info(f"Loading log lines... ({e})")
+    else:
+        st.info("Waiting for logs to initialize...")
+
+@st.fragment(run_every=1.0)
+def render_main_page_training_status():
+    status = get_training_status()
+    is_training_active = False
+    if status and status.get("status") == "RUNNING":
+        if is_process_running(status.get("pid")):
+            is_training_active = True
+        else:
+            # Process finished or died, update status
+            metadata_path = project_root / "models" / status["folder"] / "metadata.json"
+            status["status"] = "SUCCESS" if metadata_path.exists() else "FAILED"
+            status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            save_training_status(status)
+            st.rerun()
+
+    if is_training_active:
+        st.warning(f"Retraining is currently running in the background: Run `{status['folder']}` (PID: {status['pid']})")
+        log_file = project_root / "models" / status["folder"] / "training.log"
+        phase_desc, progress_pct = get_training_progress(log_file)
+        
+        col_prog, col_btn = st.columns([4, 1])
+        with col_prog:
+            st.write(f"**Current Phase:** {phase_desc}")
+            st.progress(progress_pct)
+        with col_btn:
+            st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)  # spacing
+            if st.button("Stop Training", type="primary", key="stop_training_main_btn", use_container_width=True):
+                cancel_training(status)
+                st.error("Retraining process was terminated.")
+                time.sleep(1)
+                st.rerun()
+        
+        with st.expander("View Training Log (Last 50 lines)", expanded=True):
+            if log_file.exists():
+                try:
+                    with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
+                        lines = lf.readlines()
+                        st.code("".join(lines[-50:]), language="text")
+                except Exception as e:
+                    st.info(f"Loading log lines... ({e})")
+            else:
+                st.info("Waiting for logs to initialize...")
+    else:
+        st.success("All models are trained and up-to-date. No retraining in progress.")
+
 # Evict database modules from sys.modules cache to ensure Streamlit hot-reloads on-disk database changes
 for mod_key in list(sys.modules.keys()):
     if mod_key == "database" or mod_key.startswith("database."):
@@ -565,6 +720,8 @@ def render_retraining_dashboard():
     st.title("Model Retraining & Dashboard")
     st.write("Start, monitor, and cancel model retraining tasks in the background.")
     
+<<<<<<< HEAD
+=======
     STATUS_FILE = project_root / ".training_status.json"
     
     def get_training_status():
@@ -591,6 +748,7 @@ def render_retraining_dashboard():
         except Exception:
             return False
             
+>>>>>>> a4953193018bf5fe0b9ad959d529b7206b9bf4bf
     status = get_training_status()
     
     # Check if currently running
@@ -610,36 +768,7 @@ def render_retraining_dashboard():
             
     # Display current status card
     if is_running:
-        st.warning(f"Retraining in progress: Run `{status['folder']}` (PID: {status['pid']})")
-        st.markdown(f"**Started At:** {status['start_time']}")
-        
-        # Cancel Button
-        if st.button("Cancel Retraining Run", type="primary", use_container_width=True):
-            subprocess.run(f"taskkill /F /PID {status['pid']} /T", shell=True)
-            status["status"] = "CANCELLED"
-            status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            save_training_status(status)
-            st.error("Retraining process tree was terminated.")
-            st.rerun()
-            
-        # Log streaming
-        st.markdown("### Real-time Logs")
-        log_file = project_root / "models" / status["folder"] / "training.log"
-        if log_file.exists():
-            try:
-                with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
-                    lines = lf.readlines()
-                    # Show last 100 lines
-                    st.code("".join(lines[-100:]), language="text")
-            except Exception as e:
-                st.info(f"Loading log lines... ({e})")
-        else:
-            st.info("Waiting for logs to initialize...")
-            
-        auto_refresh = st.checkbox("Auto-refresh logs every 5 seconds", value=True)
-        if auto_refresh:
-            time.sleep(5)
-            st.rerun()
+        render_active_training_dashboard(status)
             
     else:
         # Not running: show start panel
@@ -893,6 +1022,8 @@ else:
     st.sidebar.error("● Disconnected")
     st.sidebar.caption(f"Error: {db_error}")
 st.sidebar.markdown("---")
+
+
 
 # Streamlit Navigation Sidebar
 app_mode = st.sidebar.selectbox("Navigation", ["VIN Decoder", "Admin Dashboard", "Model Retraining"])
@@ -1611,3 +1742,10 @@ if st.button("Decode", type="primary"):
             except Exception as e:
                 st.error(f"Prediction failed: {e}")
                 st.exception(e)
+
+# # =====================================================================
+# #                        BACKGROUND TRAINING STATUS
+# # =====================================================================
+# st.markdown("---")
+# st.subheader("System Training Status")
+# render_main_page_training_status()
