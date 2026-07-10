@@ -5,10 +5,14 @@ import time
 import argparse
 import logging
 import pickle
+import warnings
 import numpy as np
 import pandas as pd
 from pathlib import Path
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, confusion_matrix
+
+# Ignore pandas warning about using a non-SQLAlchemy connection (we use psycopg2 directly)
+warnings.filterwarnings("ignore", category=UserWarning, message=".*pandas only supports SQLAlchemy connectable.*")
 
 # Add project root and subpackages to python path
 project_root = Path(__file__).resolve().parent
@@ -62,7 +66,7 @@ def load_config(config_path: Path) -> dict:
             }
         },
         "promotion_rules": {
-            "require_overall_improvement": true,
+            "require_overall_improvement": True,
             "allow_regression_tolerance": 0.01,
             "critical_attributes": ["make", "model"]
         }
@@ -290,11 +294,11 @@ def main():
     
     # 2. Run predictions for both Production and Candidate
     logger.info("Running inference using CURRENT PRODUCTION models...")
-    prod_preds, prod_inf_time = run_predictions(df_eval, production_dir, is_candidate=false)
+    prod_preds, prod_inf_time = run_predictions(df_eval, production_dir, is_candidate=False)
     logger.info(f"Production inference complete. Average latency: {prod_inf_time:.2f} ms/VIN")
     
     logger.info("Running inference using LATEST RETRAINED CANDIDATE models...")
-    cand_preds, cand_inf_time = run_predictions(df_eval, candidate_dir, is_candidate=true)
+    cand_preds, cand_inf_time = run_predictions(df_eval, candidate_dir, is_candidate=True)
     logger.info(f"Candidate inference complete. Average latency: {cand_inf_time:.2f} ms/VIN")
     
     # 3. Calculate metrics per attribute

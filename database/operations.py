@@ -1,6 +1,10 @@
 import datetime
+import warnings
 import pandas as pd
 from .connection import get_db_connection
+
+# Ignore pandas warning about using a non-SQLAlchemy connection (we use psycopg2 directly)
+warnings.filterwarnings("ignore", category=UserWarning, message=".*pandas only supports SQLAlchemy connectable.*")
 
 def lookup_vin_in_master_dataset(vin: str) -> dict:
     vin_upper = vin.upper().strip()
