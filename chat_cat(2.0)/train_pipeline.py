@@ -29,7 +29,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def extract_gcc_rules(data_path: str, save_dir: str):
+def extract_gcc_rules(data_path: str, save_dir: str, limit: int = None):
     logger.info("Extracting GCC vs. Non-GCC pattern-matching rules...")
     if data_path.lower() in ("postgres", "postgresql", "db", "database"):
         import sys
@@ -38,7 +38,7 @@ def extract_gcc_rules(data_path: str, save_dir: str):
         if str(project_root) not in sys.path:
             sys.path.insert(0, str(project_root))
         from database.operations import fetch_training_data_by_length
-        df = fetch_training_data_by_length(17)
+        df = fetch_training_data_by_length(17, limit=limit)
     else:
         df = pd.read_csv(data_path)
     df['VIN'] = df['chassisNumber'].astype(str).str.upper().str.strip()
@@ -141,15 +141,17 @@ def main():
         logger.error(f"Dataset not found at: {args.data_path}")
         return
         
+    db_limit = args.downsample if args.downsample > 0 else None
+        
     # Phase 1: Rule extraction
     if not args.skip_rules:
         logger.info("\n--- Phase 1: Pattern Matching Rule Extraction ---")
-        extract_gcc_rules(args.data_path, args.model_dir)
+        extract_gcc_rules(args.data_path, args.model_dir, limit=db_limit)
         
     # Phase 2: Fallback lookup model training
     if not args.skip_fallback:
         logger.info("\n--- Phase 2: Fallback Lookup Model Training ---")
-        X, y, encoders = prepare_data(args.data_path, args.model_dir)
+        X, y, encoders = prepare_data(args.data_path, args.model_dir, limit=db_limit)
         targets = ["MAKE", "MODEL", "TRIM", "BODY_TYPE", "YEAR", "CYLINDERS", "ORIGIN", "NO_OF_PASSENGERS", "WEIGHT", "REGIONAL_SPEC", "COLOR"]
         fallback_model = {}
         
@@ -227,7 +229,7 @@ def main():
         logger.info(f"Using device: {device}")
         
         # Reload features/labels and encoders
-        X, y, encoders = prepare_data(args.data_path, args.model_dir)
+        X, y, encoders = prepare_data(args.data_path, args.model_dir, limit=db_limit)
         
         pos_cols = [f"POS_{i}" for i in range(1, 18)]
         vins = X[pos_cols].agg("".join, axis=1).values

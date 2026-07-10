@@ -74,6 +74,11 @@ def is_process_running(pid):
             return False
     else:
         try:
+            cmdline_path = f"/proc/{pid}/cmdline"
+            if os.path.exists(cmdline_path):
+                with open(cmdline_path, "r", errors="ignore") as f:
+                    cmdline = f.read()
+                return "retrain.py" in cmdline or "train_pipeline.py" in cmdline
             os.kill(pid, 0)
             return True
         except OSError:
