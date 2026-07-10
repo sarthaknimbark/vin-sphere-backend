@@ -134,8 +134,8 @@ def render_active_training_dashboard(status):
     # Get progress
     log_file = project_root / "models" / status["folder"] / "training.log"
     phase_desc, progress_pct = get_training_progress(log_file)
-    st.markdown(f"**Current Phase:** {phase_desc}")
-    st.progress(progress_pct)
+    # st.markdown(f"**Current Phase:** {phase_desc}")
+    # st.progress(progress_pct)
     
     # Cancel Button
     if st.button("Cancel Retraining Run", type="primary", use_container_width=True):
