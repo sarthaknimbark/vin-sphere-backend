@@ -427,23 +427,72 @@ def get_depreciated_values_by_file(result: dict) -> dict:
                 
     return matched_values
 
+def validate_17_char_vin(vin: str) -> tuple:
+    """Validates 17-character VIN based on NHTSA modulo-11 algorithm and letter omission rules."""
+    vin = vin.upper().strip()
+    if len(vin) != 17:
+        return False, "Length must be exactly 17 characters."
+    
+    # Check for prohibited letters: I, O, Q
+    prohibited = [c for c in ("I", "O", "Q") if c in vin]
+    if prohibited:
+        return False, f"VIN cannot contain prohibited letters: {', '.join(prohibited)}."
+        
+    # Transliteration A-Z mapping based on ISO 3779 / NHTSA standards
+    trans_map = {
+        'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8,
+        'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'P': 7, 'R': 9,
+        'S': 2, 'T': 3, 'U': 4, 'V': 5, 'W': 6, 'X': 7, 'Y': 8, 'Z': 9
+    }
+    
+    # Positional weights
+    weights = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2]
+    
+    total_sum = 0
+    for idx in range(17):
+        char = vin[idx]
+        if char.isdigit():
+            val = int(char)
+        elif char in trans_map:
+            val = trans_map[char]
+        else:
+            return False, f"Invalid character '{char}' in VIN."
+            
+        total_sum += val * weights[idx]
+        
+    remainder = total_sum % 11
+    expected_check = "X" if remainder == 10 else str(remainder)
+    actual_check = vin[8]
+    
+    if expected_check != actual_check:
+        return False, f"Check-digit mismatch at 9th position (calculated '{expected_check}', but found '{actual_check}')."
+        
+    return True, ""
 
 # Verification safety check
 if st.button("Decode", use_container_width=True):
-    if len(vin_input) not in [9, 11, 12, 17]:
+    normalized_input = re.sub(r"[^A-Z0-9]", "", vin_input)
+    length = len(normalized_input)
+    
+    if length not in [9, 11, 12, 17]:
         st.error("Invalid input: Input must be 17 characters for a standard VIN, or 12, 11, or 9 characters for a short chassis.")
+    elif length == 17 and not validate_17_char_vin(normalized_input)[0]:
+        _, err_msg = validate_17_char_vin(normalized_input)
+        st.error(
+            f"Format is not matched: {err_msg} Please enter a valid 17-character VIN."
+        )
     else:
         with st.spinner("Decoding..."):
             try:
                 # Perform prediction using fallback model
-                result = decode_any_vin(vin_input)
+                result = decode_any_vin(normalized_input)
 
                 # Format prediction results into a table
                 conf_dict = result.get("attribute_confidences", {})
                 # Display overall confidence score
                 overall_conf = result.get("confidence", 0.0) * 100
 
-                price = get_lookup_price(result, vin_input)
+                price = get_lookup_price(result, normalized_input)
                 price_display = "Not found" if price is None else f"{price:,.0f}"
                 result["lookup_price"] = None if price is None else float(price)
 
