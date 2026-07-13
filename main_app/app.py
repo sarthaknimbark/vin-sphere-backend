@@ -1423,6 +1423,48 @@ def get_ml_predicted_price_info(result: dict) -> dict:
         if str(project_root) in sys.path:
             sys.path.remove(str(project_root))
 
+def validate_17_char_vin(vin: str) -> tuple:
+    """Validates 17-character VIN based on NHTSA modulo-11 algorithm and letter omission rules."""
+    vin = vin.upper().strip()
+    if len(vin) != 17:
+        return False, "Length must be exactly 17 characters."
+    
+    # Check for prohibited letters: I, O, Q
+    prohibited = [c for c in ("I", "O", "Q") if c in vin]
+    if prohibited:
+        return False, f"VIN cannot contain prohibited letters: {', '.join(prohibited)}."
+        
+    # Transliteration A-Z mapping based on ISO 3779 / NHTSA standards
+    trans_map = {
+        'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8,
+        'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'P': 7, 'R': 9,
+        'S': 2, 'T': 3, 'U': 4, 'V': 5, 'W': 6, 'X': 7, 'Y': 8, 'Z': 9
+    }
+    
+    # Positional weights
+    weights = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2]
+    
+    total_sum = 0
+    for idx in range(17):
+        char = vin[idx]
+        if char.isdigit():
+            val = int(char)
+        elif char in trans_map:
+            val = trans_map[char]
+        else:
+            return False, f"Invalid character '{char}' in VIN."
+            
+        total_sum += val * weights[idx]
+        
+    remainder = total_sum % 11
+    expected_check = "X" if remainder == 10 else str(remainder)
+    actual_check = vin[8]
+    
+    if expected_check != actual_check:
+        return False, f"Check-digit mismatch at 9th position (calculated '{expected_check}', but found '{actual_check}')."
+        
+    return True, ""
+
 #                         INPUT CONTROL PANEL
 
 vin_input = st.text_input(
@@ -1438,6 +1480,11 @@ if st.button("Decode", type="primary"):
     if length not in [9, 10, 11, 12, 13, 17]:
         st.error(
             f"Invalid chassis length ({length} characters). Input must be exactly 9, 10, 11, 12, 13, or 17 characters."
+        )
+    elif length == 17 and not validate_17_char_vin(normalized_input)[0]:
+        _, err_msg = validate_17_char_vin(normalized_input)
+        st.error(
+            f"Format is not matched: {err_msg} Please enter a valid 17-character VIN."
         )
     else:
         with st.spinner("Decoding VIN..."):
