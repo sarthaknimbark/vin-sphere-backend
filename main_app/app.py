@@ -4,6 +4,9 @@ import re
 import time
 import importlib
 import warnings
+import json
+import subprocess
+from datetime import datetime
 
 # Suppress scikit-learn inconsistent version warnings during unpickling
 try:
@@ -42,6 +45,166 @@ if str(project_root) not in sys.path:
     sys.path.append(str(project_root))
 LOOKUP_DATA_PATH = project_root / "car_app_dev"/ "dev_lookup.csv"
 CAR_DEP_CSV_PATH = project_root / "Valuation" / "data" / "car_dep.csv"
+
+STATUS_FILE = project_root / ".training_status.json"
+
+def get_training_status():
+    if not STATUS_FILE.exists():
+        return None
+    try:
+        with open(STATUS_FILE, "r") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+def save_training_status(status_dict):
+    try:
+        with open(STATUS_FILE, "w") as f:
+            json.dump(status_dict, f, indent=2)
+    except Exception:
+        pass
+
+def is_process_running(pid):
+    if os.name == "nt":
+        try:
+            cmd = f'tasklist /FI "PID eq {pid}" /FO CSV /NH'
+            res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            return f'"{pid}"' in res.stdout
+        except Exception:
+            return False
+    else:
+        try:
+            cmdline_path = f"/proc/{pid}/cmdline"
+            if os.path.exists(cmdline_path):
+                with open(cmdline_path, "r", errors="ignore") as f:
+                    cmdline = f.read()
+                return "retrain.py" in cmdline or "train_pipeline.py" in cmdline
+            os.kill(pid, 0)
+            return True
+        except OSError:
+            return False
+
+def get_training_progress(log_file_path):
+    if not Path(log_file_path).exists():
+        return "Initializing...", 0.0
+    try:
+        content = Path(log_file_path).read_text(encoding="utf-8", errors="ignore")
+        if "evaluate_and_compare.py" in content:
+            if "FINISHED IN" in content.split("evaluate_and_compare.py")[-1]:
+                return "Completed", 1.0
+            return "Evaluating & comparing candidate models (Phase 5/5)", 0.85
+        elif "short/12" in content or "short\\12" in content:
+            return "Training short 12-character model (Phase 4/5)", 0.65
+        elif "short/11" in content or "short\\11" in content:
+            return "Training short 11-character model (Phase 3/5)", 0.45
+        elif "short/10" in content or "short\\10" in content:
+            return "Training short 10-character model (Phase 2/5)", 0.25
+        elif "train_pipeline.py" in content:
+            return "Training standard 17-character model (Phase 1/5)", 0.05
+        return "Starting retraining pipeline...", 0.01
+    except Exception:
+        return "Running...", 0.0
+
+def cancel_training(status):
+    pid = status.get("pid")
+    if pid:
+        if os.name == "nt":
+            subprocess.run(f"taskkill /F /PID {pid} /T", shell=True)
+        else:
+            try:
+                import signal
+                os.kill(pid, signal.SIGTERM)
+            except Exception:
+                pass
+    status["status"] = "CANCELLED"
+    status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    save_training_status(status)
+
+
+
+@st.fragment(run_every=1.0)
+def render_active_training_dashboard(status):
+    is_active = is_process_running(status.get("pid"))
+    if not is_active:
+        # Process finished or died, update status
+        metadata_path = project_root / "models" / status["folder"] / "metadata.json"
+        status["status"] = "SUCCESS" if metadata_path.exists() else "FAILED"
+        status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        save_training_status(status)
+        st.rerun()
+
+    st.warning(f"Retraining in progress: Run `{status['folder']}` (PID: {status['pid']})")
+    st.markdown(f"**Started At:** {status['start_time']}")
+    
+    # Get progress
+    log_file = project_root / "models" / status["folder"] / "training.log"
+    phase_desc, progress_pct = get_training_progress(log_file)
+    # st.markdown(f"**Current Phase:** {phase_desc}")
+    # st.progress(progress_pct)
+    
+    # Cancel Button
+    if st.button("Cancel Retraining Run", type="primary", use_container_width=True):
+        cancel_training(status)
+        st.error("Retraining process tree was terminated.")
+        st.rerun()
+        
+    # Log streaming
+    st.markdown("### Real-time Logs")
+    if log_file.exists():
+        try:
+            with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
+                lines = lf.readlines()
+                # Show last 100 lines
+                st.code("".join(lines[-100:]), language="text")
+        except Exception as e:
+            st.info(f"Loading log lines... ({e})")
+    else:
+        st.info("Waiting for logs to initialize...")
+
+@st.fragment(run_every=1.0)
+def render_main_page_training_status():
+    status = get_training_status()
+    is_training_active = False
+    if status and status.get("status") == "RUNNING":
+        if is_process_running(status.get("pid")):
+            is_training_active = True
+        else:
+            # Process finished or died, update status
+            metadata_path = project_root / "models" / status["folder"] / "metadata.json"
+            status["status"] = "SUCCESS" if metadata_path.exists() else "FAILED"
+            status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            save_training_status(status)
+            st.rerun()
+
+    if is_training_active:
+        st.warning(f"Retraining is currently running in the background: Run `{status['folder']}` (PID: {status['pid']})")
+        log_file = project_root / "models" / status["folder"] / "training.log"
+        phase_desc, progress_pct = get_training_progress(log_file)
+        
+        col_prog, col_btn = st.columns([4, 1])
+        with col_prog:
+            st.write(f"**Current Phase:** {phase_desc}")
+            st.progress(progress_pct)
+        with col_btn:
+            st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)  # spacing
+            if st.button("Stop Training", type="primary", key="stop_training_main_btn", use_container_width=True):
+                cancel_training(status)
+                st.error("Retraining process was terminated.")
+                time.sleep(1)
+                st.rerun()
+        
+        with st.expander("View Training Log (Last 50 lines)", expanded=True):
+            if log_file.exists():
+                try:
+                    with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
+                        lines = lf.readlines()
+                        st.code("".join(lines[-50:]), language="text")
+                except Exception as e:
+                    st.info(f"Loading log lines... ({e})")
+            else:
+                st.info("Waiting for logs to initialize...")
+    else:
+        st.success("All models are trained and up-to-date. No retraining in progress.")
 
 # Evict database modules from sys.modules cache to ensure Streamlit hot-reloads on-disk database changes
 for mod_key in list(sys.modules.keys()):
@@ -542,6 +705,279 @@ def render_admin_panel():
 
     st.markdown("</div>", unsafe_allow_html=True)
 
+def render_retraining_dashboard():
+    # Admin PIN Authentication Gate
+    if "admin_authenticated" not in st.session_state:
+        st.session_state.admin_authenticated = False
+        
+    if not st.session_state.admin_authenticated:
+        st.subheader("Admin Authentication Required")
+        pin_input = st.text_input("Enter Admin PIN to Access", type="password", key="retrain_admin_pin_input")
+        if st.button("Unlock Dashboard", key="unlock_retrain_dashboard_btn"):
+            if pin_input == "123456":
+                st.session_state.admin_authenticated = True
+                st.success("Access Granted!")
+                st.rerun()
+            else:
+                st.error("Incorrect PIN. Access Denied.")
+        st.stop()
+
+    st.title("Model Retraining & Dashboard")
+    st.write("Start, monitor, and cancel model retraining tasks in the background.")
+    
+
+    status = get_training_status()
+    
+    # Check if currently running
+    is_running = False
+    if status and status.get("status") == "RUNNING":
+        if is_process_running(status.get("pid")):
+            is_running = True
+        else:
+            # Process finished or died without updating status
+            metadata_path = project_root / "models" / status["folder"] / "metadata.json"
+            if metadata_path.exists():
+                status["status"] = "SUCCESS"
+            else:
+                status["status"] = "FAILED"
+            status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            save_training_status(status)
+            
+    # Display current status card
+    if is_running:
+        render_active_training_dashboard(status)
+            
+    else:
+        # Not running: show start panel
+        st.subheader("Select the Parameter and Start Retraining")
+        
+        with st.expander("Parameter Selection Consideration"):
+            st.markdown("""
+            - **NN Epochs (Training Rounds)**: How many times the model reviews the data. More rounds can improve accuracy, but will make training take longer.
+            - **NN Batch Size (Processing Step)**: The size of data blocks the model reads in one go. Larger blocks make training faster.
+            - **NN Learning Rate (Learning Speed)**: How fast the model adjusts its knowledge. Too fast might miss patterns; too slow takes too long.
+            - **NN Downsample Limit (Data Limit)**: The amount of database rows to train on. Set to `-1` to train on all available data.
+            """)
+            
+        col1, col2 = st.columns(2)
+        with col1:
+            epochs = st.number_input("NN Epochs", min_value=1, max_value=100, value=15)
+            batch_size = st.number_input("NN Batch Size", min_value=1, max_value=4096, value=512)
+            lr = st.number_input("NN Learning Rate", min_value=1e-5, max_value=1e-1, value=1e-3, format="%.5f")
+        with col2:
+            downsample = st.number_input("NN Downsample Limit (-1 to consider all database records, or specify the number of data rows you want to consider in the training)", min_value=-1, max_value=10000000, value=-1)
+            fast = False
+            
+        skip_nn = False
+        skip_fallback = False
+        skip_rules = False
+            
+        if st.button("Start Retraining Pipeline", use_container_width=True):
+            # Calculate next folder
+            existing_dirs = []
+            models_dir = project_root / "models"
+            if models_dir.exists():
+                existing_dirs = os.listdir(models_dir)
+            max_num = 0
+            for d in existing_dirs:
+                if d.startswith("training_"):
+                    try:
+                        num = int(d.split("_")[1])
+                        if num > max_num:
+                            max_num = num
+                    except Exception:
+                        pass
+            next_folder = f"training_{max_num + 1:03d}"
+            
+            cmd = [
+                sys.executable,
+                "retrain.py",
+                "--epochs", str(epochs),
+                "--downsample", str(downsample),
+                "--batch_size", str(batch_size),
+                "--lr", str(lr)
+            ]
+            if fast:
+                cmd.append("--fast")
+            if skip_nn:
+                cmd.append("--skip_nn")
+            if skip_fallback:
+                cmd.append("--skip_fallback")
+            if skip_rules:
+                cmd.append("--skip_rules")
+                
+            # Inherit environment variables and pass database credentials from st.secrets if running on Streamlit Cloud
+            env = os.environ.copy()
+            env["PYTHONUNBUFFERED"] = "1"
+            try:
+                if "postgres" in st.secrets:
+                    pg_sec = st.secrets["postgres"]
+                    env["PGHOST"] = pg_sec.get("host", "")
+                    env["PGPORT"] = str(pg_sec.get("port", "5432"))
+                    env["PGDATABASE"] = pg_sec.get("database", "")
+                    env["PGUSER"] = pg_sec.get("username", pg_sec.get("user", ""))
+                    env["PGPASSWORD"] = pg_sec.get("password", "")
+                    
+                    # Also pass serialized connection dictionary to support SSL and custom options in connection.py fallback
+                    import json
+                    env["DB_CONN_PARAMS"] = json.dumps(dict(pg_sec))
+            except Exception:
+                pass
+                
+            # Launch background process
+            proc = subprocess.Popen(
+                cmd,
+                cwd=str(project_root),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                close_fds=True,
+                env=env
+            )
+            
+            new_status = {
+                "pid": proc.pid,
+                "status": "RUNNING",
+                "folder": next_folder,
+                "start_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "params": {
+                    "epochs": epochs,
+                    "downsample": downsample,
+                    "fast": fast
+                }
+            }
+            save_training_status(new_status)
+            st.success(f"Retraining run started in the background (PID: {proc.pid})! Logs will appear on the next refresh.")
+            time.sleep(1.5)
+            st.rerun()
+            
+        # History / Last Run Dashboard
+        if status:
+            st.markdown("---")
+            st.subheader(f"Last Training Run: `{status['folder']}`")
+            st.markdown(f"**Start Time:** {status['start_time']}")
+            if "end_time" in status:
+                st.markdown(f"**End Time:** {status['end_time']}")
+            
+            # Check status
+            run_status = status["status"]
+            if run_status == "SUCCESS":
+                st.success("Training Completed Successfully")
+            elif run_status == "CANCELLED":
+                st.info("Training Was Cancelled")
+            else:
+                st.error("Training Failed / Crashed")
+                
+            # Load metadata results
+            metadata_path = project_root / "models" / status["folder"] / "metadata.json"
+            if metadata_path.exists():
+                try:
+                    with open(metadata_path, "r") as f:
+                        meta = json.load(f)
+                        
+                    # Show durations and database counts
+                    durations = meta.get("training_durations_sec", {})
+                    db_counts = meta.get("database_row_counts", {})
+                    
+                    col_d1, col_d2 = st.columns(2)
+                    with col_d1:
+                        st.markdown("**Training Duration:**")
+                        st.write(f"- Total Duration: {durations.get('total_duration', 0.0):.2f} seconds")
+                    with col_d2:
+                        st.markdown("**Database Rows Used:**")
+                        for k, v in db_counts.items():
+                            st.write(f"- {k}: {v}")
+                            
+                    # Show evaluation results if present
+                    eval_res = meta.get("evaluation_and_comparison_result", {})
+                    if eval_res:
+                        st.markdown("### Evaluation & Promotion Summary")
+                        eval_status = eval_res.get("status", "UNKNOWN")
+                        if eval_status == "APPROVED":
+                            st.success("Candidate Model APPROVED for Promotion Recommendation!")
+                        else:
+                            st.warning("Candidate Model REJECTED for Promotion Recommendation.")
+                            for reason in eval_res.get("reasons", []):
+                                st.write(f"- {reason}")
+                                
+                        scores = eval_res.get("weighted_scores", {})
+                        st.write(f"**Production Weighted Score:** {scores.get('production', 0.0):.2f}%")
+                        st.write(f"**Candidate Weighted Score:** {scores.get('candidate', 0.0):.2f}%")
+                        
+                        # Comparison Table
+                        comp_table = eval_res.get("attribute_comparison", [])
+                        if comp_table:
+                            st.markdown("**Overall Attribute Accuracy Comparison:**")
+                            st.table(pd.DataFrame(comp_table))
+                            
+                        # Detailed Side-by-Side Metrics Comparison
+                        metrics_path = project_root / "models" / status["folder"] / "evaluation" / "metrics.json"
+                        if metrics_path.exists():
+                            try:
+                                with open(metrics_path, "r") as f:
+                                    metrics_data = json.load(f)
+                                    
+                                prod_m = metrics_data.get("production", {})
+                                cand_m = metrics_data.get("candidate", {})
+                                
+                                detailed_rows = []
+                                for attr in prod_m.keys():
+                                    p_attr = prod_m.get(attr, {})
+                                    c_attr = cand_m.get(attr, {})
+                                    
+                                    # Calculate differences
+                                    acc_diff = c_attr.get('accuracy', 0.0) - p_attr.get('accuracy', 0.0)
+                                    f1_diff = c_attr.get('f1_weighted', 0.0) - p_attr.get('f1_weighted', 0.0)
+                                    prec_diff = c_attr.get('precision_weighted', 0.0) - p_attr.get('precision_weighted', 0.0)
+                                    rec_diff = c_attr.get('recall_weighted', 0.0) - p_attr.get('recall_weighted', 0.0)
+                                    
+                                    detailed_rows.append({
+                                        "Attribute": attr.upper(),
+                                        "Metric": "Accuracy",
+                                        "Production": f"{p_attr.get('accuracy', 0.0)*100:.2f}%",
+                                        "Candidate": f"{c_attr.get('accuracy', 0.0)*100:.2f}%",
+                                        "Difference": f"{acc_diff*100:+.2f}%"
+                                    })
+                                    detailed_rows.append({
+                                        "Attribute": attr.upper(),
+                                        "Metric": "F1-Score (Weighted)",
+                                        "Production": f"{p_attr.get('f1_weighted', 0.0)*100:.2f}%",
+                                        "Candidate": f"{c_attr.get('f1_weighted', 0.0)*100:.2f}%",
+                                        "Difference": f"{f1_diff*100:+.2f}%"
+                                    })
+                                    detailed_rows.append({
+                                        "Attribute": attr.upper(),
+                                        "Metric": "Precision (Weighted)",
+                                        "Production": f"{p_attr.get('precision_weighted', 0.0)*100:.2f}%",
+                                        "Candidate": f"{c_attr.get('precision_weighted', 0.0)*100:.2f}%",
+                                        "Difference": f"{prec_diff*100:+.2f}%"
+                                    })
+                                    detailed_rows.append({
+                                        "Attribute": attr.upper(),
+                                        "Metric": "Recall (Weighted)",
+                                        "Production": f"{p_attr.get('recall_weighted', 0.0)*100:.2f}%",
+                                        "Candidate": f"{c_attr.get('recall_weighted', 0.0)*100:.2f}%",
+                                        "Difference": f"{rec_diff*100:+.2f}%"
+                                    })
+                                    
+                                st.markdown("### Detailed Side-by-Side Model Comparison (Metrics)")
+                                st.table(pd.DataFrame(detailed_rows))
+                            except Exception as e:
+                                st.warning(f"Could not load detailed metrics: {e}")
+                            
+                except Exception as e:
+                    st.warning(f"Could not load metadata details: {e}")
+            # Always show the training log output (whether success, failed, or cancelled)
+            log_file = project_root / "models" / status["folder"] / "training.log"
+            if log_file.exists():
+                st.markdown("---")
+                with st.expander("Show Training Log Output", expanded=(status["status"] != "SUCCESS")):
+                    try:
+                        with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
+                            log_lines = lf.readlines()
+                            st.code("".join(log_lines), language="text")
+                    except Exception as e:
+                        st.warning(f"Could not read log file: {e}")
+
 @st.cache_resource(ttl=30)
 def check_db_connection_cached() -> tuple:
     try:
@@ -564,15 +1000,21 @@ else:
     st.sidebar.caption(f"Error: {db_error}")
 st.sidebar.markdown("---")
 
+
+
 # Streamlit Navigation Sidebar
-app_mode = st.sidebar.selectbox("Navigation", ["VIN Decoder", "Admin Dashboard"])
+app_mode = st.sidebar.selectbox("Navigation", ["VIN Decoder", "Admin Dashboard", "Model Retraining"])
 
 if app_mode == "Admin Dashboard":
     render_admin_panel()
     st.stop()
 
+if app_mode == "Model Retraining":
+    render_retraining_dashboard()
+    st.stop()
+
 st.title("VIN Decoder")
-st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v3.0")
+st.write("Decode and get valuation for the VIN (09, 10, 11, 12, 13, 17 characters) | v4.0.1")
 
 # =====================================================================
 #                        DYNAMIC IMPORT ROUTER
@@ -1277,3 +1719,10 @@ if st.button("Decode", type="primary"):
             except Exception as e:
                 st.error(f"Prediction failed: {e}")
                 st.exception(e)
+
+# # =====================================================================
+# #                        BACKGROUND TRAINING STATUS
+# # =====================================================================
+# st.markdown("---")
+# st.subheader("System Training Status")
+# render_main_page_training_status()

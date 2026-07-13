@@ -56,7 +56,8 @@ def split_and_align_classes(
     rare_classes = class_counts[class_counts < 2].index.tolist()
     y_stratify = y_series.copy()
     if len(rare_classes) > 0:
-        y_stratify = y_stratify.replace(rare_classes, majority_class)
+        rare_set = set(rare_classes)
+        y_stratify = y_stratify.map(lambda x: majority_class if x in rare_set else x)
         
     # Double check if any class in y_stratify still has less than 2 members
     class_counts_strat = y_stratify.value_counts()

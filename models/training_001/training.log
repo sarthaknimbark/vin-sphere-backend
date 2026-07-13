@@ -1,0 +1,70 @@
+=== RETRAINING RUN: training_001 ===
+Started at: 2026-07-09T18:27:05.058460
+Parameters: {'epochs': 15, 'downsample': -1, 'batch_size': 512, 'lr': 0.001, 'fast': False, 'skip_nn': False, 'skip_fallback': False, 'skip_rules': False, 'models_dir': 'models'}
+
+
+--- EXECUTING COMMAND: C:\Program Files\Python314\python.exe train_pipeline.py --data_path postgres --model_dir D:\vin-sphere-python\models\training_001\standard --epochs 15 --downsample -1 --batch_size 512 --lr 0.001 ---
+2026-07-09 18:27:10,297 [INFO] 
+--- Phase 1: Pattern Matching Rule Extraction ---
+2026-07-09 18:27:10,298 [INFO] Extracting GCC vs. Non-GCC pattern-matching rules...
+D:\vin-sphere-python\database\operations.py:381: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql_query(query, conn)
+2026-07-09 18:27:40,570 [INFO] Successfully saved GCC vs Non-GCC rules to D:\vin-sphere-python\models\training_001\standard\gcc_non_gcc_rules.json
+2026-07-09 18:27:40,593 [INFO] 
+--- Phase 2: Fallback Lookup Model Training ---
+2026-07-09 18:27:40,593 [INFO] Loading raw dataset from postgres...
+D:\vin-sphere-python\database\operations.py:381: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql_query(query, conn)
+2026-07-09 18:27:44,150 [INFO] Loaded raw data of shape: (995157, 12)
+2026-07-09 18:27:44,150 [WARNING] Standard column 'FUEL_TYPE' could not be matched. Candidates: ['FUEL_TYPE', 'fuelType', 'fuel_type']
+2026-07-09 18:27:44,150 [WARNING] Standard column 'ENGINE' could not be matched. Candidates: ['engine', 'Engine', 'engineSize', 'engineCapacity']
+2026-07-09 18:27:44,150 [WARNING] Standard column 'TRANSMISSION' could not be matched. Candidates: ['TRANSMISSION', 'transmission']
+2026-07-09 18:27:44,151 [INFO] Cleaning VINs and filtering to length 17...
+2026-07-09 18:27:46,374 [INFO] Removing duplicate VIN records...
+2026-07-09 18:27:46,896 [INFO] Data shape after cleaning and deduplication: (995157, 12)
+2026-07-09 18:27:46,896 [INFO] Extracting features from VIN...
+2026-07-09 18:27:54,783 [INFO] Normalizing and encoding targets...
+2026-07-09 18:27:56,053 [INFO] Encoded target 'MAKE' with 257 classes. Saved to D:\vin-sphere-python\models\training_001\standard\make_encoder.pkl
+2026-07-09 18:27:59,237 [INFO] Encoded target 'MODEL' with 3847 classes. Saved to D:\vin-sphere-python\models\training_001\standard\model_encoder.pkl
+2026-07-09 18:28:01,490 [INFO] Encoded target 'TRIM' with 2651 classes. Saved to D:\vin-sphere-python\models\training_001\standard\trim_encoder.pkl
+2026-07-09 18:28:03,260 [INFO] Encoded target 'BODY_TYPE' with 32 classes. Saved to D:\vin-sphere-python\models\training_001\standard\body_type_encoder.pkl
+2026-07-09 18:28:04,912 [INFO] Encoded target 'YEAR' with 60 classes. Saved to D:\vin-sphere-python\models\training_001\standard\year_encoder.pkl
+2026-07-09 18:28:06,880 [INFO] Encoded target 'CYLINDERS' with 10 classes. Saved to D:\vin-sphere-python\models\training_001\standard\cylinders_encoder.pkl
+2026-07-09 18:28:09,038 [INFO] Encoded target 'ORIGIN' with 125 classes. Saved to D:\vin-sphere-python\models\training_001\standard\origin_encoder.pkl
+2026-07-09 18:28:10,928 [INFO] Encoded target 'NO_OF_PASSENGERS' with 66 classes. Saved to D:\vin-sphere-python\models\training_001\standard\no_of_passengers_encoder.pkl
+2026-07-09 18:28:12,735 [INFO] Encoded target 'WEIGHT' with 2485 classes. Saved to D:\vin-sphere-python\models\training_001\standard\weight_encoder.pkl
+2026-07-09 18:28:14,480 [INFO] Encoded target 'REGIONAL_SPEC' with 3 classes. Saved to D:\vin-sphere-python\models\training_001\standard\regional_spec_encoder.pkl
+2026-07-09 18:28:16,491 [INFO] Encoded target 'COLOR' with 175 classes. Saved to D:\vin-sphere-python\models\training_001\standard\color_encoder.pkl
+2026-07-09 18:28:17,289 [INFO] Building fallback model for: MAKE
+2026-07-09 18:28:29,915 [INFO] Evaluating predictions for target 'MAKE'...
+
+==================================================
+ Evaluation Metrics for Target: MAKE
+==================================================
+  Accuracy:          0.9922
+  Weighted Precision: 0.9921
+  Weighted Recall:    0.9922
+  Weighted F1-Score:  0.9920
+--------------------------------------------------
+  Macro Precision:    0.7405
+  Macro Recall:       0.7599
+  Macro F1-Score:     0.7399
+==================================================
+2026-07-09 18:28:32,659 [INFO] Confusion Matrix generated with shape: (189, 189)
+2026-07-09 18:28:33,368 [INFO] Building fallback model for: MODEL
+2026-07-09 18:29:01,600 [INFO] Evaluating predictions for target 'MODEL'...
+
+==================================================
+ Evaluation Metrics for Target: MODEL
+==================================================
+  Accuracy:          0.9465
+  Weighted Precision: 0.9452
+  Weighted Recall:    0.9465
+  Weighted F1-Score:  0.9428
+--------------------------------------------------
+  Macro Precision:    0.5197
+  Macro Recall:       0.4704
+  Macro F1-Score:     0.4759
+==================================================
+2026-07-09 18:29:04,596 [INFO] Confusion Matrix generated with shape: (2107, 2107)
+2026-07-09 18:29:04,785 [INFO] Building fallback model for: TRIM

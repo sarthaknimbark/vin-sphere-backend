@@ -112,7 +112,8 @@ def split_and_align_classes(
         
         y_stratify = df_rem["target"].copy()
         if len(rare_classes) > 0:
-            y_stratify = y_stratify.replace(rare_classes, majority_class)
+            rare_set = set(rare_classes)
+            y_stratify = y_stratify.map(lambda x: majority_class if x in rare_set else x)
             
         class_counts_strat = y_stratify.value_counts()
         if (class_counts_strat < 2).any():

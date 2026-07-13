@@ -1,6 +1,10 @@
 import datetime
+import warnings
 import pandas as pd
 from .connection import get_db_connection
+
+# Ignore pandas warning about using a non-SQLAlchemy connection (we use psycopg2 directly)
+warnings.filterwarnings("ignore", category=UserWarning, message=".*pandas only supports SQLAlchemy connectable.*")
 
 def lookup_vin_in_master_dataset(vin: str) -> dict:
     vin_upper = vin.upper().strip()
@@ -332,13 +336,15 @@ def get_approved_predictions_count() -> int:
             conn.close()
 
 
-def fetch_training_data_by_length(length: int) -> pd.DataFrame:
+def fetch_training_data_by_length(length: int, limit: int = None) -> pd.DataFrame:
     """
-    Fetches all training data for a specific chassis length from the PostgreSQL database.
+    Fetches training data for a specific chassis length from the PostgreSQL database,
+    with an optional database-level row limit to optimize network payload and performance.
     """
     conn = None
     try:
         conn = get_db_connection()
+        limit_clause = f" LIMIT {limit}" if limit and limit > 0 else ""
         if length in (10, 11, 12):
             table_name = f"master_data_{length}"
             query = f"""
@@ -355,10 +361,10 @@ def fetch_training_data_by_length(length: int) -> pd.DataFrame:
                     origin AS "origin",
                     weightinkg AS "weightInKg",
                     noofpassengers AS "noOfPassengers"
-                FROM {table_name};
+                FROM {table_name}{limit_clause};
             """
         elif length == 17:
-            query = """
+            query = f"""
                 SELECT 
                     chassisnumber AS "chassisNumber",
                     year AS "year",
@@ -373,7 +379,7 @@ def fetch_training_data_by_length(length: int) -> pd.DataFrame:
                     weightinkg AS "weightInKg",
                     noofpassengers AS "noOfPassengers"
                 FROM master_data
-                WHERE LENGTH(chassisnumber) = 17;
+                WHERE LENGTH(chassisnumber) = 17{limit_clause};
             """
         else:
             raise ValueError(f"Unsupported chassis length: {length}")
