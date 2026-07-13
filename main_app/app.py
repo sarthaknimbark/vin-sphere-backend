@@ -105,88 +105,17 @@ def get_training_progress(log_file_path):
     except Exception:
         return "Running...", 0.0
 
-def get_github_secrets():
-    try:
-        if "github" in st.secrets:
-            gh = st.secrets["github"]
-            return gh.get("repo", ""), gh.get("token", "")
-    except Exception:
-        pass
-    return "", ""
-
-def get_latest_github_run():
-    repo, token = get_github_secrets()
-    if not repo or not token:
-        return None
-    import requests
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "Authorization": f"Bearer {token}",
-        "X-GitHub-Api-Version": "2022-11-28"
-    }
-    url = f"https://api.github.com/repos/{repo}/actions/workflows/retrain.yml/runs?per_page=1"
-    try:
-        resp = requests.get(url, headers=headers, timeout=5)
-        if resp.status_code == 200:
-            runs = resp.json().get("workflow_runs", [])
-            if runs:
-                return runs[0]
-    except Exception:
-        pass
-    return None
-
-def trigger_github_retraining(repo, token, payload):
-    import requests
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "Authorization": f"Bearer {token}",
-        "X-GitHub-Api-Version": "2022-11-28"
-    }
-    url = f"https://api.github.com/repos/{repo}/dispatches"
-    data = {
-        "event_type": "retrain",
-        "client_payload": payload
-    }
-    try:
-        resp = requests.post(url, headers=headers, json=data, timeout=5)
-        return resp.status_code in (204, 201)
-    except Exception:
-        return False
-
-def cancel_github_run(run_id):
-    repo, token = get_github_secrets()
-    if not repo or not token:
-        return False
-    import requests
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "Authorization": f"Bearer {token}",
-        "X-GitHub-Api-Version": "2022-11-28"
-    }
-    url = f"https://api.github.com/repos/{repo}/actions/runs/{run_id}/cancel"
-    try:
-        resp = requests.post(url, headers=headers, timeout=5)
-        return resp.status_code == 202
-    except Exception:
-        return False
-
 def cancel_training(status):
-    is_github = status.get("type") == "github"
-    if is_github:
-        run_id = status.get("run_id")
-        if run_id:
-            cancel_github_run(run_id)
-    else:
-        pid = status.get("pid")
-        if pid:
-            if os.name == "nt":
-                subprocess.run(f"taskkill /F /PID {pid} /T", shell=True)
-            else:
-                try:
-                    import signal
-                    os.kill(pid, signal.SIGTERM)
-                except Exception:
-                    pass
+    pid = status.get("pid")
+    if pid:
+        if os.name == "nt":
+            subprocess.run(f"taskkill /F /PID {pid} /T", shell=True)
+        else:
+            try:
+                import signal
+                os.kill(pid, signal.SIGTERM)
+            except Exception:
+                pass
     status["status"] = "CANCELLED"
     status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     save_training_status(status)
@@ -195,26 +124,51 @@ def cancel_training(status):
 
 @st.fragment(run_every=1.0)
 def render_active_training_dashboard(status):
-    is_github = status.get("type") == "github"
+    is_active = is_process_running(status.get("pid"))
+    if not is_active:
+        # Process finished or died, update status
+        metadata_path = project_root / "models" / status["folder"] / "metadata.json"
+        status["status"] = "SUCCESS" if metadata_path.exists() else "FAILED"
+        status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        save_training_status(status)
+        st.rerun()
+
+    st.warning(f"Retraining in progress: Run `{status['folder']}` (PID: {status['pid']})")
+    st.markdown(f"**Started At:** {status['start_time']}")
     
-    if is_github:
-        repo, _ = get_github_secrets()
-        run_info = get_latest_github_run()
-        run_url = run_info.get("html_url") if run_info else f"https://github.com/{repo}/actions"
+    # Get progress
+    log_file = project_root / "models" / status["folder"] / "training.log"
+    phase_desc, progress_pct = get_training_progress(log_file)
+    # st.markdown(f"**Current Phase:** {phase_desc}")
+    # st.progress(progress_pct)
+    
+    # Cancel Button
+    if st.button("Cancel Retraining Run", type="primary", use_container_width=True):
+        cancel_training(status)
+        st.error("Retraining process tree was terminated.")
+        st.rerun()
         
-        st.warning(f"Retraining in progress on GitHub Actions: Run `{status['folder']}`")
-        st.markdown(f"**Started At:** {status['start_time']}")
-        st.markdown(f"🔗 [View Live Logs & Workflow Progress on GitHub Actions]({run_url})")
-        st.info("Retraining is currently running on GitHub Actions. You can view the real-time execution logs directly on GitHub by clicking the link above. Once training completes, the app will automatically reload with the new models.")
-        
-        if st.button("Cancel Retraining Run", type="primary", use_container_width=True):
-            cancel_training(status)
-            st.error("Retraining run cancellation requested on GitHub Actions.")
-            time.sleep(1.5)
-            st.rerun()
+    # Log streaming
+    st.markdown("### Real-time Logs")
+    if log_file.exists():
+        try:
+            with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
+                lines = lf.readlines()
+                # Show last 100 lines
+                st.code("".join(lines[-100:]), language="text")
+        except Exception as e:
+            st.info(f"Loading log lines... ({e})")
     else:
-        is_active = is_process_running(status.get("pid"))
-        if not is_active:
+        st.info("Waiting for logs to initialize...")
+
+@st.fragment(run_every=1.0)
+def render_main_page_training_status():
+    status = get_training_status()
+    is_training_active = False
+    if status and status.get("status") == "RUNNING":
+        if is_process_running(status.get("pid")):
+            is_training_active = True
+        else:
             # Process finished or died, update status
             metadata_path = project_root / "models" / status["folder"] / "metadata.json"
             status["status"] = "SUCCESS" if metadata_path.exists() else "FAILED"
@@ -222,107 +176,33 @@ def render_active_training_dashboard(status):
             save_training_status(status)
             st.rerun()
 
-        st.warning(f"Retraining in progress: Run `{status['folder']}` (PID: {status['pid']})")
-        st.markdown(f"**Started At:** {status['start_time']}")
-        
-        # Get progress
+    if is_training_active:
+        st.warning(f"Retraining is currently running in the background: Run `{status['folder']}` (PID: {status['pid']})")
         log_file = project_root / "models" / status["folder"] / "training.log"
         phase_desc, progress_pct = get_training_progress(log_file)
         
-        # Cancel Button
-        if st.button("Cancel Retraining Run", type="primary", use_container_width=True):
-            cancel_training(status)
-            st.error("Retraining process tree was terminated.")
-            st.rerun()
-            
-        # Log streaming
-        st.markdown("### Real-time Logs")
-        if log_file.exists():
-            try:
-                with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
-                    lines = lf.readlines()
-                    # Show last 100 lines
-                    st.code("".join(lines[-100:]), language="text")
-            except Exception as e:
-                st.info(f"Loading log lines... ({e})")
-        else:
-            st.info("Waiting for logs to initialize...")
-
-@st.fragment(run_every=1.0)
-def render_main_page_training_status():
-    status = get_training_status()
-    is_training_active = False
-    is_github = status and status.get("type") == "github"
-    
-    if status and status.get("status") == "RUNNING":
-        if is_github:
-            run_info = get_latest_github_run()
-            if run_info:
-                gh_status = run_info.get("status")
-                gh_conclusion = run_info.get("conclusion")
-                if gh_status == "completed":
-                    status["status"] = "SUCCESS" if gh_conclusion == "success" else "CANCELLED" if gh_conclusion == "cancelled" else "FAILED"
-                    status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    save_training_status(status)
-                    st.rerun()
-                else:
-                    is_training_active = True
-            else:
-                is_training_active = True
-        else:
-            if is_process_running(status.get("pid")):
-                is_training_active = True
-            else:
-                # Process finished or died, update status
-                metadata_path = project_root / "models" / status["folder"] / "metadata.json"
-                status["status"] = "SUCCESS" if metadata_path.exists() else "FAILED"
-                status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                save_training_status(status)
+        col_prog, col_btn = st.columns([4, 1])
+        with col_prog:
+            st.write(f"**Current Phase:** {phase_desc}")
+            st.progress(progress_pct)
+        with col_btn:
+            st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)  # spacing
+            if st.button("Stop Training", type="primary", key="stop_training_main_btn", use_container_width=True):
+                cancel_training(status)
+                st.error("Retraining process was terminated.")
+                time.sleep(1)
                 st.rerun()
-
-    if is_training_active:
-        if is_github:
-            repo, _ = get_github_secrets()
-            run_info = get_latest_github_run()
-            run_url = run_info.get("html_url") if run_info else f"https://github.com/{repo}/actions"
-            
-            st.warning(f"Retraining is currently running on GitHub Actions: Run `{status['folder']}`")
-            col_prog, col_btn = st.columns([4, 1])
-            with col_prog:
-                st.markdown(f"🔗 [Monitor live workflow run on GitHub Actions]({run_url})")
-            with col_btn:
-                if st.button("Stop Training", type="primary", key="stop_training_main_btn", use_container_width=True):
-                    cancel_training(status)
-                    st.error("Retraining process cancellation requested.")
-                    time.sleep(1.5)
-                    st.rerun()
-        else:
-            st.warning(f"Retraining is currently running in the background: Run `{status['folder']}` (PID: {status['pid']})")
-            log_file = project_root / "models" / status["folder"] / "training.log"
-            phase_desc, progress_pct = get_training_progress(log_file)
-            
-            col_prog, col_btn = st.columns([4, 1])
-            with col_prog:
-                st.write(f"**Current Phase:** {phase_desc}")
-                st.progress(progress_pct)
-            with col_btn:
-                st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)  # spacing
-                if st.button("Stop Training", type="primary", key="stop_training_main_btn", use_container_width=True):
-                    cancel_training(status)
-                    st.error("Retraining process was terminated.")
-                    time.sleep(1)
-                    st.rerun()
-            
-            with st.expander("View Training Log (Last 50 lines)", expanded=True):
-                if log_file.exists():
-                    try:
-                        with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
-                            lines = lf.readlines()
-                            st.code("".join(lines[-50:]), language="text")
-                    except Exception as e:
-                        st.info(f"Loading log lines... ({e})")
-                else:
-                    st.info("Waiting for logs to initialize...")
+        
+        with st.expander("View Training Log (Last 50 lines)", expanded=True):
+            if log_file.exists():
+                try:
+                    with open(log_file, "r", encoding="utf-8", errors="ignore") as lf:
+                        lines = lf.readlines()
+                        st.code("".join(lines[-50:]), language="text")
+                except Exception as e:
+                    st.info(f"Loading log lines... ({e})")
+            else:
+                st.info("Waiting for logs to initialize...")
     else:
         st.success("All models are trained and up-to-date. No retraining in progress.")
 
@@ -851,32 +731,17 @@ def render_retraining_dashboard():
     # Check if currently running
     is_running = False
     if status and status.get("status") == "RUNNING":
-        is_github = status.get("type") == "github"
-        if is_github:
-            run_info = get_latest_github_run()
-            if run_info:
-                gh_status = run_info.get("status")
-                gh_conclusion = run_info.get("conclusion")
-                if gh_status == "completed":
-                    status["status"] = "SUCCESS" if gh_conclusion == "success" else "CANCELLED" if gh_conclusion == "cancelled" else "FAILED"
-                    status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    save_training_status(status)
-                else:
-                    is_running = True
-            else:
-                is_running = True
+        if is_process_running(status.get("pid")):
+            is_running = True
         else:
-            if is_process_running(status.get("pid")):
-                is_running = True
+            # Process finished or died without updating status
+            metadata_path = project_root / "models" / status["folder"] / "metadata.json"
+            if metadata_path.exists():
+                status["status"] = "SUCCESS"
             else:
-                # Process finished or died without updating status
-                metadata_path = project_root / "models" / status["folder"] / "metadata.json"
-                if metadata_path.exists():
-                    status["status"] = "SUCCESS"
-                else:
-                    status["status"] = "FAILED"
-                status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                save_training_status(status)
+                status["status"] = "FAILED"
+            status["end_time"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            save_training_status(status)
             
     # Display current status card
     if is_running:
@@ -906,23 +771,6 @@ def render_retraining_dashboard():
         skip_nn = False
         skip_fallback = False
         skip_rules = False
-        
-        # Check GitHub Action secrets
-        repo, token = get_github_secrets()
-        has_github = bool(repo and token)
-        
-        env_options = ["Local Subprocess"]
-        if has_github:
-            env_options.insert(0, "GitHub Actions")
-            
-        train_env = st.selectbox(
-            "Training Environment",
-            options=env_options,
-            help="GitHub Actions is recommended for deployed production apps to prevent CPU throttling and OOM memory crashes."
-        )
-        
-        if not has_github:
-            st.info("💡 **Tip:** To offload retraining to GitHub Actions (preventing deployed app crashes), add your GitHub Repository name (`repo`) and Personal Access Token (`token`) under `[github]` in your Streamlit secrets.")
             
         if st.button("Start Retraining Pipeline", use_container_width=True):
             # Calculate next folder
@@ -941,100 +789,66 @@ def render_retraining_dashboard():
                         pass
             next_folder = f"training_{max_num + 1:03d}"
             
-            if train_env == "GitHub Actions":
-                payload = {
+            cmd = [
+                sys.executable,
+                "retrain.py",
+                "--epochs", str(epochs),
+                "--downsample", str(downsample),
+                "--batch_size", str(batch_size),
+                "--lr", str(lr)
+            ]
+            if fast:
+                cmd.append("--fast")
+            if skip_nn:
+                cmd.append("--skip_nn")
+            if skip_fallback:
+                cmd.append("--skip_fallback")
+            if skip_rules:
+                cmd.append("--skip_rules")
+                
+            # Inherit environment variables and pass database credentials from st.secrets if running on Streamlit Cloud
+            env = os.environ.copy()
+            env["PYTHONUNBUFFERED"] = "1"
+            try:
+                if "postgres" in st.secrets:
+                    pg_sec = st.secrets["postgres"]
+                    env["PGHOST"] = pg_sec.get("host", "")
+                    env["PGPORT"] = str(pg_sec.get("port", "5432"))
+                    env["PGDATABASE"] = pg_sec.get("database", "")
+                    env["PGUSER"] = pg_sec.get("username", pg_sec.get("user", ""))
+                    env["PGPASSWORD"] = pg_sec.get("password", "")
+                    
+                    # Also pass serialized connection dictionary to support SSL and custom options in connection.py fallback
+                    import json
+                    env["DB_CONN_PARAMS"] = json.dumps(dict(pg_sec))
+            except Exception:
+                pass
+                
+            # Launch background process
+            proc = subprocess.Popen(
+                cmd,
+                cwd=str(project_root),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                close_fds=True,
+                env=env
+            )
+            
+            new_status = {
+                "pid": proc.pid,
+                "status": "RUNNING",
+                "folder": next_folder,
+                "start_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "params": {
                     "epochs": epochs,
                     "downsample": downsample,
-                    "batch_size": batch_size,
-                    "lr": lr,
                     "fast": fast
                 }
-                success = trigger_github_retraining(repo, token, payload)
-                if success:
-                    time.sleep(2)  # Wait for GitHub Action to register
-                    run_info = get_latest_github_run()
-                    run_id = run_info.get("id") if run_info else None
-                    
-                    new_status = {
-                        "type": "github",
-                        "run_id": run_id,
-                        "status": "RUNNING",
-                        "folder": next_folder,
-                        "start_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                        "params": {
-                            "epochs": epochs,
-                            "downsample": downsample,
-                            "fast": fast
-                        }
-                    }
-                    save_training_status(new_status)
-                    st.success("Retraining triggered successfully on GitHub Actions!")
-                    time.sleep(1.5)
-                    st.rerun()
-                else:
-                    st.error("Failed to trigger GitHub Actions retraining. Check your secrets configuration.")
-            else:
-                cmd = [
-                    sys.executable,
-                    "retrain.py",
-                    "--epochs", str(epochs),
-                    "--downsample", str(downsample),
-                    "--batch_size", str(batch_size),
-                    "--lr", str(lr)
-                ]
-                if fast:
-                    cmd.append("--fast")
-                if skip_nn:
-                    cmd.append("--skip_nn")
-                if skip_fallback:
-                    cmd.append("--skip_fallback")
-                if skip_rules:
-                    cmd.append("--skip_rules")
-                    
-                # Inherit environment variables and pass database credentials from st.secrets if running on Streamlit Cloud
-                env = os.environ.copy()
-                env["PYTHONUNBUFFERED"] = "1"
-                try:
-                    if "postgres" in st.secrets:
-                        pg_sec = st.secrets["postgres"]
-                        env["PGHOST"] = pg_sec.get("host", "")
-                        env["PGPORT"] = str(pg_sec.get("port", "5432"))
-                        env["PGDATABASE"] = pg_sec.get("database", "")
-                        env["PGUSER"] = pg_sec.get("username", pg_sec.get("user", ""))
-                        env["PGPASSWORD"] = pg_sec.get("password", "")
-                        
-                        # Also pass serialized connection dictionary to support SSL and custom options in connection.py fallback
-                        import json
-                        env["DB_CONN_PARAMS"] = json.dumps(dict(pg_sec))
-                except Exception:
-                    pass
-                    
-                # Launch background process
-                proc = subprocess.Popen(
-                    cmd,
-                    cwd=str(project_root),
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    close_fds=True,
-                    env=env
-                )
-                
-                new_status = {
-                    "type": "local",
-                    "pid": proc.pid,
-                    "status": "RUNNING",
-                    "folder": next_folder,
-                    "start_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "params": {
-                        "epochs": epochs,
-                        "downsample": downsample,
-                        "fast": fast
-                    }
-                }
-                save_training_status(new_status)
-                st.success(f"Retraining run started in the background (PID: {proc.pid})! Logs will appear on the next refresh.")
-                time.sleep(1.5)
-                st.rerun()
+            }
+            save_training_status(new_status)
+            st.success(f"Retraining run started in the background (PID: {proc.pid})! Logs will appear on the next refresh.")
+            time.sleep(1.5)
+            st.rerun()
             
         # History / Last Run Dashboard
         if status:
