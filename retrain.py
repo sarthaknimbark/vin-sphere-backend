@@ -113,6 +113,47 @@ def run_training_step(cmd: list, cwd: Path, log_file) -> bool:
         log_file.flush()
         return False
 
+def promote_models_to_production(versioned_dir: Path, project_root: Path, logger):
+    """Copies approved candidate models from the versioned folder to their production paths."""
+    import shutil
+    logger.info("Promoting candidate models to production directories...")
+    
+    # 1. Promote Standard 17-character models
+    standard_src = versioned_dir / "standard"
+    standard_dst_chat = project_root / "chat_cat(2.0)" / "models"
+    standard_dst_root = project_root / "models"
+    
+    if standard_src.exists():
+        for item in os.listdir(standard_src):
+            src_file = standard_src / item
+            if src_file.is_file():
+                # Copy to chat_cat(2.0)/models
+                os.makedirs(standard_dst_chat, exist_ok=True)
+                shutil.copy2(src_file, standard_dst_chat / item)
+                logger.info(f"Copied {item} to {standard_dst_chat}")
+                
+                # Copy to root models
+                if not (standard_dst_root / item).is_dir():
+                    shutil.copy2(src_file, standard_dst_root / item)
+                    logger.info(f"Copied {item} to {standard_dst_root}")
+
+    # 2. Promote Short VIN models (10, 11, 12)
+    short_tasks = [
+        ("10", "chat_cat_short_vin"),
+        ("11", "chat_cat_short_vin_11"),
+        ("12", "chat_cat_short_vin_12")
+    ]
+    for len_str, folder_name in short_tasks:
+        short_src = versioned_dir / "short" / len_str
+        short_dst = project_root / folder_name / "models"
+        if short_src.exists():
+            os.makedirs(short_dst, exist_ok=True)
+            for item in os.listdir(short_src):
+                src_file = short_src / item
+                if src_file.is_file():
+                    shutil.copy2(src_file, short_dst / item)
+                    logger.info(f"Copied {item} to {short_dst}")
+
 def main():
     parser = argparse.ArgumentParser(description="Unified PostgreSQL-Based Automated Retraining Pipeline")
     parser.add_argument("--epochs", type=int, default=15, help="NN Transformer training epochs")
@@ -265,6 +306,13 @@ def main():
                     eval_report = json.load(f)
             except Exception as e:
                 logger.warning(f"Could not load evaluation report: {e}")
+                
+        # If model is APPROVED, copy to production directories
+        if eval_report.get("status") == "APPROVED":
+            logger.info("Retrained model received APPROVED status. Promoting models...")
+            promote_models_to_production(versioned_dir, project_root, logger)
+        else:
+            logger.info("Retrained model status is not APPROVED. Skipping model promotion.")
                 
         # 6. Save final metadata.json
         db_row_counts = get_db_row_counts()
