@@ -1,12 +1,12 @@
 {
-  "pid": 10684,
-  "status": "FAILED",
-  "folder": "training_001",
-  "start_time": "2026-07-09 18:27:04",
+  "pid": 18312,
+  "status": "SUCCESS",
+  "folder": "training_017",
+  "start_time": "2026-07-14 11:25:49",
   "params": {
     "epochs": 15,
     "downsample": -1,
     "fast": false
   },
-  "end_time": "2026-07-10 12:33:07"
+  "end_time": "2026-07-14 15:21:09"
 }
