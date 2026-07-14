@@ -1,0 +1,44 @@
+{
+  "training_number": 17,
+  "training_folder": "training_017",
+  "timestamp": "2026-07-14T15:20:09.178944",
+  "model_type": "Standard (17-char) & Short (10-12 char) VIN decoders",
+  "project_version": "3.0",
+  "training_parameters": {
+    "epochs": 15,
+    "downsample": -1,
+    "batch_size": 512,
+    "lr": 0.001,
+    "fast": false,
+    "skip_nn": false,
+    "skip_fallback": false,
+    "skip_rules": false,
+    "models_dir": "models"
+  },
+  "database_row_counts": {
+    "standard_17": 995165,
+    "short_10": 4460,
+    "short_11": 2214,
+    "short_12": 4650
+  },
+  "training_durations_sec": {
+    "total_duration": 14042.52174115181
+  },
+  "success_states": {
+    "standard_17": true,
+    "short_10": false,
+    "short_11": false,
+    "short_12": false,
+    "evaluation_and_comparison": false
+  },
+  "evaluation_metrics": {
+    "standard": {
+      "val_loss": 12.283007326336545,
+      "trim_acc": 2.512158848828329e-05,
+      "regional_spec_acc": 0.023056593914546404,
+      "body_type_acc": 0.07003396438763616
+    },
+    "short": {}
+  },
+  "evaluation_and_comparison_result": {}
+}

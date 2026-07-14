@@ -1,0 +1,82 @@
+{
+  "status": "REJECTED",
+  "reasons": [
+    "Regression detected on critical attribute 'model': Candidate Accuracy (2.75%) fell below Production (15.00%) by more than the allowed tolerance (1.0%)."
+  ],
+  "weighted_scores": {
+    "production": 27.73,
+    "candidate": 37.26
+  },
+  "latencies_ms": {
+    "production": 11.36,
+    "candidate": 13.4
+  },
+  "attribute_comparison": [
+    {
+      "attribute": "make",
+      "production_acc": 15.0,
+      "candidate_acc": 60.12,
+      "winner": "Candidate"
+    },
+    {
+      "attribute": "model",
+      "production_acc": 15.0,
+      "candidate_acc": 2.75,
+      "winner": "Production"
+    },
+    {
+      "attribute": "trim",
+      "production_acc": 62.0,
+      "candidate_acc": 61.25,
+      "winner": "Production"
+    },
+    {
+      "attribute": "body_type",
+      "production_acc": 65.75,
+      "candidate_acc": 60.38,
+      "winner": "Production"
+    },
+    {
+      "attribute": "year",
+      "production_acc": 0.0,
+      "candidate_acc": 0.0,
+      "winner": "Tie"
+    },
+    {
+      "attribute": "cylinders",
+      "production_acc": 0.75,
+      "candidate_acc": 0.75,
+      "winner": "Tie"
+    },
+    {
+      "attribute": "origin",
+      "production_acc": 24.25,
+      "candidate_acc": 64.38,
+      "winner": "Candidate"
+    },
+    {
+      "attribute": "no_of_passengers",
+      "production_acc": 0.0,
+      "candidate_acc": 0.0,
+      "winner": "Tie"
+    },
+    {
+      "attribute": "weight",
+      "production_acc": 0.0,
+      "candidate_acc": 0.0,
+      "winner": "Tie"
+    },
+    {
+      "attribute": "regional_spec",
+      "production_acc": 74.5,
+      "candidate_acc": 62.5,
+      "winner": "Production"
+    },
+    {
+      "attribute": "color",
+      "production_acc": 51.62,
+      "candidate_acc": 40.38,
+      "winner": "Production"
+    }
+  ]
+}
