@@ -224,6 +224,8 @@ from database import (
     update_pending_prediction
 )
 
+from valuation_engine import ToyotaValuationEngine
+
 
 def format_csv_value(val):
     if pd.isna(val):
@@ -1268,6 +1270,61 @@ def calculate_valuation(price: float) -> dict:
         return None
 
 
+@st.cache_resource
+def load_toyota_valuation_engine() -> ToyotaValuationEngine:
+    return ToyotaValuationEngine()
+
+
+def get_toyota_engine_valuation(result: dict) -> dict | None:
+    make = str(result.get("make", "")).strip()
+    if make.upper() != "TOYOTA":
+        return None
+
+    required_fields = {
+        "model": result.get("model"),
+        "trim": result.get("trim"),
+        "year": result.get("year"),
+        "body_type": result.get("body_type"),
+        "regional_spec": result.get("regional_spec"),
+    }
+    missing = [
+        field
+        for field, value in required_fields.items()
+        if value is None or str(value).strip().upper() in {"", "UNKNOWN", "NAN", "NONE"}
+    ]
+    if missing:
+        return {"error": f"Toyota valuation skipped. Missing decoded fields: {', '.join(missing)}"}
+
+    try:
+        payload = {
+            "make": make,
+            "model": str(result.get("model")).strip(),
+            "trim": str(result.get("trim")).strip(),
+            "model_year": int(pd.to_numeric(result.get("year"))),
+            "body_type": str(result.get("body_type")).strip(),
+            "regional_specs": str(result.get("regional_spec")).strip(),
+        }
+        return load_toyota_valuation_engine().value(payload)
+    except Exception as exc:
+        return {"error": f"Toyota valuation failed: {exc}"}
+
+
+def simplify_toyota_warning(message: str) -> str:
+    replacements = {
+        "Exact trim": "Trim",
+        "is missing; using closest trim": "not found. Used closest trim",
+        "for the same model.": "",
+        "Base-price body type": "Body type",
+        "not found among candidates; using available body type rows.": "not found in base-price rows. Used available body type.",
+        "Unknown trim": "Trim factor",
+        "using closest table entry": "used closest factor",
+    }
+    simplified = str(message)
+    for old, new in replacements.items():
+        simplified = simplified.replace(old, new)
+    return re.sub(r"\s+", " ", simplified).strip()
+
+
 @st.cache_data
 def load_car_depreciation_data():
     if not CAR_DEP_CSV_PATH.exists():
@@ -1524,6 +1581,9 @@ if st.button("Decode", type="primary"):
                 result["depreciated_values"] = dep_values
 
                 # 5. Calculate valuations
+                toyota_engine_valuation = get_toyota_engine_valuation(result)
+                result["toyota_valuation_engine"] = toyota_engine_valuation
+
                 result["lookup_price_valuation"] = calculate_valuation(price)
                 result["ml_price_valuation"] = calculate_valuation(ml_price)
                 result["depreciated_price_valuations"] = (
@@ -1635,6 +1695,23 @@ if st.button("Decode", type="primary"):
                     )
                 table_data.extend(dep_rows)
 
+                if toyota_engine_valuation and "final_value" in toyota_engine_valuation:
+                    table_data.append(
+                        {
+                            "Attribute": "Toyota Valuation Engine",
+                            "Predicted Value": f"{toyota_engine_valuation['final_value']:,.0f} AED",
+                            "Confidence": "CSV factors",
+                        }
+                    )
+                elif toyota_engine_valuation and "error" in toyota_engine_valuation:
+                    table_data.append(
+                        {
+                            "Attribute": "Toyota Valuation Engine",
+                            "Predicted Value": "Not Found",
+                            "Confidence": toyota_engine_valuation["error"],
+                        }
+                    )
+
                 # =====================================================
                 #                   DASHBOARD RENDERING
                 # =====================================================
@@ -1654,11 +1731,14 @@ if st.button("Decode", type="primary"):
                     (price is not None)
                     or (ml_price is not None)
                     or bool(dep_values)
+                    or bool(toyota_engine_valuation)
                 )
                 if has_any_valuation:
                     st.write("### Market Valuation Dashboard")
 
                     tab_titles = []
+                    if toyota_engine_valuation:
+                        tab_titles.append("Toyota CSV Engine")
                     if price is not None:
                         tab_titles.append("Market Lookup")
                     if ml_price is not None:
@@ -1668,6 +1748,61 @@ if st.button("Decode", type="primary"):
 
                     tabs = st.tabs(tab_titles)
                     tab_index = 0
+
+                    if toyota_engine_valuation:
+                        with tabs[tab_index]:
+                            if "error" in toyota_engine_valuation:
+                                st.warning(toyota_engine_valuation["error"])
+                            else:
+                                st.metric(
+                                    label="Final Insurable Value",
+                                    value=f"{toyota_engine_valuation['final_value']:,.0f} AED",
+                                )
+                                st.write("**CSV Factor Breakdown**")
+                                st.table(
+                                    pd.DataFrame(
+                                        [
+                                            {
+                                                "Metric": "Base Price",
+                                                "Value": f"{toyota_engine_valuation['base_price']:,.0f} AED",
+                                            },
+                                            {
+                                                "Metric": "Vehicle Age",
+                                                "Value": toyota_engine_valuation["vehicle_age"],
+                                            },
+                                            {
+                                                "Metric": "Age Factor",
+                                                "Value": toyota_engine_valuation["age_factor"],
+                                            },
+                                            {
+                                                "Metric": "Model Retention Factor",
+                                                "Value": toyota_engine_valuation["model_factor"],
+                                            },
+                                            {
+                                                "Metric": "Trim Factor",
+                                                "Value": toyota_engine_valuation["trim_factor"],
+                                            },
+                                            {
+                                                "Metric": "Body Type Factor",
+                                                "Value": toyota_engine_valuation["body_factor"],
+                                            },
+                                            {
+                                                "Metric": "Regional Spec Factor",
+                                                "Value": toyota_engine_valuation["regional_spec_factor"],
+                                            },
+                                            {
+                                                "Metric": "Market Demand Factor",
+                                                "Value": toyota_engine_valuation["market_factor"],
+                                            },
+                                        ]
+                                    )
+                                )
+                                warnings_list = toyota_engine_valuation.get("warnings", [])
+                                if warnings_list:
+                                    st.write("**Fallback Warnings**")
+                                    for warning in warnings_list:
+                                        st.warning(simplify_toyota_warning(warning))
+                        tab_index += 1
 
                     if price is not None:
                         with tabs[tab_index]:

@@ -1,0 +1,6 @@
+market_condition,factor
+Very High,1.05
+High,1.03
+Normal,1.0
+Low,0.97
+Very Low,0.94
