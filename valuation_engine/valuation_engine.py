@@ -37,6 +37,13 @@ class ToyotaValuationEngine:
         if missing:
             raise ValueError(f"Decoded vehicle payload is missing required keys: {missing}")
 
+        cylinders = decoded_vehicle.get("cylinders")
+        if cylinders is not None:
+            try:
+                cylinders = int(float(str(cylinders)))
+            except (ValueError, TypeError):
+                cylinders = None
+
         return DecodedVehicle(
             make=str(decoded_vehicle["make"]),
             model=str(decoded_vehicle["model"]),
@@ -44,6 +51,7 @@ class ToyotaValuationEngine:
             model_year=int(decoded_vehicle["model_year"]),
             body_type=str(decoded_vehicle["body_type"]),
             regional_specs=str(decoded_vehicle["regional_specs"]),
+            cylinders=cylinders,
         )
 
 

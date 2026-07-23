@@ -332,7 +332,7 @@ def calculate_valuation(price: float) -> dict:
 
 # Define fallback model and lookup paths
 MODEL_DIR = str(project_root / "chat_cat(2.0)" / "models")
-LOOKUP_DATA_PATH = project_root / "Data/lookup_clean_translated.csv"
+LOOKUP_DATA_PATH = project_root / "car_app_dev" / "dev_lookup.csv"
 
 # Updated directory path for your cleaned 21 depreciation CSV files
 DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data"

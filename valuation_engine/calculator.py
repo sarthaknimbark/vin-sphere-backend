@@ -23,6 +23,7 @@ class DecodedVehicle:
     model_year: int
     body_type: str
     regional_specs: str
+    cylinders: int | None = None
 
 
 @dataclass(frozen=True)
@@ -70,6 +71,7 @@ class VehicleValuationCalculator:
             year=vehicle.model_year,
             body_type=vehicle.body_type,
             regional_specs=vehicle.regional_specs,
+            cylinders=vehicle.cylinders,
         )
         warnings.extend(base_price.warnings)
 
@@ -83,14 +85,23 @@ class VehicleValuationCalculator:
         for result in (age_factor, model_factor, trim_factor, body_factor, regional_factor, market_factor):
             warnings.extend(result.warnings)
 
+        # Apply multipliers conditionally: only when a fallback occurred for that attribute
+        applied_trim_factor = trim_factor.value if base_price.trim_fallback else 1.0
+        applied_body_factor = body_factor.value if base_price.body_fallback else 1.0
+        applied_regional_factor = regional_factor.value if base_price.spec_fallback else 1.0
+
+        # Model and market demand factors are only applied if a fallback occurred (currently not tracked)
+        applied_model_factor = 1.0
+        applied_market_factor = 1.0
+
         raw_value = (
             base_price.base_price
             * age_factor.value
-            * model_factor.value
-            * trim_factor.value
-            * body_factor.value
-            * regional_factor.value
-            * market_factor.value
+            * applied_model_factor
+            * applied_trim_factor
+            * applied_body_factor
+            * applied_regional_factor
+            * applied_market_factor
         )
         final_value = round_aed(raw_value)
         logger.info("Final value resolved: %s AED", final_value)
@@ -99,11 +110,11 @@ class VehicleValuationCalculator:
             base_price=round_aed(base_price.base_price),
             vehicle_age=vehicle_age,
             age_factor=age_factor.value,
-            model_factor=model_factor.value,
-            trim_factor=trim_factor.value,
-            body_factor=body_factor.value,
-            regional_spec_factor=regional_factor.value,
-            market_factor=market_factor.value,
+            model_factor=applied_model_factor,
+            trim_factor=applied_trim_factor,
+            body_factor=applied_body_factor,
+            regional_spec_factor=applied_regional_factor,
+            market_factor=applied_market_factor,
             final_value=final_value,
             warnings=warnings,
         )
