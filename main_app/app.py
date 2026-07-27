@@ -1304,7 +1304,10 @@ def get_toyota_engine_valuation(result: dict) -> dict | None:
             "body_type": str(result.get("body_type")).strip(),
             "regional_specs": str(result.get("regional_spec")).strip(),
         }
-        return load_toyota_valuation_engine().value(payload)
+        engine = load_toyota_valuation_engine()
+        from datetime import date
+        engine.calculator.current_year = date.today().year
+        return engine.value(payload)
     except Exception as exc:
         return {"error": f"Toyota valuation failed: {exc}"}
 
