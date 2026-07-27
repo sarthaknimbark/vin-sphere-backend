@@ -610,7 +610,7 @@ if st.button("Decode", use_container_width=True):
                     if ml_price is not None:
                         with tabs[tab_index]:
                             val = result["ml_price_valuation"]
-                            st.write("**Retail Price vs. Trade Price (ML Mou  kukkuukhhujjudel)**")
+                            st.write("**Retail Price vs. Trade Price (ML Model)**")
                             st.table(pd.DataFrame([
                                 {"Price Metric": "Minimum Price (-10%)", "Retail Price (AED)": f"{val['retail_price']['minimum']:,.0f}", "Trade Price (AED)": f"{val['trade_price']['minimum']:,.0f}"},
                                 {"Price Metric": "Average Price", "Retail Price (AED)": f"{val['retail_price']['average']:,.0f}", "Trade Price (AED)": f"{val['trade_price']['average']:,.0f}"},
