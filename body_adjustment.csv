@@ -1,0 +1,8 @@
+body_type,adjustment
+SUV,0.01
+Sedan,0.0
+Pickup,0.02
+Hatchback,-0.01
+Van,-0.01
+MPV,0.0
+Coupe,0.01

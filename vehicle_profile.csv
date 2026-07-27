@@ -1,0 +1,14 @@
+make,model,segment,retention_class,demand_class
+Toyota,Land Cruiser,SUV,A,A
+Toyota,Corolla,Sedan,B,B
+Toyota,Camry,Sedan,B,B
+Toyota,Yaris,Hatchback,C,C
+Toyota,Hilux,Pickup,A,A
+Toyota,Fortuner,SUV,A,B
+Toyota,RAV4,SUV,B,B
+Toyota,Prado,SUV,A,A
+Toyota,Hiace,Van,B,B
+Toyota,Innova,MPV,B,B
+Toyota,Avanza,MPV,C,C
+Toyota,Rush,SUV,C,C
+Toyota,Raize,SUV,C,C

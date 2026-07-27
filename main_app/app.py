@@ -1304,7 +1304,10 @@ def get_toyota_engine_valuation(result: dict) -> dict | None:
             "body_type": str(result.get("body_type")).strip(),
             "regional_specs": str(result.get("regional_spec")).strip(),
         }
-        return load_toyota_valuation_engine().value(payload)
+        engine = load_toyota_valuation_engine()
+        from datetime import date
+        engine.calculator.current_year = date.today().year
+        return engine.value(payload)
     except Exception as exc:
         return {"error": f"Toyota valuation failed: {exc}"}
 
@@ -1586,6 +1589,12 @@ if st.button("Decode", type="primary"):
 
                 result["lookup_price_valuation"] = calculate_valuation(price)
                 result["ml_price_valuation"] = calculate_valuation(ml_price)
+                toyota_engine_final = (
+                    toyota_engine_valuation.get("final_value")
+                    if toyota_engine_valuation and "final_value" in toyota_engine_valuation
+                    else None
+                )
+                result["toyota_engine_price_valuation"] = calculate_valuation(toyota_engine_final)
                 result["depreciated_price_valuations"] = (
                     {
                         filename: calculate_valuation(val)
@@ -1758,6 +1767,30 @@ if st.button("Decode", type="primary"):
                                     label="Final Insurable Value",
                                     value=f"{toyota_engine_valuation['final_value']:,.0f} AED",
                                 )
+                                tev_val = result.get("toyota_engine_price_valuation")
+                                if tev_val:
+                                    st.write("**Retail Price vs. Trade Price (CSV Engine)**")
+                                    st.table(
+                                        pd.DataFrame(
+                                            [
+                                                {
+                                                    "Price Metric": "Minimum Price (-10%)",
+                                                    "Retail Price (AED)": f"{tev_val['retail_price']['minimum']:,.0f}",
+                                                    "Trade Price (AED)": f"{tev_val['trade_price']['minimum']:,.0f}",
+                                                },
+                                                {
+                                                    "Price Metric": "Average Price",
+                                                    "Retail Price (AED)": f"{tev_val['retail_price']['average']:,.0f}",
+                                                    "Trade Price (AED)": f"{tev_val['trade_price']['average']:,.0f}",
+                                                },
+                                                {
+                                                    "Price Metric": "Maximum Price (+10%)",
+                                                    "Retail Price (AED)": f"{tev_val['retail_price']['maximum']:,.0f}",
+                                                    "Trade Price (AED)": f"{tev_val['trade_price']['maximum']:,.0f}",
+                                                },
+                                            ]
+                                        )
+                                    )
                                 st.write("**CSV Factor Breakdown**")
                                 st.table(
                                     pd.DataFrame(

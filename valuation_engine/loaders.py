@@ -9,6 +9,7 @@ from typing import Iterable
 
 import pandas as pd
 
+from difflib import SequenceMatcher
 from .config import DataPaths
 from .utils import closest_match, normalize_text
 
@@ -17,6 +18,17 @@ logger = logging.getLogger(__name__)
 
 class ValuationDataError(ValueError):
     """Raised when the valuation CSV bundle is missing required data."""
+
+
+def extract_cylinders(trim_str: str) -> int | None:
+    trim_lower = str(trim_str).lower()
+    if "v8" in trim_lower or "5.7" in trim_lower or "4.6" in trim_lower or "4.8" in trim_lower:
+        return 8
+    if "v6" in trim_lower or "3.5" in trim_lower or "4.0" in trim_lower or "3.0" in trim_lower:
+        return 6
+    if "i4" in trim_lower or "l4" in trim_lower or "2.7" in trim_lower or "2.0" in trim_lower or "1.5" in trim_lower or "1.8" in trim_lower or "2.4" in trim_lower:
+        return 4
+    return None
 
 
 class MissingBasePriceError(ValuationDataError):
@@ -39,6 +51,10 @@ class BasePriceLookup:
     matched_trim: str
     matched_year: int
     warnings: list[str] = field(default_factory=list)
+    trim_fallback: bool = False
+    body_fallback: bool = False
+    spec_fallback: bool = False
+    year_fallback: bool = False
 
 
 class VehicleDataRepository:
@@ -102,22 +118,62 @@ class VehicleDataRepository:
         year: int,
         body_type: str | None = None,
         regional_specs: str | None = None,
+        cylinders: int | None = None,
     ) -> BasePriceLookup:
         """Lookup a base price using exact keys, then closest trim/year fallbacks."""
 
         logger.info("Looking up base price for %s %s %s %s", make, model, trim, year)
         warnings: list[str] = []
         frame = self.matrix
+
+        # --- 1. Model Resolution & Aliasing ---
+        norm_model = normalize_text(model)
+        norm_model_clean = norm_model.replace(" ", "").replace("-", "")
+
+        # Check exact key first
         model_rows = frame[
             (frame["_make_key"] == normalize_text(make))
-            & (frame["_model_key"] == normalize_text(model))
+            & (frame["_model_key"] == norm_model)
         ].copy()
+
+        if model_rows.empty:
+            # Check space-stripped key
+            model_rows = frame[
+                (frame["_make_key"] == normalize_text(make))
+                & (frame["_model_key"].str.replace(" ", "").str.replace("-", "") == norm_model_clean)
+            ].copy()
+
+        if model_rows.empty:
+            # Check known aliases
+            model_aliases = {
+                "prado": "land cruiser prado",
+                "lc": "land cruiser",
+                "fj": "fj cruiser",
+            }
+            alias_target = model_aliases.get(norm_model)
+            if alias_target:
+                model_rows = frame[
+                    (frame["_make_key"] == normalize_text(make))
+                    & (frame["_model_key"] == alias_target)
+                ].copy()
+
+        if model_rows.empty:
+            # Try matching by substring (stripped of spaces)
+            candidate_models = frame[frame["_make_key"] == normalize_text(make)]["_model_key"].unique()
+            matched_model = next((m for m in candidate_models if norm_model_clean in m.replace(" ", "").replace("-", "") or m.replace(" ", "").replace("-", "") in norm_model_clean), None)
+            if matched_model:
+                model_rows = frame[
+                    (frame["_make_key"] == normalize_text(make))
+                    & (frame["_model_key"] == matched_model)
+                ].copy()
 
         if model_rows.empty:
             message = f"No base-price rows found for make={make!r}, model={model!r}."
             logger.error(message)
             raise MissingBasePriceError(message)
 
+        # --- 2. Year Resolution & Fallback ---
+        year_fallback = False
         year_rows = model_rows[model_rows["Year"] == int(year)].copy()
         if year_rows.empty:
             nearest_year = self._nearest_year(year, model_rows["Year"])
@@ -128,29 +184,60 @@ class VehicleDataRepository:
             logger.warning(warning)
             warnings.append(warning)
             year_rows = model_rows[model_rows["Year"] == nearest_year].copy()
+            year_fallback = True
 
-        exact_trim_rows = year_rows[year_rows["_trim_key"] == normalize_text(trim)].copy()
-        if exact_trim_rows.empty:
-            matched_trim = closest_match(trim, year_rows["Trim"])
-            if matched_trim is None:
-                message = (
-                    f"No trim candidates found for make={make!r}, model={model!r}, "
-                    f"year={year!r}."
-                )
-                logger.error(message)
-                raise MissingBasePriceError(message)
-            warning = (
-                f"Exact trim {trim!r} is missing; using closest trim {matched_trim!r} "
-                "for the same model."
-            )
-            logger.warning(warning)
-            warnings.append(warning)
-            candidate_rows = year_rows[year_rows["_trim_key"] == normalize_text(matched_trim)].copy()
-        else:
+        # --- 3. Trim Resolution & Fallback ---
+        trim_norm = normalize_text(trim)
+        exact_trim_rows = year_rows[year_rows["_trim_key"] == trim_norm].copy()
+
+        trim_fallback = False
+        if not exact_trim_rows.empty:
             matched_trim = str(exact_trim_rows.iloc[0]["Trim"])
             candidate_rows = exact_trim_rows
+        else:
+            # Try finding candidates whose trim keys contain trim_norm as a word/substring
+            contains_rows = year_rows[
+                year_rows["_trim_key"].apply(lambda k: trim_norm in k or k in trim_norm)
+            ].copy()
 
-        selected = self._narrow_price_candidates(candidate_rows, body_type, regional_specs, warnings)
+            if contains_rows.empty:
+                # Fuzzy match fallback
+                matched_trim = closest_match(trim, year_rows["Trim"])
+                if matched_trim is None:
+                    message = (
+                        f"No trim candidates found for make={make!r}, model={model!r}, "
+                        f"year={year!r}."
+                    )
+                    logger.error(message)
+                    raise MissingBasePriceError(message)
+
+                warning = (
+                    f"Exact trim {trim!r} is missing; using closest trim {matched_trim!r} "
+                    "for the same model."
+                )
+                logger.warning(warning)
+                warnings.append(warning)
+                candidate_rows = year_rows[year_rows["_trim_key"] == normalize_text(matched_trim)].copy()
+                trim_fallback = True
+            else:
+                # Filter by cylinders if available
+                if cylinders is not None:
+                    def matches_cylinders(row_trim):
+                        row_cyl = extract_cylinders(str(row_trim))
+                        return row_cyl is None or row_cyl == cylinders
+
+                    filtered_rows = contains_rows[contains_rows["Trim"].apply(matches_cylinders)].copy()
+                    if not filtered_rows.empty:
+                        contains_rows = filtered_rows
+
+                candidate_rows = contains_rows
+                matched_trim = str(candidate_rows.iloc[0]["Trim"])
+                trim_fallback = True
+
+        # --- 4. Body & Spec Narrowing ---
+        selected, body_fallback, spec_fallback = self._narrow_price_candidates(
+            candidate_rows, body_type, regional_specs, warnings
+        )
         base_price = float(selected["Base Price"].median())
         matched_year = int(selected.iloc[0]["Year"])
         logger.info(
@@ -159,7 +246,16 @@ class VehicleDataRepository:
             matched_trim,
             matched_year,
         )
-        return BasePriceLookup(base_price=base_price, matched_trim=matched_trim, matched_year=matched_year, warnings=warnings)
+        return BasePriceLookup(
+            base_price=base_price,
+            matched_trim=matched_trim,
+            matched_year=matched_year,
+            warnings=warnings,
+            trim_fallback=trim_fallback,
+            body_fallback=body_fallback,
+            spec_fallback=spec_fallback,
+            year_fallback=year_fallback,
+        )
 
     def lookup_age_factor(self, vehicle_age: int) -> LookupValue:
         """Lookup depreciation factor, clamping above the max table age."""
@@ -240,8 +336,11 @@ class VehicleDataRepository:
         body_type: str | None,
         regional_specs: str | None,
         warnings: list[str],
-    ) -> pd.DataFrame:
+    ) -> tuple[pd.DataFrame, bool, bool]:
         selected = rows
+        body_fallback = False
+        spec_fallback = False
+
         if body_type:
             body_rows = selected[selected["_body_type_key"] == normalize_text(body_type)]
             if not body_rows.empty:
@@ -250,6 +349,7 @@ class VehicleDataRepository:
                 warning = f"Base-price body type {body_type!r} not found among candidates; using available body type rows."
                 logger.warning(warning)
                 warnings.append(warning)
+                body_fallback = True
 
         if regional_specs:
             regional_rows = selected[selected["_regional_specs_key"] == normalize_text(regional_specs)]
@@ -259,12 +359,13 @@ class VehicleDataRepository:
                 warning = f"Base-price regional spec {regional_specs!r} not found among candidates; using available regional rows."
                 logger.warning(warning)
                 warnings.append(warning)
+                spec_fallback = True
 
         if len(selected) > 1:
             warning = "Multiple base-price rows matched; using the median base price."
             logger.warning(warning)
             warnings.append(warning)
-        return selected
+        return selected, body_fallback, spec_fallback
 
     def _load_matrix(self, path: Path) -> pd.DataFrame:
         frame = self._read_csv(path)

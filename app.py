@@ -332,7 +332,7 @@ def calculate_valuation(price: float) -> dict:
 
 # Define fallback model and lookup paths
 MODEL_DIR = str(project_root / "chat_cat(2.0)" / "models")
-LOOKUP_DATA_PATH = project_root / "Data/lookup_clean_translated.csv"
+LOOKUP_DATA_PATH = project_root / "car_app_dev" / "dev_lookup.csv"
 
 # Updated directory path for your cleaned 21 depreciation CSV files
 DEPRECIATION_DIR_PATH = project_root / "Valuation" / "data"
@@ -610,7 +610,7 @@ if st.button("Decode", use_container_width=True):
                     if ml_price is not None:
                         with tabs[tab_index]:
                             val = result["ml_price_valuation"]
-                            st.write("**Retail Price vs. Trade Price (ML Mou  kukkuukhhujjudel)**")
+                            st.write("**Retail Price vs. Trade Price (ML Model)**")
                             st.table(pd.DataFrame([
                                 {"Price Metric": "Minimum Price (-10%)", "Retail Price (AED)": f"{val['retail_price']['minimum']:,.0f}", "Trade Price (AED)": f"{val['trade_price']['minimum']:,.0f}"},
                                 {"Price Metric": "Average Price", "Retail Price (AED)": f"{val['retail_price']['average']:,.0f}", "Trade Price (AED)": f"{val['trade_price']['average']:,.0f}"},
