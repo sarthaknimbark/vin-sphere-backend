@@ -90,9 +90,9 @@ class VehicleValuationCalculator:
         applied_body_factor = body_factor.value if base_price.body_fallback else 1.0
         applied_regional_factor = regional_factor.value if base_price.spec_fallback else 1.0
 
-        # Model and market demand factors are only applied if a fallback occurred (currently not tracked)
-        applied_model_factor = 1.0
-        applied_market_factor = 1.0
+        # Model and market demand factors are applied to adjust model retention/demand
+        applied_model_factor = model_factor.value
+        applied_market_factor = market_factor.value
 
         raw_value = (
             base_price.base_price

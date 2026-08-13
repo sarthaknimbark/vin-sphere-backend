@@ -1,0 +1,24 @@
+model,retention_factor,demand_factor
+Land Cruiser,1.1,1.04
+Land Cruiser Prado,1.08,1.03
+Hilux,1.07,1.03
+Fortuner,1.05,1.02
+RAV4,1.03,1.02
+Highlander,1.02,1.01
+Camry,1.02,1.0
+Corolla,1.0,1.0
+Corolla Cross,1.01,1.01
+Hiace,1.03,1.02
+Coaster,1.01,1.0
+Sequoia,1.0,1.0
+Avalon,0.99,0.99
+C-HR,0.98,0.99
+86,0.97,0.98
+Supra,1.0,0.99
+Yaris,0.95,0.98
+Yaris Sedan,0.95,0.98
+Raize,0.95,0.98
+Rush,0.94,0.97
+Avanza,0.93,0.97
+Innova,1.0,1.0
+Alphard,1.01,1.0

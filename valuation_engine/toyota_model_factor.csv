@@ -1,24 +1,50 @@
 model,retention_factor,demand_factor
-Land Cruiser,1.1,1.04
-Land Cruiser Prado,1.08,1.03
-Hilux,1.07,1.03
-Fortuner,1.05,1.02
-RAV4,1.03,1.02
-Highlander,1.02,1.01
-Camry,1.02,1.0
-Corolla,1.0,1.0
-Corolla Cross,1.01,1.01
-Hiace,1.03,1.02
-Coaster,1.01,1.0
-Sequoia,1.0,1.0
-Avalon,0.99,0.99
-C-HR,0.98,0.99
-86,0.97,0.98
-Supra,1.0,0.99
-Yaris,0.95,0.98
+Land Cruiser,1.5,1.2045
+Land Cruiser Prado,1.3594,1.2254
+Hilux,1.5,1.2424
+Fortuner,1.4406,1.2301
+RAV4,1.5,1.3916
+Highlander,1.3541,1.2375
+Camry,1.1535,1.17
+Corolla,1.1798,1.1798
+Corolla Cross,1.1729,1.0561
+Hiace,1.1737,1.0324
+Coaster,1.1229,1.0708
+Sequoia,1.2239,1.1392
+Avalon,1.0793,1.1276
+C-HR,1.4297,1.2872
+86,1.0215,1.0803
+Supra,1.5,1.5
+Yaris,1.2869,1.2042
 Yaris Sedan,0.95,0.98
-Raize,0.95,0.98
-Rush,0.94,0.97
-Avanza,0.93,0.97
-Innova,1.0,1.0
-Alphard,1.01,1.0
+Raize,1.2909,1.2245
+Rush,1.4539,1.3689
+Avanza,1.0689,1.1357
+Innova,1.1428,1.0867
+Alphard,1.5,1.5
+4Runner,0.7286,1.0699
+Aurion,1.2866,1.2951
+bZ3X,0.9996,1.0006
+bZ4X,1.1468,1.1022
+Camry Hybrid,1.1096,1.1312
+Crown,1.1435,1.1664
+Crown Kluger,0.6816,0.7413
+FJ Cruiser,1.5,1.2158
+GR86,1.0578,1.0117
+Granvia,1.1677,1.1106
+Hilux Adventure,0.8233,0.8364
+Land Cruiser 70,1.1883,1.0195
+Land Cruiser Pickup 70,0.9192,1.1423
+Land Cruiser VXR,1.1537,1.1105
+Levin,0.9589,0.9932
+Liteace,0.964,0.9187
+Prado,1.3783,1.2773
+Previa,0.8713,1.0055
+Prius,0.9658,0.9922
+Sienna,0.9343,1.0764
+Tacoma,0.869,1.1817
+Tundra,1.0562,1.0483
+Urban Cruiser,1.1212,1.0283
+Veloz,1.5,1.5
+Venza,0.808,0.8204
+Zelas,0.9042,0.8806

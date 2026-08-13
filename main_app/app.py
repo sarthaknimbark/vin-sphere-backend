@@ -1801,31 +1801,31 @@ if st.button("Decode", type="primary"):
                                             },
                                             {
                                                 "Metric": "Vehicle Age",
-                                                "Value": toyota_engine_valuation["vehicle_age"],
+                                                "Value": f"{toyota_engine_valuation['vehicle_age']} years",
                                             },
                                             {
                                                 "Metric": "Age Factor",
-                                                "Value": toyota_engine_valuation["age_factor"],
+                                                "Value": f"{toyota_engine_valuation['age_factor']:.4f}",
                                             },
                                             {
                                                 "Metric": "Model Retention Factor",
-                                                "Value": toyota_engine_valuation["model_factor"],
+                                                "Value": f"{toyota_engine_valuation['model_factor']:.4f}",
                                             },
                                             {
                                                 "Metric": "Trim Factor",
-                                                "Value": toyota_engine_valuation["trim_factor"],
+                                                "Value": f"{toyota_engine_valuation['trim_factor']:.4f}",
                                             },
                                             {
                                                 "Metric": "Body Type Factor",
-                                                "Value": toyota_engine_valuation["body_factor"],
+                                                "Value": f"{toyota_engine_valuation['body_factor']:.4f}",
                                             },
                                             {
                                                 "Metric": "Regional Spec Factor",
-                                                "Value": toyota_engine_valuation["regional_spec_factor"],
+                                                "Value": f"{toyota_engine_valuation['regional_spec_factor']:.4f}",
                                             },
                                             {
                                                 "Metric": "Market Demand Factor",
-                                                "Value": toyota_engine_valuation["market_factor"],
+                                                "Value": f"{toyota_engine_valuation['market_factor']:.4f}",
                                             },
                                         ]
                                     )

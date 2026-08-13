@@ -1,9 +1,14 @@
 body_type,factor
-SUV,1.03
-Sedan,1.0
-Pickup,1.04
-Van,0.98
-Hatchback,0.97
-Coupe,0.98
-MPV,0.99
+SUV,1.0755
+Sedan,1.5
+Pickup,1.2424
+Van,0.5
+Hatchback,1.0037
+Coupe,1.5
+MPV,1.0611
 Wagon,0.99
+MINI BUS,1.0844
+STATION WAGON,1.5
+SUV CROSSOVER,1.2838
+BUS,0.9574
+TRUCK,1.5
