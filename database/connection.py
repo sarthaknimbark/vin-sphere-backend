@@ -7,17 +7,20 @@ from pathlib import Path
 database_dir = Path(__file__).resolve().parent
 project_root = database_dir.parent
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv(dotenv_path=project_root / ".env")
+except ImportError:
+    pass
+
 def get_db_connection():
     import os
-    try:
-        from dotenv import load_dotenv
-        load_dotenv(dotenv_path=project_root / ".env")
-    except ImportError:
-        pass
 
     try:
         if "postgres" in st.secrets:
-            return psycopg2.connect(**st.secrets["postgres"])
+            secrets_params = dict(st.secrets["postgres"])
+            secrets_params.setdefault("connect_timeout", 3)
+            return psycopg2.connect(**secrets_params)
     except Exception:
         pass
 
@@ -26,6 +29,7 @@ def get_db_connection():
         conn_params_str = os.environ.get("DB_CONN_PARAMS")
         if conn_params_str:
             conn_params = json.loads(conn_params_str)
+            conn_params.setdefault("connect_timeout", 3)
             return psycopg2.connect(**conn_params)
     except Exception:
         pass
@@ -35,7 +39,8 @@ def get_db_connection():
         port=os.environ.get("PGPORT", "5432"),
         database=os.environ.get("PGDATABASE", "postgres"),
         user=os.environ.get("PGUSER", "postgres"),
-        password=os.environ.get("PGPASSWORD", "postgres")
+        password=os.environ.get("PGPASSWORD", "postgres"),
+        connect_timeout=3
     )
 
 def init_db():

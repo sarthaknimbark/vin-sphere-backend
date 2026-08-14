@@ -1080,15 +1080,18 @@ def decode_any_vin(vin_str: str) -> tuple:
     normalized = re.sub(r"[^A-Z0-9]", "", vin_str.upper())
     length = len(normalized)
 
+    db_ok, _ = check_db_connection_cached()
+
     # 1. Existing VIN lookup in PostgreSQL master_data
-    try:
-        matched_row = lookup_vin_in_master_dataset(normalized)
-        if matched_row:
-            res = get_verified_vin_dict(matched_row)
-            log_prediction(normalized, length, "master_data", res)
-            return res, length
-    except Exception as e:
-        print(f"Error checking master dataset: {e}")
+    if db_ok:
+        try:
+            matched_row = lookup_vin_in_master_dataset(normalized)
+            if matched_row:
+                res = get_verified_vin_dict(matched_row)
+                log_prediction(normalized, length, "master_data", res)
+                return res, length
+        except Exception as e:
+            print(f"Error checking master dataset: {e}")
 
     # 2. Run decoders if not found in master dataset
     res = None
@@ -1135,8 +1138,12 @@ def decode_any_vin(vin_str: str) -> tuple:
     # 3. Log all predictions & save unseen predictions to pending queue
     if res is not None:
         normalized_res = normalize_result_keys(res)
-        log_prediction(normalized, length, "decoder", normalized_res)
-        save_pending_prediction(normalized, length, normalized_res)
+        if db_ok:
+            try:
+                log_prediction(normalized, length, "decoder", normalized_res)
+                save_pending_prediction(normalized, length, normalized_res)
+            except Exception as e:
+                print(f"Error saving to DB pending logs: {e}")
 
     return res, length
 
@@ -1468,7 +1475,6 @@ def get_depreciated_values_by_file(result: dict) -> dict:
 
 def get_ml_predicted_price_info(result: dict) -> dict:
     try:
-        sys.path.insert(0, str(project_root))
         from Valuation_ml.train_price_model import predict_price_with_confidence
 
         make = result.get("make", "")
@@ -1479,9 +1485,6 @@ def get_ml_predicted_price_info(result: dict) -> dict:
     except Exception as e:
         print(f"Error in ML prediction: {e}")
         return None
-    finally:
-        if str(project_root) in sys.path:
-            sys.path.remove(str(project_root))
 
 def validate_17_char_vin(vin: str) -> tuple:
     """Validates 17-character VIN based on NHTSA modulo-11 algorithm and letter omission rules."""
@@ -1521,7 +1524,7 @@ def validate_17_char_vin(vin: str) -> tuple:
     actual_check = vin[8]
     
     if expected_check != actual_check:
-        return False, f"Check-digit mismatch at 9th position (calculated '{expected_check}', but found '{actual_check}')."
+         return False, f"Check-digit mismatch at 9th position (calculated '{expected_check}', but found '{actual_check}')."
         
     return True, ""
 
@@ -1553,15 +1556,34 @@ if st.button("Decode", type="primary"):
                 res, matched_len = decode_any_vin(normalized_input)
                 result = normalize_result_keys(res)
 
-                # 2. Get Lookup Price
-                price = get_lookup_price(result, normalized_input)
+                # 2. Parallel fetch for valuation sources
+                import threading
+                from streamlit.runtime.scriptrunner import get_script_run_ctx, add_script_run_ctx
+                
+                ctx = get_script_run_ctx()
+
+                def run_in_thread(func, *args, **kwargs):
+                    if ctx is not None:
+                        add_script_run_ctx(threading.current_thread(), ctx)
+                    return func(*args, **kwargs)
+
+                from concurrent.futures import ThreadPoolExecutor
+                with ThreadPoolExecutor(max_workers=4) as executor:
+                    future_price = executor.submit(run_in_thread, get_lookup_price, result, normalized_input)
+                    future_ml = executor.submit(run_in_thread, get_ml_predicted_price_info, result)
+                    future_dep = executor.submit(run_in_thread, get_depreciated_values_by_file, result)
+                    future_toyota = executor.submit(run_in_thread, get_toyota_engine_valuation, result)
+
+                    price = future_price.result()
+                    ml_info = future_ml.result()
+                    dep_values = future_dep.result()
+                    toyota_engine_valuation = future_toyota.result()
+
                 price_display = (
                     "Not found" if price is None else f"{price:,.0f} AED"
                 )
                 result["lookup_price"] = None if price is None else float(price)
 
-                # 3. Get ML price
-                ml_info = get_ml_predicted_price_info(result)
                 overall_conf = result.get("confidence", 0.0) * 100
 
                 if ml_info is None:
@@ -1579,12 +1601,7 @@ if st.button("Decode", type="primary"):
                     None if ml_price is None else float(ml_price)
                 )
 
-                # 4. Get depreciated values
-                dep_values = get_depreciated_values_by_file(result)
                 result["depreciated_values"] = dep_values
-
-                # 5. Calculate valuations
-                toyota_engine_valuation = get_toyota_engine_valuation(result)
                 result["toyota_valuation_engine"] = toyota_engine_valuation
 
                 result["lookup_price_valuation"] = calculate_valuation(price)
