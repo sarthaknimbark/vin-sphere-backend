@@ -1,11 +1,13 @@
 # VIN Sphere — Automotive Chassis Intelligence & Valuation Platform
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg)](https://fastapi.tiangolo.com/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.35%2B-FF4B4B.svg)](https://streamlit.io/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-EE4C2C.svg)](https://pytorch.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-336791.svg)](https://www.postgresql.org/)
-[![License](https://img.shields.io/badge/License-Proprietary-lightgrey.svg)]()
+> 🚀 **Live Demo:** **[https://vin-decoder.streamlit.app/](https://vin-decoder.streamlit.app/)** — Try the live web application and decoding engine in your browser!
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-vin--decoder.streamlit.app-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://vin-decoder.streamlit.app/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg?style=flat-square)](https://fastapi.tiangolo.com/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=flat-square)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-EE4C2C.svg?style=flat-square)](https://pytorch.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-336791.svg?style=flat-square)](https://www.postgresql.org/)
+[![License](https://img.shields.io/badge/License-Proprietary-lightgrey.svg?style=flat-square)]()
 
 **VIN Sphere** is a self-contained, enterprise-grade vehicle intelligence and valuation platform engineered specifically for the **Gulf Cooperation Council (GCC)** and international automotive markets. It decodes vehicle chassis numbers across any length (standard 17-character ISO VINs as well as 9–13 character short chassis numbers) and synthesizes multi-source market valuations using machine learning ensembles, actuarial depreciation curves, and historical auction records.
 
@@ -479,6 +481,8 @@ The standard decoder enforces ISO-3779 checksum standards. If an invalid 17-char
 ---
 
 ## 8. Web Application & Admin Dashboard (Streamlit)
+
+> 🌐 **Hosted Live App:** [https://vin-decoder.streamlit.app/](https://vin-decoder.streamlit.app/)
 
 The Streamlit web interface (`main_app/app.py`) provides a complete GUI for appraisers and administrators:
 
